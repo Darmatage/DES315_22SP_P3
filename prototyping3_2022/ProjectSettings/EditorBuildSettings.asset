@@ -30,186 +30,147 @@ EditorBuildSettings:
     path: Assets/Scenes/Scenes_Teacher/TestScene.unity
     guid: c92ce1c094afd8c43877113b8849206b
   - enabled: 1
-    path: Assets/Scenes/Scenes_Students/Scene_A11_Coop_NPC_Monster.unity
-    guid: c017bb71be862ab4dab5aa96e843e298
-  - enabled: 1
-    path: Assets/Scenes/Scenes_Students/Scene_AustinStead_CoOp.unity
-    guid: 196aaf5cedaa07c4bb1cf2b9ad9b408b
-  - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotA01.unity
     guid: b3d94b0089d40aa4fa880ffd58133db5
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotA02.unity
-    guid: 947b1fbe84ee8f442aeab6246c45ac49
+    guid: 2075eaa126c361344a11b5e9a9f03538
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotA03.unity
-    guid: d6bb025a37213f243847848b16066bd4
+    guid: f347af0b4a01fa94d8a75c315eeb3a80
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotA04.unity
-    guid: abeb369da571c4c4cac4e509ab21c20f
+    guid: 6c7d02cf96eb4cf46999bbea80caa05b
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotA05.unity
-    guid: f5cec54dcc43cf04fa4bb2f7f97936b0
+    guid: 925d6e3307e77d24c9c920a1ade36dba
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotA06.unity
-    guid: c006eae329d8d904490f452f8336b99a
+    guid: ad168024bcecc64469bc63b34b2d3e9d
+  - enabled: 1
+    path: Assets/Scenes/Scenes_Students/Scene_BotA07.unity
+    guid: c4f18f07148ee1c4d9df2ff2b3dcb008
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotA08.unity
-    guid: c0f13a5582758ad4c94a3cf3b3fb764b
+    guid: ee81f09fa7b070c408d21d3fbc2d617f
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotA09.unity
-    guid: 95ff1ef183eb76e48a9bd69ba542198e
+    guid: 4cae45e358138574f96681b6694d9086
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotA10.unity
-    guid: 3c44f2e3d20301449b28d9f3137802bc
+    guid: 46c367a15aed15e4d83078be7ebe7e6f
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotA11.unity
-    guid: c388f47120543b24f9fa20e997c665aa
+    guid: 3b2158b2166ff5a44a2d98ad91400892
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotA12.unity
-    guid: 12c57b520a0ee2e41abc43280f37ad3f
+    guid: 22018b25f3cdc434f96adbce2e0ca9df
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotA13.unity
-    guid: 940c3790b0f8ac24e85da2e73578cde4
+    guid: b51db0f4fa9be56469da5019193e3219
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotA14.unity
-    guid: 4d32508002e57b646a7ecbc9ea3e4669
+    guid: 73c48ccaa0fe26449922ad77e8d07447
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotA15.unity
-    guid: c3ddde38b930ff74cbe8872f4addd880
-  - enabled: 1
-    path: Assets/Scenes/Scenes_Students/Scene_AdamDoolittle/AdamDoolittle_Coop.unity
-    guid: 80f7f9dbe53b5084c901d34a81b37997
+    guid: f45a9712d728ddb40bb3bd0b2ac1df6e
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotA16.unity
-    guid: f3bb5a1c5b7f2f24fa1b3f85fee2bb32
+    guid: f66c33b2d50ced74bb5ff20430fd5d49
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotA17.unity
-    guid: e0bdd7bd0d98e6d46bf80156252ffff8
+    guid: cebb330899e28b642a8bb0035a94d152
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotA18.unity
-    guid: cf86350940cddb34697324a0a067d021
+    guid: dcfc3e09b4eddb547b21535f3468c9f1
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotA19.unity
-    guid: 6574fbd681870c649bf0aa2465c803af
+    guid: 6dd98257e2c6ee4498cc73d8e4090fad
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotA20.unity
-    guid: c8df9ad2a1ece884fbb2463f0ed62421
+    guid: b179330a95ccb7f429f044489af915ce
+  - enabled: 1
+    path: Assets/Scenes/Scenes_Students/Scene_BotA21.unity
+    guid: 48a95dfb12f87864c9127421b03f3e55
+  - enabled: 1
+    path: Assets/Scenes/Scenes_Students/Scene_BotA22.unity
+    guid: 696b5805c071034498886cc2bc0363ff
+  - enabled: 1
+    path: Assets/Scenes/Scenes_Students/Scene_BotA23.unity
+    guid: f3797a89c4b37524892e81abbdf19978
+  - enabled: 1
+    path: Assets/Scenes/Scenes_Students/Scene_BotA24.unity
+    guid: 11dc72e1c35001447a098ba0a5079d0a
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotB01.unity
-    guid: f01567feaef9f0d4488b0e22021a95cf
+    guid: 52c9ce0efe7772742953dcc01030cbe9
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotB02.unity
-    guid: 90bc77e9c2449304ba86748545ddbfec
+    guid: 27b71b1195cada34ea54b2b7dba814a7
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotB03.unity
-    guid: 65b6db5ea314a734ebc430d3d6d8521d
+    guid: d46801b4ab7e54f4e87f4b617131adb5
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotB04.unity
-    guid: 0acf275e64af9814b91c9b39875f7d50
+    guid: 5311e0ee1476ab742bbe43c0731fd257
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotB05.unity
-    guid: dc5a470261ac19e4fb6ff950a5a849a7
+    guid: f66ec1d58c37d6a44bc66a2888dcb838
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotB06.unity
-    guid: 7b9df931f5c1c9a42a02d09de7980e5e
+    guid: 916011c21faef8846ad0e658a509f4ef
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotB07.unity
-    guid: afb17b3608bf5ad41bf5096f63d04d84
+    guid: a594132756f9f994eb90f6ddcaf0af3e
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotB08.unity
-    guid: 3d0f835769dbbeb4e99b67fc1dbf024d
+    guid: 57b4f1bfb08f4db4d83f633c7edc75eb
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotB09.unity
-    guid: 97991406004c31b48aebfa0d35f6e5fa
+    guid: 4dde739a028f61c4c8fe145a358bcd9a
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotB10.unity
-    guid: 103cf64be78c3994e95412308ba8c0d1
+    guid: 9cf527801ce0e004893eadf567b7ad33
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotB11.unity
-    guid: 0c1e9b7ab4c4d054e81d11028da0263a
+    guid: dc700da25fb62c84392fc3c8e3341770
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotB12.unity
-    guid: 6f02f2eea5776954da3301ce93f2dc33
+    guid: ef2256884e3c0014bbe47eb1ab4324e9
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotB13.unity
-    guid: df72dfd109f52ff4f839a7d9083996b5
+    guid: 6e099859c8e6efc46bbde97670851069
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotB14.unity
-    guid: 7344ea3eb29fada4db99decb2c704df6
+    guid: 9cd8c3f37abf4304a885d2647869e49e
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotB15.unity
-    guid: 232acd63d57ea9b47b19df5cde05a0a5
+    guid: afcadc02966e3da4c913831b5aad03e1
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotB16.unity
-    guid: fdabf0bafc38b334c9a6bafeed681363
+    guid: 6c2914d11fad59b4caedcb142c23157d
+  - enabled: 1
+    path: Assets/Scenes/Scenes_Students/Scene_BotB17.unity
+    guid: 5ef2974cf36530047b05e17534ecacdf
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotB18.unity
-    guid: c34d09fed5f607c4cb7cca1a13c94b29
+    guid: 2f1131ed1abfc72459215b70b2268243
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotB19.unity
-    guid: 8f1c812333ed53f458e775de1cac3070
+    guid: a7e37709dec9ea64c900c12762890b45
   - enabled: 1
     path: Assets/Scenes/Scenes_Students/Scene_BotB20.unity
-    guid: 1ea80f4ce8f75844796a3c920426ed03
+    guid: b5ea3d0961c0195469f424eec46bd74f
   - enabled: 1
-    path: Assets/Scenes/Scenes_Students/Scene_LorenzoDeMaine.unity
-    guid: fb5dddceffb217a409874b74648c426c
+    path: Assets/Scenes/Scenes_Students/Scene_BotB21.unity
+    guid: e30c9a9d5b03eed469205e8355483c45
   - enabled: 1
-    path: Assets/Scenes/Scenes_Students/Scene_MatthewKlingman.unity
-    guid: 6b96909ad4af1cc42a36920ecc319576
+    path: Assets/Scenes/Scenes_Students/Scene_BotB22.unity
+    guid: 8d70050721c2da3489e21eab8ab4fdbe
   - enabled: 1
-    path: Assets/Scenes/Scenes_Students/Scene_QuinnBeierle.unity
-    guid: b65ad464c15328245ab74c47225a44cb
+    path: Assets/Scenes/Scenes_Students/Scene_BotB23.unity
+    guid: c136a6eac6be7a74983e8abec3d3df0b
   - enabled: 1
-    path: Assets/Scenes/Scenes_Students/Scene_RhiannaPinkerton.unity
-    guid: 11f8806f98aa4f24fb9c13c2c4c734c8
-  - enabled: 1
-    path: Assets/Scenes/Scenes_Students/Scene_SpikeTraps_DavidDasky.unity
-    guid: 50f82ae3ae642b24e87813627815824d
-  - enabled: 1
-    path: Assets/Scenes/Scenes_Students/Scene_SwampLevel_DevonPeterson.unity
-    guid: e8112859c1ff8d240a6ea5860a48baed
-  - enabled: 1
-    path: Assets/Scenes/Scenes_Students/AloraNewbury/AloraNewbury.unity
-    guid: c67cd6924ea34e74eb9b73d23846c46d
-  - enabled: 1
-    path: Assets/Scenes/Scenes_Students/DH_Scenes/DH_Scene_Coop.unity
-    guid: c4ec4481c34604f4785c89393a030f83
-  - enabled: 1
-    path: Assets/Scenes/Scenes_Students/DH_Scenes/Scene_BotB17.unity
-    guid: a93d58a5b77761547a020143d71f4c8b
-  - enabled: 1
-    path: Assets/Scenes/Scenes_Students/Ethan_Coop_Scene/Ethan_PacManBoss.unity
-    guid: 9aec5dc90616be3418c66d9219e88301
-  - enabled: 1
-    path: Assets/Scenes/Scenes_Students/Scene_BotB15/JWymer_CoOp_Scene.Unity
-    guid: ca608104034e19d489b74c814087087c
-  - enabled: 1
-    path: Assets/Scenes/Scenes_Students/Scene_DieterVoegels/DieterVoegels_InversionArena.unity
-    guid: f4fce6ec488025847848d329da5b4088
-  - enabled: 1
-    path: Assets/Scenes/Scenes_Students/Scene_KeanuCendejas/Scene_KeanuCendejas.unity
-    guid: 6468714498dbdd649ab03380360bb1f7
-  - enabled: 1
-    path: Assets/Scenes/Scenes_Students/Scene_KeeganTompkins/KeeganTompkins_Apocarena.unity
-    guid: a6999a14643cef048a8ee8e480715207
-  - enabled: 1
-    path: Assets/Scenes/Scenes_Students/Scene_MarsJurich/Mars_Coop.unity
-    guid: 8269a7cc569fa164f909a72feaef2c91
-  - enabled: 1
-    path: Assets/Scenes/Scenes_Students/Scene_RyanGarvan/RyanGarvan_Arena.unity
-    guid: 0b1b77dbfa2dc7c41ab087609bdb920e
-  - enabled: 1
-    path: Assets/Scenes/Scenes_Students/Scenes_cavness.d/Arena_DRC.unity
-    guid: a53d38af7a37570449c4b26c00cf35fc
-  - enabled: 1
-    path: Assets/Scenes/Scenes_Students/Scene_RisingLava_MarkCulp.unity
-    guid: 536ab881f8f1f60438efdb8848cf060c
-  - enabled: 1
-    path: Assets/Scenes/Scenes_Students/Scene_BotB07/Dustins_Arena.unity
-    guid: 0e045148c39e99b4f8b8fb5045b81b76
-  - enabled: 1
-    path: Assets/Scenes/Scenes_Students/Scene_WillPritz/WillPritz_Arena.unity
-    guid: 2bac6122397fded43954b9ce6cbaaf58
+    path: Assets/Scenes/Scenes_Students/Scene_BotB24.unity
+    guid: 9ca3906d7cd6eca458c69d439d8d1137
   m_configObjects: {}
