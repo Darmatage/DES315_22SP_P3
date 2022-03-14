@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6350672901216803553}
   - component: {fileID: 6350672901216803552}
   - component: {fileID: 6350672901216803555}
+  - component: {fileID: 7569125266338418984}
   m_Layer: 5
   m_Name: Button_A12
   m_TagString: Untagged
@@ -63,6 +64,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -91,14 +93,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.7921569, g: 0.5254902, b: 0.8, a: 1}
-    m_HighlightedColor: {r: 0.8996725, g: 0.9622642, b: 0.67630833, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
     m_PressedColor: {r: 0.9339623, g: 0.7092827, b: 0.7092827, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -121,6 +124,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6350672901216803555}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Showcase
         m_Mode: 1
         m_Arguments:
@@ -147,6 +151,23 @@ MonoBehaviour:
   botPrefab: {fileID: 1355330930375697355, guid: 3c9edd494356e264899f6c0651b1e534,
     type: 3}
   gameHandlerObj: {fileID: 0}
+--- !u!114 &7569125266338418984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6350672901216803558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c6ca4978267b14695f5d34c35b9c45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HueTime: 2
+  rainbow:
+  - {r: 0.33333334, g: 0.80392164, b: 0.98823535, a: 0}
+  - {r: 1, g: 1, b: 1, a: 0}
+  - {r: 0.9686275, g: 0.65882355, b: 0.72156864, a: 0}
 --- !u!1 &6350672901285930397
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,8 +226,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -224,4 +246,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: A12 NAME
+  m_Text: Scott Fado-Bristow
