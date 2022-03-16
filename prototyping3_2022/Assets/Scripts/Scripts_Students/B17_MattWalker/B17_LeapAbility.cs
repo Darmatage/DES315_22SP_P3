@@ -21,7 +21,7 @@ public class B17_LeapAbility : MonoBehaviour
         // Reduce cooldown
         CooldownTimer = Mathf.Clamp(CooldownTimer - Time.deltaTime, 0.0f, Cooldown);
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             if (CooldownTimer <= 0.0f)
 			{
