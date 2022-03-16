@@ -5,11 +5,12 @@ using UnityEngine;
 public class A19_Gliding : MonoBehaviour
 {
     public BotBasic_Move botBasic_Move;
+    public A19_Weapon1 a19_Weapon1;
     public Rigidbody rb;
     public bool isGliding = false;
     private float gravityWorld = -9.81f;
     public float glideSpeed = 1f;
-    public float gravityScale = 1.0f;
+    private float gravityScale = 1.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +35,7 @@ public class A19_Gliding : MonoBehaviour
     {
         if(!botBasic_Move.isGrounded)
         {
-            if(Input.GetButton(botBasic_Move.pJump) && rb.velocity.y <= 0f)
+            if(Input.GetButton(botBasic_Move.pJump) && rb.velocity.y <= 0f && !a19_Weapon1.isGroundSlam)
             {
                 isGliding = true;
                 rb.velocity = new Vector3(rb.velocity.x, -glideSpeed, rb.velocity.z);
