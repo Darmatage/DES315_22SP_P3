@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class A19_Weapon1 : MonoBehaviour
 {
+    public GameObject dustPartilce;
     public BotBasic_Move botBasic_Move;
-     public Rigidbody rb;
+    public Rigidbody rb;
     public bool isGroundSlam = false;
     public float gravityScale = 10.0f;
 
@@ -29,15 +30,20 @@ public class A19_Weapon1 : MonoBehaviour
     void Update()
     {
         //if (Input.GetKeyDown(KeyCode.T)){
-		if (Input.GetButtonDown(button1) && rb.velocity.y <= 0f && !isGroundSlam){
+		if (Input.GetButtonDown(button1)&& !isGroundSlam){
+            isGroundSlam = true;
 			Vector3 gravity = -9.81f * gravityScale * Vector3.up;
             rb.AddForce(gravity, ForceMode.Acceleration);
 
 		}
 
-        if(botBasic_Move.isGrounded)
+        if(isGroundSlam)
         {
-            isGroundSlam = true;
+            if(botBasic_Move.isGrounded)
+            {
+                isGroundSlam = false;
+                Instantiate(dustPartilce, transform.position,  Quaternion.Euler(90, 0, 0) );
+            }
         }
     }
 }

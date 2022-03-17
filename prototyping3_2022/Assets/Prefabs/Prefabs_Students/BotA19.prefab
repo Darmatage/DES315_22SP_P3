@@ -403,6 +403,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3879529c42a2cd346aade00011483551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dustPartilce: {fileID: 8262242811970727711, guid: 62c4ac3e98464374cb168d46b9cfb0ca,
+    type: 3}
   botBasic_Move: {fileID: 1355330930375697358}
   rb: {fileID: 1355330930375697357}
   isGroundSlam: 0

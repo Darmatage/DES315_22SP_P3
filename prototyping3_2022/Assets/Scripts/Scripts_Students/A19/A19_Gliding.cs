@@ -24,7 +24,7 @@ public class A19_Gliding : MonoBehaviour
     }
     private void  FixedUpdate()
     {
-        if(botBasic_Move.isGrounded == false)
+        if(botBasic_Move.isGrounded == false &&  isGliding == false && !a19_Weapon1.isGroundSlam)
         {
             Vector3 gravity = gravityWorld * gravityScale * Vector3.up;
             rb.AddForce(gravity, ForceMode.Acceleration);
@@ -44,6 +44,10 @@ public class A19_Gliding : MonoBehaviour
             {
                 isGliding = false;
             }
+        }
+        else
+        {
+            isGliding = false;
         }
     }
 }
