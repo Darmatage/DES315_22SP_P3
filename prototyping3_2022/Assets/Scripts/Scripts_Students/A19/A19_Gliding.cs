@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class A19_Gliding : MonoBehaviour
 {
+    public GameObject glideEffect;
     public BotBasic_Move botBasic_Move;
     public A19_Weapon1 a19_Weapon1;
     public Rigidbody rb;
@@ -24,10 +25,21 @@ public class A19_Gliding : MonoBehaviour
     }
     private void  FixedUpdate()
     {
-        if(botBasic_Move.isGrounded == false &&  isGliding == false && !a19_Weapon1.isGroundSlam)
+        if(!a19_Weapon1.isGroundSlam && botBasic_Move.isGrounded == false &&  isGliding == false )
         {
             Vector3 gravity = gravityWorld * gravityScale * Vector3.up;
             rb.AddForce(gravity, ForceMode.Acceleration);
+        }
+    }
+    public void UpdateGlidingEffect()
+    {
+        if(isGliding)
+        {
+            glideEffect.SetActive(true);
+        }
+        else
+        {
+            glideEffect.SetActive(false);
         }
     }
 
@@ -35,19 +47,26 @@ public class A19_Gliding : MonoBehaviour
     {
         if(!botBasic_Move.isGrounded)
         {
-            if(Input.GetButton(botBasic_Move.pJump) && rb.velocity.y <= 0f && !a19_Weapon1.isGroundSlam)
+            if(a19_Weapon1.isGroundSlam && Input.GetButton(botBasic_Move.pJump))
+                a19_Weapon1.isGroundSlam = false;
+                
+            if( !a19_Weapon1.isGroundSlam && Input.GetButton(botBasic_Move.pJump) && rb.velocity.y <= 0f)
             {
+                
                 isGliding = true;
                 rb.velocity = new Vector3(rb.velocity.x, -glideSpeed, rb.velocity.z);
+                UpdateGlidingEffect();
             }
             else
             {
                 isGliding = false;
+                UpdateGlidingEffect();
             }
         }
         else
         {
             isGliding = false;
+            UpdateGlidingEffect();
         }
     }
 }
