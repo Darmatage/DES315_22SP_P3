@@ -5,6 +5,7 @@ using UnityEngine;
 public class A19_Weapon1 : MonoBehaviour
 {
     public GameObject dustPartilce;
+    public GameObject damageCollider;
     public BotBasic_Move botBasic_Move;
     public Rigidbody rb;
     public bool isGroundSlam = false;
@@ -30,20 +31,38 @@ public class A19_Weapon1 : MonoBehaviour
     void Update()
     {
         //if (Input.GetKeyDown(KeyCode.T)){
-		if (Input.GetButtonDown(button1)&& !isGroundSlam){
+		if (Input.GetButtonDown(button1) && !isGroundSlam){
+
+            //Trying to slam while grounded
+            if(botBasic_Move.isGrounded)
+            {
+                return;
+            }
             isGroundSlam = true;
+            damageCollider.SetActive(true);
 			Vector3 gravity = -9.81f * gravityScale * Vector3.up;
             rb.AddForce(gravity, ForceMode.Acceleration);
 
+            
+
 		}
+        
 
         if(isGroundSlam)
         {
             if(botBasic_Move.isGrounded)
             {
-                isGroundSlam = false;
-                Instantiate(dustPartilce, transform.position,  Quaternion.Euler(90, 0, 0) );
+                ResetGroundSlam();
             }
         }
+    }
+
+    public void ResetGroundSlam()
+    {
+                Instantiate(dustPartilce, transform.position,  Quaternion.Euler(90, 0, 0) );
+
+        isGroundSlam = false;
+        damageCollider.SetActive(false);
+
     }
 }
