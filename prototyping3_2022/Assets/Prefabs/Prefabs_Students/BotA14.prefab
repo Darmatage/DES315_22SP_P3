@@ -27,7 +27,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
-  particlesPrefab: {fileID: 7246120000014656734, guid: 740a2aebec573654ab0fea34ed35ef72,
+  particlesPrefab: {fileID: 7916852506792683719, guid: a6746c9ee60a1a44d813bcdbac5cb0ce,
     type: 3}
   SpawnParticlesHere: {x: 0, y: 0, z: 0}
   isPlayer1Weapon: 0
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 1355330930375697359}
   - component: {fileID: 364999052203561223}
   - component: {fileID: 5780095072016173801}
-  - component: {fileID: 7285542615022466734}
+  - component: {fileID: 5464373141747640766}
   m_Layer: 0
   m_Name: BotA14
   m_TagString: Untagged
@@ -389,7 +389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doesFallDamage: 0
   playerFallDamage: 4
---- !u!114 &7285542615022466734
+--- !u!114 &5464373141747640766
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -398,12 +398,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1355330930375697355}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67b5dfa20ebefac448d710384853fb07, type: 3}
+  m_Script: {fileID: 11500000, guid: ea4686dc3f174b2458160e9fadaba2a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponThrust: {fileID: 0}
-  button1: 
-  button2: 
+  leftFist: {fileID: 4654571123274727292}
+  rightFist: {fileID: 384124384027739569}
+  button1: LeftFist
+  button2: RightFist
   button3: 
   button4: 
 --- !u!1 &1355330930662561729
@@ -575,7 +576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
-  particlesPrefab: {fileID: 7246120000014656734, guid: 740a2aebec573654ab0fea34ed35ef72,
+  particlesPrefab: {fileID: 7916852506792683719, guid: a6746c9ee60a1a44d813bcdbac5cb0ce,
     type: 3}
   SpawnParticlesHere: {x: 0, y: 0, z: 0}
   isPlayer1Weapon: 0
@@ -646,7 +647,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f67794b30687692409891af877b20169,
         type: 3}
       propertyPath: m_Name
-      value: botRocketFist (1)
+      value: rightRocketFist
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f67794b30687692409891af877b20169, type: 3}
@@ -1053,7 +1054,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f67794b30687692409891af877b20169,
         type: 3}
       propertyPath: m_Name
-      value: botRocketFist
+      value: leftRocketFist
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f67794b30687692409891af877b20169, type: 3}
