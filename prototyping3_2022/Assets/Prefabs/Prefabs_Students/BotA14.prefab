@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 5780095072016173801}
   - component: {fileID: 7285542615022466734}
   m_Layer: 0
-  m_Name: BotA01
+  m_Name: BotA14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
