@@ -411,7 +411,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 812115325479631441}
   m_LocalRotation: {x: -0, y: -0.29377732, z: -0, w: 0.9558739}
-  m_LocalPosition: {x: 1.6, y: 0.677, z: -3.71}
+  m_LocalPosition: {x: 1.6, y: 0.677, z: -3.72}
   m_LocalScale: {x: 1, y: 1.308702, z: 0.08828591}
   m_Children: []
   m_Father: {fileID: 6618688248253167451}
@@ -526,7 +526,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
-  particlesPrefab: {fileID: 0}
+  particlesPrefab: {fileID: 892880391445559666, guid: fc8a6dac78f34994793cb924da313edb,
+    type: 3}
   SpawnParticlesHere: {x: 0, y: 0, z: 0}
   isPlayer1Weapon: 0
   isPlayer2Weapon: 0
@@ -1063,7 +1064,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
-  particlesPrefab: {fileID: 0}
+  particlesPrefab: {fileID: 892880391445559666, guid: fc8a6dac78f34994793cb924da313edb,
+    type: 3}
   SpawnParticlesHere: {x: 0, y: 0, z: 0}
   isPlayer1Weapon: 0
   isPlayer2Weapon: 0
@@ -1114,7 +1116,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
-  particlesPrefab: {fileID: 0}
+  particlesPrefab: {fileID: 892880391445559666, guid: fc8a6dac78f34994793cb924da313edb,
+    type: 3}
   SpawnParticlesHere: {x: 0, y: 0, z: 0}
   isPlayer1Weapon: 0
   isPlayer2Weapon: 0
@@ -1294,7 +1297,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
-  particlesPrefab: {fileID: 0}
+  particlesPrefab: {fileID: 892880391445559666, guid: fc8a6dac78f34994793cb924da313edb,
+    type: 3}
   SpawnParticlesHere: {x: 0, y: 0, z: 0}
   isPlayer1Weapon: 0
   isPlayer2Weapon: 0
@@ -1888,7 +1892,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
-  particlesPrefab: {fileID: 0}
+  particlesPrefab: {fileID: 892880391445559666, guid: fc8a6dac78f34994793cb924da313edb,
+    type: 3}
   SpawnParticlesHere: {x: 0, y: 0, z: 0}
   isPlayer1Weapon: 0
   isPlayer2Weapon: 0
@@ -2056,7 +2061,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
-  particlesPrefab: {fileID: 0}
+  particlesPrefab: {fileID: 892880391445559666, guid: fc8a6dac78f34994793cb924da313edb,
+    type: 3}
   SpawnParticlesHere: {x: 0, y: 0, z: 0}
   isPlayer1Weapon: 0
   isPlayer2Weapon: 0
