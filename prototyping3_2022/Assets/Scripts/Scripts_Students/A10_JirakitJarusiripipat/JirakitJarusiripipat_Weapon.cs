@@ -37,15 +37,19 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 	private bool missileOut = false;
 	private bool missileReady = true;
 	private bool weaponOut = false;
-	
-
-
+	private float eachCooldown = 0.5f;
+	private float currentEachCooldown;
+	private int currentMissileOut;
+	private int maximumMissile = 4;
+	private GameObject target;
 	void Start()
 	{
 		button1 = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
 		button2 = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
 		button3 = gameObject.transform.parent.GetComponent<playerParent>().action3Input;
 		button4 = gameObject.transform.parent.GetComponent<playerParent>().action4Input;
+
+		target = GameObject.FindGameObjectWithTag("Player2");
 	}
 
 	void Update()
@@ -55,13 +59,24 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 		{
 			//weaponThrust.transform.Translate(0, thrustAmount, 0);
 			missileOut = true;
-			GameObject obj = Instantiate(missile, shootPoint[0].transform.position, Quaternion.identity);
-			obj.GetComponent<JirakitJarusiripipat_Missile>().originPos = shootPoint[0].transform.position ;
-			obj.GetComponent<JirakitJarusiripipat_Missile>().targetPos = transform.position + new Vector3(1, 1, 4);
-			
 			StartCoroutine(WithdrawWeapon());
 		}
-		if(!missileOut && currentMissileCooldown > 0.0f)
+		if(missileOut && currentEachCooldown <= 0.0f && currentMissileOut < maximumMissile)
+        {
+			GameObject obj = Instantiate(missile, shootPoint[0].transform.position, Quaternion.identity);
+			Vector3 velo = CalculateVelocity(new Vector3(target.transform.position.x, target.transform.position.y - 3.4f, target.transform.position.z), transform.position, 2f);
+			obj.transform.rotation = Quaternion.LookRotation(velo);
+			obj.GetComponent<Rigidbody>().velocity = velo;
+            currentMissileOut++;
+            Debug.Log(currentMissileOut);
+            currentEachCooldown = eachCooldown;
+			Debug.Log(currentEachCooldown);
+		}
+		else if(currentEachCooldown > 0.0f)
+        {
+			currentEachCooldown -= Time.deltaTime;
+        }
+		if(!missileOut && currentMissileCooldown > 0.0f )
         {
 			currentMissileCooldown -= Time.deltaTime;
 			missileReady = false;
@@ -77,6 +92,7 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 			GameObject obj = Instantiate(tankBullet, mainGunBarrel.position, Quaternion.identity);
 			obj.GetComponent<Rigidbody>().AddForce(mainGunBarrel.forward * bulletSpeed);
 			currentBulletCooldown = bulletCooldown;
+			GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * -5000);
 
 		}
 		if (currentBulletCooldown > 0.0f)
@@ -88,14 +104,32 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 		{
 			mainGunReady = true;
 		}
-
+		//
 	}
-
 	IEnumerator WithdrawWeapon()
 	{
 		yield return new WaitForSeconds(missileCooldown - 4.0f);
 		//weaponThrust.transform.Translate(0, -thrustAmount, 0);
 		missileOut = false;
 		currentMissileCooldown = missileCooldown;
+		currentMissileOut = 0;
+	}
+	public Vector3 CalculateVelocity(Vector3 target, Vector3 origin, float time)
+	{
+		Vector3 distance = target - origin;
+		Vector3 distanceXZ = distance;
+		distanceXZ.y = 0f;
+
+		float sy = distance.y;
+		float sxz = distanceXZ.magnitude;
+
+		float vxz = sxz / time;
+		float vy = sy / time + 0.5f * Mathf.Abs(Physics.gravity.y) * time;
+
+		Vector3 result = distanceXZ.normalized;
+		result *= vxz;
+		result.y = vy;
+
+		return result;
 	}
 }
