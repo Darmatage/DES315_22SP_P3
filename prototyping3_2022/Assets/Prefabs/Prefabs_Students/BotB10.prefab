@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 1355330930375697359}
   - component: {fileID: 364999052203561223}
   - component: {fileID: 5780095072016173801}
-  - component: {fileID: 7285542615022466734}
+  - component: {fileID: 6120986892041629867}
   m_Layer: 0
   m_Name: BotB10
   m_TagString: B10
@@ -355,7 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doesFallDamage: 0
   playerFallDamage: 4
---- !u!114 &7285542615022466734
+--- !u!114 &6120986892041629867
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -364,11 +364,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1355330930375697355}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67b5dfa20ebefac448d710384853fb07, type: 3}
+  m_Script: {fileID: 11500000, guid: 02ffa39eb83172a48b5e0d832afd9ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponThrust: {fileID: 8160687095547711129}
-  button1: 
+  mine_prefab: {fileID: 6222910822826562529, guid: 9a0a2a3e515fa8a44884c9a4ce21c16f,
+    type: 3}
+  button1: e
   button2: 
   button3: 
   button4: 
