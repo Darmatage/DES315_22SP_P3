@@ -13,6 +13,12 @@ public class BenThompson_ScaleManager : MonoBehaviour
     [SerializeField]
     private float respawnTimeAfterLastScale;
 
+    [SerializeField]
+    GameObject scalePrefab;
+
+    [SerializeField]
+    GameObject spawnLocation;
+
     private float activeTimer = 0.0f;
 
     // Start is called before the first frame update
@@ -41,10 +47,10 @@ public class BenThompson_ScaleManager : MonoBehaviour
     }
 
     // Use scale
-    public void UseScaleMine()
+    public bool UseScaleMine()
     {
         if (currentNumScales == 0)
-            return;
+            return false;
 
         // Remove a scale from the bot's back
         scales[currentNumScales - 1].SetActive(false);
@@ -52,12 +58,23 @@ public class BenThompson_ScaleManager : MonoBehaviour
         // Decrease the number of scales
         currentNumScales--;
 
+        GameObject mine = Instantiate(scalePrefab, spawnLocation.transform.position, scalePrefab.transform.rotation);
+        
+        if(transform.parent.parent.tag == "Player2")
+        {
+            mine.GetComponentInChildren<BenThompson_MineBehavior>().isPlayer2weapon = true;
+        }
+        
+        //scalePrefab.transform.position = spawnLocation.transform.position;
+
         // If we are now out of scales
         if(currentNumScales == 0)
         {
             // Set the respawn time if we are out of scales
             activeTimer = respawnTimeAfterLastScale;
         }
+
+        return true;
     }
 
     public int GetNumScales()
