@@ -1531,7 +1531,12 @@ PrefabInstance:
     - target: {fileID: 703025586473637849, guid: e845ce151d995264e80a8dfbe0f43522,
         type: 3}
       propertyPath: m_MotionVectors
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1017672482099453707, guid: e845ce151d995264e80a8dfbe0f43522,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1329509311311316992, guid: e845ce151d995264e80a8dfbe0f43522,
         type: 3}
@@ -1598,6 +1603,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1355330930375697357, guid: e845ce151d995264e80a8dfbe0f43522,
+        type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5464373141747640766, guid: e845ce151d995264e80a8dfbe0f43522,
         type: 3}
       propertyPath: button1
@@ -1611,12 +1621,22 @@ PrefabInstance:
     - target: {fileID: 5480127421306580244, guid: e845ce151d995264e80a8dfbe0f43522,
         type: 3}
       propertyPath: m_MotionVectors
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6322958759162786509, guid: e845ce151d995264e80a8dfbe0f43522,
         type: 3}
       propertyPath: m_MotionVectors
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326505759185945045, guid: e845ce151d995264e80a8dfbe0f43522,
+        type: 3}
+      propertyPath: damage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7818521870008839666, guid: e845ce151d995264e80a8dfbe0f43522,
+        type: 3}
+      propertyPath: damage
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e845ce151d995264e80a8dfbe0f43522, type: 3}
