@@ -71,8 +71,8 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 		if(missileOut && currentEachCooldown <= 0.0f && currentMissileOut < maximumMissile)
         {
 			GameObject obj = Instantiate(missile, shootPoint[0].transform.position, Quaternion.identity);
-            float randomNumberX = Random.Range(-5.0f, 5.0f);
-            float randomNumberZ = Random.Range(-5.0f, 5.0f);
+            float randomNumberX = Random.Range(-4.0f, 4.0f);
+            float randomNumberZ = Random.Range(-4.0f, 4.0f);
             Vector3 velo = CalculateVelocity(new Vector3(target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.x + randomNumberX, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.y - 2.2f, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.z + randomNumberZ), transform.position , 1.5f);
 			obj.transform.rotation = Quaternion.LookRotation(velo);
 			obj.GetComponent<Rigidbody>().velocity = velo;

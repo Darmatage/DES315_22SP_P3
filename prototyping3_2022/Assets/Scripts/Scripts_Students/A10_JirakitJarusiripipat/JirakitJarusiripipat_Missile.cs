@@ -13,5 +13,9 @@ public class JirakitJarusiripipat_Missile : MonoBehaviour
             GameObject obj = Instantiate(splash,transform.position,Quaternion.identity);
             Destroy(gameObject);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
