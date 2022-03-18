@@ -38,10 +38,14 @@ public class BenThompson_Weapons : MonoBehaviour
     int currentRangeOut = -1;
 
     private float activeCooldown = 0.0f;
+    private float mineCooldown = 0.0f;
 
     [Header("Scales")]
     [SerializeField]
     private BenThompson_ScaleManager scaleManager;
+
+    [SerializeField]
+    private float scalePlacementCooldown;
 
     // Start is called before the first frame update
     void Start()
@@ -55,24 +59,20 @@ public class BenThompson_Weapons : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         // Use a mine
-        if(Input.GetKeyDown(KeyCode.P))
+        if (Input.GetButtonDown(button2) && mineCooldown <= 0.0f)
         {
-            scaleManager.UseScaleMine();
+            if(scaleManager.UseScaleMine())
+            {
+                mineCooldown = scalePlacementCooldown;
+            }
+            
         }
 
-        // If there is an active cooldown
-        if(activeCooldown > 0.0f)
-        {
-            // Decrease the cooldown
-            activeCooldown -= Time.deltaTime;
-
-            // Leave the loop
-            return;
-        }
 
         // If the firebreath ability can be used
-        if((Input.GetButtonDown(button1)) && (weaponOut == false))
+        if ((Input.GetButtonDown(button1)) && (weaponOut == false) && activeCooldown <= 0.0f)
         {
             // Get the current scale value
             firebreathRange = scaleManager.GetNumScales();
@@ -150,6 +150,18 @@ public class BenThompson_Weapons : MonoBehaviour
             }
 
             
+        }
+
+        // If there is an active cooldown
+        if (activeCooldown > 0.0f)
+        {
+            // Decrease the cooldown
+            activeCooldown -= Time.deltaTime;
+        }
+
+        if (mineCooldown > 0.0f)
+        {
+            mineCooldown -= Time.deltaTime;
         }
     }
 
