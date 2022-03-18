@@ -82,6 +82,7 @@ public class A6_RailGun : MonoBehaviour {
         GetComponent<CapsuleCollider>().enabled = true;
         GetComponent<MeshRenderer>().enabled = true;
 
+        isCharging = false;
         source.volume = .25f;
         source.pitch = 1;
         source.loop = false;
