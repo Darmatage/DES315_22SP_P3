@@ -48,8 +48,15 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 		button2 = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
 		button3 = gameObject.transform.parent.GetComponent<playerParent>().action3Input;
 		button4 = gameObject.transform.parent.GetComponent<playerParent>().action4Input;
+		if(GetComponentInParent<playerParent>().isPlayer1)
+        {
+			target = GameObject.FindGameObjectWithTag("Player2");
+		}
+		else
+        {
 
-		target = GameObject.FindGameObjectWithTag("Player2");
+			target = GameObject.FindGameObjectWithTag("Player1");
+		}
 	}
 
 	void Update()
@@ -64,7 +71,9 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 		if(missileOut && currentEachCooldown <= 0.0f && currentMissileOut < maximumMissile)
         {
 			GameObject obj = Instantiate(missile, shootPoint[0].transform.position, Quaternion.identity);
-			Vector3 velo = CalculateVelocity(new Vector3(target.transform.position.x, target.transform.position.y - 3.4f, target.transform.position.z), transform.position, 2f);
+            float randomNumberX = Random.Range(-5.0f, 5.0f);
+            float randomNumberZ = Random.Range(-5.0f, 5.0f);
+            Vector3 velo = CalculateVelocity(new Vector3(target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.x + randomNumberX, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.y - 2.2f, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.z + randomNumberZ), transform.position , 1.5f);
 			obj.transform.rotation = Quaternion.LookRotation(velo);
 			obj.GetComponent<Rigidbody>().velocity = velo;
             currentMissileOut++;

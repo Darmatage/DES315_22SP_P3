@@ -315,10 +315,10 @@ MonoBehaviour:
   forceSideLimit_p75: 1
   shieldPowerFront: 5
   shieldPowerBack: 3
-  shieldPowerLeft: 5
-  shieldPowerRight: 5
-  shieldPowerTop: 5
-  shieldPowerBottom: 5
+  shieldPowerLeft: 3
+  shieldPowerRight: 3
+  shieldPowerTop: 2
+  shieldPowerBottom: 2
   shieldFrontObj: {fileID: 1098726327034351829}
   shieldBackObj: {fileID: 2186211737314387781}
   shieldLeftObj: {fileID: 2735579452779107192}
