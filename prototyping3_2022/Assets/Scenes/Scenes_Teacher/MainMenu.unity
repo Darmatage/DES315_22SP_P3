@@ -468,26 +468,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button_B02
       objectReference: {fileID: 0}
-    - target: {fileID: 8069984668085712590, guid: 7c7d6edfd31cacd4ca27f1c13a534dac,
-        type: 3}
-      propertyPath: m_Colors.m_NormalColor.b
-      value: 0.08486207
-      objectReference: {fileID: 0}
-    - target: {fileID: 8069984668085712590, guid: 7c7d6edfd31cacd4ca27f1c13a534dac,
-        type: 3}
-      propertyPath: m_Colors.m_NormalColor.g
-      value: 0.029859383
-      objectReference: {fileID: 0}
-    - target: {fileID: 8069984668085712590, guid: 7c7d6edfd31cacd4ca27f1c13a534dac,
-        type: 3}
-      propertyPath: m_Colors.m_NormalColor.r
-      value: 0.5754717
-      objectReference: {fileID: 0}
-    - target: {fileID: 8069984669619503392, guid: 7c7d6edfd31cacd4ca27f1c13a534dac,
-        type: 3}
-      propertyPath: m_Text
-      value: B02 Jonathan Hamling
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c7d6edfd31cacd4ca27f1c13a534dac, type: 3}
 --- !u!224 &130365013 stripped
@@ -8572,6 +8552,66 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1962424202}
     m_Modifications:
+    - target: {fileID: 6350672901216803552, guid: 85884e1dd7e289b4ba8a58881dc27079,
+        type: 3}
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 0.55374706
+      objectReference: {fileID: 0}
+    - target: {fileID: 6350672901216803552, guid: 85884e1dd7e289b4ba8a58881dc27079,
+        type: 3}
+      propertyPath: m_Colors.m_NormalColor.g
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6350672901216803552, guid: 85884e1dd7e289b4ba8a58881dc27079,
+        type: 3}
+      propertyPath: m_Colors.m_NormalColor.r
+      value: 0.5254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 6350672901216803552, guid: 85884e1dd7e289b4ba8a58881dc27079,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.15294118
+      objectReference: {fileID: 0}
+    - target: {fileID: 6350672901216803552, guid: 85884e1dd7e289b4ba8a58881dc27079,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.54038686
+      objectReference: {fileID: 0}
+    - target: {fileID: 6350672901216803552, guid: 85884e1dd7e289b4ba8a58881dc27079,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.6313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 6350672901216803552, guid: 85884e1dd7e289b4ba8a58881dc27079,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.754361
+      objectReference: {fileID: 0}
+    - target: {fileID: 6350672901216803552, guid: 85884e1dd7e289b4ba8a58881dc27079,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.9811321
+      objectReference: {fileID: 0}
+    - target: {fileID: 6350672901216803552, guid: 85884e1dd7e289b4ba8a58881dc27079,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.9718127
+      objectReference: {fileID: 0}
+    - target: {fileID: 6350672901216803552, guid: 85884e1dd7e289b4ba8a58881dc27079,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0.5582948
+      objectReference: {fileID: 0}
+    - target: {fileID: 6350672901216803552, guid: 85884e1dd7e289b4ba8a58881dc27079,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0.9622642
+      objectReference: {fileID: 0}
+    - target: {fileID: 6350672901216803552, guid: 85884e1dd7e289b4ba8a58881dc27079,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0.87118846
+      objectReference: {fileID: 0}
     - target: {fileID: 6350672901216803555, guid: 85884e1dd7e289b4ba8a58881dc27079,
         type: 3}
       propertyPath: gameHandlerObj
@@ -8686,6 +8726,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6350672901285930399, guid: 85884e1dd7e289b4ba8a58881dc27079,
+        type: 3}
+      propertyPath: m_Text
+      value: A15 Christian Wookey
+      objectReference: {fileID: 0}
+    - target: {fileID: 6350672901285930399, guid: 85884e1dd7e289b4ba8a58881dc27079,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85884e1dd7e289b4ba8a58881dc27079, type: 3}
