@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  rotateSpeed: 100
+  rotateSpeed: 120
   jumpSpeed: 10
   boostSpeed: 10
   groundCheck: {fileID: 1355330930762081256}
@@ -311,13 +311,13 @@ MonoBehaviour:
   compassSides: {fileID: 1029706280859159121}
   compassVertical: {fileID: 4587639291210960121}
   sidelimit: 0.75
-  knockBackSpeed: 10
+  knockBackSpeed: 12
   forceSideLimit_p75: 1
   shieldPowerFront: 5
   shieldPowerBack: 5
   shieldPowerLeft: 5
   shieldPowerRight: 5
-  shieldPowerTop: 5
+  shieldPowerTop: 4
   shieldPowerBottom: 5
   shieldFrontObj: {fileID: 1098726327034351829}
   shieldBackObj: {fileID: 2186211737314387781}
