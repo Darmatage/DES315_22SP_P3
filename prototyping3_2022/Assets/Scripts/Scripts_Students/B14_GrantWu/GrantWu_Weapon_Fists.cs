@@ -31,13 +31,13 @@ public class GrantWu_Weapon_Fists : MonoBehaviour
 	void Update()
 	{
 		//if (Input.GetKeyDown(KeyCode.T)){
-		if ((Input.GetMouseButtonDown(0)) && (leftOut == false))
+		if ((Input.GetMouseButtonDown(0) || Input.GetButtonDown(button1)) && (leftOut == false))
 		{
 			leftFist.transform.Translate(0, 0, thrustAmount);
 			leftOut = true;
 			StartCoroutine(WithdrawWeapon(true));
 		}
-		if ((Input.GetMouseButtonDown(1)) && (rightOut == false))
+		if ((Input.GetMouseButtonDown(1) || Input.GetButtonDown(button1)) && (rightOut == false))
 		{
 			rightFist.transform.Translate(0, 0, thrustAmount);
 			rightOut = true;
@@ -47,7 +47,7 @@ public class GrantWu_Weapon_Fists : MonoBehaviour
 
 	IEnumerator WithdrawWeapon(bool isLeft)
 	{
-		yield return new WaitForSeconds(0.6f);
+		yield return new WaitForSeconds(0.5f);
 		if (isLeft)
 		{
 			leftFist.transform.Translate(0, 0, -thrustAmount);
