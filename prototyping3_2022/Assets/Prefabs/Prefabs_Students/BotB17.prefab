@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 2936379485176439298}
   m_Layer: 0
   m_Name: MouthWeapon
-  m_TagString: Untagged
+  m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
