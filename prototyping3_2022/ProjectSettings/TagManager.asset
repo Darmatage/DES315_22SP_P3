@@ -32,6 +32,8 @@ TagManager:
   - Ball
   - Pellet
   - A03bot
+  - Player1_Mine
+  - Player2_Mine
   layers:
   - Default
   - TransparentFX
