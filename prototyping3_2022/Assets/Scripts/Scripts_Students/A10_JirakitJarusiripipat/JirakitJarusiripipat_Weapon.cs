@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class JirakitJarusiripipat_Weapon : MonoBehaviour
 {
+	private JirakitJarusiripipat_SoundKeeper soundKeeper;
+
 	[HideInInspector]
 	//grab axis from parent object
 	public string button1;
@@ -42,6 +44,7 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 	private int currentMissileOut;
 	private int maximumMissile = 4;
 	private GameObject target;
+
 	void Start()
 	{
 		button1 = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
@@ -57,6 +60,7 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 
 			target = GameObject.FindGameObjectWithTag("Player1");
 		}
+		soundKeeper = GetComponent<JirakitJarusiripipat_SoundKeeper>();
 	}
 
 	void Update()
@@ -77,9 +81,9 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 			obj.transform.rotation = Quaternion.LookRotation(velo);
 			obj.GetComponent<Rigidbody>().velocity = velo;
             currentMissileOut++;
-            Debug.Log(currentMissileOut);
             currentEachCooldown = eachCooldown;
-			Debug.Log(currentEachCooldown);
+			soundKeeper.PlayLauncher();
+			obj.GetComponent<JirakitJarusiripipat_Missile>().parent = this.gameObject;
 		}
 		else if(currentEachCooldown > 0.0f)
         {
@@ -102,6 +106,8 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 			obj.GetComponent<Rigidbody>().AddForce(mainGunBarrel.forward * bulletSpeed);
 			currentBulletCooldown = bulletCooldown;
 			GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * -5000);
+			soundKeeper.PlayMainGun();
+
 
 		}
 		if (currentBulletCooldown > 0.0f)
