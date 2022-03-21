@@ -59,4 +59,20 @@ public class GrantWu_Weapon_Fists : MonoBehaviour
 			rightOut = false;
 		}
 	}
+
+    private void OnCollisionEnter(Collision other)
+    {
+		if (other.gameObject.CompareTag("Player1") || other.gameObject.CompareTag("Player2"))
+        {
+			Rigidbody other_rb = other.gameObject.GetComponent<Rigidbody>();
+			Stun(other_rb);
+		}
+    }
+
+	IEnumerator Stun(Rigidbody other_rb)
+    {
+		yield return new WaitForSeconds(0.1f);
+		other_rb.velocity = new Vector3(0, 0, 0);
+		yield return new WaitForSeconds(1f);
+    }
 }
