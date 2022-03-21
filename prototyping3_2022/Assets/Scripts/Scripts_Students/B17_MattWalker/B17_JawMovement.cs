@@ -26,6 +26,7 @@ public class B17_JawMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (IsReadyToBite)
 		{
             if (CheckMouthFullyClosed())
