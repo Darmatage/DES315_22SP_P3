@@ -195,7 +195,7 @@ MonoBehaviour:
   particlesPrefab: {fileID: 7246120000014656734, guid: 740a2aebec573654ab0fea34ed35ef72,
     type: 3}
   SpawnParticlesHere: {x: 0, y: 0, z: 0}
-  isPlayer1Weapon: 1
+  isPlayer1Weapon: 0
   isPlayer2Weapon: 0
   isMonsterWeapon: 0
 --- !u!114 &1327476963089521406
