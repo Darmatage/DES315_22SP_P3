@@ -145,15 +145,15 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 			mainGunReady = true;
 		}
 		//
-		if(Input.GetButtonDown(button3) && !botOut)
-        {
-			botOut = true;
-			//currentBotCooldown = botCooldown;
-        }
-		if(currentBotCooldown > 0.0f && botOut)
-        {
-			currentBotCooldown -= Time.deltaTime;
-        }
+		//if(Input.GetButtonDown(button3) && !botOut)
+  //      {
+		//	botOut = true;
+		//	//currentBotCooldown = botCooldown;
+  //      }
+		//if(currentBotCooldown > 0.0f && botOut)
+  //      {
+		//	currentBotCooldown -= Time.deltaTime;
+  //      }
 	}
 	IEnumerator WithdrawWeapon()
 	{
