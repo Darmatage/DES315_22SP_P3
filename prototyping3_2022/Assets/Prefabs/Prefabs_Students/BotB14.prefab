@@ -288,7 +288,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1355330930375697355}
   serializedVersion: 2
-  m_Mass: 220
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -401,8 +401,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea4686dc3f174b2458160e9fadaba2a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftFist: {fileID: 4654571123274727292}
-  rightFist: {fileID: 384124384027739569}
+  leftFist: {fileID: 384124384027739569}
+  rightFist: {fileID: 4654571123274727292}
   thrustAmount: 5
   button1: 
   button2: 
