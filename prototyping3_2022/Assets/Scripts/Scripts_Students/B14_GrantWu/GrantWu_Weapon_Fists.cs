@@ -36,15 +36,14 @@ public class GrantWu_Weapon_Fists : MonoBehaviour
 		button4 = gameObject.transform.parent.GetComponent<playerParent>().action4Input;
 
 		myrb = gameObject.GetComponent<Rigidbody>();
-		
+
 		// Grab other game object based on player tag
-		if (GameObject.FindWithTag("Player1"))
-        {
-			if (GameObject.FindWithTag("Player1").tag != gameObject.tag)
-				othergo = GameObject.FindWithTag("Player1");
+		if (gameObject.CompareTag("Player1"))
+		{
+			othergo = GameObject.FindWithTag("Player2") ? GameObject.FindWithTag("Player2") : null;
 		}
-		else if (GameObject.FindWithTag("Player2"))
-			othergo = GameObject.FindWithTag("Player2");
+		else if (gameObject.CompareTag("Player2"))
+			othergo = GameObject.FindWithTag("Player1") ? GameObject.FindWithTag("Player1") : null;
 
 		// Store other's original values here
 		if (othergo)

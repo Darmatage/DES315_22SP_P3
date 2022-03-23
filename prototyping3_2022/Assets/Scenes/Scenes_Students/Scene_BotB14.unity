@@ -468,6 +468,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BotB14
       objectReference: {fileID: 0}
+    - target: {fileID: 1355330930375697355, guid: e845ce151d995264e80a8dfbe0f43522,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player1
+      objectReference: {fileID: 0}
     - target: {fileID: 1355330930375697356, guid: e845ce151d995264e80a8dfbe0f43522,
         type: 3}
       propertyPath: m_RootOrder
