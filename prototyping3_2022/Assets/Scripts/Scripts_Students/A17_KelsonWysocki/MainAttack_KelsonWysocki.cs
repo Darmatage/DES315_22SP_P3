@@ -5,14 +5,13 @@ using UnityEngine;
 public class MainAttack_KelsonWysocki : MonoBehaviour
 {
     public GameObject laser;
+    public MainAttackDamage_KelsonWysocki hitbox;
     private ParticleSystem laserEffect;
     public float range;
     public float damage;
     public float duration;
 
     public string button;
-
-    private bool shooting = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,17 +24,17 @@ public class MainAttack_KelsonWysocki : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown(button) && !shooting)
+        if (Input.GetButtonDown(button) && !hitbox.isShooting)
         {
             laserEffect.Play();
-            Invoke(nameof(EndAttack), duration - 3.5f);
-            shooting = true;
+            Invoke(nameof(EndAttack), duration - laserEffect.main.startLifetime.constant);
+            hitbox.isShooting = true;
         }
     }
 
     void EndAttack()
     {
         laserEffect.Stop();
-        shooting = false;
+        hitbox.isShooting = false;
     }
 }
