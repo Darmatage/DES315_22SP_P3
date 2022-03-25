@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 6342493771560367303}
   - component: {fileID: 1327476963089521406}
   - component: {fileID: 3790560845598396827}
+  - component: {fileID: 3912373677948634710}
   m_Layer: 0
   m_Name: Blade
   m_TagString: Hazard
@@ -226,6 +227,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particlePrefab: {fileID: 1528016530178176365, guid: b2a4c419ecf855d47b88c6390b62bf34,
     type: 3}
+--- !u!114 &3912373677948634710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6342493771560367308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73bb509ba0b03aa4f9097007c3fed1bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6342493771694231642
 GameObject:
   m_ObjectHideFlags: 0
