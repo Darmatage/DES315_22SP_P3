@@ -5,14 +5,35 @@ using UnityEngine;
 public class TaroKumagai_WeaponDamage : HazardDamage
 {
     public TaroKumagai_Weapon_BasicProjectile parentRef;
+    public GameObject Explosion;
+
+
 	void OnCollisionEnter(Collision other)
     {
-        if (isAPlayer(other.gameObject) || isReactiveProjectile(other.gameObject))
+        if (isAPlayer(other.gameObject))
+            Physics.IgnoreCollision(GetComponent<Collider>(), other.collider, true);
+
+
+        //if (isAPlayer(other.gameObject) || isReactiveProjectile(other.gameObject))
+        //{
+        //    SpawnParticlesHere = other.contacts[0].point;
+        //    //make particles
+        //    GameObject damageParticles = Instantiate(particlesPrefab, SpawnParticlesHere, other.transform.rotation);
+        //    StartCoroutine(destroyParticles(damageParticles));
+        //    
+        //}
+
+        if (isReactiveProjectile(other.gameObject))
         {
-            SpawnParticlesHere = other.contacts[0].point;
-            //make particles
-            GameObject damageParticles = Instantiate(particlesPrefab, SpawnParticlesHere, other.transform.rotation);
-            StartCoroutine(destroyParticles(damageParticles));
+            // Get the midpoint of the collision
+            Vector3 CollisionEpicenter = gameObject.transform.position + other.gameObject.transform.position;
+            CollisionEpicenter.x /= 2;
+            CollisionEpicenter.y /= 2;
+            CollisionEpicenter.z /= 2;
+
+            // Create Explosion Hitbox and effect
+            parentRef.CreateExplosion(CollisionEpicenter);
+
             Destroy(gameObject);
         }
     }
@@ -23,6 +44,10 @@ public class TaroKumagai_WeaponDamage : HazardDamage
     }
 
     bool isAPlayer(GameObject someObject)
+    {
+        return someObject.transform.root.tag == "Player1" || someObject.transform.root.tag == "Player2";
+    }
+    bool isOpposingPlayer(GameObject someObject)
     {
         return someObject.gameObject != parentRef.gameObject && (someObject.transform.root.tag == "Player1" || someObject.transform.root.tag == "Player2");
     }
@@ -48,7 +73,3 @@ public class TaroKumagai_WeaponDamage : HazardDamage
 	}
 
 }
-
-	//NOTE: this script is just damage
-	//hazard object movement is managed by their button
-	//reporting damage is done by the damage script on the bots 
