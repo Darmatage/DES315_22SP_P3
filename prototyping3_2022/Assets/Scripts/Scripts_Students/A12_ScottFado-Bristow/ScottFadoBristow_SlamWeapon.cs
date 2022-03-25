@@ -14,6 +14,8 @@ public class ScottFadoBristow_SlamWeapon : MonoBehaviour
 
     private float timer;
 
+    public int count = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,14 +37,24 @@ public class ScottFadoBristow_SlamWeapon : MonoBehaviour
             timer = AttackCooldown;
         }
 
-        if(canAttack == false)
+        if (canAttack == false)
         {
             timer -= Time.deltaTime;
 
-            if(timer <= 0)
+            if (timer <= 0)
             {
                 canAttack = true;
             }
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(count > 0)
+        {
+            this.GetComponent<HazardDamage>().damage = 0;
+        }
+
+        count++;
     }
 }
