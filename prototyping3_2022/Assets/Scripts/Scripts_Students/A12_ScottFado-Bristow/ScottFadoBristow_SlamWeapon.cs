@@ -8,13 +8,15 @@ public class ScottFadoBristow_SlamWeapon : MonoBehaviour
 
     public float AttackCooldown = 2.0f;
 
+    public float HitboxOffset = 2.0f;
+
     bool canAttack = true;
 
     public string button1;
 
     private float timer;
 
-    public int count = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +32,7 @@ public class ScottFadoBristow_SlamWeapon : MonoBehaviour
             GameObject s = Instantiate(slamTrigger, transform);
 
             Vector3 nt = s.transform.localPosition;
-            nt.x += 4.0f;
+            nt.x += HitboxOffset;
             s.transform.localPosition = nt;
 
             canAttack = false;
@@ -48,13 +50,5 @@ public class ScottFadoBristow_SlamWeapon : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(count > 0)
-        {
-            this.GetComponent<HazardDamage>().damage = 0;
-        }
-
-        count++;
-    }
+    
 }
