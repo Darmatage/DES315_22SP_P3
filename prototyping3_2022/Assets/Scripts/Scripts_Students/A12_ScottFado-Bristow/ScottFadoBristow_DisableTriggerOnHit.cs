@@ -4,18 +4,28 @@ using UnityEngine;
 
 public class ScottFadoBristow_DisableTriggerOnHit : MonoBehaviour
 {
-
+    public float Timeout = 0.25f;
     private int count = 0;
+    private float timer;
     // Start is called before the first frame update
     void Start()
     {
-        
+        timer = Timeout;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+       
+
+        if(timer <= 0)
+        {
+            DisableDamage();
+        }
+        else
+        {
+            timer -= Time.deltaTime;
+        }
     }
 
 
@@ -23,9 +33,15 @@ public class ScottFadoBristow_DisableTriggerOnHit : MonoBehaviour
     {
         if (count > 0)
         {
-            gameObject.GetComponent<HazardDamage>().damage = 0;
+            DisableDamage();
         }
-
+        
         count++;
+    }
+
+
+    private void DisableDamage()
+    {
+        gameObject.GetComponent<HazardDamage>().damage = 0;
     }
 }
