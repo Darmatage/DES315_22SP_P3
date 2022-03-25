@@ -21,6 +21,8 @@ public class B17_JawMovement : MonoBehaviour
         BiteDirModifier = 1.0f;
 
         OtherJaw = OtherJawObject.GetComponent<B17_JawMovement>();
+
+
     }
 
     // Update is called once per frame

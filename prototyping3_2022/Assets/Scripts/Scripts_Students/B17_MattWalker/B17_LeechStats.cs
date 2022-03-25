@@ -31,15 +31,15 @@ public class B17_LeechStats : MonoBehaviour
             if (otherRoot.tag == "Player1" || otherRoot.tag == "Player2")
 			{
                 IsLeeching = true;
-                StartCoroutine(IncreaseSize(transform.root.localScale * ScaleIncreaseAmount));
+                StartCoroutine(IncreaseSize(transform.parent.localScale * ScaleIncreaseAmount));
 			}
     }
 
     IEnumerator IncreaseSize(Vector3 targetScale)
 	{
-        while (transform.root.localScale.magnitude < targetScale.magnitude)
+        while (transform.parent.localScale.magnitude < targetScale.magnitude)
 		{
-            transform.root.localScale += transform.root.localScale * ScaleIncreaseSpeed * Time.deltaTime;
+            transform.parent.localScale += transform.parent.localScale * ScaleIncreaseSpeed * Time.deltaTime;
             yield return null;
         }
 
