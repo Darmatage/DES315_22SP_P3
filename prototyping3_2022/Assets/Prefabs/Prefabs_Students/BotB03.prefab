@@ -157,11 +157,11 @@ GameObject:
   - component: {fileID: 6362456292364079154}
   - component: {fileID: 7107478127326975586}
   - component: {fileID: 1355330930375697357}
-  - component: {fileID: 1355330930375697358}
-  - component: {fileID: 1355330930375697359}
+  - component: {fileID: 4178292551861604707}
   - component: {fileID: 364999052203561223}
   - component: {fileID: 5780095072016173801}
-  - component: {fileID: 7285542615022466734}
+  - component: {fileID: 4889632875750502140}
+  - component: {fileID: 4750799367959631791}
   m_Layer: 0
   m_Name: BotB03
   m_TagString: Untagged
@@ -262,7 +262,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1355330930375697358
+--- !u!114 &4178292551861604707
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -271,7 +271,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1355330930375697355}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aab929fe774a0084c8ae87aafe02faf6, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a30daad1b9ba4b4186ac7abd67e896c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 20
@@ -292,40 +292,6 @@ MonoBehaviour:
   pHorizontal: 
   pJump: 
   button4: 
---- !u!114 &1355330930375697359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355330930375697355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11712de1bbb4c024e9eaff6f3c3d5bff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  compassSides: {fileID: 1029706280859159121}
-  compassVertical: {fileID: 4587639291210960121}
-  sidelimit: 0.75
-  knockBackSpeed: 10
-  forceSideLimit_p75: 1
-  shieldPowerFront: 1
-  shieldPowerBack: 0
-  shieldPowerLeft: 0
-  shieldPowerRight: 0
-  shieldPowerTop: 1
-  shieldPowerBottom: 1
-  shieldFrontObj: {fileID: 1098726327034351829}
-  shieldBackObj: {fileID: 2186211737314387781}
-  shieldLeftObj: {fileID: 2735579452779107192}
-  shieldRightObj: {fileID: 2072343368729710841}
-  shieldTopObj: {fileID: 3220133571300334769}
-  shieldBottomObj: {fileID: 565303781940079435}
-  dmgParticlesFront: {fileID: 992594538681992222}
-  dmgParticlesBack: {fileID: 4516345222768258679}
-  dmgParticlesLeft: {fileID: 6974817156101819959}
-  dmgParticlesRight: {fileID: 3397723275512725552}
-  dmgParticlesTop: {fileID: 8546135154986991094}
 --- !u!114 &364999052203561223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,7 +321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doesFallDamage: 0
   playerFallDamage: 4
---- !u!114 &7285542615022466734
+--- !u!114 &4889632875750502140
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -364,14 +330,57 @@ MonoBehaviour:
   m_GameObject: {fileID: 1355330930375697355}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67b5dfa20ebefac448d710384853fb07, type: 3}
+  m_Script: {fileID: 11500000, guid: a60d1fc400add614bb8b075219f84ea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponThrust: {fileID: 8160687095547711129}
+  weaponThrust: {fileID: 0}
   button1: 
   button2: 
   button3: 
   button4: 
+--- !u!114 &4750799367959631791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355330930375697355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef415b572dedc749a9e6ab21749bd7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  compassSides: {fileID: 1029706280859159121}
+  compassVertical: {fileID: 4587639291210960121}
+  sidelimit: 0.75
+  knockBackSpeed: 10
+  forceSideLimit_p75: 1
+  shieldPowerFront: 1
+  shieldPowerBack: 0
+  shieldPowerLeft: 0
+  shieldPowerRight: 0
+  shieldPowerTop: 1
+  shieldPowerBottom: 1
+  shieldFrontObj: {fileID: 1098726327034351829}
+  shieldBackObj: {fileID: 2186211737314387781}
+  shieldLeftObj: {fileID: 2735579452779107192}
+  shieldRightObj: {fileID: 2072343368729710841}
+  shieldTopObj: {fileID: 3220133571300334769}
+  shieldBottomObj: {fileID: 565303781940079435}
+  dmgParticlesFront: {fileID: 992594538681992222}
+  dmgParticlesBack: {fileID: 4516345222768258679}
+  dmgParticlesLeft: {fileID: 6974817156101819959}
+  dmgParticlesRight: {fileID: 3397723275512725552}
+  dmgParticlesTop: {fileID: 8546135154986991094}
+  HurtEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  DamageEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  BreakEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1355330930662561729
 GameObject:
   m_ObjectHideFlags: 0
