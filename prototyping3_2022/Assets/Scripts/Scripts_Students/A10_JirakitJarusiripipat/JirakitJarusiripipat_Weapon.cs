@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class JirakitJarusiripipat_Weapon : MonoBehaviour
 {
+	private JirakitJarusiripipat_SoundKeeper soundKeeper;
+
 	[HideInInspector]
 	//grab axis from parent object
 	public string button1;
@@ -31,6 +33,7 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
     private GameObject missile;
 	public GameObject weaponThrust;
 	private float thrustAmount = 3f;
+	private Animator animator;
 	[SerializeField]
 	private float missileCooldown;
 	private float currentMissileCooldown;
@@ -42,7 +45,21 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 	private int currentMissileOut;
 	private int maximumMissile = 4;
 	private GameObject target;
-	void Start()
+	private float holdTime = 1.0f;
+	private float currentHoldTime;
+	private bool holding = false;
+	[Header("Suicide Bot")]
+	[SerializeField]
+	private float botCooldown = 7.0f;
+	private float currentBotCooldown;
+	private bool botOut = false;
+	[SerializeField]
+	private GameObject suicideBot;
+	[SerializeField]
+	private Transform botSpawn;
+
+
+    void Start()
 	{
 		button1 = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
 		button2 = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
@@ -57,29 +74,45 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 
 			target = GameObject.FindGameObjectWithTag("Player1");
 		}
+		soundKeeper = GetComponent<JirakitJarusiripipat_SoundKeeper>();
+		animator = GetComponent<Animator>();
 	}
 
 	void Update()
 	{
 		//if (Input.GetKeyDown(KeyCode.T)){
+		float dist = Vector3.Distance(target.transform.position, transform.position);
 		if ((Input.GetButtonDown(button2)) && (!missileOut) && missileReady)
 		{
-			//weaponThrust.transform.Translate(0, thrustAmount, 0);
 			missileOut = true;
+			//weaponThrust.transform.Translate(0, thrustAmount, 0);
 			StartCoroutine(WithdrawWeapon());
+			holding = true;
+			currentHoldTime = holdTime;
+			animator.SetTrigger("Shoot");
+
 		}
-		if(missileOut && currentEachCooldown <= 0.0f && currentMissileOut < maximumMissile)
+		if (currentHoldTime > 0.0f && (missileOut) && missileReady)
         {
-			GameObject obj = Instantiate(missile, shootPoint[0].transform.position, Quaternion.identity);
+			currentHoldTime -= Time.deltaTime;
+        }
+		else
+        {
+			holding = false;
+
+		}
+		if (missileOut && currentEachCooldown <= 0.0f && currentMissileOut < maximumMissile && !holding)
+        {
+			GameObject obj = Instantiate(missile, shootPoint[currentMissileOut].transform.position, Quaternion.identity);
             float randomNumberX = Random.Range(-4.0f, 4.0f);
             float randomNumberZ = Random.Range(-4.0f, 4.0f);
             Vector3 velo = CalculateVelocity(new Vector3(target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.x + randomNumberX, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.y - 2.2f, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.z + randomNumberZ), transform.position , 1.5f);
 			obj.transform.rotation = Quaternion.LookRotation(velo);
 			obj.GetComponent<Rigidbody>().velocity = velo;
             currentMissileOut++;
-            Debug.Log(currentMissileOut);
             currentEachCooldown = eachCooldown;
-			Debug.Log(currentEachCooldown);
+			soundKeeper.PlayLauncher();
+			obj.GetComponent<JirakitJarusiripipat_Missile>().parent = this.gameObject;
 		}
 		else if(currentEachCooldown > 0.0f)
         {
@@ -102,6 +135,8 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 			obj.GetComponent<Rigidbody>().AddForce(mainGunBarrel.forward * bulletSpeed);
 			currentBulletCooldown = bulletCooldown;
 			GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * -5000);
+			soundKeeper.PlayMainGun();
+
 
 		}
 		if (currentBulletCooldown > 0.0f)
@@ -113,15 +148,32 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 		{
 			mainGunReady = true;
 		}
-		//
-	}
+
+        if (Input.GetButtonDown(button3) && !botOut)
+        {
+			GameObject obj = Instantiate(suicideBot, botSpawn.transform.position, Quaternion.identity);
+			obj.GetComponent<JirakitJarusiripipat_SuicideBot>().target = target.GetComponentInChildren<BotBasic_Damage>().gameObject.transform;
+			Debug.Log(obj.GetComponent<JirakitJarusiripipat_SuicideBot>().target);
+            botOut = true;
+            currentBotCooldown = botCooldown;
+        }
+        if (currentBotCooldown > 0.0f && botOut)
+        {
+            currentBotCooldown -= Time.deltaTime;
+        }
+		else if(currentBotCooldown <= 0.0f)
+        {
+			botOut = false;
+        }
+    }
 	IEnumerator WithdrawWeapon()
 	{
-		yield return new WaitForSeconds(missileCooldown - 4.0f);
+		yield return new WaitForSeconds(missileCooldown+1 - 4.0f);
 		//weaponThrust.transform.Translate(0, -thrustAmount, 0);
 		missileOut = false;
 		currentMissileCooldown = missileCooldown;
 		currentMissileOut = 0;
+		//animator.SetTrigger("Idle");
 	}
 	public Vector3 CalculateVelocity(Vector3 target, Vector3 origin, float time)
 	{

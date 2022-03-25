@@ -6,6 +6,7 @@ public class TaroKumagai_Weapon_BasicProjectile : MonoBehaviour
 {
 
 	public GameObject projectile;
+	public GameObject explosion;
 
     public int MaxProjectiles = 2;
     public float ProjectileLifetime = 3f;
@@ -14,20 +15,27 @@ public class TaroKumagai_Weapon_BasicProjectile : MonoBehaviour
     public float ProjectileTravelTime = 0.5f;
 
     public LinkedList<GameObject> activeProjectiles = new LinkedList<GameObject>();
+    public LinkedList<GameObject> activeExplosions = new LinkedList<GameObject>();
 	//grab axis from parent object
-	public string ButtonLaunch;
-	public string ButtonMagnetize;
+	public string ButtonLaunch = "INVALID_KEY";
+	public string ButtonMagnetize = "INVALID_KEY";
     private bool magentizing = false;
+
+
+    private void Awake()
+    {
+        ButtonLaunch = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
+        ButtonMagnetize = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
+    }
 
     void Start()
     {
-		ButtonLaunch = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
-        ButtonMagnetize = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
+		
     }
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.T)){
+
         if (Input.GetButtonDown(ButtonLaunch) && activeProjectiles.Count < MaxProjectiles)
         {
             Vector3 LaunchPosition = gameObject.transform.position + gameObject.transform.forward * 2;
@@ -43,6 +51,18 @@ public class TaroKumagai_Weapon_BasicProjectile : MonoBehaviour
 
             StartCoroutine(SetProjectileToStop(newProjectile, ProjectileTravelTime));
             StartCoroutine(SetProjectileToExpire(newProjectile, ProjectileLifetime));
+        }
+
+        if (Input.GetButtonDown(ButtonMagnetize))
+        {
+            foreach (var projectile in activeProjectiles)
+                projectile.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
+
+        if (Input.GetButtonUp(ButtonMagnetize))
+        {
+            foreach (var projectile in activeProjectiles)
+                projectile.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
 
         if (Input.GetButton(ButtonMagnetize))
@@ -77,6 +97,18 @@ public class TaroKumagai_Weapon_BasicProjectile : MonoBehaviour
         else
             magentizing = false;
     }
+
+    public void CreateExplosion(Vector3 position)
+    {
+        if (activeExplosions.Count > 0)
+            return;
+
+        GameObject explosionRef = Instantiate(explosion, position, Quaternion.identity);
+        explosionRef.GetComponent<TaroKumagai_WeaponExplosionHitBox>().parentRef = this;
+
+        activeExplosions.AddLast(explosionRef);
+    }
+
 
     IEnumerator SetProjectileToStop(GameObject projectile, float projectileTravelTime)
     {
