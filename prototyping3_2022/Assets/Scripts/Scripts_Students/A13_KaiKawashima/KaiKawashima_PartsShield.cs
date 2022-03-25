@@ -10,11 +10,16 @@ public class KaiKawashima_PartsShield : MonoBehaviour
 
     [HideInInspector]
     public float front = 5.0f;
-    private float back = 5.0f;
-    private float left = 5.0f;
-    private float right = 5.0f;
-    private float top = 5.0f;
-    private float bottom = 5.0f;
+    [HideInInspector]
+    public float back = 5.0f;
+    [HideInInspector]
+    public float left = 5.0f;
+    [HideInInspector]
+    public float right = 5.0f;
+    [HideInInspector]
+    public float top = 5.0f;
+    [HideInInspector]
+    public float bottom = 5.0f;
     private string thisPlayer;
 
     // Start is called before the first frame update

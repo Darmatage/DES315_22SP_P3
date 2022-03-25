@@ -17,6 +17,7 @@ public class KaiKawashima_PartsManager : MonoBehaviour
 
     public BotBasic_Damage DamageStuff;
     public GameObject PartPrefab;
+    public KaiKawashima_PartsShield PartShield;
     public int MaxPartsPerSide = 5;
     public float Damage = 1.0f;
     public float PartSpeed = 3.0f;
@@ -39,6 +40,7 @@ public class KaiKawashima_PartsManager : MonoBehaviour
         AllParts.Add(new List<GameObject>());
 
         DamageStuff = gameObject.GetComponentInParent<BotBasic_Damage>();
+        PartShield = gameObject.GetComponentInParent<KaiKawashima_PartsShield>();
     }
 
     // Update is called once per frame
@@ -46,6 +48,19 @@ public class KaiKawashima_PartsManager : MonoBehaviour
     {
         if (CollectingTimer > 0.0f) CollectingTimer -= Time.deltaTime;
         else IsCollecting = false;
+
+        if (IsCollecting)
+        {
+            foreach (List<GameObject> sides in AllParts)
+            {
+                foreach (GameObject part in sides)
+                {
+                    part.GetComponent<HazardDamage>().damage = Damage;
+                    Rigidbody rb = part.GetComponent<Rigidbody>();
+                    rb.velocity = Vector3.Normalize(transform.position - part.transform.position) * PartSpeed;
+                }
+            }
+        }
     }
 
 
@@ -65,15 +80,6 @@ public class KaiKawashima_PartsManager : MonoBehaviour
     {
         IsCollecting = true;
         CollectingTimer = 1.0f;
-        foreach (List<GameObject> sides in AllParts)
-        {
-            foreach (GameObject part in sides)
-            {
-                part.GetComponent<HazardDamage>().damage = Damage;
-                Rigidbody rb = part.GetComponent<Rigidbody>();
-                rb.velocity = Vector3.Normalize(transform.position - part.transform.position) * PartSpeed;
-            }
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -90,30 +96,36 @@ public class KaiKawashima_PartsManager : MonoBehaviour
                     if (i == (int)Side.TOP)
                     { 
                         ++DamageStuff.shieldPowerTop;
+                        ++PartShield.top;
                         DamageStuff.dmgParticlesTop.SetActive(false);
                     }
                     if (i == (int)Side.BOTTOM) 
                     {
                         ++DamageStuff.shieldPowerBottom;
+                        ++PartShield.bottom;
                     }
                     if (i == (int)Side.LEFT)
                     {
                         ++DamageStuff.shieldPowerLeft;
+                        ++PartShield.left;
                         DamageStuff.dmgParticlesLeft.SetActive(false);
                     }
                     if (i == (int)Side.RIGHT)
                     {
                         ++DamageStuff.shieldPowerRight;
+                        ++PartShield.right;
                         DamageStuff.dmgParticlesRight.SetActive(false);
                     }
                     if (i == (int)Side.FRONT)
                     {
                         ++DamageStuff.shieldPowerFront;
+                        ++PartShield.front;
                         DamageStuff.dmgParticlesFront.SetActive(false);
                     }
                     if (i == (int)Side.BACK)
                     {
                         ++DamageStuff.shieldPowerBack;
+                        ++PartShield.back;
                         DamageStuff.dmgParticlesBack.SetActive(false);
                     }
 
