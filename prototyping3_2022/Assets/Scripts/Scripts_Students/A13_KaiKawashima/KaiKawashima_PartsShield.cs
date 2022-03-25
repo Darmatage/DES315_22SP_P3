@@ -8,7 +8,8 @@ public class KaiKawashima_PartsShield : MonoBehaviour
     private BotBasic_Damage damageManager;
     private GameObject partPrefab;
 
-    private float front = 5.0f;
+    [HideInInspector]
+    public float front = 5.0f;
     private float back = 5.0f;
     private float left = 5.0f;
     private float right = 5.0f;

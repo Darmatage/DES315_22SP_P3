@@ -21,6 +21,8 @@ public class KaiKawashima_PartsManager : MonoBehaviour
     public float Damage = 1.0f;
     public float PartSpeed = 3.0f;
 
+    private bool IsCollecting = false;
+    private float CollectingTimer = 0.0f;
     // 0: front, 1: back, 2: left, 3: right, 4: top, 5: bottom
     private List<List<GameObject>> AllParts = new List<List<GameObject>>();
 
@@ -42,7 +44,8 @@ public class KaiKawashima_PartsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (CollectingTimer > 0.0f) CollectingTimer -= Time.deltaTime;
+        else IsCollecting = false;
     }
 
 
@@ -50,14 +53,18 @@ public class KaiKawashima_PartsManager : MonoBehaviour
     {
         // if no more parts can be created from that side
         if (AllParts[(int)side].Count > MaxPartsPerSide) return false;
+        if (DamageStuff.shieldPowerFront <= 0) return false;
 
         // add part
         AllParts[((int)side)].Add(part);
+
         return true;
     }
 
     public void CollectAllParts()
     {
+        IsCollecting = true;
+        CollectingTimer = 1.0f;
         foreach (List<GameObject> sides in AllParts)
         {
             foreach (GameObject part in sides)
@@ -75,7 +82,7 @@ public class KaiKawashima_PartsManager : MonoBehaviour
         {
             foreach (GameObject part in AllParts[i])
             {
-                if (part == other.gameObject && part.GetComponent<HazardDamage>().damage > 0.0f)
+                if (part == other.gameObject && IsCollecting)
                 {
                     AllParts[i].Remove(part);
                     GameObject.Destroy(other.gameObject);
