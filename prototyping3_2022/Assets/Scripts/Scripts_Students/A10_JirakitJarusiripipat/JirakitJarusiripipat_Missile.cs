@@ -17,9 +17,9 @@ public class JirakitJarusiripipat_Missile : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.layer == 8)
+        if (collision.gameObject.layer == 8)
         {
-            GameObject obj = Instantiate(splash,transform.position,Quaternion.identity);
+            GameObject obj = Instantiate(splash, transform.position, Quaternion.identity);
             soundKeeper.Explode();
             Destroy(gameObject);
         }
@@ -29,4 +29,18 @@ public class JirakitJarusiripipat_Missile : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.layer == 8)
+    //    {
+    //        GameObject obj = Instantiate(splash, transform.position, Quaternion.identity);
+    //        soundKeeper.Explode();
+    //        Destroy(gameObject);
+    //    }
+    //    else
+    //    {
+    //        soundKeeper.Explode();
+    //        Destroy(gameObject);
+    //    }
+    //}
 }

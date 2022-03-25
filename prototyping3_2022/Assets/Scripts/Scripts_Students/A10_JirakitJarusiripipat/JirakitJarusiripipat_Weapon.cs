@@ -53,6 +53,10 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 	private float botCooldown = 7.0f;
 	private float currentBotCooldown;
 	private bool botOut = false;
+	[SerializeField]
+	private GameObject suicideBot;
+	[SerializeField]
+	private Transform botSpawn;
 
 
     void Start()
@@ -144,17 +148,24 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 		{
 			mainGunReady = true;
 		}
-		//
-		//if(Input.GetButtonDown(button3) && !botOut)
-  //      {
-		//	botOut = true;
-		//	//currentBotCooldown = botCooldown;
-  //      }
-		//if(currentBotCooldown > 0.0f && botOut)
-  //      {
-		//	currentBotCooldown -= Time.deltaTime;
-  //      }
-	}
+
+        if (Input.GetButtonDown(button3) && !botOut)
+        {
+			GameObject obj = Instantiate(suicideBot, botSpawn.transform.position, Quaternion.identity);
+			obj.GetComponent<JirakitJarusiripipat_SuicideBot>().target = target.GetComponentInChildren<BotBasic_Damage>().gameObject.transform;
+			Debug.Log(obj.GetComponent<JirakitJarusiripipat_SuicideBot>().target);
+            botOut = true;
+            currentBotCooldown = botCooldown;
+        }
+        if (currentBotCooldown > 0.0f && botOut)
+        {
+            currentBotCooldown -= Time.deltaTime;
+        }
+		else if(currentBotCooldown <= 0.0f)
+        {
+			botOut = false;
+        }
+    }
 	IEnumerator WithdrawWeapon()
 	{
 		yield return new WaitForSeconds(missileCooldown+1 - 4.0f);
