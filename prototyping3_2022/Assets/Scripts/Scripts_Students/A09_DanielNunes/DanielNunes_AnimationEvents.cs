@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DanielNunes_AnimationEvents : MonoBehaviour
 {
+    [HideInInspector]
+    public bool endOfSlash;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,5 +61,15 @@ public class DanielNunes_AnimationEvents : MonoBehaviour
     public void RestoreRotation()
     {
         transform.parent.GetComponent<BotBasic_Move>().rotateSpeed = 100;
+    }
+
+    public void SetDamage(float damage)
+    {
+        transform.Find("Art").Find("Blade").GetComponent<HazardDamage>().damage = damage;
+    }
+
+    public void EndOfSlash()
+    {
+        endOfSlash = true;
     }
 }
