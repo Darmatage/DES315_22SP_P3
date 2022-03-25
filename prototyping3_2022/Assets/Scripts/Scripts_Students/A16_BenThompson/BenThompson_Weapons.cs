@@ -24,6 +24,9 @@ public class BenThompson_Weapons : MonoBehaviour
     [SerializeField]
     private float firebreathCooldown;
 
+    [SerializeField]
+    private float firebreathDamage;
+
     [Header("Button Bindings")]
     //grab axis from parent object
     public string button1;
@@ -54,6 +57,25 @@ public class BenThompson_Weapons : MonoBehaviour
         button2 = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
         button3 = gameObject.transform.parent.GetComponent<playerParent>().action3Input;
         button4 = gameObject.transform.parent.GetComponent<playerParent>().action4Input;
+
+        if(gameObject.transform.root.tag == "Player2")
+        {
+            firebreath4scales.GetComponent<BenThompson_FirebreathBehavior>().SetPlayer2();
+            firebreath3scales.GetComponent<BenThompson_FirebreathBehavior>().SetPlayer2();
+            firebreath2scales.GetComponent<BenThompson_FirebreathBehavior>().SetPlayer2();
+            firebreath1scale.GetComponent<BenThompson_FirebreathBehavior>().SetPlayer2();
+            firebreath4scales.GetComponent<HazardDamage>().isPlayer2Weapon = true;
+            firebreath3scales.GetComponent<HazardDamage>().isPlayer2Weapon = true;
+            firebreath2scales.GetComponent<HazardDamage>().isPlayer2Weapon = true;
+            firebreath1scale.GetComponent<HazardDamage>().isPlayer2Weapon = true;
+        }
+        else
+        {
+            firebreath4scales.GetComponent<HazardDamage>().isPlayer1Weapon = true;
+            firebreath3scales.GetComponent<HazardDamage>().isPlayer1Weapon = true;
+            firebreath2scales.GetComponent<HazardDamage>().isPlayer1Weapon = true;
+            firebreath1scale.GetComponent<HazardDamage>().isPlayer1Weapon = true;
+        }
     }
 
     // Update is called once per frame
@@ -181,6 +203,9 @@ public class BenThompson_Weapons : MonoBehaviour
                 // Deactivate the 4 scale range fire breath
                 firebreath4scales.SetActive(false);
 
+                firebreath4scales.GetComponent<BenThompson_FirebreathBehavior>().ResetHitCount();
+                firebreath4scales.GetComponent<HazardDamage>().damage = firebreathDamage;
+
                 break;
 
             case 3:
@@ -190,6 +215,9 @@ public class BenThompson_Weapons : MonoBehaviour
 
                 // Deactivate the 3 scale range fire breath
                 firebreath3scales.SetActive(false);
+
+                firebreath3scales.GetComponent<BenThompson_FirebreathBehavior>().ResetHitCount();
+                firebreath3scales.GetComponent<HazardDamage>().damage = firebreathDamage;
 
                 break;
 
@@ -201,6 +229,9 @@ public class BenThompson_Weapons : MonoBehaviour
                 // Deactivate the 2 scale range fire breath
                 firebreath2scales.SetActive(false);
 
+                firebreath2scales.GetComponent<BenThompson_FirebreathBehavior>().ResetHitCount();
+                firebreath2scales.GetComponent<HazardDamage>().damage = firebreathDamage;
+
                 break;
 
             case 1:
@@ -210,6 +241,9 @@ public class BenThompson_Weapons : MonoBehaviour
 
                 // Deactivate the 1 scale range fire breath
                 firebreath1scale.SetActive(false);
+
+                firebreath1scale.GetComponent<BenThompson_FirebreathBehavior>().ResetHitCount();
+                firebreath1scale.GetComponent<HazardDamage>().damage = firebreathDamage;
 
                 break;
         }
