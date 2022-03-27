@@ -17,6 +17,12 @@ public class BenThompson_Weapons : MonoBehaviour
     [SerializeField]
     private GameObject firebreath1scale;
 
+    [SerializeField]
+    private ParticleSystem firebreathCough;
+
+    [SerializeField]
+    private GameObject tailArt;
+
     [Header("Firebreath Stats")]
     [SerializeField]
     private float firebreathLength;
@@ -26,6 +32,9 @@ public class BenThompson_Weapons : MonoBehaviour
 
     [SerializeField]
     private float firebreathDamage;
+
+    [SerializeField]
+    private float coughCooldown;
 
     [Header("Button Bindings")]
     //grab axis from parent object
@@ -42,6 +51,7 @@ public class BenThompson_Weapons : MonoBehaviour
 
     private float activeCooldown = 0.0f;
     private float mineCooldown = 0.0f;
+    private float coughTimer = 0.0f;
 
     [Header("Scales")]
     [SerializeField]
@@ -81,6 +91,20 @@ public class BenThompson_Weapons : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // If firebreath is attempted to be used but can't play the cough
+        if (Input.GetButtonDown(button1) && activeCooldown > 0.0f)
+        {
+            // If we can cough and the firebreath ability isn't about to be ready
+            if (coughTimer <= 0.0f && activeCooldown - coughCooldown > 0.0f)
+            {
+                // Play the cough
+                firebreathCough.Play();
+
+                // Reset the cough cooldown
+                coughTimer = coughCooldown;
+            }
+        }
+
 
         // Use a mine
         if (Input.GetButtonDown(button2) && mineCooldown <= 0.0f)
@@ -114,6 +138,8 @@ public class BenThompson_Weapons : MonoBehaviour
                     // Indicate that a weapon is currently out
                     weaponOut = true;
 
+                    tailArt.transform.localEulerAngles = new Vector3(-72.088f, tailArt.transform.localEulerAngles.y, tailArt.transform.localEulerAngles.z);
+
                     // Start the process of ending the fire breath attack
                     StartCoroutine(EndFireBreath());
 
@@ -130,6 +156,8 @@ public class BenThompson_Weapons : MonoBehaviour
 
                     // Indicate that a weapon is currently out
                     weaponOut = true;
+
+                    tailArt.transform.localEulerAngles = new Vector3(-72.088f, tailArt.transform.localEulerAngles.y, tailArt.transform.localEulerAngles.z);
 
                     // Start the process of ending the fire breath attack
                     StartCoroutine(EndFireBreath());
@@ -148,6 +176,8 @@ public class BenThompson_Weapons : MonoBehaviour
                     // Indicate that a weapon is currently out
                     weaponOut = true;
 
+                    tailArt.transform.localEulerAngles = new Vector3(-72.088f, tailArt.transform.localEulerAngles.y, tailArt.transform.localEulerAngles.z);
+
                     // Start the process of ending the fire breath attack
                     StartCoroutine(EndFireBreath());
 
@@ -165,9 +195,27 @@ public class BenThompson_Weapons : MonoBehaviour
                     // Indicate that a weapon is currently out
                     weaponOut = true;
 
+                    tailArt.transform.localEulerAngles = new Vector3(-72.088f, tailArt.transform.localEulerAngles.y, tailArt.transform.localEulerAngles.z);
+
                     // Start the process of ending the fire breath attack
                     StartCoroutine(EndFireBreath());
 
+                    break;
+
+                case 0:
+                    // If firebreath is attempted to be used but can't play the cough
+                    if (Input.GetButtonDown(button1))
+                    {
+                        // If we can cough and the firebreath ability isn't about to be ready
+                        if (coughTimer <= 0.0f)
+                        {
+                            // Play the cough
+                            firebreathCough.Play();
+
+                            // Reset the cough cooldown
+                            coughTimer = coughCooldown;
+                        }
+                    }
                     break;
             }
 
@@ -179,11 +227,30 @@ public class BenThompson_Weapons : MonoBehaviour
         {
             // Decrease the cooldown
             activeCooldown -= Time.deltaTime;
+
+            if(activeCooldown <= 0.0f)
+            {
+                tailArt.transform.localEulerAngles = new Vector3(-37.311f, tailArt.transform.localEulerAngles.y, tailArt.transform.localEulerAngles.z);
+            }
+            else
+            {
+                if (scaleManager.GetRespawnTimer() <= 0.0f)
+                {
+                    tailArt.transform.localEulerAngles = Vector3.Lerp(new Vector3(-72.088f, tailArt.transform.localEulerAngles.y, tailArt.transform.localEulerAngles.z),
+                                                             new Vector3(-37.311f, tailArt.transform.localEulerAngles.y, tailArt.transform.localEulerAngles.z),
+                                                             1.0f - activeCooldown / firebreathCooldown);
+                }
+            }
         }
 
         if (mineCooldown > 0.0f)
         {
             mineCooldown -= Time.deltaTime;
+        }
+
+        if(coughTimer > 0.0f)
+        {
+            coughTimer -= Time.deltaTime;
         }
     }
 
