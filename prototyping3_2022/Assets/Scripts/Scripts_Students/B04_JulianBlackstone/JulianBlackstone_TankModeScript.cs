@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class JulianBlackstone_TankModeScript : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject leg1 = null;
+    [SerializeField]
+    private GameObject leg2 = null;
+    [SerializeField]
+    private GameObject leg3 = null;
+    [SerializeField]
+    private GameObject leg4 = null;
+
     // Start is called before the first frame update
     void Start()
     {
