@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1229773323}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.74, y: 0.12, z: 0.87}
+  m_LocalPosition: {x: 1.91, y: -0.301, z: 0.87}
   m_LocalScale: {x: 0.7142857, y: 0.7142857, z: 0.7142857}
   m_Children: []
   m_Father: {fileID: 1355330930375697356}
@@ -491,7 +491,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c5ff78a5f7f2d214895b31989fcc73e9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1013,6 +1013,9 @@ MonoBehaviour:
   weaponThrust: {fileID: 0}
   missileCooldown: 6
   botCooldown: 7
+  suicideBot: {fileID: 645873793712370039, guid: 33ab68b1867e6eb4eb7f40a9d9cdfcf3,
+    type: 3}
+  botSpawn: {fileID: 1229773324}
 --- !u!114 &7285542615022466734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2750,7 +2753,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c5ff78a5f7f2d214895b31989fcc73e9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
