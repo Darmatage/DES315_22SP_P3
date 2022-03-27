@@ -974,7 +974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3845f74f031cb75448f5046181029089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 50
   target: {fileID: 0}
   BlastExplosion: {fileID: 3768722107935373676, guid: 4c33d54e1285b9545aed06dfec790940,
     type: 3}
@@ -1005,8 +1005,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5705185, y: 1, z: 1.0928992}
-  m_Center: {x: 0.13054156, y: 0, z: 0.013946474}
+  m_Size: {x: 1.49059, y: 1, z: 1.0928992}
+  m_Center: {x: 0.016699135, y: 0, z: 0.013946474}
 --- !u!1001 &335402865
 PrefabInstance:
   m_ObjectHideFlags: 0

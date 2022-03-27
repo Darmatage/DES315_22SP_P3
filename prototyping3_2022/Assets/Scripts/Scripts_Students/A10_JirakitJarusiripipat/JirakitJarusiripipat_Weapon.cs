@@ -106,7 +106,7 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 			GameObject obj = Instantiate(missile, shootPoint[currentMissileOut].transform.position, Quaternion.identity);
             float randomNumberX = Random.Range(-4.0f, 4.0f);
             float randomNumberZ = Random.Range(-4.0f, 4.0f);
-            Vector3 velo = CalculateVelocity(new Vector3(target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.x + randomNumberX, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.y - 2.2f, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.z + randomNumberZ), transform.position , 1.5f);
+            Vector3 velo = CalculateVelocity(new Vector3(target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.x + randomNumberX, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.y - 2.2f, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.z + randomNumberZ), transform.position , 0.5f);
 			obj.transform.rotation = Quaternion.LookRotation(velo);
 			obj.GetComponent<Rigidbody>().velocity = velo;
             currentMissileOut++;
@@ -156,6 +156,7 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 			Debug.Log(obj.GetComponent<JirakitJarusiripipat_SuicideBot>().target);
             botOut = true;
             currentBotCooldown = botCooldown;
+			obj.GetComponent<JirakitJarusiripipat_SuicideBot>().parent = gameObject;
         }
         if (currentBotCooldown > 0.0f && botOut)
         {
