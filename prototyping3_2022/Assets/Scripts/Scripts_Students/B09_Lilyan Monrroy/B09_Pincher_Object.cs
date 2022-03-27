@@ -15,6 +15,7 @@ public class B09_Pincher_Object : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        grabbedObject = null;
         originalPincherPos = transform.localPosition;
     }
 
@@ -34,7 +35,6 @@ public class B09_Pincher_Object : MonoBehaviour
             {
                 grabbedObject = player2;
                 player2.GetComponent<BotBasic_Move>().isGrabbed = true;
-                ContactPoint = player2.transform.localPosition;
             }
         }
     }
@@ -47,8 +47,8 @@ public class B09_Pincher_Object : MonoBehaviour
         {
             if (player2.GetComponent<BotBasic_Move>())
             {
-                //player2.GetComponent<BotBasic_Move>().isGrabbed = false;
-                //grabbedObject = null;
+                player2.GetComponent<BotBasic_Move>().isGrabbed = false;
+                grabbedObject = null;
             }
         }
     }

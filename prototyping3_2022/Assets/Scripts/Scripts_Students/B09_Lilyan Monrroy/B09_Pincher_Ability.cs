@@ -8,7 +8,8 @@ public class B09_Pincher_Ability : MonoBehaviour
 {
     public GameObject pincher_left;
     public GameObject pincher_right;
-    public GameObject grabbedObject;
+    private GameObject grabbedObject;
+    private Transform grabbedObjecParentTransform;
 
 
     //grab axis from parent object
@@ -36,24 +37,50 @@ public class B09_Pincher_Ability : MonoBehaviour
         if (left == null || right == null)
             return;
 
-        Debug.Log("Rotation of player: " + transform.eulerAngles);
+        if (left.grabbedObject == null && right.grabbedObject == null)
+        {
+            if (grabbedObject)
+            {
+                Debug.Log("Set parent transform");
+
+                grabbedObject.transform.SetParent(grabbedObjecParentTransform);
+                grabbedObjecParentTransform = null;
+                grabbedObject = null;
+            }
+        }
 
         //Grab Mechanic
         if (Input.GetButton(button1))
         {
+            if (grabbedObject)
+            {
+                Debug.Log("Set parent transform");
+
+                grabbedObject.transform.SetParent(grabbedObjecParentTransform);
+                grabbedObjecParentTransform = null;
+                grabbedObject = null;
+            }
+
             left.open();
             right.open();
+
         }
         else
         {
             if (left.grabbedObject && right.grabbedObject)
             {
-                GameObject player2 = left.grabbedObject;
-                player2.GetComponent<Rigidbody>().isKinematic = true;
-                Vector3 dist = transform.localPosition - left.ContactPoint;
+                if (grabbedObject == null)
+                {
+                    Debug.Log("Copied changed transform");
+                    grabbedObject = left.grabbedObject;
+                    grabbedObjecParentTransform = grabbedObject.transform.parent;
+                }
 
-                player2.transform.localPosition = new Vector3(transform.position.x, player2.transform.localPosition.y, transform.position.z);
+                grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
+                grabbedObject.transform.SetParent(transform);
+
             }
+
             left.close();
             right.close();
         }
