@@ -44,6 +44,7 @@ public class B09_Pincher_Ability : MonoBehaviour
                 Debug.Log("Set parent transform");
 
                 grabbedObject.transform.SetParent(grabbedObjecParentTransform);
+                grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
                 grabbedObjecParentTransform = null;
                 grabbedObject = null;
             }
@@ -57,6 +58,7 @@ public class B09_Pincher_Ability : MonoBehaviour
                 Debug.Log("Set parent transform");
 
                 grabbedObject.transform.SetParent(grabbedObjecParentTransform);
+                grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
                 grabbedObjecParentTransform = null;
                 grabbedObject = null;
             }
