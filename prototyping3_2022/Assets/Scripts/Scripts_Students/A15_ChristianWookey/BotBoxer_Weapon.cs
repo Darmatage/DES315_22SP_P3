@@ -33,13 +33,13 @@ public class BotBoxer_Weapon : MonoBehaviour
 		//if (Input.GetKeyDown(KeyCode.T)){
 		if ((Input.GetButtonDown(button1)) && (leftWeaponOut == false))
 		{
-			weaponLeftThrust.transform.Translate(0, thrustAmount, 0);
+			weaponLeftThrust.transform.Translate(0, 0, thrustAmount);
 			leftWeaponOut = true;
 			StartCoroutine(WithdrawLeftWeapon());
 		}
 		if ((Input.GetButtonDown(button2)) && (rightWeaponOut == false))
 		{
-			weaponRightThrust.transform.Translate(0, thrustAmount, 0);
+			weaponRightThrust.transform.Translate(0, 0, thrustAmount);
 			rightWeaponOut = true;
 			StartCoroutine(WithdrawRightWeapon());
 		}
@@ -48,14 +48,14 @@ public class BotBoxer_Weapon : MonoBehaviour
 	IEnumerator WithdrawLeftWeapon()
 	{
 		yield return new WaitForSeconds(0.6f);
-		weaponLeftThrust.transform.Translate(0, -thrustAmount, 0);
+		weaponLeftThrust.transform.Translate(0, 0, -thrustAmount);
 		leftWeaponOut = false;
 	}
 
 	IEnumerator WithdrawRightWeapon()
 	{
 		yield return new WaitForSeconds(0.6f);
-		weaponRightThrust.transform.Translate(0, -thrustAmount, 0);
+		weaponRightThrust.transform.Translate(0, 0, -thrustAmount);
 		rightWeaponOut = false;
 	}
 
