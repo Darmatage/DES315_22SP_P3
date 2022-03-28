@@ -1013,6 +1013,8 @@ MonoBehaviour:
   missile: {fileID: 3330078648268077829, guid: 59e28352efe23844d83fe00229a3fbc6, type: 3}
   weaponThrust: {fileID: 0}
   missileCooldown: 6
+  missileIndication: {fileID: 4085200527003681851, guid: 2dd5ae3718bc19d45901064449f65a46,
+    type: 3}
   botCooldown: 7
   suicideBot: {fileID: 645873793712370039, guid: 33ab68b1867e6eb4eb7f40a9d9cdfcf3,
     type: 3}

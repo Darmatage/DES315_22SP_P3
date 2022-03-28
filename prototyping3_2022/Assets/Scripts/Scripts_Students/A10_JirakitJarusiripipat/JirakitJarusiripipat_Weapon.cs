@@ -48,6 +48,8 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 	private float holdTime = 1.0f;
 	private float currentHoldTime;
 	private bool holding = false;
+	[SerializeField]
+	private GameObject missileIndication;
 	[Header("Suicide Bot")]
 	[SerializeField]
 	private float botCooldown = 7.0f;
@@ -57,7 +59,7 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 	private GameObject suicideBot;
 	[SerializeField]
 	private Transform botSpawn;
-
+	
 
     void Start()
 	{
@@ -113,6 +115,8 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
             currentEachCooldown = eachCooldown;
 			soundKeeper.PlayLauncher();
 			obj.GetComponent<JirakitJarusiripipat_Missile>().parent = this.gameObject;
+			Vector3 placeToSpawn = new Vector3(target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.x + randomNumberX, 0, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.z);
+			Instantiate(missileIndication, placeToSpawn, Quaternion.identity);
 		}
 		else if(currentEachCooldown > 0.0f)
         {
@@ -157,6 +161,7 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
             botOut = true;
             currentBotCooldown = botCooldown;
 			obj.GetComponent<JirakitJarusiripipat_SuicideBot>().parent = gameObject;
+
         }
         if (currentBotCooldown > 0.0f && botOut)
         {
