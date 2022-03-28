@@ -8,8 +8,8 @@ public class BotB15_Weapon : MonoBehaviour{
     public GameObject FrontWeapon;
     public GameObject BackWeapon;
     public GameObject BottomSmoke;
-    public AudioSource SoundEffect;
-    public AudioSource WoopSoundEffect;
+    //public AudioSource SoundEffect;
+    //public AudioSource WoopSoundEffect;
     private float thrustAmount = 2.0f;
 
     private bool frontWeaponOut = false;
@@ -39,7 +39,7 @@ public class BotB15_Weapon : MonoBehaviour{
         {
             FrontWeapon.transform.localScale = new Vector3(1, 1, 1);
             FrontWeapon.transform.Translate(0, thrustAmount, 0);
-            SoundEffect.PlayOneShot(SoundEffect.clip);
+            //SoundEffect.PlayOneShot(SoundEffect.clip);
             frontWeaponOut = true;
 			StartCoroutine(WithdrawFrontWeapon());
         }
@@ -47,14 +47,14 @@ public class BotB15_Weapon : MonoBehaviour{
         {
             BackWeapon.transform.localScale = new Vector3(1, 1, 1);
             BackWeapon.transform.Translate(0, thrustAmount, 0);
-            SoundEffect.PlayOneShot(SoundEffect.clip);
+            //SoundEffect.PlayOneShot(SoundEffect.clip);
             backWeaponOut = true;
             StartCoroutine(WithdrawBackWeapon());
         }
         if(Input.GetButtonDown(button3) && (emergencyEject == true))
         {
             rb.AddForce(rb.centerOfMass + new Vector3(Random.Range(0, 200), 100, Random.Range(0, 200)), ForceMode.Impulse);
-            WoopSoundEffect.Play();
+            //WoopSoundEffect.Play();
             StartCoroutine(EmergencyCooldown());
             emergencyEject = false;
         }
