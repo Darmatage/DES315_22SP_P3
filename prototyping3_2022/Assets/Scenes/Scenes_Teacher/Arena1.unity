@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13021,7 +13021,7 @@ PrefabInstance:
         type: 3}
       propertyPath: botPrefabs.Array.data[7]
       value: 
-      objectReference: {fileID: 1355330930375697355, guid: 2ef4f250302206c48af6906f36dd7ff5,
+      objectReference: {fileID: 6978040854554231791, guid: e69f0ecfc4868454ea9b55680cfe041b,
         type: 3}
     - target: {fileID: 6311594513585171110, guid: 05be270cdabffa742bd6f579ed45bdbe,
         type: 3}
