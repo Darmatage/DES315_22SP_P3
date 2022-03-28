@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WonjuJo_BasicWeapon : MonoBehaviour
@@ -26,15 +25,21 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 	private float Button2Cooldown = 0f;
 	private float Button2CooldownRate = 4f;
 
+	Vector3 LauncherPosition;
+
 
 	void Start()
 	{
 		button1 = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
 		button2 = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
+
+		
 	}
 
 	void Update()
 	{
+		LauncherPosition = ProjectileLauncher.transform.position;
+
 		//if (Input.GetKeyDown(KeyCode.T)){
 		if ((Input.GetButtonDown(button1)) && (weaponOut == false) && Time.time > Button1Cooldown)
 		{
@@ -46,13 +51,11 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 		
 		}
 
-		if ((Input.GetButtonDown(button2)))
+		if ((Input.GetButtonDown(button2)) && Time.time > Button2Cooldown)
 		{
 			Button2Cooldown = Time.time + Button2CooldownRate;
 
-			//project tile spawn
-			
-
+			Instantiate(Projectile, LauncherPosition, transform.rotation);
 		}
 	}
 
