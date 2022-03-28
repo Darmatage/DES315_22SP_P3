@@ -344,7 +344,7 @@ MonoBehaviour:
   SheildDefend:
     m_PersistentCalls:
       m_Calls: []
-  KinvesWeapons: {fileID: 0}
+  KinvesWeapons: {fileID: 1823747586810392670}
 --- !u!114 &4750799367959631791
 MonoBehaviour:
   m_ObjectHideFlags: 0
