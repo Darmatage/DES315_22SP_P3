@@ -955,14 +955,14 @@ MonoBehaviour:
   isTurtled: 0
   canFlip: 1
   isGrabbed: 0
-  isAnchored: 0
   parentName: 
   pVertical: 
   pHorizontal: 
   pJump: 
+  button4: 
+  isAnchored: 0
   button2: 
   button3: 
-  button4: 
 --- !u!114 &6992577135207358945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -981,12 +981,18 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3461238887822298025, guid: f136a6a8bcf37644faf99307886c3a49,
     type: 3}
   spinAcceleration: 100
-  spinDragCo: 0.2
+  spinDragCo: 0.04
   bulletSpeed: 30
-  bulletLifetime: 0.5
-  fireRate: 50
+  bulletLifetime: 1
+  fireRate: 12
   spreadFactor: 5
-  DPS: 1
+  DPS: 5
+  windupTime: 1
+  overheatTime: 3
+  barPrefab: {fileID: 1126585746793281164, guid: e1e5ab7cb61708f4aa04847b52dd00de,
+    type: 3}
+  bar: {fileID: 0}
+  barGraphic: {fileID: 0}
   button1: 
   button2: 
 --- !u!114 &1355330930375697359

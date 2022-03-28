@@ -2,47 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class B18_Movement : MonoBehaviour
+public class B18_Movement : BotBasic_Move
 {
-	public float moveSpeed = 10;
-	public float rotateSpeed = 100;
-	public float jumpSpeed = 7f;
-	private float flipSpeed = 150f;
-	public float boostSpeed = 10f;
 
-	private Rigidbody rb;
+	private float b18_flipSpeed = 150f;
+
+	private Rigidbody b18_rb;
 	private Animator anim;
-	public Transform groundCheck;
-	public Transform turtleCheck;
-	public LayerMask groundLayer;
-	//public Collider[] isGrounded;
-	public bool isGrounded;
-	public bool isTurtled;
 
 	// flip cooldown logic
-	public bool canFlip = true;
+
 	// private bool canFlipGate = true;
 	// private float flipTimer = 0;
-	// public float flipTime = 1f;
+	// public float flipTime = 1f; 
 
-	public bool isGrabbed = false;
+
 	public bool isAnchored = false;
 
 	//grab axis from parent object
-	public string parentName;
-	public string pVertical;
-	public string pHorizontal;
-	public string pJump;
+
 	public string button2;
 	public string button3;
-	public string button4; 
+
 
 	// Start is called before the first frame update
 	void Start()
     {
 		if (gameObject.GetComponent<Rigidbody>() != null)
 		{
-			rb = gameObject.GetComponent<Rigidbody>();
+			b18_rb = gameObject.GetComponent<Rigidbody>();
 		}
 
 		if (gameObject.GetComponent<Animator>() != null)
@@ -86,12 +74,12 @@ public class B18_Movement : MonoBehaviour
 			transform.Rotate(0, botRotate, 0);
 		}
 
-
+		 
 		if (Input.GetButtonDown(pJump))
 		{
 			if (isGrounded == true)
 			{
-				rb.AddForce(rb.centerOfMass + new Vector3(0f, jumpSpeed * 10, 0f), ForceMode.Impulse);
+				b18_rb.AddForce(b18_rb.centerOfMass + new Vector3(0f, jumpSpeed * 10, 0f), ForceMode.Impulse);
 			}
 
 			//flip cooldown logic
@@ -101,8 +89,8 @@ public class B18_Movement : MonoBehaviour
 
 			if ((isTurtled == true) && (canFlip == true))
 			{
-				rb.AddForce(rb.centerOfMass + new Vector3(jumpSpeed / 2, 0, jumpSpeed / 2), ForceMode.Impulse);
-				transform.Rotate(flipSpeed, 0, 0);
+				b18_rb.AddForce(b18_rb.centerOfMass + new Vector3(jumpSpeed / 2, 0, jumpSpeed / 2), ForceMode.Impulse);
+				transform.Rotate(b18_flipSpeed, 0, 0);
 				GetComponent<Rigidbody>().velocity = Vector3.zero;
 				GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 				// canFlip = false;
@@ -119,15 +107,30 @@ public class B18_Movement : MonoBehaviour
 		}
 	}
 
+	private float prevKnockbackSpeed = 1f;
+
 	private void Anchor()
     {
 		anim.SetTrigger("MoveFeetDown");
 		isAnchored = true;
+
+		var myDamage = GetComponent<BotBasic_Damage>();
+		if(myDamage != null)
+        {
+			prevKnockbackSpeed = myDamage.knockBackSpeed;
+			myDamage.knockBackSpeed = 0;
+        }
     }
 
 	private void UnAnchor()
     {
 		anim.SetTrigger("MoveFeetUp");
 		isAnchored = false;
-    }
+
+		var myDamage = GetComponent<BotBasic_Damage>();
+		if (myDamage != null)
+		{
+			myDamage.knockBackSpeed = prevKnockbackSpeed;
+		}
+	}
 }
