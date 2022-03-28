@@ -10,6 +10,8 @@ public class A19_Weapon2 : MonoBehaviour
     public float spinSpeed;
     public float spinTimer;
     public float spinCooldown;
+    public TrailRenderer spinTrail;
+    public A19_Weapon1 a19_Weapon1;
 
 
 
@@ -34,6 +36,10 @@ public class A19_Weapon2 : MonoBehaviour
             hasSpin = true;
             StartCoroutine(SpinCorontine());
         }
+        else if (Input.GetButtonDown(button2) && !hasSpin && onSpinCooldown)
+        {
+           StartCoroutine(a19_Weapon1.CooldownFeedback());
+        }
         if(hasSpin)
         {
             Spin();
@@ -48,11 +54,14 @@ public class A19_Weapon2 : MonoBehaviour
     private IEnumerator SpinCorontine()
     {
         spinDamageCollider.SetActive(true);
+        spinTrail.enabled = true;
         yield return new WaitForSeconds(spinTimer);
         spinDamageCollider.SetActive(false);
 
         hasSpin = false;
         onSpinCooldown = true;
+        spinTrail.enabled = false;
+
         StartCoroutine(SpinCorontineCooldown());
 
     }
