@@ -371,11 +371,12 @@ MonoBehaviour:
     type: 3}
   explosion: {fileID: 6779703677866785669, guid: 84413bf608e37a34a81abfb9e9d73e8b,
     type: 3}
-  MaxProjectiles: 2
-  ProjectileLifetime: 6
-  ProjectileLaunchForce: 20
+  MaxProjectiles: 4
+  ProjectileLifetime: 10
+  ProjectileLaunchForce: 7
   ProjectileMagnetizationForce: 3
-  ProjectileTravelTime: 0.5
+  ProjectileTravelTime: 2
+  Cooldown: 5
   ButtonLaunch: INVALID_KEY
   ButtonMagnetize: INVALID_KEY
 --- !u!1 &1355330930662561729
