@@ -14,6 +14,7 @@ public class WonjuJo_Projectile : MonoBehaviour
     public AudioClip CannonSound;
     private AudioSource AS;
 
+    public ParticleSystem PS;
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody>();

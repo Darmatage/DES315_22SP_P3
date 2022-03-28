@@ -123,7 +123,7 @@ SphereCollider:
   m_GameObject: {fileID: 430483798972867000}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 5971725424432182923}
   - component: {fileID: 803324733984634934}
   - component: {fileID: -2512868650712567752}
+  - component: {fileID: 3838219979336230672}
   m_Layer: 0
   m_Name: B07_Projectile
   m_TagString: Hazard
@@ -210,6 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CannonSound: {fileID: 8300000, guid: 13b33b5ef58b27248b7b80e568a66e98, type: 3}
+  PS: {fileID: 0}
 --- !u!82 &-2512868650712567752
 AudioSource:
   m_ObjectHideFlags: 0
@@ -306,3 +308,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!135 &3838219979336230672
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7859295102930071986}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
