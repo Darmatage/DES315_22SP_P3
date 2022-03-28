@@ -5283,7 +5283,7 @@ MonoBehaviour:
   knockBackSpeed: 10
   forceSideLimit_p75: 1
   shieldPowerFront: 5
-  shieldPowerBack: 5
+  shieldPowerBack: 0
   shieldPowerLeft: 5
   shieldPowerRight: 5
   shieldPowerTop: 5
@@ -5897,13 +5897,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3229244130628949705}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.9238793, w: -0.38268402}
   m_LocalPosition: {x: -0.75, y: 0.17000008, z: 0.46}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children: []
   m_Father: {fileID: 1355330930375697356}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 225}
 --- !u!33 &7813332066597472836
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -20497,13 +20497,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8160687095547711129}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.9238795, w: 0.38268366}
   m_LocalPosition: {x: 0.75, y: 0.17, z: 0.46}
   m_LocalScale: {x: -0.6, y: 0.6, z: 0.6}
   m_Children: []
   m_Father: {fileID: 1355330930375697356}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 135}
 --- !u!33 &2814387273355324590
 MeshFilter:
   m_ObjectHideFlags: 0
