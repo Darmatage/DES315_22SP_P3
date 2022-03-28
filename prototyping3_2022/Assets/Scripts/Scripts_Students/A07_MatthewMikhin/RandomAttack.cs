@@ -18,7 +18,7 @@ public class RandomAttack : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             int rand = Random.Range(0, 21);
-            melee.damage = 0.1f  *  rand * 4;
+            melee.damage = 0.1f  *  rand;
         }
     }
 }
