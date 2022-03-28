@@ -40,7 +40,7 @@ public class TaroKumagai_Weapon_BasicProjectile : MonoBehaviour
         if (Input.GetButtonDown(ButtonLaunch) && activeProjectiles.Count < MaxProjectiles && onCooldown == false)
         {
             // Launching a new projectile
-            Vector3 LaunchPosition = gameObject.transform.position + gameObject.transform.forward * 2;
+            Vector3 LaunchPosition = gameObject.transform.position + gameObject.transform.forward * 3;
             GameObject newProjectile = Instantiate(projectile, LaunchPosition, Quaternion.identity);
             activeProjectiles.AddLast(newProjectile);
             newProjectile.GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * ProjectileLaunchForce, ForceMode.Impulse);
