@@ -320,5 +320,10 @@ public class BenThompson_Weapons : MonoBehaviour
 
         // Set a cooldown for the firebreath ability
         activeCooldown = firebreathCooldown;
+    }   
+
+    public float GetMineTime()
+    {
+        return mineCooldown;
     }
 }
