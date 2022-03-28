@@ -51,6 +51,8 @@ public class B03Bot_Move : MonoBehaviour
 		pJump = gameObject.transform.parent.GetComponent<playerParent>().jumpInput;
 		button4 = gameObject.transform.parent.GetComponent<playerParent>().action4Input;
 
+		if (MovementEvent == null) MovementEvent = new B03_MoveEvent();
+
 		// pVertical = "p1Vertical";
 		// pHorizontal = "p1Horizontal";
 		// pJump = "p1Jump";
