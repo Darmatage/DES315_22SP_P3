@@ -33,12 +33,12 @@ public class B17_RollAbility : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton(jumpInput))
+        if (Input.GetButton(button3))
 		{
             IsRolling = true;
             RollDirection = 1.0f;
 		}
-        else if (Input.GetButton(button1))
+        else if (Input.GetButton(button4))
         {
             IsRolling = true;
             RollDirection = -1.0f;
