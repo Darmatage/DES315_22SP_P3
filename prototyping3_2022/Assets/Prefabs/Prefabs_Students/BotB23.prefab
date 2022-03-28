@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 364999052203561223}
   - component: {fileID: 5780095072016173801}
   - component: {fileID: 7285542615022466734}
+  - component: {fileID: 1722765485093277601}
   m_Layer: 0
   m_Name: BotB23
   m_TagString: Untagged
@@ -369,6 +370,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponThrust: {fileID: 8160687095547711129}
+  button1: 
+  button2: 
+  button3: 
+  button4: 
+--- !u!114 &1722765485093277601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355330930375697355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67b5dfa20ebefac448d710384853fb07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponThrust: {fileID: 2337723901973394019}
   button1: 
   button2: 
   button3: 
