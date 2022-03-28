@@ -21,6 +21,9 @@ public class BenThompson_ScaleManager : MonoBehaviour
 
     private float activeTimer = 0.0f;
 
+    [SerializeField]
+    GameObject tailArt;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +38,10 @@ public class BenThompson_ScaleManager : MonoBehaviour
         {
             // Decrease the timer
             activeTimer -= Time.deltaTime;
+
+            tailArt.transform.localEulerAngles = Vector3.Lerp(new Vector3(-72.088f, tailArt.transform.localEulerAngles.y, tailArt.transform.localEulerAngles.z),
+                                                             new Vector3(-37.311f, tailArt.transform.localEulerAngles.y, tailArt.transform.localEulerAngles.z),
+                                                             1.0f - activeTimer / respawnTimeAfterLastScale);
 
             // Leave the loop
             return;
@@ -72,6 +79,8 @@ public class BenThompson_ScaleManager : MonoBehaviour
         {
             // Set the respawn time if we are out of scales
             activeTimer = respawnTimeAfterLastScale;
+
+            // BEN THOMPSON SOUND EFFECT
         }
 
         return true;
@@ -92,5 +101,14 @@ public class BenThompson_ScaleManager : MonoBehaviour
 
         // Reset the current number of scales
         currentNumScales = initialNumScales;
+
+        tailArt.transform.localEulerAngles = new Vector3(-37.311f, tailArt.transform.localEulerAngles.y, tailArt.transform.localEulerAngles.z);
+
+        // BEN THOMPSON SOUND EFFECT
+    }
+
+    public float GetRespawnTimer()
+    {
+        return activeTimer;
     }
 }
