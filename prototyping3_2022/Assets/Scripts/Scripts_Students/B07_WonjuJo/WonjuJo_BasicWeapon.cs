@@ -7,6 +7,9 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 	//NOTE: This script goes on the main playerBot Game Object, and the weapon goes in the public GO slot
 
 	public GameObject weaponThrust;
+	public GameObject Projectile;
+	public GameObject ProjectileLauncher;
+
 	private float thrustAmount = 3f;
 
 	private bool weaponOut = false;
@@ -18,14 +21,16 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 	public string button4; // currently boost in player move script
 
 	private float Button1Cooldown = 0f;
-	private float ButtonCooldownRate = 2f;
+	private float Button1CooldownRate = 2f;
+	
+	private float Button2Cooldown = 0f;
+	private float Button2CooldownRate = 4f;
+
 
 	void Start()
 	{
 		button1 = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
 		button2 = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
-		button3 = gameObject.transform.parent.GetComponent<playerParent>().action3Input;
-		button4 = gameObject.transform.parent.GetComponent<playerParent>().action4Input;
 	}
 
 	void Update()
@@ -33,12 +38,21 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 		//if (Input.GetKeyDown(KeyCode.T)){
 		if ((Input.GetButtonDown(button1)) && (weaponOut == false) && Time.time > Button1Cooldown)
 		{
-			Button1Cooldown = Time.time + ButtonCooldownRate;
+			Button1Cooldown = Time.time + Button1CooldownRate;
 			
 			weaponThrust.transform.Translate(0, thrustAmount, 0);
 			weaponOut = true;
 			StartCoroutine(WithdrawWeapon());
 		
+		}
+
+		if ((Input.GetButtonDown(button2)))
+		{
+			Button2Cooldown = Time.time + Button2CooldownRate;
+
+			//project tile spawn
+			
+
 		}
 	}
 
