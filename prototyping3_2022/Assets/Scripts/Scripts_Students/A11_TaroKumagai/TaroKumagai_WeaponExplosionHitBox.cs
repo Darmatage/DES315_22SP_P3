@@ -5,7 +5,7 @@ using UnityEngine;
 public class TaroKumagai_WeaponExplosionHitBox : HazardDamage
 {
     public TaroKumagai_Weapon_BasicProjectile parentRef;
-    public float explosionLifeTime = 0.2f;
+    public float explosionLifeTime = 1f;
 	void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("ground"))

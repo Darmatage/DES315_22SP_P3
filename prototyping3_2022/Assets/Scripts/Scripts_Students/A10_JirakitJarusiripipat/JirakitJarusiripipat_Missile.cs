@@ -6,6 +6,8 @@ public class JirakitJarusiripipat_Missile : MonoBehaviour
 {
     [SerializeField]
     private GameObject splash;
+    [SerializeField]
+    private GameObject slpashWithoutDamage;
     [HideInInspector]
     public GameObject parent;
     private JirakitJarusiripipat_SoundKeeper soundKeeper;
@@ -26,6 +28,7 @@ public class JirakitJarusiripipat_Missile : MonoBehaviour
         else
         {
             soundKeeper.Explode();
+            GameObject obj = Instantiate(slpashWithoutDamage, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

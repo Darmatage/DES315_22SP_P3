@@ -25,6 +25,12 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 	private float currentBulletCooldown;
 	private bool mainGunReady = true;
 	[SerializeField]
+	private GameObject mainGun;
+	[SerializeField]
+	private Material normalMainGun;
+	[SerializeField]
+	private Material cooldownMainGun;
+	[SerializeField]
 	private Transform mainGunBarrel;
 	[Header("Missle Launcher")]
     [SerializeField]
@@ -34,6 +40,12 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 	public GameObject weaponThrust;
 	private float thrustAmount = 3f;
 	private Animator animator;
+	[SerializeField]
+	private Material normalMissile;
+	[SerializeField]
+	private Material cooldownMissile;
+	[SerializeField]
+	private GameObject missileBarrel;
 	[SerializeField]
 	private float missileCooldown;
 	private float currentMissileCooldown;
@@ -48,6 +60,8 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 	private float holdTime = 1.0f;
 	private float currentHoldTime;
 	private bool holding = false;
+	[SerializeField]
+	private GameObject missileIndication;
 	[Header("Suicide Bot")]
 	[SerializeField]
 	private float botCooldown = 7.0f;
@@ -57,7 +71,12 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 	private GameObject suicideBot;
 	[SerializeField]
 	private Transform botSpawn;
-
+	[SerializeField]
+	private GameObject catTail;
+	[SerializeField]
+	private Material normalCatTail;
+	[SerializeField]
+	private Material cooldownCatTail;
 
     void Start()
 	{
@@ -81,7 +100,12 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 	void Update()
 	{
 		//if (Input.GetKeyDown(KeyCode.T)){
-		float dist = Vector3.Distance(target.transform.position, transform.position);
+		float dist;
+		if (target != null)
+        {
+			dist = Vector3.Distance(target.transform.position, transform.position);
+
+		}
 		if ((Input.GetButtonDown(button2)) && (!missileOut) && missileReady)
 		{
 			missileOut = true;
@@ -106,13 +130,16 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 			GameObject obj = Instantiate(missile, shootPoint[currentMissileOut].transform.position, Quaternion.identity);
             float randomNumberX = Random.Range(-4.0f, 4.0f);
             float randomNumberZ = Random.Range(-4.0f, 4.0f);
-            Vector3 velo = CalculateVelocity(new Vector3(target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.x + randomNumberX, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.y - 2.2f, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.z + randomNumberZ), transform.position , 1.5f);
+            Vector3 velo = CalculateVelocity(new Vector3(target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.x + randomNumberX, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.y - 2.2f, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.z + randomNumberZ), transform.position , 0.5f);
 			obj.transform.rotation = Quaternion.LookRotation(velo);
 			obj.GetComponent<Rigidbody>().velocity = velo;
             currentMissileOut++;
             currentEachCooldown = eachCooldown;
 			soundKeeper.PlayLauncher();
 			obj.GetComponent<JirakitJarusiripipat_Missile>().parent = this.gameObject;
+			Vector3 placeToSpawn = new Vector3(target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.x + randomNumberX, 0, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.z);
+			Instantiate(missileIndication, placeToSpawn, Quaternion.identity);
+			missileBarrel.GetComponent<Renderer>().material = cooldownMissile;
 		}
 		else if(currentEachCooldown > 0.0f)
         {
@@ -126,6 +153,7 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 		else if(!missileOut && currentMissileCooldown <= 0.0f)
         {
 			missileReady = true;
+			missileBarrel.GetComponent<Renderer>().material = normalMissile;
 		}
 
 		if((Input.GetButtonDown(button1) && mainGunReady))
@@ -136,7 +164,7 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 			currentBulletCooldown = bulletCooldown;
 			GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * -5000);
 			soundKeeper.PlayMainGun();
-
+			mainGun.GetComponent<Renderer>().material = cooldownMainGun;
 
 		}
 		if (currentBulletCooldown > 0.0f)
@@ -147,6 +175,7 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 		else if (currentBulletCooldown <= 0.0f)
 		{
 			mainGunReady = true;
+			mainGun.GetComponent<Renderer>().material = normalMainGun;
 		}
 
         if (Input.GetButtonDown(button3) && !botOut)
@@ -156,6 +185,9 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 			Debug.Log(obj.GetComponent<JirakitJarusiripipat_SuicideBot>().target);
             botOut = true;
             currentBotCooldown = botCooldown;
+			obj.GetComponent<JirakitJarusiripipat_SuicideBot>().parent = gameObject;
+			catTail.GetComponentInChildren<Renderer>().material = cooldownCatTail;
+
         }
         if (currentBotCooldown > 0.0f && botOut)
         {
@@ -164,7 +196,8 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 		else if(currentBotCooldown <= 0.0f)
         {
 			botOut = false;
-        }
+			catTail.GetComponentInChildren<Renderer>().material = normalCatTail;
+		}
     }
 	IEnumerator WithdrawWeapon()
 	{

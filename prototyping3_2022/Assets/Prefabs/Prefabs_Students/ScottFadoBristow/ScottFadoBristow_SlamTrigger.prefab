@@ -182,7 +182,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -351,7 +351,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.45
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1199,7 +1199,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    separateAxes: 0
+    separateAxes: 1
   RotationModule:
     enabled: 0
     x:
@@ -1363,7 +1363,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -1372,7 +1372,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
+        key1: {r: 1, g: 1, b: 1, a: 0}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -4818,6 +4818,7 @@ GameObject:
   - component: {fileID: 5535236913018945579}
   - component: {fileID: 8424003054804511481}
   - component: {fileID: -3232034093442675723}
+  - component: {fileID: 3292784388559327445}
   m_Layer: 0
   m_Name: ScottFadoBristow_SlamTrigger
   m_TagString: Hazard
@@ -4834,7 +4835,7 @@ Transform:
   m_GameObject: {fileID: 4947766490009947104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0.76779}
   m_Children:
   - {fileID: 1705341608548096407}
   m_Father: {fileID: 0}
@@ -4885,3 +4886,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   KillTime: 1
+--- !u!114 &3292784388559327445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4947766490009947104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90066e62a00f24548aa49d3484e74209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Timeout: 0.25

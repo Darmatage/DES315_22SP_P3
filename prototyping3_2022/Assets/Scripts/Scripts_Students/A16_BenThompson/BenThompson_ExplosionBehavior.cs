@@ -12,6 +12,8 @@ public class BenThompson_ExplosionBehavior : MonoBehaviour
 
     private bool whichPlayer = false; // Player 1
 
+    private int hitCount = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,5 +38,19 @@ public class BenThompson_ExplosionBehavior : MonoBehaviour
     public void IsPlayer2()
     {
         whichPlayer = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(hitCount > 0)
+        {
+            this.GetComponent<HazardDamage>().damage = 0;
+        }
+
+        // Prevent multiple collisions
+        if(other.gameObject.transform.root.tag == "Player1" && whichPlayer || other.gameObject.transform.root.tag == "Player2" && !whichPlayer)
+        {
+            hitCount++;
+        }
     }
 }
