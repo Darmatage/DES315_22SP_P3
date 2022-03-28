@@ -1042,19 +1042,17 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'P1 CONTROLS:
 
-    P1 Move: [WASD] / Joy
+    P1 Move: [WASD]
 
-    P1 Jump: [Q] / (A)
+    P1 Jump: [Q]
 
 
-    ATTACK
-    / DEFENSE:
+    ATTACK / DEFENSE:
 
-    Charge: R
+    Charge:
+    R (HOLD)
 
-    Fire: E
-
-    (B)  (Y)  [B-R]  [B-L] '
+    Fire: E'
 --- !u!222 &526984811
 CanvasRenderer:
   m_ObjectHideFlags: 0
