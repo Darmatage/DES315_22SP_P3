@@ -7447,6 +7447,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8069984668085712585, guid: d0a2db187f1a4d145b26c41a63590115,
         type: 3}
+      propertyPath: myScene
+      value: Scene_BotB06
+      objectReference: {fileID: 0}
+    - target: {fileID: 8069984668085712585, guid: d0a2db187f1a4d145b26c41a63590115,
+        type: 3}
       propertyPath: gameHandlerObj
       value: 
       objectReference: {fileID: 314138004}
