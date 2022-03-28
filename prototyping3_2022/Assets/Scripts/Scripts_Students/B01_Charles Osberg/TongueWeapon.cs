@@ -5,7 +5,7 @@ using UnityEngine;
 public class TongueWeapon : MonoBehaviour
 {
     public GameObject weaponThrust;
-    private float thrustAmount = 5f;
+    private float thrustAmount = 2f;
 	
     private bool weaponOut = false;
 
@@ -17,14 +17,21 @@ public class TongueWeapon : MonoBehaviour
     }
 
     void Update(){
-        if ((Input.GetButton(button1))&&(weaponOut==false)){
-            weaponThrust.transform.Translate(0,thrustAmount, 0);
-            weaponOut = true;
+        if (Input.GetButton(button1))
+        {
+            if (!weaponOut)
+            {
+                weaponThrust.transform.Translate(0,thrustAmount, 0);
+                weaponOut = true;
+            }
         }
         else
         {
-            weaponThrust.transform.Translate(0,-thrustAmount, 0);
-            weaponOut = false;
+            if (weaponOut)
+            {
+                weaponThrust.transform.Translate(0,-thrustAmount, 0);
+                weaponOut = false;
+            }
         }
     }
 }
