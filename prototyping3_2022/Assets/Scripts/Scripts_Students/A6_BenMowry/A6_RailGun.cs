@@ -64,7 +64,7 @@ public class A6_RailGun : MonoBehaviour {
             chargeLevel = Mathf.Clamp(chargeLevel + 1, 0, chargeLevelMax);
         }
 
-        if (Input.GetMouseButton(0)) {
+        if (Input.GetKeyDown(fireKey)) {
             if (chargeLevel > 1) {
                 Fire(chargeLevel);
                 ResetCharge();

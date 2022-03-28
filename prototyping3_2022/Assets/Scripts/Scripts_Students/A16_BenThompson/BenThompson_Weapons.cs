@@ -17,12 +17,24 @@ public class BenThompson_Weapons : MonoBehaviour
     [SerializeField]
     private GameObject firebreath1scale;
 
+    [SerializeField]
+    private ParticleSystem firebreathCough;
+
+    [SerializeField]
+    private GameObject tailArt;
+
     [Header("Firebreath Stats")]
     [SerializeField]
     private float firebreathLength;
     
     [SerializeField]
     private float firebreathCooldown;
+
+    [SerializeField]
+    private float firebreathDamage;
+
+    [SerializeField]
+    private float coughCooldown;
 
     [Header("Button Bindings")]
     //grab axis from parent object
@@ -38,10 +50,15 @@ public class BenThompson_Weapons : MonoBehaviour
     int currentRangeOut = -1;
 
     private float activeCooldown = 0.0f;
+    private float mineCooldown = 0.0f;
+    private float coughTimer = 0.0f;
 
     [Header("Scales")]
     [SerializeField]
     private BenThompson_ScaleManager scaleManager;
+
+    [SerializeField]
+    private float scalePlacementCooldown;
 
     // Start is called before the first frame update
     void Start()
@@ -50,29 +67,58 @@ public class BenThompson_Weapons : MonoBehaviour
         button2 = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
         button3 = gameObject.transform.parent.GetComponent<playerParent>().action3Input;
         button4 = gameObject.transform.parent.GetComponent<playerParent>().action4Input;
+
+        if(gameObject.transform.root.tag == "Player2")
+        {
+            firebreath4scales.GetComponent<BenThompson_FirebreathBehavior>().SetPlayer2();
+            firebreath3scales.GetComponent<BenThompson_FirebreathBehavior>().SetPlayer2();
+            firebreath2scales.GetComponent<BenThompson_FirebreathBehavior>().SetPlayer2();
+            firebreath1scale.GetComponent<BenThompson_FirebreathBehavior>().SetPlayer2();
+            firebreath4scales.GetComponent<HazardDamage>().isPlayer2Weapon = true;
+            firebreath3scales.GetComponent<HazardDamage>().isPlayer2Weapon = true;
+            firebreath2scales.GetComponent<HazardDamage>().isPlayer2Weapon = true;
+            firebreath1scale.GetComponent<HazardDamage>().isPlayer2Weapon = true;
+        }
+        else
+        {
+            firebreath4scales.GetComponent<HazardDamage>().isPlayer1Weapon = true;
+            firebreath3scales.GetComponent<HazardDamage>().isPlayer1Weapon = true;
+            firebreath2scales.GetComponent<HazardDamage>().isPlayer1Weapon = true;
+            firebreath1scale.GetComponent<HazardDamage>().isPlayer1Weapon = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        // If firebreath is attempted to be used but can't play the cough
+        if (Input.GetButtonDown(button1) && activeCooldown > 0.0f)
+        {
+            // If we can cough and the firebreath ability isn't about to be ready
+            if (coughTimer <= 0.0f && activeCooldown - coughCooldown > 0.0f)
+            {
+                // Play the cough
+                firebreathCough.Play();
+
+                // Reset the cough cooldown
+                coughTimer = coughCooldown;
+            }
+        }
+
+
         // Use a mine
-        if(Input.GetKeyDown(KeyCode.P))
+        if (Input.GetButtonDown(button2) && mineCooldown <= 0.0f)
         {
-            scaleManager.UseScaleMine();
+            if(scaleManager.UseScaleMine())
+            {
+                mineCooldown = scalePlacementCooldown;
+            }
+            
         }
 
-        // If there is an active cooldown
-        if(activeCooldown > 0.0f)
-        {
-            // Decrease the cooldown
-            activeCooldown -= Time.deltaTime;
-
-            // Leave the loop
-            return;
-        }
 
         // If the firebreath ability can be used
-        if((Input.GetButtonDown(button1)) && (weaponOut == false))
+        if ((Input.GetButtonDown(button1)) && (weaponOut == false) && activeCooldown <= 0.0f)
         {
             // Get the current scale value
             firebreathRange = scaleManager.GetNumScales();
@@ -92,6 +138,8 @@ public class BenThompson_Weapons : MonoBehaviour
                     // Indicate that a weapon is currently out
                     weaponOut = true;
 
+                    tailArt.transform.localEulerAngles = new Vector3(-72.088f, tailArt.transform.localEulerAngles.y, tailArt.transform.localEulerAngles.z);
+
                     // Start the process of ending the fire breath attack
                     StartCoroutine(EndFireBreath());
 
@@ -108,6 +156,8 @@ public class BenThompson_Weapons : MonoBehaviour
 
                     // Indicate that a weapon is currently out
                     weaponOut = true;
+
+                    tailArt.transform.localEulerAngles = new Vector3(-72.088f, tailArt.transform.localEulerAngles.y, tailArt.transform.localEulerAngles.z);
 
                     // Start the process of ending the fire breath attack
                     StartCoroutine(EndFireBreath());
@@ -126,6 +176,8 @@ public class BenThompson_Weapons : MonoBehaviour
                     // Indicate that a weapon is currently out
                     weaponOut = true;
 
+                    tailArt.transform.localEulerAngles = new Vector3(-72.088f, tailArt.transform.localEulerAngles.y, tailArt.transform.localEulerAngles.z);
+
                     // Start the process of ending the fire breath attack
                     StartCoroutine(EndFireBreath());
 
@@ -143,13 +195,62 @@ public class BenThompson_Weapons : MonoBehaviour
                     // Indicate that a weapon is currently out
                     weaponOut = true;
 
+                    tailArt.transform.localEulerAngles = new Vector3(-72.088f, tailArt.transform.localEulerAngles.y, tailArt.transform.localEulerAngles.z);
+
                     // Start the process of ending the fire breath attack
                     StartCoroutine(EndFireBreath());
 
                     break;
+
+                case 0:
+                    // If firebreath is attempted to be used but can't play the cough
+                    if (Input.GetButtonDown(button1))
+                    {
+                        // If we can cough and the firebreath ability isn't about to be ready
+                        if (coughTimer <= 0.0f)
+                        {
+                            // Play the cough
+                            firebreathCough.Play();
+
+                            // Reset the cough cooldown
+                            coughTimer = coughCooldown;
+                        }
+                    }
+                    break;
             }
 
             
+        }
+
+        // If there is an active cooldown
+        if (activeCooldown > 0.0f)
+        {
+            // Decrease the cooldown
+            activeCooldown -= Time.deltaTime;
+
+            if(activeCooldown <= 0.0f)
+            {
+                tailArt.transform.localEulerAngles = new Vector3(-37.311f, tailArt.transform.localEulerAngles.y, tailArt.transform.localEulerAngles.z);
+            }
+            else
+            {
+                if (scaleManager.GetRespawnTimer() <= 0.0f)
+                {
+                    tailArt.transform.localEulerAngles = Vector3.Lerp(new Vector3(-72.088f, tailArt.transform.localEulerAngles.y, tailArt.transform.localEulerAngles.z),
+                                                             new Vector3(-37.311f, tailArt.transform.localEulerAngles.y, tailArt.transform.localEulerAngles.z),
+                                                             1.0f - activeCooldown / firebreathCooldown);
+                }
+            }
+        }
+
+        if (mineCooldown > 0.0f)
+        {
+            mineCooldown -= Time.deltaTime;
+        }
+
+        if(coughTimer > 0.0f)
+        {
+            coughTimer -= Time.deltaTime;
         }
     }
 
@@ -169,6 +270,9 @@ public class BenThompson_Weapons : MonoBehaviour
                 // Deactivate the 4 scale range fire breath
                 firebreath4scales.SetActive(false);
 
+                firebreath4scales.GetComponent<BenThompson_FirebreathBehavior>().ResetHitCount();
+                firebreath4scales.GetComponent<HazardDamage>().damage = firebreathDamage;
+
                 break;
 
             case 3:
@@ -178,6 +282,9 @@ public class BenThompson_Weapons : MonoBehaviour
 
                 // Deactivate the 3 scale range fire breath
                 firebreath3scales.SetActive(false);
+
+                firebreath3scales.GetComponent<BenThompson_FirebreathBehavior>().ResetHitCount();
+                firebreath3scales.GetComponent<HazardDamage>().damage = firebreathDamage;
 
                 break;
 
@@ -189,6 +296,9 @@ public class BenThompson_Weapons : MonoBehaviour
                 // Deactivate the 2 scale range fire breath
                 firebreath2scales.SetActive(false);
 
+                firebreath2scales.GetComponent<BenThompson_FirebreathBehavior>().ResetHitCount();
+                firebreath2scales.GetComponent<HazardDamage>().damage = firebreathDamage;
+
                 break;
 
             case 1:
@@ -199,6 +309,9 @@ public class BenThompson_Weapons : MonoBehaviour
                 // Deactivate the 1 scale range fire breath
                 firebreath1scale.SetActive(false);
 
+                firebreath1scale.GetComponent<BenThompson_FirebreathBehavior>().ResetHitCount();
+                firebreath1scale.GetComponent<HazardDamage>().damage = firebreathDamage;
+
                 break;
         }
 
@@ -207,5 +320,10 @@ public class BenThompson_Weapons : MonoBehaviour
 
         // Set a cooldown for the firebreath ability
         activeCooldown = firebreathCooldown;
+    }   
+
+    public float GetMineTime()
+    {
+        return mineCooldown;
     }
 }
