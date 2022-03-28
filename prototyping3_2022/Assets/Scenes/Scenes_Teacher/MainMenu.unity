@@ -2294,6 +2294,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button_B15
       objectReference: {fileID: 0}
+    - target: {fileID: 8069984668085712590, guid: 198aa3070c6b4304aab90816f1a138c2,
+        type: 3}
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8069984668085712590, guid: 198aa3070c6b4304aab90816f1a138c2,
+        type: 3}
+      propertyPath: m_Colors.m_NormalColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8069984668085712590, guid: 198aa3070c6b4304aab90816f1a138c2,
+        type: 3}
+      propertyPath: m_Colors.m_NormalColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8069984669619503392, guid: 198aa3070c6b4304aab90816f1a138c2,
+        type: 3}
+      propertyPath: m_Text
+      value: B15 Eunjin Hong
+      objectReference: {fileID: 0}
+    - target: {fileID: 8069984669619503392, guid: 198aa3070c6b4304aab90816f1a138c2,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8069984669619503392, guid: 198aa3070c6b4304aab90816f1a138c2,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8069984669619503392, guid: 198aa3070c6b4304aab90816f1a138c2,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 198aa3070c6b4304aab90816f1a138c2, type: 3}
 --- !u!224 &625493468 stripped

@@ -8,16 +8,22 @@ public class ScottFadoBristow_SlamWeapon : MonoBehaviour
 
     public float AttackCooldown = 2.0f;
 
+    public float HitboxOffset = 2.0f;
+
     bool canAttack = true;
 
     public string button1;
 
     private float timer;
 
+    private Animator aniPlayer;
+
+
     // Start is called before the first frame update
     void Start()
     {
         button1 = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
+        aniPlayer = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -25,24 +31,36 @@ public class ScottFadoBristow_SlamWeapon : MonoBehaviour
     {
         if ((Input.GetButtonDown(button1)) && (canAttack == true))
         {
-            GameObject s = Instantiate(slamTrigger, transform);
+            aniPlayer.Play("ScottFadoBristow_Crab_Slam");
 
-            Vector3 nt = s.transform.localPosition;
-            nt.x += 4.0f;
-            s.transform.localPosition = nt;
+            //SPawn Hitbox now called Via animation event
+            //SpawnHitbox();
 
             canAttack = false;
             timer = AttackCooldown;
         }
 
-        if(canAttack == false)
+        if (canAttack == false)
         {
             timer -= Time.deltaTime;
 
-            if(timer <= 0)
+            if (timer <= 0)
             {
                 canAttack = true;
             }
         }
     }
+
+
+    void SpawnHitbox()
+    {
+
+        GameObject s = Instantiate(slamTrigger, transform);
+
+        Vector3 nt = s.transform.localPosition;
+        nt.x += HitboxOffset;
+        s.transform.localPosition = nt;
+    }
+
+    
 }
