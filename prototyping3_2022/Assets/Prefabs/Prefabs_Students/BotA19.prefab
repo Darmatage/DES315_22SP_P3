@@ -433,7 +433,7 @@ MonoBehaviour:
   button2: 
   spinRotation: {x: 0, y: 10, z: 0}
   spinSpeed: 85
-  spinTimer: 1.5
+  spinTimer: 1
   spinCooldown: 2
   hasSpin: 0
   onSpinCooldown: 0
