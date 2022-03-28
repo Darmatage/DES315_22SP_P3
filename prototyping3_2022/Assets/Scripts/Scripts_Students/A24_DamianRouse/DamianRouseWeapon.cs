@@ -1,37 +1,70 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DamianRouseWeapon : MonoBehaviour
 {
+  [Header("Parts of the Spear")]
   public GameObject forward_;
+  public GameObject up_;
+  public GameObject right_;
   public GameObject spearTip_;
   private GameObject owner_;
-  public bool lunging;
+  public GameObject dashHitBox_;
+  public GameObject swipeHitBox_;
 
-  private int hitsLeft_;
-
+  [Header("Move 1 Settings")]
+  public int moveOneDamage_ = 4;
   public float moveOneRange_ = 4f;
   public float moveOneSpeed_ = 4f;
-  private float timer_;
-  private bool moveOneActive_ = false;
-  private float moveOneTimer_;
-  private bool moveOneReturning_ = false;
 
-  private Vector3 start_;
+  [Header("Move 2 Settings")]
+  public int moveTwoDamage_ = 6;
+  public float moveTwoTurnSpeed_ = 4f;
+  public float moveTwoDashForce_ = 400f;
+  public float moveTwoWait1_ = 4f;
+  public float moveTwoWait2_ = 4f;
+  public float moveTwoWait3_ = 4f;
+  public float moveTwoWait4_ = 4f;
+
+  [Header("Move 3 Settings")]
+  public int moveThreeDamage_ = 4;
+  public float moveThreeWait1_ = 4f;
+  public float moveThreeWait2_ = 4f;
+  public float moveThreeWait3_ = 4f;
+  public float moveThreeWait4_ = 4f;
+  public float slashSpin_ = -4f;
+
+  //Misc
+  private Vector3 startPos_;
+  private Quaternion startRot_;
+  private Vector3 currentVec_;
+  private Quaternion currentQuat_;
+  private Vector3 targetVec_;
+  private Quaternion targetQuat_;
+  private int hitsLeft_;
+
+  //Lerp Stuff
+  private bool lerping_ = false;
+  private float lerpTimer_;
+  private float lerpDuration_;
+  private Func<int> lerpFunction_ = () => { return 1; };
+  private Func<int> Endfunc_ = () => { return 1; };
 
   //public Animator stab_;
 
   // Start is called before the first frame update
   void Start()
   {
-    start_ = transform.localPosition;
+    startPos_ = transform.localPosition;
+    startRot_ = transform.localRotation;
   }
 
   // Update is called once per frame
   void Update()
   {
-    MoveOneUpdate();
+    Use();
     /*
      float botMove = Input.GetAxisRaw(pVertical) * moveSpeed * Time.deltaTime;
 		float botRotate = Input.GetAxisRaw(pHorizontal) * rotateSpeed * Time.deltaTime;
@@ -41,50 +74,10 @@ public class DamianRouseWeapon : MonoBehaviour
 			transform.Rotate(0, botRotate, 0);
 		}
      */
-
-    if (lunging)
-    {
-      GetComponent<Rigidbody>().AddForce(transform.forward * 200, ForceMode.Impulse);
-      lunging = false;
-    }
   }
 
-  public void MoveOneUpdate()
-  {
-    if (!moveOneActive_)
-      return;
-
-    if (!moveOneReturning_)
-    {
-      moveOneTimer_ += Time.deltaTime;
-      if (timer_ < moveOneTimer_)
-      {
-        moveOneTimer_ = timer_;
-        moveOneReturning_ = true;
-      }
-    }
-    else
-    {
-      moveOneTimer_ -= Time.deltaTime;
-      if (moveOneTimer_ < 0)
-      {
-        moveOneTimer_ = 0;
-        moveOneActive_ = false;
-        moveOneReturning_ = false;
-      }
-    }
-
-    transform.localPosition = Vector3.Lerp(start_, (forward_.transform.localPosition - spearTip_.transform.localPosition) * moveOneRange_ + start_, moveOneTimer_ / timer_);
-
-    if (!moveOneActive_)
-    {
-      moveOneTimer_ = 0;
-      moveOneActive_ = false;
-      ClearHits();
-      owner_.GetComponent<DamianRouseManager>().FinishMove();
-    }
-  }
-
+  //Called By Manager
+  //-----------------------------------------
   public void TransferData(GameObject owner)
   {
     owner_ = owner;
@@ -94,36 +87,252 @@ public class DamianRouseWeapon : MonoBehaviour
   {
     if (move == 1)
       MoveOne();
+    else if (move == 2)
+      MoveTwo();
+    else if (move == 3)
+      MoveThree();
     else
       owner_.GetComponent<DamianRouseManager>().isAttacking = false;
   }
 
+  //Move One
+  //------------------------------
   public void MoveOne()
   {
-    AddHits(1);
-    moveOneActive_ = true;
-    moveOneTimer_ = 0;
-    timer_ = moveOneSpeed_;
-    //stab_.enabled = true;
+    SetHitDamage(spearTip_, moveOneDamage_);
+    AddHits(spearTip_, 1);
+    targetVec_ = (forward_.transform.localPosition - spearTip_.transform.localPosition) * moveOneRange_ + startPos_;
+    SetValues(moveOneSpeed_, MoveOneStep1, MoveOneStep1E);
   }
 
-  public void AddHits(int hits)
+  public int MoveOneStep1()
+  {
+    transform.localPosition = Vector3.Lerp(startPos_, targetVec_, lerpTimer_ / lerpDuration_);
+    return 1;
+  }
+
+  public int MoveOneStep1E()
+  {
+    //targetVec_ = (forward_.transform.localPosition - spearTip_.transform.localPosition) * moveOneRange_ + startPos_;
+    SetValues(moveOneSpeed_, MoveOneStep2, MoveEnd);
+    return 1;
+  }
+
+  public int MoveOneStep2()
+  {
+    transform.localPosition = Vector3.Lerp(targetVec_, startPos_ , lerpTimer_ / lerpDuration_);
+    return 1;
+  }
+
+  //Move Two
+  //------------------------------
+
+  public void MoveTwo()
+  {
+    targetVec_ = -(right_.transform.localPosition - spearTip_.transform.localPosition) * 1f + startPos_;
+    SetValues(moveTwoWait1_, MoveTwoStep1, MoveTwoStep1E);
+  }
+
+  public int MoveTwoStep1()
+  {
+    transform.localPosition = Vector3.Lerp(startPos_, targetVec_, lerpTimer_ / lerpDuration_);
+    return 1;
+  }
+
+  public int MoveTwoStep1E()
+  {
+    owner_.GetComponent<BotBasic_Move>().rotateSpeed = moveTwoTurnSpeed_;
+    SetValues(moveTwoWait2_, MoveTwoStep2, MoveTwoStep2E);
+    return 1;
+  }
+
+  public int MoveTwoStep2()
+  {
+    //wait or whatever
+    return 1;
+  }
+
+  public int MoveTwoStep2E()
+  {
+    
+    SetHitDamage(dashHitBox_, moveTwoDamage_);
+    AddHits(dashHitBox_, 1);
+
+    owner_.GetComponent<BotBasic_Move>().rotateSpeed = 0;
+    owner_.GetComponent<Rigidbody>().AddForce(transform.forward * moveTwoDashForce_, ForceMode.Impulse);
+
+    SetValues(moveTwoWait3_, MoveTwoStep3, MoveTwoStep3E);
+    return 1;
+  }
+
+  public int MoveTwoStep3()
+  {
+    //wait
+    //transform.localPosition = Vector3.Lerp(startPos_, -(right_.transform.localPosition - spearTip_.transform.localPosition) * 2f + startPos_, lerpTimer_ / lerpDuration_);
+    return 1;
+  }
+
+  public int MoveTwoStep3E()
+  {
+    SetValues(moveTwoWait4_, MoveTwoStep4, MoveEnd);
+    return 1;
+  }
+
+  public int MoveTwoStep4()
+  {
+    transform.localPosition = Vector3.Lerp(currentVec_, startPos_, lerpTimer_ / lerpDuration_);
+    return 1;
+  }
+
+  //Move Three
+  //------------------------------
+
+  public void MoveThree()
+  {
+    Vector3 vec = -(right_.transform.localPosition - spearTip_.transform.localPosition) * 1f;
+    vec += (forward_.transform.localPosition - spearTip_.transform.localPosition) * 2f;
+    vec += (up_.transform.localPosition - spearTip_.transform.localPosition) * 1f;
+
+    targetVec_ = vec + startPos_;
+    SetValues(moveThreeWait1_, MoveThreeStep1, MoveThreeStep1E);
+  }
+
+  public int MoveThreeStep1()
+  {
+    transform.localPosition = Vector3.Lerp(startPos_, targetVec_, lerpTimer_ / lerpDuration_);
+
+    transform.localRotation = Quaternion.Slerp(startRot_, Quaternion.Euler(-45,-45,1), lerpTimer_ / lerpDuration_);
+    return 1;
+  }
+
+  public int MoveThreeStep1E()
+  {
+    SetValues(moveThreeWait2_, MoveThreeStep2, MoveThreeStep2E);
+    return 1;
+  }
+
+  public int MoveThreeStep2()
+  {
+    //wait or whatever
+    return 1;
+  }
+
+  public int MoveThreeStep2E()
+  {
+    SetHitDamage(swipeHitBox_, moveTwoDamage_);
+    AddHits(swipeHitBox_, 1);
+
+    Vector3 vec = (forward_.transform.localPosition - spearTip_.transform.localPosition) * 3f;
+    vec += -(up_.transform.localPosition - spearTip_.transform.localPosition) * 1f;
+
+    targetVec_ = vec + startPos_;
+    SetValues(moveThreeWait3_, MoveThreeStep3, MoveThreeStep3E);
+    return 1;
+  }
+
+  public int MoveThreeStep3()
+  {
+    //Vector3 vec = -(right_.transform.localPosition - spearTip_.transform.localPosition) * 1f;
+    transform.localPosition = Vector3.Lerp(currentVec_, targetVec_, lerpTimer_ / lerpDuration_);
+
+    transform.localRotation = Quaternion.Slerp(currentQuat_, Quaternion.Euler(5, 45, 1), lerpTimer_ / lerpDuration_);
+
+
+    return 1;
+  }
+
+  public int MoveThreeStep3E()
+  {
+    SetValues(moveThreeWait4_, MoveThreeStep4, MoveEnd);
+    
+    return 1;
+  }
+
+  public int MoveThreeStep4()
+  {
+    transform.localPosition = Vector3.Lerp(currentVec_, startPos_, lerpTimer_ / lerpDuration_);
+    transform.localRotation = Quaternion.Slerp(currentQuat_, startRot_, lerpTimer_ / lerpDuration_);
+    
+    owner_.transform.Rotate(0, Time.deltaTime * slashSpin_, 0);
+    
+    return 1;
+  }
+
+  //Generic Move End
+  //------------------------------
+
+  public int MoveEnd()
+  {
+    ClearHits();
+    owner_.GetComponent<DamianRouseManager>().FinishMove();
+    return 1;
+  }
+
+  //Collision Hits
+  //------------------------------
+  public void SetHitDamage(GameObject on, int amount)
+  {
+    HazardDamage hd = on.GetComponent<HazardDamage>();
+
+    if(hd)
+    {
+      hd.damage = amount;
+    }
+  }
+
+  public void AddHits(GameObject go, int hits)
   {
     hitsLeft_ += hits;
-    spearTip_.GetComponent<BoxCollider>().enabled = true;
+    go.GetComponent<BoxCollider>().enabled = true;
   }
 
-  public void Hit()
+  public void Hit(GameObject go)
   {
     --hitsLeft_;
 
     if (hitsLeft_ < 1)
-      spearTip_.GetComponent<BoxCollider>().enabled = false;
+      go.GetComponent<BoxCollider>().enabled = false;
   }
 
   public void ClearHits()
   {
     hitsLeft_ = 0;
     spearTip_.GetComponent<BoxCollider>().enabled = false;
+    dashHitBox_.GetComponent<BoxCollider>().enabled = false;
+    swipeHitBox_.GetComponent<BoxCollider>().enabled = false;
+  }
+
+
+  //Lerp Stuff
+  //-------------------------------------
+  public void SetValues(float lerpDuration, Func<int> lerpFunction = null, Func<int> Endfunc = null)
+  {
+    lerpTimer_ = 0;
+    lerping_ = true;
+    lerpDuration_ = lerpDuration;
+
+    lerpFunction_ = lerpFunction;
+    Endfunc_ = Endfunc;
+  }
+
+  public bool Use()
+  {
+    //if not lerping, return false
+    if (!lerping_)
+      return false;
+
+    lerpTimer_ += Time.deltaTime;
+    if (lerpTimer_ > lerpDuration_)
+      lerpTimer_ = lerpDuration_;
+
+    lerpFunction_();
+    if(lerpTimer_ >= lerpDuration_)
+    {
+      currentVec_ = transform.localPosition;
+      currentQuat_ = transform.localRotation;
+      lerping_ = false;
+      Endfunc_();
+    }
+    return true;
   }
 }
