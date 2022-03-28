@@ -31,6 +31,7 @@ public class B03Bot_Weapon : MonoBehaviour
 
 	public B03_WeaponEvent ActivateWeapon;
 	public UnityEvent SheildDefend;
+	[SerializeField] GameObject KinvesWeapons;
 
 	bool deactivateSheild = false;
 
@@ -70,10 +71,12 @@ public class B03Bot_Weapon : MonoBehaviour
 		else if (Input.GetButtonDown(button3) && currentWeapon == Weapon.NONE)
 		{
 			ActivateWeapon.Invoke(Weapon.KNIVES);
+			KinvesWeapons.SetActive(true);
 		}
 		else if (!Input.GetButton(button3) && currentWeapon == Weapon.KNIVES)
 		{
 			ActivateWeapon.Invoke(Weapon.NONE);
+			KinvesWeapons.SetActive(false);
 		}
 	}
 
