@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class B02Stabilize : MonoBehaviour
+public class B15Stabilize : MonoBehaviour
 {
 
     // Update is called once per frame

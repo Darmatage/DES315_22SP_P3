@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BotB02_Move : MonoBehaviour
+public class BotB15_Move : MonoBehaviour
 {
 	public float moveSpeed = 10;
 	public float rotateSpeed = 100;

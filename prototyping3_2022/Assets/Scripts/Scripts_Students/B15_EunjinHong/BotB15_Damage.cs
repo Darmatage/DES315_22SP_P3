@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BotB02_Damage : MonoBehaviour{
+public class BotB15_Damage : MonoBehaviour{
 	public GameObject compassSides;
 	public GameObject compassVertical;
 	private float sidelimit = 0.7f;

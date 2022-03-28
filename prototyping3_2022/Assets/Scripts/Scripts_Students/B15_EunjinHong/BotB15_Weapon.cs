@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BotB02_Weapon : MonoBehaviour{
+public class BotB15_Weapon : MonoBehaviour{
     //NOTE: This script goes on the main playerBot Game Object, and the weapon goes in the public GO slot
 
     public GameObject FrontWeapon;
