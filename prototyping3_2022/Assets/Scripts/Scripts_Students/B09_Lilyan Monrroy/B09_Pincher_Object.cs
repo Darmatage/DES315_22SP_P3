@@ -8,7 +8,8 @@ public class B09_Pincher_Object : MonoBehaviour
     public GameObject grabbedObject;
     [SerializeField] float openVelocity;
     [SerializeField] float closeVelocity;
-    [SerializeField] Vector3 originalPincherPos;
+    private Vector3 originalPincherPos;
+    private Quaternion originalPincherRot;
     public Vector3 ContactPoint;
 
 
@@ -17,6 +18,7 @@ public class B09_Pincher_Object : MonoBehaviour
     {
         grabbedObject = null;
         originalPincherPos = transform.localPosition;
+        originalPincherRot = transform.localRotation;
     }
 
     // Update is called once per frame
@@ -57,6 +59,7 @@ public class B09_Pincher_Object : MonoBehaviour
     {
         Vector3 openPos = new Vector3(originalPincherPos.x * 2.0f, originalPincherPos.y, originalPincherPos.z);
         transform.localPosition = Vector3.Lerp(transform.localPosition, openPos, 0.9f);
+        transform.localRotation = originalPincherRot;
     }
 
     public void close()
@@ -65,5 +68,6 @@ public class B09_Pincher_Object : MonoBehaviour
             return;
 
         transform.localPosition = Vector3.Lerp(transform.localPosition, originalPincherPos, 0.9f);
+        transform.localRotation = originalPincherRot;
     }
 }
