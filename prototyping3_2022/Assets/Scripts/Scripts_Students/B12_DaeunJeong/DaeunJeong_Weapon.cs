@@ -16,8 +16,18 @@ public class DaeunJeong_Weapon : MonoBehaviour
     public string button3;
     public string button4; // currently boost in player move script
 
+    private Rigidbody rb;
+    private AudioSource audioSource;
+    public AudioClip weaponSFX;
+    public AudioClip boostSFX;
+    public float boostSpeed = 0.0f;
+    public GameObject fireVFX;
+
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
+
         button1 = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
         button2 = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
         button3 = gameObject.transform.parent.GetComponent<playerParent>().action3Input;
@@ -26,19 +36,35 @@ public class DaeunJeong_Weapon : MonoBehaviour
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.T)){
+        // Weapon
         if ((Input.GetButtonDown(button1)) && (weaponOut == false))
         {
             weaponThrust.transform.Translate(0, 0, thrustAmount);
             weaponOut = true;
             StartCoroutine(WithdrawWeapon());
         }
+
+        // BOOST
+        if (Input.GetButtonDown(button2))
+        {
+            StartCoroutine(Boost());
+        }
     }
 
     IEnumerator WithdrawWeapon()
     {
+        audioSource.PlayOneShot(weaponSFX);
         yield return new WaitForSeconds(0.6f);
         weaponThrust.transform.Translate(0, 0, -thrustAmount);
         weaponOut = false;
+    }
+
+    IEnumerator Boost()
+    {
+        fireVFX.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        rb.AddForce(transform.forward * boostSpeed, ForceMode.Impulse);
+        audioSource.PlayOneShot(boostSFX);
+        fireVFX.SetActive(false);
     }
 }

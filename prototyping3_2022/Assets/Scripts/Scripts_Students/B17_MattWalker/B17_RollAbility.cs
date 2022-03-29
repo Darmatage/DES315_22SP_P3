@@ -10,23 +10,35 @@ public class B17_RollAbility : MonoBehaviour
     private float RollDirection;
     private bool IsRolling;
 
-
+    //grab axis from parent object
+    public string button1;
+    public string button2;
+    public string button3;
+    public string button4; // currently boost in player move script
+    public string jumpInput;
 
     // Start is called before the first frame update
     void Start()
     {
         IsRolling = false;
+
+
+        button1 = gameObject.transform.parent.parent.GetComponent<playerParent>().action1Input;
+        button2 = gameObject.transform.parent.parent.GetComponent<playerParent>().action2Input;
+        button3 = gameObject.transform.parent.parent.GetComponent<playerParent>().action3Input;
+        button4 = gameObject.transform.parent.parent.GetComponent<playerParent>().action4Input;
+        jumpInput = gameObject.transform.parent.parent.GetComponent<playerParent>().jumpInput;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetButton(button3))
 		{
             IsRolling = true;
             RollDirection = 1.0f;
 		}
-        else if (Input.GetKey(KeyCode.E))
+        else if (Input.GetButton(button4))
         {
             IsRolling = true;
             RollDirection = -1.0f;

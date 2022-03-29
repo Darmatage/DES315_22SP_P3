@@ -17,6 +17,8 @@ public class HyungseobKim_Cannon : MonoBehaviour
     [HideInInspector]
     public string button4;
 
+    public BotBasic_Damage enemy;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,16 @@ public class HyungseobKim_Cannon : MonoBehaviour
         button2 = gameObject.transform.parent.parent.GetComponent<playerParent>().action2Input;
         button3 = gameObject.transform.parent.parent.GetComponent<playerParent>().action3Input;
         button4 = gameObject.transform.parent.parent.GetComponent<playerParent>().action4Input;
+
+        var bots = FindObjectsOfType<BotBasic_Damage>();
+        foreach(BotBasic_Damage bot in bots)
+        {
+            if (bot.gameObject != transform.parent)
+            {
+                enemy = bot;
+                break;
+            }
+        }
     }
 
     // Update is called once per frame

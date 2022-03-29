@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class DanielNunes_AnimationEvents : MonoBehaviour
 {
+    [HideInInspector]
+    public bool endOfSlash;
+
+    private BoxCollider coll;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        coll = transform.Find("Art").Find("Blade").GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -58,5 +63,39 @@ public class DanielNunes_AnimationEvents : MonoBehaviour
     public void RestoreRotation()
     {
         transform.parent.GetComponent<BotBasic_Move>().rotateSpeed = 100;
+    }
+
+    public void SetDamage(float damage)
+    {
+        transform.Find("Art").Find("Blade").GetComponent<HazardDamage>().damage = damage;
+    }
+
+    public void EndOfSlash()
+    {
+        endOfSlash = true;
+    }
+
+    public void SetBladeTrigger(int b)
+    {
+        if (b != 0)
+        {
+            coll.isTrigger = true;
+        }
+        else
+        {
+            coll.isTrigger = false;
+        }
+    }
+
+    public void SetTrail(int b)
+    {
+        if (b != 0)
+        {
+            coll.GetComponent<TrailRenderer>().emitting = true;
+        }
+        else
+        {
+            coll.GetComponent<TrailRenderer>().emitting = false;
+        }
     }
 }

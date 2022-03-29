@@ -114,6 +114,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splash: {fileID: 4085200527003681851, guid: 59935240da6befc43ac859e52f403dc2, type: 3}
+  slpashWithoutDamage: {fileID: 4085200527003681851, guid: 265623d160c37b84684c2e0024b02f34,
+    type: 3}
+  parent: {fileID: 0}
 --- !u!54 &-6083933838794206099
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -16,9 +16,20 @@ public class DanielNunes_Halberd : MonoBehaviour
     public bool isAttacking;
     public bool lunging;
 
+    //grab axis from parent object
+    public string button1;
+    public string button2;
+    public string button3;
+    public string button4; // currently boost in player move script
+
     // Start is called before the first frame update
     void Start()
     {
+        button1 = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
+        button2 = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
+        button3 = gameObject.transform.parent.GetComponent<playerParent>().action3Input;
+        button4 = gameObject.transform.parent.GetComponent<playerParent>().action4Input;
+
         GameObject halberd = Instantiate(halberdPrefab, transform);
 
         //center the halberd to the bot, and offset it upward
@@ -33,17 +44,17 @@ public class DanielNunes_Halberd : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isAttacking && Input.GetKeyDown(KeyCode.E))
+        if (!isAttacking && Input.GetButtonDown(button1))
         {
             halberdAnim.Play("Slash");
         }
 
-        if (!isAttacking && Input.GetKeyDown(KeyCode.R))
+        if (!isAttacking && Input.GetButtonDown(button2))
         {
             halberdAnim.Play("Swing");
         }
 
-        if (!isAttacking && Input.GetKeyDown(KeyCode.F))
+        if (!isAttacking && Input.GetButtonDown(button3))
         {
             halberdAnim.Play("Poke");
         }
