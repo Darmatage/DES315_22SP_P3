@@ -227,7 +227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 537696f540094b344bb847eaea3099df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScaleIncreaseAmount: 1.1
+  ScaleIncreaseAmount: 0.1
+  ScaleIncreaseFalloff: 0.9
   ScaleIncreaseSpeed: 0.01
   HealthIncreaseAmount: 7
   NormalBodyMaterial: {fileID: 2100000, guid: 248e996f31b2dc8439b8cb82532339af, type: 2}
