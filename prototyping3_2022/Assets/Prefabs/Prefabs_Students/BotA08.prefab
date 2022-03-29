@@ -279,9 +279,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab929fe774a0084c8ae87aafe02faf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 15
   rotateSpeed: 100
-  jumpSpeed: 7
+  jumpSpeed: 0
   boostSpeed: 10
   groundCheck: {fileID: 1355330930762081256}
   turtleCheck: {fileID: 1355330929556144337}
@@ -315,11 +315,11 @@ MonoBehaviour:
   knockBackSpeed: 10
   forceSideLimit_p75: 1
   shieldPowerFront: 5
-  shieldPowerBack: 5
+  shieldPowerBack: 1
   shieldPowerLeft: 5
   shieldPowerRight: 5
-  shieldPowerTop: 5
-  shieldPowerBottom: 5
+  shieldPowerTop: 1
+  shieldPowerBottom: 1
   shieldFrontObj: {fileID: 1098726327034351829}
   shieldBackObj: {fileID: 2186211737314387781}
   shieldLeftObj: {fileID: 2735579452779107192}
@@ -652,12 +652,17 @@ PrefabInstance:
     - target: {fileID: 3055262920815044317, guid: 8556b1ed1f1ab4848a11220c1e8bee70,
         type: 3}
       propertyPath: cooldown_time
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3055262920815044317, guid: 8556b1ed1f1ab4848a11220c1e8bee70,
         type: 3}
       propertyPath: activation_key
       value: 114
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077268705639244637, guid: 8556b1ed1f1ab4848a11220c1e8bee70,
+        type: 3}
+      propertyPath: damage
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5322394234129782648, guid: 8556b1ed1f1ab4848a11220c1e8bee70,
         type: 3}
@@ -723,6 +728,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6230327471668970897, guid: 8556b1ed1f1ab4848a11220c1e8bee70,
+        type: 3}
+      propertyPath: damage
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6628180290630986966, guid: 8556b1ed1f1ab4848a11220c1e8bee70,
+        type: 3}
+      propertyPath: damage
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722080965404780218, guid: 8556b1ed1f1ab4848a11220c1e8bee70,
+        type: 3}
+      propertyPath: damage
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7298759709758966130, guid: 8556b1ed1f1ab4848a11220c1e8bee70,
+        type: 3}
+      propertyPath: damage
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7326487381583282571, guid: 8556b1ed1f1ab4848a11220c1e8bee70,
+        type: 3}
+      propertyPath: damage
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8556b1ed1f1ab4848a11220c1e8bee70, type: 3}
@@ -972,12 +1002,17 @@ PrefabInstance:
     - target: {fileID: 3055262920815044317, guid: 8556b1ed1f1ab4848a11220c1e8bee70,
         type: 3}
       propertyPath: cooldown_time
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3055262920815044317, guid: 8556b1ed1f1ab4848a11220c1e8bee70,
         type: 3}
       propertyPath: activation_key
       value: 114
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077268705639244637, guid: 8556b1ed1f1ab4848a11220c1e8bee70,
+        type: 3}
+      propertyPath: damage
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5322394234129782648, guid: 8556b1ed1f1ab4848a11220c1e8bee70,
         type: 3}
@@ -1043,6 +1078,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6230327471668970897, guid: 8556b1ed1f1ab4848a11220c1e8bee70,
+        type: 3}
+      propertyPath: damage
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6628180290630986966, guid: 8556b1ed1f1ab4848a11220c1e8bee70,
+        type: 3}
+      propertyPath: damage
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722080965404780218, guid: 8556b1ed1f1ab4848a11220c1e8bee70,
+        type: 3}
+      propertyPath: damage
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7298759709758966130, guid: 8556b1ed1f1ab4848a11220c1e8bee70,
+        type: 3}
+      propertyPath: damage
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7326487381583282571, guid: 8556b1ed1f1ab4848a11220c1e8bee70,
+        type: 3}
+      propertyPath: damage
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8556b1ed1f1ab4848a11220c1e8bee70, type: 3}
@@ -1182,6 +1242,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1905478258945451594, guid: cba1d6a328faecc4080814b86d23be40,
         type: 3}
+      propertyPath: cooldown_time
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1905478258945451594, guid: cba1d6a328faecc4080814b86d23be40,
+        type: 3}
       propertyPath: activation_key
       value: 101
       objectReference: {fileID: 0}
@@ -1244,6 +1309,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SawBlade
+      objectReference: {fileID: 0}
+    - target: {fileID: 7546881396553747323, guid: cba1d6a328faecc4080814b86d23be40,
+        type: 3}
+      propertyPath: damage
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cba1d6a328faecc4080814b86d23be40, type: 3}

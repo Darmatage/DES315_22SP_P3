@@ -18,13 +18,26 @@ public class DanielNunes_DisableCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if we are player1 and hit player2, or if we're player2 and hit player1
-        if (other.transform.parent.root.CompareTag("Player2") && GetComponent<HazardDamage>().isPlayer1Weapon ||
-            other.transform.parent.root.CompareTag("Player1") && GetComponent<HazardDamage>().isPlayer2Weapon)
+        //if it is actually dealing damage here
+        if (GetComponent<HazardDamage>().damage > 0.0f)
         {
-            Debug.Log(other.name);
-            GetComponent<BoxCollider>().enabled = false;
-            Invoke(nameof(EnableCollider), 1.0f);
+            Transform p = other.transform.parent;
+
+            if (p)
+            {
+                p = other.transform.parent.root;
+                if (p)
+                {
+                    //if we are player1 and hit player2, or if we're player2 and hit player1
+                    if (p.CompareTag("Player2") && GetComponent<HazardDamage>().isPlayer1Weapon ||
+                        p.CompareTag("Player1") && GetComponent<HazardDamage>().isPlayer2Weapon)
+                    {
+                        Debug.Log(other.name);
+                        GetComponent<BoxCollider>().enabled = false;
+                        Invoke(nameof(EnableCollider), 1.0f);
+                    }
+                }
+            }
         }
     }
 
