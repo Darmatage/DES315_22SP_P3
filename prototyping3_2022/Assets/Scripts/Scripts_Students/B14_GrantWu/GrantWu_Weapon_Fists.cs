@@ -62,14 +62,14 @@ public class GrantWu_Weapon_Fists : MonoBehaviour
 	void Update()
 	{
 		//if (Input.GetKeyDown(KeyCode.T)){
-		if ((Input.GetMouseButtonDown(0) || Input.GetButtonDown(button2)) && (leftOut == false))
+		if ((Input.GetMouseButtonDown(0) || Input.GetButtonDown(button1)) && (leftOut == false))
 		{
 			myrb.constraints = RigidbodyConstraints.FreezeAll;
 			leftFist.transform.Translate(0, 0, thrustAmount);
 			leftOut = true;
 			StartCoroutine(WithdrawWeapon(true));
 		}
-		if ((Input.GetMouseButtonDown(1) || Input.GetButtonDown(button1)) && (rightOut == false))
+		if ((Input.GetMouseButtonDown(1) || Input.GetButtonDown(button2)) && (rightOut == false))
 		{
 			myrb.constraints = RigidbodyConstraints.FreezeAll;
 			rightFist.transform.Translate(0, 0, thrustAmount);
