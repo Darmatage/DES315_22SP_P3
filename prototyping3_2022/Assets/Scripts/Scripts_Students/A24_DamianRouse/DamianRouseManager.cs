@@ -39,11 +39,13 @@ public class DamianRouseManager : MonoBehaviour
 
     defaultSpeed_ = gameObject.GetComponent<BotBasic_Move>().moveSpeed;
     defaultTurn_ = gameObject.GetComponent<BotBasic_Move>().rotateSpeed;
+
   }
 
   // Update is called once per frame
   void Update()
   {
+
     if(!isAttacking)
     {
       if (Input.GetButtonDown(button1))
@@ -72,6 +74,20 @@ public class DamianRouseManager : MonoBehaviour
   public void UseMove(int move)
   {
     if (move == 1)
+    {
+      isAttacking = true;
+      gameObject.GetComponent<BotBasic_Move>().moveSpeed = 5;
+      gameObject.GetComponent<BotBasic_Move>().rotateSpeed = 0;
+      weaponScript_.Act(move);
+    }
+    else if(move == 2)
+    {
+      isAttacking = true;
+      gameObject.GetComponent<BotBasic_Move>().moveSpeed = 0;
+      gameObject.GetComponent<BotBasic_Move>().rotateSpeed = 0;
+      weaponScript_.Act(move);
+    }
+    else if (move == 3)
     {
       isAttacking = true;
       gameObject.GetComponent<BotBasic_Move>().moveSpeed = 5;

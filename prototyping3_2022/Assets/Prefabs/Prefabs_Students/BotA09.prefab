@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 5780095072016173801}
   - component: {fileID: 7285542615022466734}
   - component: {fileID: 5965173355438313419}
+  - component: {fileID: 3950171039021794981}
   m_Layer: 0
   m_Name: BotA09
   m_TagString: Untagged
@@ -395,6 +396,19 @@ MonoBehaviour:
   button2: 
   button3: 
   button4: 
+--- !u!114 &3950171039021794981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355330930375697355}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c51879da08e652e44b0ae6723e296357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cams: []
 --- !u!1 &1355330930662561729
 GameObject:
   m_ObjectHideFlags: 0

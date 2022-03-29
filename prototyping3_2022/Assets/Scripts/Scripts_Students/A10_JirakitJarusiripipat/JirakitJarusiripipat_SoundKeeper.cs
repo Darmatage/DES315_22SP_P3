@@ -14,7 +14,10 @@ public class JirakitJarusiripipat_SoundKeeper : MonoBehaviour
     private AudioSource explodeSound;
     [SerializeField]
     private AudioSource botMovingSound;
-    
+    [SerializeField]
+    private AudioSource countdownSound;
+    [SerializeField]
+    private AudioSource botExplosion;
     public void PlayMainGun()
     {
         mainGunSound.Play();
@@ -33,6 +36,28 @@ public class JirakitJarusiripipat_SoundKeeper : MonoBehaviour
     }
     public void BotMoving()
     {
-        botMovingSound.Play();
+        if(!botMovingSound.isPlaying)
+        {
+            botMovingSound.Play();
+        }
+    }
+    public void StopBotMoving()
+    {
+        if (botMovingSound.isPlaying)
+        {
+            botMovingSound.Stop();
+        }
+    }
+    public void PlayCountdownSound()
+    {
+        countdownSound.Play();
+    }
+    public void StopCountdownSound()
+    {
+        countdownSound.Stop();
+    }
+    public void PlayBotExplosion()
+    {
+        botExplosion.Play();
     }
 }
