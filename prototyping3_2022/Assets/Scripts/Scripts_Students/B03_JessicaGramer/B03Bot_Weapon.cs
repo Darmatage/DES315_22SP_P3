@@ -62,7 +62,7 @@ public class B03Bot_Weapon : MonoBehaviour
 			ActivateWeapon.Invoke(Weapon.NONE);
 			movement.moveSpeed *= slowDown;
 		}
-		else if (Input.GetButtonDown(button2) && currentWeapon == Weapon.BOW)
+		else if (Input.GetButton(button2) && currentWeapon != Weapon.BOW)
 		{
 			ActivateWeapon.Invoke(Weapon.BOW);
 		}
@@ -96,8 +96,8 @@ public class B03Bot_Weapon : MonoBehaviour
 		currentWeapon = weapon;
     }
 
-	void AnimationEventActivateBow()
-    {
-
-    }
+	public void AnimationEventActivateBow()
+	{
+		ActivateWeapon.Invoke(Weapon.NONE);
+	}
 }
