@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8551493487458659876}
   - component: {fileID: 6858239054649824903}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: HyungseobKim_Bullet
   m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,9 +114,9 @@ MonoBehaviour:
   moving: 1
   speed: 20
   explosionRange: 80
-  explosionSpeed: 200
-  pullRange: 100
-  pullSpeed: 200
+  explosionSpeed: 150
+  pullRange: 80
+  pullSpeed: 150
 --- !u!54 &8551493487458659876
 Rigidbody:
   m_ObjectHideFlags: 0
