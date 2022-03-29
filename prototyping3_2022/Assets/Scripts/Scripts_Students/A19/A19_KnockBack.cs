@@ -11,7 +11,7 @@ public class A19_KnockBack : MonoBehaviour
         if(rb)
         {
             var direction =  other.transform.position - gameObject.transform.position;
-            rb.AddForce(direction * knockBackForce);
+            rb.AddForce(direction * knockBackForce, ForceMode.Impulse);
         }
         
 	}

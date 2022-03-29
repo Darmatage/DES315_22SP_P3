@@ -27,6 +27,7 @@ public class GrantWu_Weapon_Fists : MonoBehaviour
 	private float othermovespeed;
 	private float otherrotatespeed;
 	private float otherjumpspeed;
+	private AudioSource audiosource;
 
 	void Start()
 	{
@@ -36,6 +37,7 @@ public class GrantWu_Weapon_Fists : MonoBehaviour
 		button4 = gameObject.transform.parent.GetComponent<playerParent>().action4Input;
 
 		myrb = gameObject.GetComponent<Rigidbody>();
+		audiosource = gameObject.GetComponent<AudioSource>();
 
 		// Grab other game object based on player tag
 		if (gameObject.CompareTag("Player1"))
@@ -103,6 +105,7 @@ public class GrantWu_Weapon_Fists : MonoBehaviour
 			other_movement.moveSpeed = 0f;
 			other_movement.rotateSpeed = 0f;
 			other_movement.jumpSpeed = 0f;
+			audiosource.Play();
 
 			StartCoroutine(ReleaseStun(other_rb, other_movement));
 		}
