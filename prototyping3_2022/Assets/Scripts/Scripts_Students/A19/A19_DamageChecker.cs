@@ -13,8 +13,15 @@ public class A19_DamageChecker : MonoBehaviour
      private void OnTriggerEnter(Collider other)
     {
         
-            a19_Weapon1.ResetGroundSlam();
-        
+        StartCoroutine(WaitForReset());
 	}
 
+    private IEnumerator WaitForReset()
+    {
+        yield return new WaitForSeconds(0.3f);
+        a19_Weapon1.ResetGroundSlam();
+
+    }
+
+   
 }

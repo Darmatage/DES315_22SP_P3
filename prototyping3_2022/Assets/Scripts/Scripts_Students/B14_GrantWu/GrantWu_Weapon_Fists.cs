@@ -27,6 +27,7 @@ public class GrantWu_Weapon_Fists : MonoBehaviour
 	private float othermovespeed;
 	private float otherrotatespeed;
 	private float otherjumpspeed;
+	private AudioSource audiosource;
 
 	void Start()
 	{
@@ -36,6 +37,7 @@ public class GrantWu_Weapon_Fists : MonoBehaviour
 		button4 = gameObject.transform.parent.GetComponent<playerParent>().action4Input;
 
 		myrb = gameObject.GetComponent<Rigidbody>();
+		audiosource = gameObject.GetComponent<AudioSource>();
 
 		// Grab other game object based on player tag
 		if (gameObject.CompareTag("Player1"))
@@ -60,14 +62,14 @@ public class GrantWu_Weapon_Fists : MonoBehaviour
 	void Update()
 	{
 		//if (Input.GetKeyDown(KeyCode.T)){
-		if ((Input.GetMouseButtonDown(0) || Input.GetButtonDown(button2)) && (leftOut == false))
+		if ((Input.GetMouseButtonDown(0) || Input.GetButtonDown(button1)) && (leftOut == false))
 		{
 			myrb.constraints = RigidbodyConstraints.FreezeAll;
 			leftFist.transform.Translate(0, 0, thrustAmount);
 			leftOut = true;
 			StartCoroutine(WithdrawWeapon(true));
 		}
-		if ((Input.GetMouseButtonDown(1) || Input.GetButtonDown(button1)) && (rightOut == false))
+		if ((Input.GetMouseButtonDown(1) || Input.GetButtonDown(button2)) && (rightOut == false))
 		{
 			myrb.constraints = RigidbodyConstraints.FreezeAll;
 			rightFist.transform.Translate(0, 0, thrustAmount);
@@ -103,6 +105,7 @@ public class GrantWu_Weapon_Fists : MonoBehaviour
 			other_movement.moveSpeed = 0f;
 			other_movement.rotateSpeed = 0f;
 			other_movement.jumpSpeed = 0f;
+			audiosource.Play();
 
 			StartCoroutine(ReleaseStun(other_rb, other_movement));
 		}

@@ -11,6 +11,9 @@ public class A19_Weapon1 : MonoBehaviour
     public float groundSlamCooldownTimer;
     public bool isGroundSlam = false;
     public float gravityScale = 10.0f;
+    public MeshRenderer botBodyMaterial;
+    public Material cooldowwMaterial;
+
 
     //grab axis from parent object
 	public string button1;
@@ -18,10 +21,13 @@ public class A19_Weapon1 : MonoBehaviour
 
     private bool groundSlamCooldown = false;
 
+    private Material orignalMaterial;
+
    
     // Start is called before the first frame update
     void Start()
     {
+        orignalMaterial = botBodyMaterial.material;
         groundSlamCooldown = false;
         button1 = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
     }
@@ -47,6 +53,10 @@ public class A19_Weapon1 : MonoBehaviour
             
 
 		}
+        else if(Input.GetButtonDown(button1) && groundSlamCooldown)
+        {
+            StartCoroutine(CooldownFeedback()); 
+        }
         
 
         if(isGroundSlam)
@@ -72,6 +82,14 @@ public class A19_Weapon1 : MonoBehaviour
         yield return new WaitForSeconds(groundSlamCooldownTimer);
         groundSlamCooldown = false;
 
+
+    }
+
+    public IEnumerator CooldownFeedback()
+    {
+        botBodyMaterial.material = cooldowwMaterial;
+        yield return new WaitForSeconds(0.2f);
+        botBodyMaterial.material = orignalMaterial;
 
     }
 }
