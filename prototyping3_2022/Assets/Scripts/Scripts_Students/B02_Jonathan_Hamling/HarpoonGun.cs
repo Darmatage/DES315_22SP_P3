@@ -8,6 +8,13 @@ public class HarpoonGun : MonoBehaviour
     [SerializeField]
     private GameObject player;
     private GameObject enemy;
+    [SerializeField]
+    private GameObject harpoon;
+
+    private string button1;
+    private string button2;
+    private string button3;
+    private string button4;
 
     public float hookSpeed;
     public float maxHookDistance;
@@ -24,6 +31,16 @@ public class HarpoonGun : MonoBehaviour
 
     Rigidbody rb;
 
+    public void Start()
+    {
+        button1 = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
+        button2 = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
+        button3 = gameObject.transform.parent.GetComponent<playerParent>().action3Input;
+        button4 = gameObject.transform.parent.GetComponent<playerParent>().action4Input;
+
+        rb.isKinematic = true;
+    }
+
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -38,9 +55,10 @@ public class HarpoonGun : MonoBehaviour
     {
         startPos = new Vector3(player.transform.position.x + x_offset, player.transform.position.y, player.transform.position.z + z_offset);
         lineRenderer.SetPosition(0, startPos);
-        lineRenderer.SetPosition(1, transform.position);
-        if (Input.GetButtonDown("Fire1") && !isHook && !wasEnmyHook)
+        lineRenderer.SetPosition(1, harpoon.transform.position);
+        if (Input.GetButtonDown(button1) /*&& !isHook && !wasEnmyHook*/)
         {
+            Debug.Log("Object Fired");
             StartHook();
         }
 
@@ -52,18 +70,19 @@ public class HarpoonGun : MonoBehaviour
     {
         isHook = true;
         rb.isKinematic = false;
-        rb.AddForce(transform.forward * hookSpeed);
+        rb.AddForce(harpoon.transform.forward * hookSpeed);
     }
 
     private void ReturnHook()
     {
         if (isHook)
         {
-            distance = Vector3.Distance(transform.position, startPos);
+            distance = Vector3.Distance(harpoon.transform.position, startPos);
+
             if (distance > maxHookDistance || wasEnmyHook)
             {
                 rb.isKinematic = true;
-                transform.position = startPos;
+                harpoon.transform.position = startPos;
                 isHook = false;
             }
         }
@@ -81,7 +100,8 @@ public class HarpoonGun : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag.Equals("Player2"))
+        if ((other.gameObject.tag.Equals("Player2") && !this.gameObject.tag.Equals("Player2")) 
+            || (other.gameObject.tag.Equals("Player1") && !this.gameObject.tag.Equals("Player1")))
         {
             wasEnmyHook = true;
             enemy = other.gameObject;
