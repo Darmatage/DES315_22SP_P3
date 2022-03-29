@@ -17,6 +17,9 @@ public class JulianBlackstone_TankModeScript : MonoBehaviour
     [SerializeField]
     private BoxCollider colBox = null;
 
+    [SerializeField]
+    private BoxCollider floorColBox = null;
+
     //grab axis from parent object
     public string button1;
     public string button2;
@@ -96,6 +99,7 @@ public class JulianBlackstone_TankModeScript : MonoBehaviour
             leg4.SetActive(false);
             mace.SetActive(true);
             colBox.enabled = false;
+            floorColBox.enabled = false;
 
             myMove.moveSpeed = 2;
             myMove.rotateSpeed = 250;
@@ -111,6 +115,8 @@ public class JulianBlackstone_TankModeScript : MonoBehaviour
             leg3.SetActive(true);
             leg4.SetActive(true);
             mace.SetActive(false);
+            floorColBox.enabled = true;
+
 
             myMove.moveSpeed = 15;
             myMove.rotateSpeed = 120;
