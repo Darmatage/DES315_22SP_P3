@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 285211234849058633}
-  - component: {fileID: 5321807220222400254}
   m_Layer: 0
   m_Name: Pincher
   m_TagString: Untagged
@@ -33,19 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5321807220222400254
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5271050903793711231}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.9819925, y: 1, z: 1.5160103}
-  m_Center: {x: -0.020500064, y: 0, z: 2.3729281}
 --- !u!1001 &1703288195990163290
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -127,7 +113,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ec238f29693fa4c4fb981e57a43c1af5, type: 2}
+      objectReference: {fileID: 2100000, guid: cb03603e8394f2d42bebce6ddf8c5572, type: 2}
     - target: {fileID: 919132149155446097, guid: 207399ca4b7cec24a835a511015548ff,
         type: 3}
       propertyPath: m_Name
@@ -222,7 +208,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ec238f29693fa4c4fb981e57a43c1af5, type: 2}
+      objectReference: {fileID: 2100000, guid: cb03603e8394f2d42bebce6ddf8c5572, type: 2}
     - target: {fileID: 919132149155446097, guid: 207399ca4b7cec24a835a511015548ff,
         type: 3}
       propertyPath: m_Name

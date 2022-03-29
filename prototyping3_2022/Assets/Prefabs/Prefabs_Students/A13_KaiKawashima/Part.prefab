@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 3013958852967979951}
   - component: {fileID: 10469620788774805}
   - component: {fileID: 678070194137835971}
+  - component: {fileID: -2750861146142330731}
   m_Layer: 0
   m_Name: Part
-  m_TagString: Untagged
+  m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,7 +115,7 @@ MonoBehaviour:
   particlesPrefab: {fileID: 7916852506792683719, guid: a6746c9ee60a1a44d813bcdbac5cb0ce,
     type: 3}
   SpawnParticlesHere: {x: 0, y: 0, z: 0}
-  isPlayer1Weapon: 0
+  isPlayer1Weapon: 1
   isPlayer2Weapon: 0
   isMonsterWeapon: 0
 --- !u!54 &678070194137835971
@@ -133,3 +134,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-2750861146142330731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7623049533072962564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6d582c25b0653647987757227d788dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
