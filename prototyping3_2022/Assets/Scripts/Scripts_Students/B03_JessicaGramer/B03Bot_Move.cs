@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[System.Serializable]
 public class B03_MoveEvent : UnityEvent<float> { }
 
 [RequireComponent(typeof(Rigidbody))]
@@ -71,6 +72,7 @@ public class B03Bot_Move : MonoBehaviour
 				MovementEvent.Invoke(botMove);
 				transform.Translate(0, 0, botMove);
             }
+			else MovementEvent.Invoke(0);
 			transform.Rotate(0, botRotate, 0);
 		}
 
