@@ -59,6 +59,9 @@ public class DanielNunes_HalberdCollision : MonoBehaviour
             //Invoke(nameof(DisableAOE), 0.75f);
 
             FindObjectOfType<DanielNunes_AnimationEvents>().endOfSlash = false;
+
+            //play sound effect
+            transform.parent.parent.GetComponent<DanielNunes_AnimationEvents>().pound.Play();
         }
     }
 
