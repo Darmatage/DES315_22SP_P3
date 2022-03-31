@@ -139,11 +139,11 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
             float randomNumberZ = Random.Range(-4.0f, 4.0f);
             Vector3 velo = CalculateVelocity(new Vector3(target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.x + randomNumberX, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.y - 3.0f, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.z + randomNumberZ), transform.position , 0.5f);
 			obj.transform.rotation = Quaternion.LookRotation(velo);
-			obj.GetComponent<Rigidbody>().velocity = velo;
+			obj.GetComponentInChildren<Rigidbody>().velocity = velo;
             currentMissileOut++;
             currentEachCooldown = eachCooldown;
 			soundKeeper.PlayLauncher();
-			obj.GetComponent<JirakitJarusiripipat_Missile>().parent = this.gameObject;
+			obj.GetComponentInChildren<JirakitJarusiripipat_Missile>().parent = gameObject;
 			Vector3 placeToSpawn = new Vector3(target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.x + randomNumberX, 0, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.z);
 			Instantiate(missileIndication, placeToSpawn, Quaternion.identity);
 			missileBarrel.GetComponent<Renderer>().material = cooldownMissile;
@@ -170,7 +170,7 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
         {
 			mainGunReady = false;
 			GameObject obj = Instantiate(tankBullet, mainGunBarrel.position, Quaternion.identity);
-			obj.GetComponent<Rigidbody>().AddForce(mainGunBarrel.forward * bulletSpeed);
+			obj.GetComponentInChildren<Rigidbody>().AddForce(mainGunBarrel.forward * bulletSpeed);
 			currentBulletCooldown = bulletCooldown;
 			GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * -5000);
 			soundKeeper.PlayMainGun();
