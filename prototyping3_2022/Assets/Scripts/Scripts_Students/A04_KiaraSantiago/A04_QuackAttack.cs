@@ -16,7 +16,26 @@ public class A04_QuackAttack : MonoBehaviour
     void Start()
     {
         button = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
-        enemy = gameObject.transform.parent.GetComponent<playerParent>().
+        
+        //decide if we are player one or two
+        if(gameObject.CompareTag("Player1")) //we are player 1
+        {
+            if(GameObject.FindWithTag("Player2"))
+            {
+                enemy = GameObject.FindWithTag("Player2");
+            }
+        }
+        else if(gameObject.CompareTag("Player2")) //we are player 2
+        {
+            if (GameObject.FindWithTag("Player1"))
+            {
+                enemy = GameObject.FindWithTag("Player1");
+            }
+        }
+        else
+        {
+            Debug.Log("A04 Quack Attack - could not find enemy");
+        }
     }
 
     // Update is called once per frame
