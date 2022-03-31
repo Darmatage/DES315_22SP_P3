@@ -2907,5 +2907,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpikeHazard
       objectReference: {fileID: 0}
+    - target: {fileID: 8886089521965729132, guid: fc8195e9e0e0f2f46b363627c2cc6cdc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc8195e9e0e0f2f46b363627c2cc6cdc, type: 3}

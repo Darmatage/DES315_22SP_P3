@@ -12,12 +12,20 @@ public class JirakitJarusiripipat_SuicideBot : MonoBehaviour
     private bool oneTime = false;
     [SerializeField]
     private GameObject BlastExplosion;
+    public JirakitJarusiripipat_SoundKeeper soundKeeper;
+    [HideInInspector]
+    public GameObject parent;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        soundKeeper = parent.GetComponentInChildren<JirakitJarusiripipat_SoundKeeper>();
     }
-
+    private void OnDestroy()
+    {
+        soundKeeper.StopBotMoving();
+        soundKeeper.StopCountdownSound();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -26,9 +34,13 @@ public class JirakitJarusiripipat_SuicideBot : MonoBehaviour
             Vector3 pos = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
             rb.MovePosition(pos);
             transform.LookAt(target);
+            soundKeeper.BotMoving();
         }
         else if(stop && !oneTime)
         {
+            soundKeeper.StopBotMoving();
+            soundKeeper.PlayCountdownSound();
+
             oneTime = true;
             StartCoroutine(Boom());
         }
@@ -37,7 +49,8 @@ public class JirakitJarusiripipat_SuicideBot : MonoBehaviour
     {
         yield return new WaitForSeconds(2.0f);
         Instantiate(BlastExplosion, transform.position, Quaternion.identity);
-        Debug.Log("Boommmmmmmmmmmmmmmm!");
+        soundKeeper.PlayBotExplosion();
+        //Debug.Log("Boommmmmmmmmmmmmmmm!");
         Destroy(gameObject);
     }
     private void OnCollisionEnter(Collision collision)
