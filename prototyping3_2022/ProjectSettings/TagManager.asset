@@ -34,6 +34,7 @@ TagManager:
   - A03bot
   - Player1_Mine
   - Player2_Mine
+  - B10
   layers:
   - Default
   - TransparentFX
@@ -46,7 +47,7 @@ TagManager:
   - ground
   - A09_Projectiles
   - A09_Bot
-  - 
+  - A03_Ball
   - 
   - 
   - B05_Top

@@ -5,12 +5,18 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class B03_AnimationController : MonoBehaviour
 {
+    [SerializeField] B03Bot_Weapon weapon;
     private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+    }
+
+    public void BowFire()
+    {
+        weapon.AnimationEventActivateBow();
     }
 
     public void SheildDefend()
