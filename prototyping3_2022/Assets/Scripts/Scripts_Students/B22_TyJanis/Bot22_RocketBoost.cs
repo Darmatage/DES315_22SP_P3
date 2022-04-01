@@ -8,9 +8,11 @@ public class Bot22_RocketBoost : MonoBehaviour
     public GameObject rightBoost;
 	public GameObject body;
 	public float boostSpeed = 1000f;
+	public float cooldown = 2.0f;
 	private float thrustAmount = 1f;
 	
 	private bool boosting = false;
+	private bool onCooldown = false;
 
 	private Rigidbody rb;
 
@@ -41,17 +43,27 @@ public class Bot22_RocketBoost : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if ((Input.GetButtonDown(button1))&&(boosting==false))
+		if(onCooldown)
+			StartCoroutine(Cooldown());
+		else
 		{
-			leftBoost.transform.Translate(0,thrustAmount, 0);
-            rightBoost.transform.Translate(0,thrustAmount, 0);
-			boosting = true;
-		
-			rb.AddForce(transform.forward * boostSpeed, ForceMode.Impulse);
+			if ((Input.GetButtonDown(button1))&&(boosting==false))
+			{
+				leftBoost.transform.Translate(0,thrustAmount, 0);
+				rightBoost.transform.Translate(0,thrustAmount, 0);
+				boosting = true;
+			
+				rb.AddForce(transform.forward * boostSpeed, ForceMode.Impulse);
 
 
-			StartCoroutine(TurnOffBoost());
-		}  
+				StartCoroutine(TurnOffBoost());
+
+				onCooldown = true;
+			}  	
+		}
+
+
+
         
     }
     
@@ -61,5 +73,11 @@ public class Bot22_RocketBoost : MonoBehaviour
 		leftBoost.transform.Translate(0,-thrustAmount, 0);
         rightBoost.transform.Translate(0,-thrustAmount, 0);
 		boosting = false;
+	}
+
+	IEnumerator Cooldown()
+    {
+		yield return new WaitForSeconds(cooldown);
+		onCooldown = false;
 	}
 }

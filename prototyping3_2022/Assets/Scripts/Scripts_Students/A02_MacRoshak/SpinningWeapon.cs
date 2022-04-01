@@ -16,7 +16,7 @@ public class SpinningWeapon : MonoBehaviour
 
 	//private bool weaponOut = false;
 	public Rigidbody bladeRigidbody;
-	private SpinnerDamage damageScript;
+	private HazardDamage damageScript;
 	//private Transform BladeTransform;
 
 	//grab axis from parent object
@@ -35,7 +35,7 @@ public class SpinningWeapon : MonoBehaviour
 		button4 = gameObject.transform.parent.GetComponent<playerParent>().action4Input;
 
 		bladeRigidbody = spinnerBlade.GetComponent<Rigidbody>();
-		damageScript = spinnerBlade.GetComponent<SpinnerDamage>();
+		damageScript = spinnerBlade.GetComponent<HazardDamage>();
 
 		weaponAcceleration = maxspeed/3.0f;
 		weaponDecel = maxspeed / 2.0f;
@@ -66,7 +66,7 @@ public class SpinningWeapon : MonoBehaviour
 			BladeTransform.rotation = Vector3.up * BladeTransform.rotation.y;
 	    }*/
 
-		currentDamage = (bladeRigidbody.angularVelocity.magnitude / maxspeed) * (maxDamage / maxspeed);
+		currentDamage = bladeRigidbody.angularVelocity.magnitude / 2.5f;
 		damageScript.damage = Mathf.Round(currentDamage);
 
 

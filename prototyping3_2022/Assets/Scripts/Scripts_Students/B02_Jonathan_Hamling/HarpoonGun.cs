@@ -121,6 +121,7 @@ public class HarpoonGun : MonoBehaviour
     private GameObject harpoon;
     [SerializeField]
     private GameObject orca;
+    GameObject enemy;
     [SerializeField]
     private float launchSpeed = 3f;
 
@@ -171,6 +172,7 @@ public class HarpoonGun : MonoBehaviour
             newHarpoon.GetComponent<LineRenderer>().SetPosition(0, startPos);
             newHarpoon.GetComponent<LineRenderer>().SetPosition(1, newHarpoon.transform.position);
             isHook = newHarpoon.GetComponent<ColliderHarpoon>().isHooked;
+            enemy = newHarpoon.GetComponent<ColliderHarpoon>().enemy;
             if (newHarpoon.GetComponent<ColliderHarpoon>().falseHook) ;
             newHarpoon.GetComponent<ColliderHarpoon>().player = this.gameObject;
         }
@@ -214,6 +216,16 @@ public class HarpoonGun : MonoBehaviour
             {
                 isLaunched = false;
             }
+        }
+    }
+
+    private void BringEnemyBack()
+    {
+        if (isHook)
+        {
+            Vector3 final = new Vector3(startPos.x, enemy.transform.position.y, startPos.z);
+            enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, final, maxDistance);
+            isHook = false;
         }
     }
 
