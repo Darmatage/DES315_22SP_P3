@@ -104,7 +104,6 @@ public class GrantWu_Weapon_Fists : MonoBehaviour
 			other_movement.rotateSpeed = 0f;
 			other_movement.jumpSpeed = 0f;
 			audiosource.Play();
-			Debug.Log("Stunned");
 			StartCoroutine(ReleaseStun(other_rb, other_movement));
 		}
     }
