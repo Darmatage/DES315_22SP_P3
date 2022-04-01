@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 4676566802558256396}
   - component: {fileID: 7102465646149287616}
   - component: {fileID: 8962903872576219297}
-  m_Layer: 0
-  m_Name: Ball
+  m_Layer: 11
+  m_Name: HemieChoi_Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
