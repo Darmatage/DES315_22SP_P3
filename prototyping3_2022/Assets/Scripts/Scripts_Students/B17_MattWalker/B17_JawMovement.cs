@@ -13,6 +13,8 @@ public class B17_JawMovement : MonoBehaviour
     private float BiteDirModifier; // Used to change the direction of the jaw movement for jaw open and closing
     private B17_JawMovement OtherJaw;
 
+    private bool isEnabled;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +23,7 @@ public class B17_JawMovement : MonoBehaviour
         BiteDirModifier = 1.0f;
 
         OtherJaw = OtherJawObject.GetComponent<B17_JawMovement>();
-
+        isEnabled = true;
 
     }
 
@@ -29,7 +31,7 @@ public class B17_JawMovement : MonoBehaviour
     void Update()
     {
 
-        if (IsReadyToBite)
+        if (IsReadyToBite && isEnabled)
 		{
             if (CheckMouthFullyClosed())
 			{
@@ -89,5 +91,10 @@ public class B17_JawMovement : MonoBehaviour
     public bool GetIsBitingDown()
 	{
         return IsBitingDown;
+	}
+
+    public void SetEnabled(bool Enabled)
+	{
+        isEnabled = Enabled;
 	}
 }

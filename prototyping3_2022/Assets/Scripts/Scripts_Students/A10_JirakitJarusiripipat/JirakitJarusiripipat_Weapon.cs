@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class JirakitJarusiripipat_Weapon : MonoBehaviour
 {
@@ -77,7 +78,11 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 	private Material normalCatTail;
 	[SerializeField]
 	private Material cooldownCatTail;
-
+	[Header("UI")]
+	[SerializeField]
+	private Image missileBarImage;
+	[SerializeField]
+	private Image barBG;
     void Start()
 	{
 		button1 = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
@@ -114,6 +119,8 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 			holding = true;
 			currentHoldTime = holdTime;
 			animator.SetTrigger("Shoot");
+			barBG.gameObject.SetActive(true);
+			missileBarImage.fillAmount = 1.0f;
 
 		}
 		if (currentHoldTime > 0.0f && (missileOut) && missileReady)
@@ -130,13 +137,13 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 			GameObject obj = Instantiate(missile, shootPoint[currentMissileOut].transform.position, Quaternion.identity);
             float randomNumberX = Random.Range(-4.0f, 4.0f);
             float randomNumberZ = Random.Range(-4.0f, 4.0f);
-            Vector3 velo = CalculateVelocity(new Vector3(target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.x + randomNumberX, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.y - 2.2f, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.z + randomNumberZ), transform.position , 0.5f);
+            Vector3 velo = CalculateVelocity(new Vector3(target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.x + randomNumberX, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.y - 3.0f, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.z + randomNumberZ), transform.position , 0.5f);
 			obj.transform.rotation = Quaternion.LookRotation(velo);
-			obj.GetComponent<Rigidbody>().velocity = velo;
+			obj.GetComponentInChildren<Rigidbody>().velocity = velo;
             currentMissileOut++;
             currentEachCooldown = eachCooldown;
 			soundKeeper.PlayLauncher();
-			obj.GetComponent<JirakitJarusiripipat_Missile>().parent = this.gameObject;
+			obj.GetComponentInChildren<JirakitJarusiripipat_Missile>().parent = gameObject;
 			Vector3 placeToSpawn = new Vector3(target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.x + randomNumberX, 0, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.z);
 			Instantiate(missileIndication, placeToSpawn, Quaternion.identity);
 			missileBarrel.GetComponent<Renderer>().material = cooldownMissile;
@@ -148,19 +155,22 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 		if(!missileOut && currentMissileCooldown > 0.0f )
         {
 			currentMissileCooldown -= Time.deltaTime;
+			//uiDisplay += Time.deltaTime;
+			missileBarImage.fillAmount = currentMissileCooldown / missileCooldown;
 			missileReady = false;
 		}
 		else if(!missileOut && currentMissileCooldown <= 0.0f)
         {
 			missileReady = true;
 			missileBarrel.GetComponent<Renderer>().material = normalMissile;
+			barBG.gameObject.SetActive(false);
 		}
 
 		if((Input.GetButtonDown(button1) && mainGunReady))
         {
 			mainGunReady = false;
 			GameObject obj = Instantiate(tankBullet, mainGunBarrel.position, Quaternion.identity);
-			obj.GetComponent<Rigidbody>().AddForce(mainGunBarrel.forward * bulletSpeed);
+			obj.GetComponentInChildren<Rigidbody>().AddForce(mainGunBarrel.forward * bulletSpeed);
 			currentBulletCooldown = bulletCooldown;
 			GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * -5000);
 			soundKeeper.PlayMainGun();

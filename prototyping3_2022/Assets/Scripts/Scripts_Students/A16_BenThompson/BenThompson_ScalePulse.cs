@@ -65,7 +65,8 @@ public class BenThompson_ScalePulse : MonoBehaviour
             {
                 meshRend.material.Lerp(downPulseColor, upPulseColor, 1 - pulseTimer / (totalPulseTime / 2));
 
-                particles.startColor = meshRend.material.color;
+                ParticleSystem.MainModule mainp = particles.main;
+                mainp.startColor = meshRend.material.color;
                 particles.Play();
 
                 pulseTimer -= Time.deltaTime;
@@ -80,7 +81,8 @@ public class BenThompson_ScalePulse : MonoBehaviour
             else
             {
                 meshRend.material.Lerp(upPulseColor, downPulseColor, 1 - pulseTimer / (totalPulseTime / 2));
-                particles.startColor = meshRend.material.color;
+                ParticleSystem.MainModule mainp = particles.main;
+                mainp.startColor = meshRend.material.color;
                 particles.Play();
 
                 pulseTimer -= Time.deltaTime;

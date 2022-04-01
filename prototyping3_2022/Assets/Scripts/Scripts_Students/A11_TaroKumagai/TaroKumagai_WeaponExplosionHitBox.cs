@@ -6,9 +6,10 @@ public class TaroKumagai_WeaponExplosionHitBox : HazardDamage
 {
     public TaroKumagai_Weapon_BasicProjectile parentRef;
     public float explosionLifeTime = 1f;
+
 	void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("ground"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("ground") || other.gameObject.tag.Equals("Hazard"))
             Physics.IgnoreCollision(GetComponent<Collider>(), other.collider, true);
     }
 
