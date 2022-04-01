@@ -19,6 +19,8 @@ public class JirakitJarusiripipat_TankBullet : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        bulletEffect.gameObject.SetActive(true);
+        bulletEffect.Play();
         Destroy(gameObject);
 
     }

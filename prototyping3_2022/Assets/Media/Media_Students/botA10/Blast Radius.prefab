@@ -40,7 +40,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1529369241628673821}
   serializedVersion: 8
-  lengthInSec: 0.3
+  lengthInSec: 0.7
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -115,8 +115,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
-      minScalar: 0.27
+      scalar: 1
+      minScalar: 0.54
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -168,7 +168,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 4.28
+      scalar: 5.3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -284,8 +284,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.4
-      minScalar: 0.25
+      scalar: 0.8
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4887,6 +4887,7 @@ GameObject:
   - component: {fileID: 3768722107935373683}
   - component: {fileID: 2690662597539085127}
   - component: {fileID: -3137855796218289427}
+  - component: {fileID: 2036120254283430930}
   - component: {fileID: 8553369636196392619}
   m_Layer: 0
   m_Name: Blast Radius
@@ -5006,6 +5007,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToDestroy: 0.5
+--- !u!114 &2036120254283430930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3768722107935373676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b155aaa9b25687348837c99e716d25c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockBackForce: 350
 --- !u!114 &8553369636196392619
 MonoBehaviour:
   m_ObjectHideFlags: 0
