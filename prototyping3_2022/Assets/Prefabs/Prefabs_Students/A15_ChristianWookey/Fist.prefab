@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 3959444698982829496}
   - component: {fileID: 3518426687496985924}
   - component: {fileID: 1348999603458728699}
-  - component: {fileID: 5049069527623016391}
   - component: {fileID: 3852334965317018344}
+  - component: {fileID: 8158095318183831657}
+  - component: {fileID: 3065277648044232767}
   m_Layer: 0
   m_Name: Fist
   m_TagString: Hazard
@@ -84,25 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5049069527623016391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7394300990700535667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7ca4913335a3b745850f156a725a789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
-  particlesPrefab: {fileID: 7916852506792683719, guid: a6746c9ee60a1a44d813bcdbac5cb0ce,
-    type: 3}
-  SpawnParticlesHere: {x: 0, y: 0, z: 1.68}
-  isPlayer1Weapon: 0
-  isPlayer2Weapon: 0
-  isMonsterWeapon: 0
 --- !u!135 &3852334965317018344
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -112,7 +94,47 @@ SphereCollider:
   m_GameObject: {fileID: 7394300990700535667}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 1.05
   m_Center: {x: 0, y: 0, z: 0.74}
+--- !u!114 &8158095318183831657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7394300990700535667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b13c63eee51a10740a82e49e533e482b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+  particlesPrefab: {fileID: 7801668705024534204, guid: f584c8ad982ed864bbe6ed16b57d4e2b,
+    type: 3}
+  SpawnParticlesHere: {x: 0, y: 0, z: 2.68}
+  isPlayer1Weapon: 0
+  isPlayer2Weapon: 0
+  isMonsterWeapon: 0
+  materials:
+  - {fileID: 2100000, guid: 4e1b9f0135683db4d9ccb687fcbe7e3c, type: 2}
+  - {fileID: 2100000, guid: 293dca061b3f7c14d96fad173e219164, type: 2}
+  - {fileID: 2100000, guid: fd0f0ddda72017345988a5c4996b8b5c, type: 2}
+  - {fileID: 2100000, guid: b0d403dda2dff684d8f9dd1733d24d75, type: 2}
+--- !u!54 &3065277648044232767
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7394300990700535667}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
