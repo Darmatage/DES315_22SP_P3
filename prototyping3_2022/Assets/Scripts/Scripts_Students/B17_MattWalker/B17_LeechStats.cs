@@ -18,8 +18,16 @@ public class B17_LeechStats : MonoBehaviour
     public Material GrowthBodyMaterial;
     public GameObject BotBody;
 
-    //private bool IsLeeching;
-    //public float cooldown = 3.0f;
+    // For weapon cooldown and cooldown effects
+    public GameObject MouthWeapon;
+    public GameObject UpperJawObject;
+    public GameObject LowerJawObject;
+    private B17_JawMovement UpperJaw;
+    private B17_JawMovement LowerJaw;
+
+    private bool shouldDisableAttack;
+
+    public float cooldown = 3.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -27,21 +35,38 @@ public class B17_LeechStats : MonoBehaviour
         thisPlayer = gameObject.transform.root.tag;
         gh = GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>();
         isLeeching = false;
+
+        UpperJaw = UpperJawObject.GetComponent<B17_JawMovement>();
+        LowerJaw = LowerJawObject.GetComponent<B17_JawMovement>();
+
+        shouldDisableAttack = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // This is in update() so the weapon isn't disabled until the frame after
+        // this script detects a weapon hit.  If we do it on the frame of the hit
+        // then the BotBasic_Damage script doesn't detect the hit
+        if (shouldDisableAttack)
+            MouthWeapon.tag = "Untagged";
     }
 
     void OnTriggerEnter(Collider other)
     {
         Transform otherRoot = other.transform.root;
-        
+
         if (otherRoot.tag != thisPlayer)
             if (otherRoot.tag == "Player1" || otherRoot.tag == "Player2")
 			{
+                // Don't let the weapon attack multiple times in quick succession 
+                transform.GetComponent<Collider>().enabled = false;
+                UpperJaw.SetEnabled(false);
+                LowerJaw.SetEnabled(false);
+                shouldDisableAttack = true;
+                Invoke("EnableWeapon", cooldown);
+
+                // Increase bot stats and size
                 isLeeching = true;
                 IncreaseStats();
                 targetGrowthSize = transform.parent.localScale * (1.0f + ScaleIncreaseAmount);
@@ -97,4 +122,14 @@ public class B17_LeechStats : MonoBehaviour
             //gh.p2Health += HealthIncreaseAmount;
         }
 	}
+
+    void EnableWeapon()
+	{
+        transform.GetComponent<Collider>().enabled = true;
+
+        LowerJaw.SetEnabled(true);
+        UpperJaw.SetEnabled(true);
+        MouthWeapon.tag = "Hazard";
+        shouldDisableAttack = false;
+    }
 }
