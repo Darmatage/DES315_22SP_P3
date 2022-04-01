@@ -978,6 +978,8 @@ MonoBehaviour:
   target: {fileID: 0}
   BlastExplosion: {fileID: 3768722107935373676, guid: 4c33d54e1285b9545aed06dfec790940,
     type: 3}
+  soundKeeper: {fileID: 0}
+  parent: {fileID: 0}
 --- !u!54 &6747749528203599524
 Rigidbody:
   m_ObjectHideFlags: 0

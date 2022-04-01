@@ -227,7 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   compassSides: {fileID: 1029706280859159121}
   compassVertical: {fileID: 4587639291210960121}
-  sidelimit: 0.75
+  sidelimit: 0.72
   knockBackSpeed: 10
   forceSideLimit_p75: 1
   shieldPowerFront: 5
