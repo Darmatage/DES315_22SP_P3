@@ -296,7 +296,7 @@ public class DamianRouseWeapon : MonoBehaviour
     if (hitsLeft_ < 1)
     {
       go.GetComponent<BoxCollider>().enabled = false;
-      hazard.damage = 0;
+      //hazard.damage = 0;
     }
   }
 
