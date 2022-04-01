@@ -468,6 +468,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button_B02
       objectReference: {fileID: 0}
+    - target: {fileID: 8069984669619503392, guid: 7c7d6edfd31cacd4ca27f1c13a534dac,
+        type: 3}
+      propertyPath: m_Text
+      value: B02 Jonathan Hamling
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c7d6edfd31cacd4ca27f1c13a534dac, type: 3}
 --- !u!224 &130365013 stripped
