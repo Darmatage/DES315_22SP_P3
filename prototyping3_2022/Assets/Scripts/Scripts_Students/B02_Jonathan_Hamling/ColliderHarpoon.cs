@@ -5,6 +5,7 @@ using UnityEngine;
 public class ColliderHarpoon : MonoBehaviour
 {
     public GameObject player;
+    public GameObject enemy;
     public bool isHooked = false;
     public bool falseHook = false;
 
@@ -17,6 +18,7 @@ public class ColliderHarpoon : MonoBehaviour
         else if (other.gameObject.tag.Equals("Player2") || other.gameObject.tag.Equals("Player1"))
         {
             isHooked = true;
+            enemy = other.gameObject;
         }
         else
         {
