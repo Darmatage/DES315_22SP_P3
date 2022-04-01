@@ -25277,6 +25277,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: RightFist
       objectReference: {fileID: 0}
+    - target: {fileID: 8158095318183831657, guid: 93b81acf4f16b804a84ed43795fb3015,
+        type: 3}
+      propertyPath: SpawnParticlesHere.x
+      value: 2.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 8158095318183831657, guid: 93b81acf4f16b804a84ed43795fb3015,
+        type: 3}
+      propertyPath: SpawnParticlesHere.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93b81acf4f16b804a84ed43795fb3015, type: 3}
 --- !u!1 &8160687095547711129 stripped
@@ -25372,6 +25382,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LeftFist
+      objectReference: {fileID: 0}
+    - target: {fileID: 8158095318183831657, guid: 93b81acf4f16b804a84ed43795fb3015,
+        type: 3}
+      propertyPath: SpawnParticlesHere.x
+      value: 2.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 8158095318183831657, guid: 93b81acf4f16b804a84ed43795fb3015,
+        type: 3}
+      propertyPath: SpawnParticlesHere.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93b81acf4f16b804a84ed43795fb3015, type: 3}

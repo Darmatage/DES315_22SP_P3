@@ -5,6 +5,8 @@ using UnityEngine;
 public class Boxer_HazardDamage : HazardDamage{
 	private GameHandler gameHandler;
 
+	public GameObject particleLocation;
+
 	public Material[] materials;
 
 	private float delay = 0f;
@@ -17,8 +19,8 @@ public class Boxer_HazardDamage : HazardDamage{
     void OnCollisionEnter(Collision other) {
 		if (delay <= 0f)
 		{
-			GameObject damageParticles = Instantiate(particlesPrefab, transform.position + SpawnParticlesHere, other.transform.rotation);
-			damageParticles.GetComponent<ParticleSystemRenderer>().material = materials[0];// Random.Range(0, materials.Length)];
+			GameObject damageParticles = Instantiate(particlesPrefab, particleLocation.transform.position, other.transform.rotation);
+			damageParticles.GetComponent<ParticleSystemRenderer>().material = materials[Random.Range(0, materials.Length)];
 			damageParticles.GetComponent<ParticleSystem>().Emit(1);
 			delay = 0.1f;
 			Destroy(damageParticles, 1f);
