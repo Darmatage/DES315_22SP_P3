@@ -31,6 +31,10 @@ public class B03Bot_Weapon : MonoBehaviour
 	public UnityEvent SheildDefend;
 	[SerializeField] float slowDown = 2f;
 	[SerializeField] GameObject KinvesWeapons;
+	[SerializeField] GameObject Projectitle;
+	[SerializeField] float projectileSpeed;
+	[SerializeField] Transform projectileStart;
+	[SerializeField] GameObject projectileParticles;
 
 	bool deactivateSheild = false;
 	B03Bot_Move movement;
@@ -98,6 +102,15 @@ public class B03Bot_Weapon : MonoBehaviour
 
 	public void AnimationEventActivateBow()
 	{
+		GameObject projectile = Instantiate(Projectitle, projectileStart.position, transform.rotation);
+		HazardDamage hazard = projectile.GetComponent<HazardDamage>();
+
+		if (projectile.transform.root.tag == "Player1") { hazard.isPlayer1Weapon = true; }
+		if (projectile.transform.root.tag == "Player2") { hazard.isPlayer2Weapon = true; }
+
+		hazard.particlesPrefab = projectileParticles;
+		projectile.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed);
+
 		ActivateWeapon.Invoke(Weapon.NONE);
 	}
 }
