@@ -8,7 +8,6 @@ public class JirakitJarusiripipat_Missile : MonoBehaviour
     private GameObject splash;
     [SerializeField]
     private GameObject slpashWithoutDamage;
-    [HideInInspector]
     public GameObject parent;
     private JirakitJarusiripipat_SoundKeeper soundKeeper;
     private void Start()

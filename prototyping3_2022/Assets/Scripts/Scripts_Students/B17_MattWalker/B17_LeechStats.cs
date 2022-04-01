@@ -7,8 +7,11 @@ public class B17_LeechStats : MonoBehaviour
     private string thisPlayer;
     private int materialToggle = 0; // for alternating between materials during growth
     private GameHandler gh;
+    private Vector3 targetGrowthSize;
+    private bool isLeeching;
 
-    public float ScaleIncreaseAmount = 1.1f;
+    public float ScaleIncreaseAmount = 0.2f;
+    public float ScaleIncreaseFalloff = 0.8f;
     public float ScaleIncreaseSpeed = 100f;
     public float HealthIncreaseAmount = 7.0f;
     public Material NormalBodyMaterial;
@@ -23,7 +26,7 @@ public class B17_LeechStats : MonoBehaviour
     {
         thisPlayer = gameObject.transform.root.tag;
         gh = GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>();
-        //IsLeeching = false;
+        isLeeching = false;
     }
 
     // Update is called once per frame
@@ -39,10 +42,11 @@ public class B17_LeechStats : MonoBehaviour
         if (otherRoot.tag != thisPlayer)
             if (otherRoot.tag == "Player1" || otherRoot.tag == "Player2")
 			{
-                //IsLeeching = true;
+                isLeeching = true;
                 IncreaseStats();
-                StartCoroutine(IncreaseSize(transform.parent.localScale * ScaleIncreaseAmount));
-			}
+                targetGrowthSize = transform.parent.localScale * (1.0f + ScaleIncreaseAmount);
+                StartCoroutine(IncreaseSize(targetGrowthSize));
+            }
     }
 
     IEnumerator IncreaseSize(Vector3 targetScale)
@@ -72,7 +76,14 @@ public class B17_LeechStats : MonoBehaviour
 
         // End with the normal material
         BotBody.GetComponent<Renderer>().material = NormalBodyMaterial;
-        //IsLeeching = false;
+        
+        // Reduce the amount the leech grows next time
+        if (isLeeching)
+		{
+            isLeeching = false;
+            ScaleIncreaseAmount *= ScaleIncreaseFalloff;
+            ScaleIncreaseSpeed *= ScaleIncreaseFalloff;
+        }
     }
 
     void IncreaseStats()
