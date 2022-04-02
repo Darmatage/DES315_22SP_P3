@@ -56,7 +56,6 @@ public class B09_Pincher_Ability : MonoBehaviour
             if (grabbedObject)
             {
                 Debug.Log("Set parent transform");
-
                 grabbedObject.transform.SetParent(grabbedObjecParentTransform);
                 grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
                 grabbedObjecParentTransform = null;
@@ -69,7 +68,7 @@ public class B09_Pincher_Ability : MonoBehaviour
         }
         else
         {
-            if (left.grabbedObject && right.grabbedObject)
+            if ((left.grabbedObject != null && left.state == B09_Pincher_Object.PincherState.Close) && (right.grabbedObject != null && right.state == B09_Pincher_Object.PincherState.Close))
             {
                 if (grabbedObject == null)
                 {
