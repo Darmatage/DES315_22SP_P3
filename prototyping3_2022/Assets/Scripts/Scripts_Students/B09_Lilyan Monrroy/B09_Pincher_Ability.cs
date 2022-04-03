@@ -8,7 +8,11 @@ public class B09_Pincher_Ability : MonoBehaviour
 {
     public GameObject pincher_left;
     public GameObject pincher_right;
+    public GameObject saw;
+    [SerializeField] private Animator sawBlade;
     private GameObject grabbedObject;
+    private float thrustAmount = 1.85f;
+
     private Transform grabbedObjecParentTransform;
 
 
@@ -39,28 +43,13 @@ public class B09_Pincher_Ability : MonoBehaviour
 
         if (left.grabbedObject == null && right.grabbedObject == null)
         {
-            if (grabbedObject)
-            {
-                Debug.Log("Set parent transform");
-
-                grabbedObject.transform.SetParent(grabbedObjecParentTransform);
-                grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
-                grabbedObjecParentTransform = null;
-                grabbedObject = null;
-            }
+            ResetGrabbedObject();
         }
 
         //Grab Mechanic
         if (Input.GetButton(button1))
         {
-            if (grabbedObject)
-            {
-                Debug.Log("Set parent transform");
-                grabbedObject.transform.SetParent(grabbedObjecParentTransform);
-                grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
-                grabbedObjecParentTransform = null;
-                grabbedObject = null;
-            }
+            ResetGrabbedObject();
 
             left.open();
             right.open();
@@ -70,11 +59,15 @@ public class B09_Pincher_Ability : MonoBehaviour
         {
             if ((left.grabbedObject != null && left.state == B09_Pincher_Object.PincherState.Close) && (right.grabbedObject != null && right.state == B09_Pincher_Object.PincherState.Close))
             {
+                sawBlade.SetBool("Spinning", true);
+
                 if (grabbedObject == null)
                 {
                     Debug.Log("Copied changed transform");
                     grabbedObject = left.grabbedObject;
                     grabbedObjecParentTransform = grabbedObject.transform.parent;
+
+                    saw.transform.Translate(0, thrustAmount, 0);
                 }
 
                 grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
@@ -85,5 +78,22 @@ public class B09_Pincher_Ability : MonoBehaviour
             left.close();
             right.close();
         }
+    }
+
+    private void ResetGrabbedObject()
+    {
+        if (grabbedObject)
+        {
+            Debug.Log("Set parent transform");
+            grabbedObject.transform.SetParent(grabbedObjecParentTransform);
+            grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
+            grabbedObjecParentTransform = null;
+            grabbedObject = null;
+
+            saw.transform.Translate(0,  -1 * thrustAmount,0);
+        }
+
+        sawBlade.SetBool("Spinning", false);
+
     }
 }
