@@ -1048,14 +1048,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1355330930375697355}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67b5dfa20ebefac448d710384853fb07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponThrust: {fileID: 8160687095547711129}
-  button1: E
-  button2: R
+  button1: 
+  button2: 
   button3: 
   button4: 
 --- !u!82 &2397953713259149596
@@ -3112,8 +3112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8318a2e22c166f141bd37dfbecf84ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chargeKey: 114
-  fireKey: 101
+  chargeKey: r
+  fireKey: e
   chargeThresh: 2.5
   chargeMax: 10
   chargeLevelMax: 4
@@ -3592,7 +3592,7 @@ PrefabInstance:
     - target: {fileID: 4996346617280188990, guid: f3ce26a275528f54aa8e326dfe9c7f23,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3ce26a275528f54aa8e326dfe9c7f23, type: 3}

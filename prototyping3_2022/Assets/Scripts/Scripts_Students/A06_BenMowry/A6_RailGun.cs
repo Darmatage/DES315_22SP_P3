@@ -9,9 +9,10 @@ public class A6_RailGun : MonoBehaviour {
     private float moveSpeedTemp;
     private float damageTemp;
     private AudioSource source;
+    private bool isFiring;
 
-    public KeyCode chargeKey;
-    public KeyCode fireKey;
+    public string chargeKey;
+    public string fireKey;
 
     public float chargeThresh;
     public float chargeMax;
@@ -27,30 +28,36 @@ public class A6_RailGun : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         charge = 0;
+        isFiring = false;
         chargeLevel = 1;
         isCharging = false;
         moveSpeedTemp = GetComponentInParent<BotBasic_Move>().moveSpeed;
         GetComponent<CapsuleCollider>().enabled = false;
         GetComponent<MeshRenderer>().enabled = false;
         source = GetComponentInParent<AudioSource>();
+        chargeKey = GetComponentInParent<playerParent>().action2Input;
+        fireKey = GetComponentInParent<playerParent>().action1Input;
     }
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(chargeKey)) {
-            isCharging = true;
+        if (!isFiring) {
+            if (Input.GetButtonDown(chargeKey))
+            {
+                isCharging = true;
+                source.clip = chargeSound;
+                source.volume = 1.0f;
+                source.Play();
+                source.loop = true;
+            }
 
-            source.clip = chargeSound;
-            source.volume = 1.0f;
-            source.Play();
-            source.loop = true;
-        }
-
-        if (Input.GetKeyUp(chargeKey)) {
-            GetComponentInParent<BotBasic_Move>().moveSpeed = moveSpeedTemp;
-            isCharging = false;
-            source.Stop();
-            source.loop = false;
+            if (Input.GetButtonUp(chargeKey))
+            {
+                GetComponentInParent<BotBasic_Move>().moveSpeed = moveSpeedTemp;
+                isCharging = false;
+                source.Stop();
+                source.loop = false;
+            }
         }
 
         if (isCharging) {
@@ -64,10 +71,11 @@ public class A6_RailGun : MonoBehaviour {
             chargeLevel = Mathf.Clamp(chargeLevel + 1, 0, chargeLevelMax);
         }
 
-        if (Input.GetKeyDown(fireKey)) {
+        if (Input.GetButtonDown(fireKey)) {
             if (chargeLevel > 1) {
                 Fire(chargeLevel);
                 ResetCharge();
+
             }
         }
 
