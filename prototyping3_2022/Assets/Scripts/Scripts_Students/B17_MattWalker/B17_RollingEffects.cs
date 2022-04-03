@@ -11,14 +11,34 @@ public class B17_RollingEffects : MonoBehaviour
     public List<AudioClip> PlayerCollisionSounds;
     private AudioSource audioSource;
 
+    private bool offCooldown;
+    bool isNonPlayerCollision;
+    bool justHitPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
         rollScript = RollAbilityObject.GetComponent<B17_RollAbility>();
         audioSource = transform.GetComponent<AudioSource>();
+
+        offCooldown = true;
+        justHitPlayer = false;
     }
 
-    void OnTriggerEnter(Collider collision)
+	private void Update()
+	{
+		if (justHitPlayer && offCooldown)
+		{
+            // disable damage on the frame after player hit is detected, so play nicely with BotBasic_Damage script
+            //transform.tag = "Untagged";
+            //offCooldown = false;
+            //justHitPlayer = false;
+            //Invoke("SetAsHazard", transform.parent.GetComponent<B17_RollAbility>().cooldown);
+
+        }
+	}
+
+	void OnTriggerEnter(Collider collision)
     {
         // only play rolling collision sounds when the bot is rolling
         if (!rollScript.GetIsRolling())
@@ -26,7 +46,7 @@ public class B17_RollingEffects : MonoBehaviour
 
         Transform otherRoot = collision.transform.root;
         string thisPlayer = gameObject.transform.root.tag;
-        bool isNonPlayerCollision = false;
+        isNonPlayerCollision = false;
 
         // determine whether to play crash sound for player collision or environment collision
         if (thisPlayer == "Player1" && otherRoot.tag != "Player2")
@@ -40,6 +60,8 @@ public class B17_RollingEffects : MonoBehaviour
         else
             isNonPlayerCollision = false;
 
+        justHitPlayer = !isNonPlayerCollision;
+
         // play the sfx
         if (isNonPlayerCollision)
 		{
@@ -48,13 +70,20 @@ public class B17_RollingEffects : MonoBehaviour
 		else
 		{
             audioSource.PlayOneShot(PlayerCollisionSounds[UnityEngine.Random.Range(0, PlayerCollisionSounds.Count)]);
+
+            // This disables the weapon too early... 
+            transform.tag = "Untagged";
+            offCooldown = false;
+            justHitPlayer = false;
+            Invoke("SetAsHazard", transform.parent.GetComponent<B17_RollAbility>().cooldown);
         }
 
     }
 
-	// Update is called once per frame
-	void Update()
-    {
-        
+	private void SetAsHazard()
+	{
+        transform.tag = "Hazard";
+        offCooldown = true;
+
     }
 }
