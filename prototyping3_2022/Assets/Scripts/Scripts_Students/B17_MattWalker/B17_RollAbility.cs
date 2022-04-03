@@ -43,12 +43,11 @@ public class B17_RollAbility : MonoBehaviour
             IsRolling = true;
             RollDirection = -1.0f;
         }
+        else
+            IsRolling = false;
 
         if (IsRolling)
             Roll();
-
-        IsRolling = false;
-
     }
 
     private void Roll()
@@ -56,4 +55,9 @@ public class B17_RollAbility : MonoBehaviour
         Rigidbody rb = transform.parent.GetComponent<Rigidbody>();
         rb.AddRelativeTorque(new Vector3(0.0f, 0.0f, RollForce) * RollDirection);
     }
+
+    public bool GetIsRolling()
+	{
+        return IsRolling;
+	}
 }
