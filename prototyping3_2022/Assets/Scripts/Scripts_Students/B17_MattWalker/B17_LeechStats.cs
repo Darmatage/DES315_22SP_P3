@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class B17_LeechStats : MonoBehaviour
 {
+    // Player feedback
+    public List<AudioClip> BiteAudioClips;
+    public List<AudioClip> GrowthAudioClips;
+    public GameObject particlesPrefab;
+    private AudioSource audioSource;
+    public GameObject GrowthAudioObject;
+    private AudioSource growthAudioSource;
+
     private string thisPlayer;
     private int materialToggle = 0; // for alternating between materials during growth
     private GameHandler gh;
@@ -16,6 +24,8 @@ public class B17_LeechStats : MonoBehaviour
     public float HealthIncreaseAmount = 7.0f;
     public Material NormalBodyMaterial;
     public Material GrowthBodyMaterial;
+    public float GrowthFlickerInterval = 0.1f;
+    private float growthFlickerTimer = 0.0f;
     public GameObject BotBody;
 
     // For weapon cooldown and cooldown effects
@@ -40,6 +50,9 @@ public class B17_LeechStats : MonoBehaviour
         LowerJaw = LowerJawObject.GetComponent<B17_JawMovement>();
 
         shouldDisableAttack = false;
+
+        audioSource = transform.GetComponent<AudioSource>();
+        growthAudioSource = GrowthAudioObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -66,12 +79,32 @@ public class B17_LeechStats : MonoBehaviour
                 shouldDisableAttack = true;
                 Invoke("EnableWeapon", cooldown);
 
+                // Create bite feedback
+                GameObject damageParticles = Instantiate(particlesPrefab, transform.position, other.transform.rotation);
+                StartCoroutine(destroyParticles(damageParticles));
+                //audioSource.clip = BiteAudioClips[UnityEngine.Random.Range(0, BiteAudioClips.Count)];
+                //audioSource.Play();
+                audioSource.PlayOneShot(BiteAudioClips[UnityEngine.Random.Range(0, BiteAudioClips.Count)]);
+
+
                 // Increase bot stats and size
                 isLeeching = true;
                 IncreaseStats();
                 targetGrowthSize = transform.parent.localScale * (1.0f + ScaleIncreaseAmount);
+                growthAudioSource.clip = GrowthAudioClips[UnityEngine.Random.Range(0, GrowthAudioClips.Count)];
+                growthAudioSource.Play();
+
+                // do size increase and vfx
+                growthFlickerTimer = 0.0f;
+                materialToggle = 0;
                 StartCoroutine(IncreaseSize(targetGrowthSize));
             }
+    }
+
+    IEnumerator destroyParticles(GameObject particles)
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(particles);
     }
 
     IEnumerator IncreaseSize(Vector3 targetScale)
@@ -79,21 +112,43 @@ public class B17_LeechStats : MonoBehaviour
         while (transform.parent.localScale.magnitude < targetScale.magnitude)
 		{
             // Make the bot flicker between red and normal color while growing
-            switch (materialToggle)
+            growthFlickerTimer += Time.deltaTime;
+            if (growthFlickerTimer >= GrowthFlickerInterval)
 			{
-                case 0:
-                    BotBody.GetComponent<Renderer>().material = GrowthBodyMaterial;
-                    materialToggle = 1;
-                    break;
-                case 1:
-                    BotBody.GetComponent<Renderer>().material = NormalBodyMaterial;
-                    materialToggle = 0;
-                    break;
-                default:
-                    BotBody.GetComponent<Renderer>().material = NormalBodyMaterial;
-                    materialToggle = 0;
-                    break;
-            }
+                growthFlickerTimer = 0.0f;
+
+				switch (materialToggle)
+				{
+					case 0:
+						BotBody.GetComponent<Renderer>().material = GrowthBodyMaterial;
+						materialToggle = 1;
+						break;
+					case 1:
+						BotBody.GetComponent<Renderer>().material = NormalBodyMaterial;
+						materialToggle = 0;
+						break;
+					default:
+						BotBody.GetComponent<Renderer>().material = NormalBodyMaterial;
+						materialToggle = 0;
+						break;
+				}
+
+			}
+            //         switch (materialToggle)
+            //{
+            //             case 0:
+            //                 BotBody.GetComponent<Renderer>().material = GrowthBodyMaterial;
+            //                 materialToggle = 1;
+            //                 break;
+            //             case 1:
+            //                 BotBody.GetComponent<Renderer>().material = NormalBodyMaterial;
+            //                 materialToggle = 0;
+            //                 break;
+            //             default:
+            //                 BotBody.GetComponent<Renderer>().material = NormalBodyMaterial;
+            //                 materialToggle = 0;
+            //                 break;
+            //         }
 
             transform.parent.localScale += transform.parent.localScale * ScaleIncreaseSpeed * Time.deltaTime;
             yield return null;
@@ -101,7 +156,8 @@ public class B17_LeechStats : MonoBehaviour
 
         // End with the normal material
         BotBody.GetComponent<Renderer>().material = NormalBodyMaterial;
-        
+        growthAudioSource.Stop();
+
         // Reduce the amount the leech grows next time
         if (isLeeching)
 		{
