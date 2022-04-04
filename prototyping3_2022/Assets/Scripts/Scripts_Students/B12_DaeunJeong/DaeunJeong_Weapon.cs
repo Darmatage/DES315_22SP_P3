@@ -23,6 +23,9 @@ public class DaeunJeong_Weapon : MonoBehaviour
     public float boostSpeed = 0.0f;
     public GameObject fireVFX;
 
+    public float WithdrawWeaponTimer = 1.0f;
+    public float BoostTimer = 1.0f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -54,7 +57,7 @@ public class DaeunJeong_Weapon : MonoBehaviour
     IEnumerator WithdrawWeapon()
     {
         audioSource.PlayOneShot(weaponSFX);
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(WithdrawWeaponTimer);
         weaponThrust.transform.Translate(0, 0, -thrustAmount);
         weaponOut = false;
     }
@@ -62,7 +65,7 @@ public class DaeunJeong_Weapon : MonoBehaviour
     IEnumerator Boost()
     {
         fireVFX.SetActive(true);
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(BoostTimer);
         rb.AddForce(transform.forward * boostSpeed, ForceMode.Impulse);
         audioSource.PlayOneShot(boostSFX);
         fireVFX.SetActive(false);
