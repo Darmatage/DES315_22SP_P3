@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
@@ -9,10 +10,13 @@ public class B09_Pincher_Ability : MonoBehaviour
     public GameObject pincher_left;
     public GameObject pincher_right;
     public GameObject saw;
+
     [SerializeField] private Animator sawBlade;
     private GameObject grabbedObject;
     private float thrustAmount = 1.85f;
-
+    private float sawBaseZ = 0.0f;
+    private float targetZ = 0.0f;
+    private float elapsedTime;
     private Transform grabbedObjecParentTransform;
 
 
@@ -29,6 +33,8 @@ public class B09_Pincher_Ability : MonoBehaviour
         button2 = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
         button3 = gameObject.transform.parent.GetComponent<playerParent>().action3Input;
         button4 = gameObject.transform.parent.GetComponent<playerParent>().action4Input;
+
+        targetZ = Mathf.Abs(1.50f - sawBaseZ);
 
     }
 
@@ -67,7 +73,16 @@ public class B09_Pincher_Ability : MonoBehaviour
                     grabbedObject = left.grabbedObject;
                     grabbedObjecParentTransform = grabbedObject.transform.parent;
 
-                    saw.transform.Translate(0, thrustAmount, 0);
+                    elapsedTime = 0;
+                    sawBaseZ = saw.transform.localPosition.z;
+                }
+                else
+                {
+
+                    elapsedTime += Time.deltaTime;
+                    float newPositionZ = sawBaseZ + Mathf.Clamp(Mathf.Sin(elapsedTime * 2.0f) * targetZ,0, targetZ);
+
+                    saw.transform.localPosition = new Vector3(0, saw.transform.localPosition.y, newPositionZ);
                 }
 
                 grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
@@ -90,7 +105,7 @@ public class B09_Pincher_Ability : MonoBehaviour
             grabbedObjecParentTransform = null;
             grabbedObject = null;
 
-            saw.transform.Translate(0,  -1 * thrustAmount,0);
+            saw.transform.localPosition = new Vector3(0, saw.transform.localPosition.y, sawBaseZ);
         }
 
         sawBlade.SetBool("Spinning", false);
