@@ -10,37 +10,49 @@ public class B20_FrontAttack : MonoBehaviour
 	private float thrustAmount = 5*4f;
 	private float transform = 0.0f;
 	private float timer = 3.0f;
+	float cooldown = 3.0f;
 
 	private bool weaponOut = false;
 
 	//grab axis from parent object
 	public string button1;
-	public string button2;
-	public string button3;
-	public string button4; // currently boost in player move script
+	GameObject bullet;
 
 	void Start()
 	{
 		button1 = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
-		button2 = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
-		button3 = gameObject.transform.parent.GetComponent<playerParent>().action3Input;
-		button4 = gameObject.transform.parent.GetComponent<playerParent>().action4Input;
 	}
 
 	void Update()
 	{
-		if (weaponOut)
+		cooldown -= Time.deltaTime;
+
+		if ((Input.GetButtonDown(button1)) && (weaponOut == false))
+        {
+			cooldown = timer;
+			ShootBullet();
+        }
+
+		if (cooldown < 0.0f)
+        {
+			weaponOut = false;
+			if (bullet)
+				Destroy(bullet);
+        }
+
+		/*if (weaponOut)
         {
 			transform += (50*Time.deltaTime);
-			weaponThrust.transform.Translate(0, 50*Time.deltaTime, 0);
-        }
+			//weaponThrust.transform.Translate(0, 50*Time.deltaTime, 0);
+			projectile.velocity = weaponThrust.transform.forward;
+		}
 		//else
         //{
 			timer += Time.deltaTime;
         //}
 		if (transform >= thrustAmount)
         {
-			weaponThrust.transform.Translate(0, -transform, 0);
+			//weaponThrust.transform.Translate(0, -transform, 0);
 			transform = 0.0f;
 			weaponOut = false;
         }
@@ -51,14 +63,17 @@ public class B20_FrontAttack : MonoBehaviour
 			timer = 0.0f;
 
 			//StartCoroutine(WithdrawWeapon());
-		}
+		}*/
 	}
-	void OnCollisionEnter(Collision other)
+
+	void ShootBullet()
 	{
-		weaponThrust.transform.Translate(0, -transform, 0);
-		transform = 0.0f;
-		weaponOut = false;
-	}
+		weaponOut = true;
+		Quaternion.Euler(weaponThrust.transform.rotation.x, Quaternion.identity.y, Quaternion.identity.z);
+		bullet = Instantiate(weaponThrust, gameObject.transform.position + gameObject.transform.forward.normalized * 2.5f, Quaternion.identity);
+		bullet.GetComponent<Rigidbody>().velocity = gameObject.transform.forward.normalized*50.0f;
+    }
+
 
 	IEnumerator WithdrawWeapon()
 	{
