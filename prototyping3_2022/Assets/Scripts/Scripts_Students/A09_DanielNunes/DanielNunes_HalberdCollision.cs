@@ -42,16 +42,16 @@ public class DanielNunes_HalberdCollision : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //if the halberd hit the ground and was at the end of the swing animation
-        if (other.gameObject.layer == LayerMask.NameToLayer("ground") && FindObjectOfType<DanielNunes_AnimationEvents>().endOfSlash)
+        if (/*other.gameObject.layer == LayerMask.NameToLayer("ground") && */FindObjectOfType<DanielNunes_AnimationEvents>().endOfSlash)
         {
             //foreach (Camera cam in acs.cams)
             //{
             //    cam.GetComponent<DanielNunes_CameraShake>().Shake();
             //}
 
-            Vector3 offset = FindObjectOfType<DanielNunes_Halberd>().transform.forward * 1.5f;
+            //Vector3 offset = FindObjectOfType<DanielNunes_Halberd>().transform.forward * 1.5f;
             //spawn particles
-            GameObject particles = Instantiate(particlePrefab, other.ClosestPointOnBounds(transform.position) + offset, Quaternion.identity);
+            GameObject particles = Instantiate(particlePrefab, other.ClosestPointOnBounds(transform.position)/* + offset*/, Quaternion.identity);
             Destroy(particles, 2.0f);
 
             //enable AOE collider for 0.75 seconds
@@ -59,6 +59,9 @@ public class DanielNunes_HalberdCollision : MonoBehaviour
             //Invoke(nameof(DisableAOE), 0.75f);
 
             FindObjectOfType<DanielNunes_AnimationEvents>().endOfSlash = false;
+
+            //play sound effect
+            transform.parent.parent.GetComponent<DanielNunes_AnimationEvents>().pound.Play();
         }
     }
 

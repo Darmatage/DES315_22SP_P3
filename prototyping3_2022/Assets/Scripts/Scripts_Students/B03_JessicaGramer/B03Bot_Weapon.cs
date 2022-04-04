@@ -6,6 +6,7 @@ using UnityEngine.Events;
 [System.Serializable]
 public class B03_WeaponEvent : UnityEvent<B03Bot_Weapon.Weapon> { }
 
+[RequireComponent(typeof(B03Bot_Move))]
 public class B03Bot_Weapon : MonoBehaviour
 {
 	//NOTE: This script goes on the main playerBot Game Object, and the weapon goes in the public GO slot
@@ -18,9 +19,6 @@ public class B03Bot_Weapon : MonoBehaviour
 		NONE
     }
 
-	private float thrustAmount = 3f;
-	private bool weaponOut = false;
-
 	public Weapon currentWeapon { get; private set; }
 
 	//grab axis from parent object
@@ -31,9 +29,15 @@ public class B03Bot_Weapon : MonoBehaviour
 
 	public B03_WeaponEvent ActivateWeapon;
 	public UnityEvent SheildDefend;
+	[SerializeField] float slowDown = 2f;
 	[SerializeField] GameObject KinvesWeapons;
+	[SerializeField] GameObject Projectitle;
+	[SerializeField] float projectileSpeed;
+	[SerializeField] Transform projectileStart;
+	[SerializeField] GameObject projectileParticles;
 
 	bool deactivateSheild = false;
+	B03Bot_Move movement;
 
 	void Start()
 	{
@@ -46,27 +50,25 @@ public class B03Bot_Weapon : MonoBehaviour
 
 		if (ActivateWeapon == null) ActivateWeapon = new B03_WeaponEvent();
 		ActivateWeapon.AddListener(WeaponEvent);
+
+		movement = GetComponent<B03Bot_Move>();
 	}
 
 	void Update()
 	{
 		if(Input.GetButtonDown(button1) && currentWeapon == Weapon.NONE)
         {
-			deactivateSheild = false;
-			ActivateWeapon.Invoke(Weapon.SHEILD);
-        }
+			SheildDown();
+		}
 		else if(!Input.GetButton(button1) && currentWeapon == Weapon.SHEILD)
         {
 			deactivateSheild = true;
 			ActivateWeapon.Invoke(Weapon.NONE);
-        }
-		else if(Input.GetButtonDown(button2) && currentWeapon == Weapon.NONE)
-        {
-			ActivateWeapon.Invoke(Weapon.BOW);
-        }
-		else if (!Input.GetButton(button2) && currentWeapon == Weapon.BOW)
+			movement.moveSpeed *= slowDown;
+		}
+		else if (Input.GetButton(button2) && currentWeapon != Weapon.BOW)
 		{
-			ActivateWeapon.Invoke(Weapon.NONE);
+			ActivateWeapon.Invoke(Weapon.BOW);
 		}
 		else if (Input.GetButtonDown(button3) && currentWeapon == Weapon.NONE)
 		{
@@ -80,18 +82,35 @@ public class B03Bot_Weapon : MonoBehaviour
 		}
 	}
 
+	public void SheildDown()
+    {
+		deactivateSheild = false;
+		ActivateWeapon.Invoke(Weapon.SHEILD);
+		movement.moveSpeed /= slowDown;
+	}
+
 	void WeaponEvent(Weapon weapon)
     {
 		if(currentWeapon == Weapon.SHEILD && weapon == Weapon.NONE && !deactivateSheild)
         {
 			SheildDefend.Invoke();
+			deactivateSheild = true;
         }
 
 		currentWeapon = weapon;
     }
 
-	void AnimationEventActivateBow()
-    {
+	public void AnimationEventActivateBow()
+	{
+		GameObject projectile = Instantiate(Projectitle, projectileStart.position, transform.rotation);
+		HazardDamage hazard = projectile.GetComponent<HazardDamage>();
 
-    }
+		if (projectile.transform.root.tag == "Player1") { hazard.isPlayer1Weapon = true; }
+		if (projectile.transform.root.tag == "Player2") { hazard.isPlayer2Weapon = true; }
+
+		hazard.particlesPrefab = projectileParticles;
+		projectile.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed);
+
+		ActivateWeapon.Invoke(Weapon.NONE);
+	}
 }

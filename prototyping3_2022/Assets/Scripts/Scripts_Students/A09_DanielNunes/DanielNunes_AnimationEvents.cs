@@ -9,6 +9,13 @@ public class DanielNunes_AnimationEvents : MonoBehaviour
 
     private BoxCollider coll;
 
+    [SerializeField]
+    private AudioSource poke;
+    [SerializeField]
+    public AudioSource pound;
+    [SerializeField]
+    private AudioSource swoosh;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -97,5 +104,20 @@ public class DanielNunes_AnimationEvents : MonoBehaviour
         {
             coll.GetComponent<TrailRenderer>().emitting = false;
         }
+    }
+
+    public void PlayPound()
+    {
+        pound.Play();
+    }
+
+    public void PlayPoke()
+    {
+        poke.Play();
+    }
+
+    public void PlaySwoosh()
+    {
+        swoosh.Play();
     }
 }
