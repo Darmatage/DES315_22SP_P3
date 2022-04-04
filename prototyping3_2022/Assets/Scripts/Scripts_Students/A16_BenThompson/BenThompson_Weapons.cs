@@ -36,6 +36,16 @@ public class BenThompson_Weapons : MonoBehaviour
     [SerializeField]
     private float coughCooldown;
 
+    [Header("Firebreath Sounds")]
+    [SerializeField]
+    AudioSource firebreathCoughSound;
+
+    [SerializeField]
+    AudioSource firebreathActiveSound;
+
+    [SerializeField]
+    AudioSource firebreathReadyToUse;
+
     [Header("Button Bindings")]
     //grab axis from parent object
     public string button1;
@@ -59,6 +69,8 @@ public class BenThompson_Weapons : MonoBehaviour
 
     [SerializeField]
     private float scalePlacementCooldown;
+
+    private bool informedUserAboutFirebreathActiveState = true;
 
     // Start is called before the first frame update
     void Start()
@@ -91,6 +103,16 @@ public class BenThompson_Weapons : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // If firebreath is ready to be used, we have the appropriate number of scales and informed user is false
+        if(activeCooldown <= 0.0f && scaleManager.GetNumScales() > 0 && !informedUserAboutFirebreathActiveState)
+        {
+            // We are informing the user about firebreath being enabled
+            informedUserAboutFirebreathActiveState = true;
+
+            // Play the sound effect for firebreath being ready
+            firebreathReadyToUse.Play();
+        }
+
         // If firebreath is attempted to be used but can't play the cough
         if (Input.GetButtonDown(button1) && activeCooldown > 0.0f)
         {
@@ -99,6 +121,9 @@ public class BenThompson_Weapons : MonoBehaviour
             {
                 // Play the cough
                 firebreathCough.Play();
+
+                // Play the cough sound effect
+                firebreathCoughSound.Play();
 
                 // Reset the cough cooldown
                 coughTimer = coughCooldown;
@@ -138,6 +163,9 @@ public class BenThompson_Weapons : MonoBehaviour
                     // Indicate that a weapon is currently out
                     weaponOut = true;
 
+                    // Play the firebreath sound effect
+                    firebreathActiveSound.Play();
+
                     tailArt.transform.localEulerAngles = new Vector3(-72.088f, tailArt.transform.localEulerAngles.y, tailArt.transform.localEulerAngles.z);
 
                     // Start the process of ending the fire breath attack
@@ -156,6 +184,9 @@ public class BenThompson_Weapons : MonoBehaviour
 
                     // Indicate that a weapon is currently out
                     weaponOut = true;
+
+                    // Play the firebreath sound effect
+                    firebreathActiveSound.Play();
 
                     tailArt.transform.localEulerAngles = new Vector3(-72.088f, tailArt.transform.localEulerAngles.y, tailArt.transform.localEulerAngles.z);
 
@@ -176,6 +207,9 @@ public class BenThompson_Weapons : MonoBehaviour
                     // Indicate that a weapon is currently out
                     weaponOut = true;
 
+                    // Play the firebreath sound effect
+                    firebreathActiveSound.Play();
+
                     tailArt.transform.localEulerAngles = new Vector3(-72.088f, tailArt.transform.localEulerAngles.y, tailArt.transform.localEulerAngles.z);
 
                     // Start the process of ending the fire breath attack
@@ -195,6 +229,9 @@ public class BenThompson_Weapons : MonoBehaviour
                     // Indicate that a weapon is currently out
                     weaponOut = true;
 
+                    // Play the firebreath sound effect
+                    firebreathActiveSound.Play();
+
                     tailArt.transform.localEulerAngles = new Vector3(-72.088f, tailArt.transform.localEulerAngles.y, tailArt.transform.localEulerAngles.z);
 
                     // Start the process of ending the fire breath attack
@@ -211,6 +248,9 @@ public class BenThompson_Weapons : MonoBehaviour
                         {
                             // Play the cough
                             firebreathCough.Play();
+
+                            // Play the cough sound effect
+                            firebreathCoughSound.Play();
 
                             // Reset the cough cooldown
                             coughTimer = coughCooldown;
@@ -318,8 +358,13 @@ public class BenThompson_Weapons : MonoBehaviour
         // We are no longer active with a weapon
         weaponOut = false;
 
+        firebreathActiveSound.Stop();
+
         // Set a cooldown for the firebreath ability
         activeCooldown = firebreathCooldown;
+
+        // We will need to inform the user the next time we can use firebreath
+        informedUserAboutFirebreathActiveState = false;
     }   
 
     public float GetMineTime()

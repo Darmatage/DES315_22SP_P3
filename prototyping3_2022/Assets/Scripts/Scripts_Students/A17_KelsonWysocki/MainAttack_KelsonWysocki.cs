@@ -52,8 +52,8 @@ public class MainAttack_KelsonWysocki : MonoBehaviour
             }
 
             float change = Time.time - startTime;
-            move.moveSpeed = Mathf.Lerp(20f, 5f, change / 0.25f);
-            move.rotateSpeed = Mathf.Lerp(170f, 10f, change / 0.25f);
+            move.moveSpeed = Mathf.Lerp(20f, 0f, change / 0.25f);
+            move.rotateSpeed = Mathf.Lerp(250f, 150f, change / 0.25f);
         }
 
         if (!resetSpeed && resetSpeedCounter >= resetSpeedTime)
@@ -65,8 +65,8 @@ public class MainAttack_KelsonWysocki : MonoBehaviour
         if (resetSpeed)
         {
             float change = Time.time - startTime;
-            move.moveSpeed = Mathf.Lerp(5f, 20f, change / 0.25f);
-            move.rotateSpeed = Mathf.Lerp(10f, 170f, change / 0.25f);
+            move.moveSpeed = Mathf.Lerp(1f, 20f, change / 0.25f);
+            move.rotateSpeed = Mathf.Lerp(150f, 250f, change / 0.25f);
         }
     }
 

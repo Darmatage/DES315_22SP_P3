@@ -7,6 +7,7 @@ public class TaroKumagai_Weapon_BasicProjectile : MonoBehaviour
 
 	public GameObject projectile;
 	public GameObject explosion;
+	public GameObject magnetizationParticle;
 
     public int MaxProjectiles = 2;
     public float ProjectileLifetime = 3f;
@@ -14,6 +15,9 @@ public class TaroKumagai_Weapon_BasicProjectile : MonoBehaviour
     public float ProjectileMagnetizationForce = 3f;
     public float ProjectileTravelTime = 0.5f;
     public float Cooldown = 0.5f;
+
+    public float MagnetParticleCooldown = 0.1f;
+    private float magnetTimer = 0;
 
     public LinkedList<GameObject> activeProjectiles = new LinkedList<GameObject>();
     public LinkedList<GameObject> activeExplosions = new LinkedList<GameObject>();
@@ -36,6 +40,7 @@ public class TaroKumagai_Weapon_BasicProjectile : MonoBehaviour
 
     void Update()
     {
+        magnetTimer = Mathf.Max(magnetTimer - Time.deltaTime, 0.0f);
 
         if (Input.GetButtonDown(ButtonLaunch) && activeProjectiles.Count < MaxProjectiles && onCooldown == false)
         {
@@ -74,12 +79,9 @@ public class TaroKumagai_Weapon_BasicProjectile : MonoBehaviour
                 projectile.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
 
-        if (Input.GetButton(ButtonMagnetize))
+        if (Input.GetButton(ButtonMagnetize) && activeProjectiles.Count > 1)
         {
-            if(activeProjectiles.Count > 1)
-                magentizing = true;
-            else
-                magentizing = false;
+            magentizing = true;
 
             Vector3 midpoint = new Vector3();
 
@@ -97,17 +99,45 @@ public class TaroKumagai_Weapon_BasicProjectile : MonoBehaviour
                 midpoint.z /= activeProjectiles.Count;
             }
 
+
             foreach (var projectile in activeProjectiles)
             {
                 Vector3 direction = (midpoint - projectile.transform.position).normalized;
+                // Setting projectile in motion
                 projectile.GetComponent<Rigidbody>().AddForce(direction * ProjectileMagnetizationForce, ForceMode.Force);
             }
+
+            if (magnetTimer <= 0.0f)
+            {
+                foreach (var projectile in activeProjectiles)
+                {
+                    Vector3 direction = (midpoint - projectile.transform.position).normalized;
+
+                    // Creating particle for magnetization effect
+                    GameObject magParticle = Instantiate(magnetizationParticle, projectile.transform.position, Quaternion.identity);
+                    magParticle.GetComponent<Rigidbody>().AddForce(direction * ProjectileMagnetizationForce * 5, ForceMode.VelocityChange);
+                }
+                // Resetting the cooldown for magnetization particle effect
+                magnetTimer = MagnetParticleCooldown;
+            }
+            
         }
         else
             magentizing = false;
     }
 
     public void CreateExplosion(Vector3 position)
+    {
+        if (activeExplosions.Count > 0)
+            return;
+
+        GameObject explosionRef = Instantiate(explosion, position, Quaternion.identity);
+        explosionRef.GetComponent<TaroKumagai_WeaponExplosionHitBox>().parentRef = this;
+
+        activeExplosions.AddLast(explosionRef);
+    }
+
+    public void CreateMagentizationParticles(Vector3 position)
     {
         if (activeExplosions.Count > 0)
             return;
