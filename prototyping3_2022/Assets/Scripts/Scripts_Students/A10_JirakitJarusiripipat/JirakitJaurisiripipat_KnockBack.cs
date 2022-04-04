@@ -16,16 +16,6 @@ public class JirakitJaurisiripipat_KnockBack : MonoBehaviour
             direction.y = 0;
 
             rb.AddForce(direction.normalized * knockBackForce, ForceMode.Impulse);
-
-            if(rb.gameObject.transform.parent.tag == "Player1")
-            {
-                Camera cam = GameObject.FindWithTag("camP1").GetComponent<Camera>();
-
-            }
-            else if(rb.gameObject.transform.parent.tag == "Player2")
-            {
-
-            }
         }
     }
 }

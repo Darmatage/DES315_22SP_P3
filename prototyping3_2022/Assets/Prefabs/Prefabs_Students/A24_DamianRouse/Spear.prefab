@@ -783,8 +783,8 @@ MonoBehaviour:
   moveOneRange_: 6
   moveOneSpeed_: 0.3
   moveTwoDamage_: 5
-  moveTwoTurnSpeed_: 70
-  moveTwoDashForce_: 600
+  moveTwoTurnSpeedMult_: 3
+  moveTwoDashForce_: 1000
   moveTwoWait1_: 0.3
   moveTwoWait2_: 1
   moveTwoWait3_: 1
