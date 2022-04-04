@@ -201,17 +201,12 @@ public class JirakitJarusiripipat_Weapon : MonoBehaviour
 	void ShootEachMissile()
     {
 		GameObject obj = Instantiate(missile, shootPoint[currentMissileOut].transform.position, Quaternion.identity);
-		float randomNumberX = Random.Range(-4.0f, 4.0f);
-		float randomNumberZ = Random.Range(-4.0f, 4.0f);
-		Vector3 velo = CalculateVelocity(new Vector3(target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.x + randomNumberX, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.y - 3.0f, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.z + randomNumberZ), transform.position, 0.5f);
-		obj.transform.rotation = Quaternion.LookRotation(velo);
-		obj.GetComponentInChildren<Rigidbody>().velocity = velo;
+		obj.GetComponentInChildren<JirakitJarusiripipat_Missile>().target = target;
 		currentMissileOut++;
 		currentEachCooldown = eachCooldown;
 		soundKeeper.PlayLauncher();
 		obj.GetComponentInChildren<JirakitJarusiripipat_Missile>().parent = gameObject;
-		Vector3 placeToSpawn = new Vector3(target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.x + randomNumberX, 0, target.transform.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position.z);
-		Instantiate(missileIndication, placeToSpawn, Quaternion.identity);
+		
 		missileBarrel.GetComponent<Renderer>().material = cooldownMissile;
 	}
 	public void SpawnSuicideBot()
