@@ -7,13 +7,25 @@ public class BotB15_Weapon : MonoBehaviour{
 
     public GameObject FrontWeapon;
     public GameObject BackWeapon;
+
+    public GameObject RightWeapon;
+    public GameObject LeftWeapon;
+
+    public GameObject UnderWeapon;
+
+
     public GameObject BottomSmoke;
     //public AudioSource SoundEffect;
     //public AudioSource WoopSoundEffect;
-    private float thrustAmount = 2.0f;
+    private float thrustAmount = 3.0f;
 
     private bool frontWeaponOut = false;
 	private bool backWeaponOut = false;
+    public bool rightWeaponOut = false;
+    public bool leftWeaponOut = false;
+
+    public bool underWeaponOut = false;
+
     private bool emergencyEject = true;
     private Rigidbody rb;
 
@@ -37,23 +49,36 @@ public class BotB15_Weapon : MonoBehaviour{
 		//if (Input.GetKeyDown(KeyCode.T)){
 		if ((Input.GetButtonDown(button1))&&(frontWeaponOut==false))
         {
-            FrontWeapon.transform.localScale = new Vector3(1, 1, 1);
+            FrontWeapon.transform.localScale = new Vector3(3, 3, 3);
             FrontWeapon.transform.Translate(0, thrustAmount, 0);
+
+            BackWeapon.transform.localScale = new Vector3(3,3,3);
+            BackWeapon.transform.Translate(0, thrustAmount, 0);
+
+            RightWeapon.transform.localScale = new Vector3(3, 3, 3);
+            RightWeapon.transform.Translate(0, thrustAmount, 0);
+
+            LeftWeapon.transform.localScale = new Vector3(3, 3, 3);
+            LeftWeapon.transform.Translate(0, thrustAmount, 0);
+
             //SoundEffect.PlayOneShot(SoundEffect.clip);
             frontWeaponOut = true;
+            backWeaponOut = true;
+            rightWeaponOut = true;
+            leftWeaponOut = true;
 			StartCoroutine(WithdrawFrontWeapon());
         }
         if ((Input.GetButtonDown(button2)) && (backWeaponOut == false))
         {
-            BackWeapon.transform.localScale = new Vector3(1, 1, 1);
-            BackWeapon.transform.Translate(0, thrustAmount, 0);
+            UnderWeapon.transform.localScale = new Vector3(3, 3, 3);
+            UnderWeapon.transform.Translate(0, thrustAmount, 0);
             //SoundEffect.PlayOneShot(SoundEffect.clip);
-            backWeaponOut = true;
-            StartCoroutine(WithdrawBackWeapon());
+            underWeaponOut = true;
+            StartCoroutine(WithdrawUnderWeapon());
         }
-        if(Input.GetButtonDown(button3) && (emergencyEject == true))
+        if (Input.GetButtonDown(button3) && (emergencyEject == true))
         {
-            rb.AddForce(rb.centerOfMass + new Vector3(Random.Range(0, 200), 100, Random.Range(0, 200)), ForceMode.Impulse);
+            rb.AddForce(rb.centerOfMass + new Vector3(/*Random.Range(0, 200)*/0, 200, 0/* Random.Range(0, 200)*/), ForceMode.Impulse);
             //WoopSoundEffect.Play();
             StartCoroutine(EmergencyCooldown());
             emergencyEject = false;
@@ -64,15 +89,22 @@ public class BotB15_Weapon : MonoBehaviour{
 		yield return new WaitForSeconds(0.6f);
         FrontWeapon.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         FrontWeapon.transform.Translate(0, -thrustAmount, 0);
+        BackWeapon.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        BackWeapon.transform.Translate(0, -thrustAmount, 0);
+        RightWeapon.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        RightWeapon.transform.Translate(0, -thrustAmount, 0);
+        LeftWeapon.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        LeftWeapon.transform.Translate(0, -thrustAmount, 0);
+
         frontWeaponOut = false;
 	}
 
-    IEnumerator WithdrawBackWeapon()
+    IEnumerator WithdrawUnderWeapon()
     {
         yield return new WaitForSeconds(0.6f);
-        BackWeapon.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        BackWeapon.transform.Translate(0, -thrustAmount, 0);
-        backWeaponOut = false;
+        UnderWeapon.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        UnderWeapon.transform.Translate(0, -thrustAmount, 0);
+        underWeaponOut = false;
     }
 
     IEnumerator EmergencyCooldown()
