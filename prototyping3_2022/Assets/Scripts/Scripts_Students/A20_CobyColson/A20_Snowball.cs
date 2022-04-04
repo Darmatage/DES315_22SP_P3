@@ -14,6 +14,7 @@ public class A20_Snowball : MonoBehaviour
     
     public Transform snowballSpawnPointLeft;
     public Transform snowballSpawnPointRight;
+    private BotBasic_Move movement;
     public float turretRotationSpeed;
     public float turretShootCooldown;
     private bool snowballSpawnLeft = true;
@@ -30,6 +31,7 @@ public class A20_Snowball : MonoBehaviour
     {
         activekey1 = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
         activeKey2 = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
+        movement = GetComponent<BotBasic_Move>();
     }
 
     // Update is called once per frame
@@ -63,6 +65,7 @@ public class A20_Snowball : MonoBehaviour
                       snowmanTopRef.transform.position.z);
                 }
                 bodyPart.SetActive(false);
+                movement.moveSpeed -= 1.5f;
 
                 A20_SnowTurretBehavior turretBehavior = turret.AddComponent<A20_SnowTurretBehavior>();
                 turretBehavior.Initialize(snowballPrefab, turretRotationSpeed, turretShootCooldown, transform.position + transform.forward * 5.0f);

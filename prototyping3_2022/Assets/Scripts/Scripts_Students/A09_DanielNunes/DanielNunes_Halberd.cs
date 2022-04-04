@@ -48,16 +48,22 @@ public class DanielNunes_Halberd : MonoBehaviour
         {
             halberdAnim.Play("Slash");
         }
-
+        
         if (!isAttacking && Input.GetButtonDown(button2))
         {
-            halberdAnim.Play("Swing");
+            halberdAnim.Play("Poke");
         }
 
         if (!isAttacking && Input.GetButtonDown(button3))
         {
-            halberdAnim.Play("Poke");
+            halberdAnim.Play("Swing");
         }
+
+        if (!isAttacking && Input.GetButtonDown(button4))
+        {
+            halberdAnim.Play("SwingR");
+        }
+
     }
 
     private void FixedUpdate()

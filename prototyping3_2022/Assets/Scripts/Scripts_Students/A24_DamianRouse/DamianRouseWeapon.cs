@@ -43,7 +43,10 @@ public class DamianRouseWeapon : MonoBehaviour
   private Quaternion currentQuat_;
   private Vector3 targetVec_;
   private Quaternion targetQuat_;
-  private int hitsLeft_;
+
+
+  [Header("Debug")]
+  public int hitsLeft_ = 0;
 
   //Lerp Stuff
   private bool lerping_ = false;
@@ -286,12 +289,15 @@ public class DamianRouseWeapon : MonoBehaviour
     go.GetComponent<BoxCollider>().enabled = true;
   }
 
-  public void Hit(GameObject go)
+  public void Hit(GameObject go, HazardDamage hazard)
   {
     --hitsLeft_;
 
     if (hitsLeft_ < 1)
+    {
       go.GetComponent<BoxCollider>().enabled = false;
+      //hazard.damage = 0;
+    }
   }
 
   public void ClearHits()
