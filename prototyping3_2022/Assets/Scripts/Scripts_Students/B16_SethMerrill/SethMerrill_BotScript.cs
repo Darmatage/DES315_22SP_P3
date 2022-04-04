@@ -29,7 +29,7 @@ public class SethMerrill_BotScript : MonoBehaviour
 		else
 		{
 			timeUntilReady = 0.0f;
-			if(CheckInputFire())
+			if(CheckInputFire() && weapon != null)
 			{
 				weapon.GetComponent<SethMerrillCannonScript>().Fire();
 				GetComponent<Rigidbody>().AddForce(transform.forward * -5000.0f);
@@ -37,7 +37,7 @@ public class SethMerrill_BotScript : MonoBehaviour
 			}
 		}
 		
-		if(CheckInputArms())
+		if(CheckInputArms() && arms != null)
 		{
 			arms.GetComponent<SethMerrillArmsScript>().Grab();
 		}	
