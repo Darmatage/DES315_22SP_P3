@@ -8,9 +8,9 @@ public class QuackBash_CD : MonoBehaviour
 
 
     private float timeHeld = 0;
-    private float m_restoreEffect = 1;
-    private float m_restoreTime = 1;
     [Header("Bot Attributes")]
+    private float m_cooldowndt = 0;
+    public float m_coolDown = 1;
     public float chargeTime = 2f;
     public float m_launchForce = 1000;
     public float m_minDamage;
@@ -76,7 +76,14 @@ public class QuackBash_CD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton(button1))
+        if (Input.GetButtonDown(button1) && m_cooldowndt <= 0)
+        {
+            // first frame
+            timeHeld = 0;
+            
+        }
+
+        if (Input.GetButton(button1) && m_cooldowndt <= 0)
         {
             m_state = DuckState.Charging;
             if (m_chargeSound && m_chargeSoundTrigger == false)
@@ -88,12 +95,12 @@ public class QuackBash_CD : MonoBehaviour
             timeHeld = Mathf.Clamp(timeHeld += Time.deltaTime, 0, chargeTime);
             float t = timeHeld / chargeTime;
             float eval = m_interp.Evaluate(t);
-
+            transform.localScale = Vector3.Lerp(m_originalScale, m_originalScale * m_scale, eval);
             m_movement.moveSpeed = Mathf.Lerp(m_originalSpeed, m_chargeSpeed, eval);
             m_movement.rotateSpeed = Mathf.Lerp(m_originalTurn, m_chargeTurn, eval);
             m_weapon.damage = Mathf.Lerp(m_minDamage, m_MaxDamage, eval);
-            transform.localScale = Vector3.Lerp(m_originalScale, m_originalScale * m_scale, eval);
             // damage is based on the charge
+            
         }
         else
         {
@@ -105,13 +112,15 @@ public class QuackBash_CD : MonoBehaviour
                 // Reset movespeed
                 m_movement.moveSpeed = 0;
                 m_movement.rotateSpeed = 0;
+                m_cooldowndt = m_coolDown;
+                float t = timeHeld / chargeTime;
+                float eval = m_interp.Evaluate(t);
 
-                Invoke("ResetBot", chargeTime);
+
+                Invoke("ResetBot", chargeTime * eval);
                 // launch bot
-                m_rb.AddForce(transform.forward * m_launchForce, ForceMode.Impulse);
+                m_rb.AddForce(transform.forward * (m_launchForce * eval), ForceMode.Impulse);
                 m_state = DuckState.Fire;
-                timeHeld = 0;
-
 
                 if (m_chargeSound)
                 {
@@ -131,7 +140,13 @@ public class QuackBash_CD : MonoBehaviour
             else // this is not active
             {
                 // revert scale
-                
+                m_cooldowndt = Mathf.Clamp(m_cooldowndt - Time.deltaTime, 0, m_coolDown);
+                timeHeld = Mathf.Clamp(timeHeld - (Time.deltaTime * 2), 0, chargeTime);
+                float t = timeHeld / chargeTime;
+                float eval = m_interp.Evaluate(t);
+                transform.localScale = Vector3.Lerp(m_originalScale, m_originalScale * m_scale, eval);
+
+
             }
         }
 
