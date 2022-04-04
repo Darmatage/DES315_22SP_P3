@@ -275,8 +275,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab929fe774a0084c8ae87aafe02faf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 14
-  rotateSpeed: 80
+  moveSpeed: 12
+  rotateSpeed: 100
   jumpSpeed: 7
   boostSpeed: 10
   groundCheck: {fileID: 1355330930762081256}
@@ -369,8 +369,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chargeTime: 2
-  m_launchForce: 0
-  m_MaxDamage: 0
+  m_launchForce: 350
+  m_minDamage: 5
+  m_MaxDamage: 15
+  m_scale: 2
   m_interp:
     serializedVersion: 2
     m_Curve:
@@ -395,6 +397,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  m_chargeSpeed: 3
+  m_chargeTurn: 140
 --- !u!1 &1355330930662561729
 GameObject:
   m_ObjectHideFlags: 0
