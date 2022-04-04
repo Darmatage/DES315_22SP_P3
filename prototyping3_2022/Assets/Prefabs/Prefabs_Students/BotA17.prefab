@@ -274,7 +274,7 @@ Transform:
   m_GameObject: {fileID: 1355330930375697355}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.31, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 1355330929262153268}
   - {fileID: 9047258866988001352}
@@ -371,7 +371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 20
-  rotateSpeed: 200
+  rotateSpeed: 250
   jumpSpeed: 0
   boostSpeed: 10
   groundCheck: {fileID: 1355330930762081256}
@@ -406,11 +406,11 @@ MonoBehaviour:
   knockBackSpeed: 10
   forceSideLimit_p75: 1
   shieldPowerFront: 2
-  shieldPowerBack: 2
-  shieldPowerLeft: 2
-  shieldPowerRight: 2
-  shieldPowerTop: 2
-  shieldPowerBottom: 2
+  shieldPowerBack: 1
+  shieldPowerLeft: 1
+  shieldPowerRight: 1
+  shieldPowerTop: 1
+  shieldPowerBottom: 1
   shieldFrontObj: {fileID: 1098726327034351829}
   shieldBackObj: {fileID: 2186211737314387781}
   shieldLeftObj: {fileID: 2735579452779107192}
@@ -465,7 +465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laser: {fileID: 1621029551011219295, guid: 228a37ce2ed15074598a31039ae8fa29, type: 3}
   button: 
-  offset: 2.5
+  offset: 1.25
   cooldown: 0.25
   resetSpeedTime: 0.5
 --- !u!1 &1355330930662561729
