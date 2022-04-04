@@ -33,6 +33,9 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 
 	private Renderer LauncherRenderer;
 
+	AudioSource AS;
+	public AudioClip FirstWeaponClip;
+
 	bool CannotAttack = false;
 
 	float StartTime;
@@ -48,6 +51,8 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 			Debug.Log("There is no LauncherRenderer");
 
 		LauncherRenderer.material.color = StartColor;
+
+		AS = GetComponent<AudioSource>();
 	}
 
     void Update()
@@ -57,17 +62,13 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 		if ((Input.GetButtonDown(button1)) && (weaponOut == false) && Time.time > Button1Cooldown)
 		{
 			Button1Cooldown = Time.time + Button1CooldownRate;
-			
+
+			AS.PlayOneShot(FirstWeaponClip);
+
 			weaponThrust.transform.Translate(0, 0, thrustAmount);
 			weaponOut = true;
 			StartCoroutine(WithdrawWeapon());
-		
-		}
-
-		if(CannotAttack)
-		{
-			float t = (Time.time - StartTime) / Button2CooldownRate;
-			LauncherRenderer.material.color = Color.Lerp(EndColor, StartColor, t);
+			
 		}
 
 		if (Input.GetButtonDown(button2) && Time.time > Button2Cooldown)
@@ -81,6 +82,13 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 			Instantiate(Projectile, LauncherPosition, transform.rotation);
 			
 			CannotAttack = true;
+
+		}
+
+		if (CannotAttack)
+		{
+			float t = (Time.time - StartTime) / Button2CooldownRate;
+			LauncherRenderer.material.color = Color.Lerp(EndColor, StartColor, t);		
 		}
 	}
 
@@ -90,5 +98,4 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 		weaponThrust.transform.Translate(0, 0, -thrustAmount);
 		weaponOut = false;
 	}
-
 }
