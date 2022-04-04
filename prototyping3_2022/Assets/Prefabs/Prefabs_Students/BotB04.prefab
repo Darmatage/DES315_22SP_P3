@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 1355330930375697356}
   - component: {fileID: 5399035688532580068}
   - component: {fileID: 3648416720296770018}
+  - component: {fileID: 1652028591221637819}
   - component: {fileID: 6362456292364079154}
   - component: {fileID: 7107478127326975586}
   - component: {fileID: 1355330930375697357}
@@ -224,6 +225,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.1, y: 1.3, z: 2.1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &1652028591221637819
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355330930375697355}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.8, y: 1, z: 2.8}
+  m_Center: {x: 0, y: -2.1, z: 0}
 --- !u!136 &6362456292364079154
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -315,10 +329,10 @@ MonoBehaviour:
   sidelimit: 0.75
   knockBackSpeed: 10
   forceSideLimit_p75: 1
-  shieldPowerFront: 6
-  shieldPowerBack: 6
-  shieldPowerLeft: 6
-  shieldPowerRight: 6
+  shieldPowerFront: 8
+  shieldPowerBack: 8
+  shieldPowerLeft: 8
+  shieldPowerRight: 8
   shieldPowerTop: 2
   shieldPowerBottom: 2
   shieldFrontObj: {fileID: 1098726327034351829}
@@ -395,6 +409,7 @@ MonoBehaviour:
   leg3: {fileID: 2174296539845438956}
   leg4: {fileID: 2864637216314679361}
   mace: {fileID: 4848419780103270477}
+  colBox: {fileID: 1652028591221637819}
   button1: 
   button2: 
   button3: 
@@ -425,7 +440,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1355330930662561729}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.198}
   m_LocalScale: {x: 0.55, y: 0.7, z: 0.55}
   m_Children: []
   m_Father: {fileID: 1355330929262153268}
@@ -1389,6 +1404,11 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4269103144597895777, guid: ee6e25bc562364d47aff7bb71dcb8e3d,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910844019206320929, guid: ee6e25bc562364d47aff7bb71dcb8e3d,
         type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
