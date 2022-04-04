@@ -31,9 +31,6 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 	public Color StartColor;
 	public Color EndColor;
 
-	public AudioClip CannotLaunch;
-	public AudioSource AS;
-
 	private Renderer LauncherRenderer;
 
 	bool CannotAttack = false;
@@ -44,12 +41,6 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 	{
 		button1 = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
         button2 = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
-
-		if (!CannotLaunch)
-			Debug.Log("There is no audio clip in basic weapon");
-
-		if (!AS)
-			Debug.Log("There is no audio source in basic weapon");
 
 		LauncherRenderer = Barrel.GetComponent<Renderer>();
 
