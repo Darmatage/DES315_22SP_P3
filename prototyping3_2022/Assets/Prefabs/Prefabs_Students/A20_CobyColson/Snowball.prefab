@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  particlesPrefab: {fileID: 7246120000014656734, guid: 740a2aebec573654ab0fea34ed35ef72,
+  particlesPrefab: {fileID: 7916852506792683719, guid: a6746c9ee60a1a44d813bcdbac5cb0ce,
     type: 3}
   SpawnParticlesHere: {x: 0, y: 0, z: 0}
   isPlayer1Weapon: 0
@@ -129,5 +129,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e0276cd210f8fc4c8448d58afb8c9d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 24
-  gravityFactor: 0.0005
+  speed: 26
+  gravityFactor: 0.0004

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3356042997071605205}
   - component: {fileID: 7929159396266003782}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: arms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  rotateSpeed: 20
+  rotateSpeed: 40
   jumpSpeed: 0
   boostSpeed: 10
   groundCheck: {fileID: 1355330930762081256}
@@ -429,7 +429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 962074117161544771}
-  arms: {fileID: 0}
+  arms: {fileID: 225162463842554384}
   rechargeTime: 5
 --- !u!1 &1355330930662561729
 GameObject:

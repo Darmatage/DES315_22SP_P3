@@ -374,6 +374,7 @@ MonoBehaviour:
   rightBoost: {fileID: 4111592044332931799}
   body: {fileID: 1355330930375697355}
   boostSpeed: 2000
+  cooldown: 2
   button1: 
   button2: 
   button3: 
