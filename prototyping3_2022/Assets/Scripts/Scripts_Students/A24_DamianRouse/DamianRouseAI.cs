@@ -19,8 +19,9 @@ public class DamianRouseAI : MonoBehaviour
 
   public bool aggro_ = false;
   public int moving_ = 0;
-  
-  
+
+  public float timeUntilJump_ = 2;
+  public float jumpTimer_ = 0;
 
   [Header("Obstacle Detection Data")]
   public float obstacleDetectRange_ = 4f;
@@ -55,8 +56,6 @@ public class DamianRouseAI : MonoBehaviour
   private GameHandler GH_;
   public float startTimer_ = 500f;
   public float timer_ = 0;
-
-
   
 
   void Start()
@@ -146,17 +145,20 @@ public class DamianRouseAI : MonoBehaviour
 
   void GetIntel()
   {
+    //Get 2D x and z position vectors
     Vector2 self = new Vector2(transform.position.x, transform.position.z);
     Vector2 enemy = new Vector2(enemy_.transform.position.x, enemy_.transform.position.z);
     Vector2 targetDir = enemy - self;
     Vector2 forwardDir = new Vector2(transform.forward.x, transform.forward.z);// - self;
 
+    //Get distance between 2D positions
     distanceBetweenFrontAndEnemy_ = Vector2.Distance(self,enemy);
     
-    //Use angle data
+    //Get Angle between front and enemy
     angleBetweenFrontAndEnemy_ = Vector2.SignedAngle(targetDir, forwardDir);
     float absABFE = Mathf.Abs(angleBetweenFrontAndEnemy_);
 
+    //Use angle to determine if player has flanked AI
     if (flanked_ && absABFE < 15f)
       flanked_ = false;
     else if (!flanked_ && absABFE > 15 && absABFE > Mathf.Abs(pastAngleBetweenFrontAndEnemy_))
@@ -173,14 +175,27 @@ public class DamianRouseAI : MonoBehaviour
     else
       flankedTimer_ = 0;
 
+    //Cannot be flanked before a certain time
     if (timer_ < delayUntilFlankingIsPossible_)
       flanked_ = false;
 
-    //predict future
+    //Predict where player will be
     predictedEnemyAngle_ = (angleBetweenFrontAndEnemy_ - pastAngleBetweenFrontAndEnemy_) * futureSense_ + angleBetweenFrontAndEnemy_;
-
+    //Update Past
     pastAngleBetweenFrontAndEnemy_ = angleBetweenFrontAndEnemy_;
 
+    //Determine if the AI is flipped
+    if(Vector3.Angle(transform.up, Vector3.up) > 20f)
+    {
+      jumpTimer_ += Time.deltaTime;
+
+      if (jumpTimer_ > timeUntilJump_)
+        Jump();
+    }
+    else
+      jumpTimer_ = 0;
+
+    //Make rays from 4 spots on AI
     Ray frontLeft = new Ray(transform.position - transform.right + transform.forward * 2, transform.forward);
     Ray frontRight = new Ray(transform.position + transform.right + transform.forward * 2, transform.forward);
     Ray backLeft = new Ray(transform.position - transform.right - transform.forward * 2, -transform.forward);
@@ -193,6 +208,7 @@ public class DamianRouseAI : MonoBehaviour
     obstacleBackLeft_ = false;
     obstacleBackRight_ = false;
 
+    //Check if rays collide with hazards
     foreach (Collider c in hazards_)
     {
       if (!obstacleFrontLeft_ && c.Raycast(frontLeft, out hit, obstacleDetectRange_))
@@ -208,6 +224,7 @@ public class DamianRouseAI : MonoBehaviour
         obstacleBackRight_ = true;
     }
 
+    //Draw rays
     if (debug_)
     {
       if (obstacleFrontLeft_)
@@ -234,10 +251,10 @@ public class DamianRouseAI : MonoBehaviour
 
   public void Act()
   {
+    //make sure no mixed move orders
     bool gaveMoveDir = false;
 
-
-
+    //Aggro flip
     if(!aggro_)
     {
       if (timer_ / startTimer_  > 0.5f ||
@@ -250,6 +267,7 @@ public class DamianRouseAI : MonoBehaviour
       }
     }
 
+    //What to be done if flanked
     if(flanked_)
     {
       if(DRM_.isAttacking == false)
@@ -271,11 +289,10 @@ public class DamianRouseAI : MonoBehaviour
       gaveMoveDir = true;
     }
 
-    //Look at the enemy
-
+    //Get Rot speed
     rotation_ = BBM_.rotateSpeed * Time.deltaTime;
     float angleToUse = angleBetweenFrontAndEnemy_;
-
+    //Use predicted angle if attacking
     if (DRM_.isAttacking == true)
     {
       angleToUse = predictedEnemyAngle_;
@@ -283,6 +300,7 @@ public class DamianRouseAI : MonoBehaviour
 
     float absABFE = Mathf.Abs(angleToUse);
 
+    //turn to look right at player
     if (absABFE > 1)
     {
       if (absABFE - rotation_ < 0)
@@ -295,14 +313,14 @@ public class DamianRouseAI : MonoBehaviour
       rotation_ = 0;
 
 
-
+    //Only do if not attacking
     if(!DRM_.isAttacking)
     {
       if(distanceBetweenFrontAndEnemy_ < DRM_.weaponScript_.moveOneRange_ + 2f && absABFE < 15f)
         DRM_.UseMove(1);
     }
 
-
+    //if no move order, give order
     if(!gaveMoveDir)
     {
       if (distanceBetweenFrontAndEnemy_ > DRM_.weaponScript_.moveOneRange_ + 3f)
@@ -316,6 +334,7 @@ public class DamianRouseAI : MonoBehaviour
   {
     move_ = BBM_.moveSpeed * Time.deltaTime * moving_;
 
+    //Move if not grabbed
     if (BBM_.isGrabbed == false)
     {
       AvoidObstacles();
@@ -324,6 +343,7 @@ public class DamianRouseAI : MonoBehaviour
     }
   }
 
+  //Basically strafes around hazards
   void AvoidObstacles()
   {
     float botMove = BBM_.moveSpeed * Time.deltaTime;
@@ -358,10 +378,11 @@ public class DamianRouseAI : MonoBehaviour
     {
       transform.Translate(botMove, 0, 0);
       move_ = 0;
-      rotation_ = 0;
+      //rotation_ = 0;
     }
   }
 
+  //From Basic Move, just flip AI upright
   public void Jump()
   {
     Rigidbody rb = gameObject.GetComponent<Rigidbody>();
@@ -389,4 +410,6 @@ public class DamianRouseAI : MonoBehaviour
       GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
     }
   }
+
+
 }
