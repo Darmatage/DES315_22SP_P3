@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 3018058079556101149}
   m_Layer: 0
   m_Name: BotA03
-  m_TagString: Untagged
+  m_TagString: A03bot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -504,6 +504,7 @@ MonoBehaviour:
     type: 3}
   shotPoint: {fileID: 5305991630053407949}
   Orca: {fileID: 4807637594650251133}
+  duckOutCount: 0
   button1: 
   button2: 
   button3: 

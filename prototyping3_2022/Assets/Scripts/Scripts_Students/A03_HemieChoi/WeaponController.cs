@@ -10,6 +10,8 @@ public class WeaponController : MonoBehaviour
     public Transform shotPoint;
 	public Transform Orca;
     private HazardDamage dmgScrt;
+    private bool isDuckAvail = true;
+    public int duckOutCount = 0;
 
     public string button1;
     public string button2;
@@ -25,6 +27,7 @@ public class WeaponController : MonoBehaviour
         button4 = gameObject.transform.parent.GetComponent<playerParent>().action4Input;
 
         dmgScrt = throwBall.GetComponent<HazardDamage>();
+        
     }
 
     // Update is called once per frame
@@ -35,10 +38,14 @@ public class WeaponController : MonoBehaviour
 
         //transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, horiRot * rotateSpeed, verRot * rotateSpeed));
 
-        if ((Input.GetButtonDown(button1)))
+        isDuckAvail = duckOutCount == 5 ? false : true;
+ 
+
+        if ((Input.GetButtonDown(button1)) && isDuckAvail)
         {
             GameObject ball2Throw = Instantiate(throwBall, shotPoint.position, shotPoint.rotation);
             ball2Throw.GetComponent<Rigidbody>().velocity = shotPoint.transform.forward * shootPower;
+            ++duckOutCount;
         }
 		
 		if ((Input.GetButton(button2)))
