@@ -8,12 +8,13 @@ public class WeaponController : MonoBehaviour
     public float shootPower = 5;
     public GameObject throwBall;
     public Transform shotPoint;
+	public Transform Orca;
     private HazardDamage dmgScrt;
 
     public string button1;
     public string button2;
     public string button3;
-    public string button4; // currently boost in player move script
+    public string button4; 
 
     // Start is called before the first frame update
     void Start()
@@ -29,15 +30,28 @@ public class WeaponController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horiRot = Input.GetAxis("Horizontal");
-        float verRot = Input.GetAxis("Vertical");
+        //float horiRot = Input.GetAxis("Horizontal");
+        //float verRot = Input.GetAxis("Vertical");
 
-        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, horiRot * rotateSpeed, verRot * rotateSpeed));
+        //transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, horiRot * rotateSpeed, verRot * rotateSpeed));
 
         if ((Input.GetButtonDown(button1)))
         {
             GameObject ball2Throw = Instantiate(throwBall, shotPoint.position, shotPoint.rotation);
             ball2Throw.GetComponent<Rigidbody>().velocity = shotPoint.transform.forward * shootPower;
         }
+		
+		if ((Input.GetButton(button2)))
+        {
+            Orca.rotation = Quaternion.Euler(Orca.rotation.eulerAngles + new Vector3(0, rotateSpeed, 0));
+        }
+		
+		if ((Input.GetButton(button3)))
+        {
+            Orca.rotation = Quaternion.Euler(Orca.rotation.eulerAngles + new Vector3(0, rotateSpeed * -1, 0));
+        }
+
+		
+		
     }
 }
