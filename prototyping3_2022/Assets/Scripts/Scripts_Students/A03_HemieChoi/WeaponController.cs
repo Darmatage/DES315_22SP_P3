@@ -37,7 +37,7 @@ public class WeaponController : MonoBehaviour
         if ((Input.GetButtonDown(button1)))
         {
             GameObject ball2Throw = Instantiate(throwBall, shotPoint.position, shotPoint.rotation);
-            ball2Throw.GetComponent<Rigidbody>().velocity = shotPoint.transform.up * shootPower;
+            ball2Throw.GetComponent<Rigidbody>().velocity = shotPoint.transform.forward * shootPower;
         }
     }
 }

@@ -12494,7 +12494,7 @@ PrefabInstance:
         type: 3}
       propertyPath: botPrefabs.Array.data[39]
       value: 
-      objectReference: {fileID: 1355330930375697355, guid: 4cadd2fff056b2b4f950a2e9cf8d0e78,
+      objectReference: {fileID: 1355330930375697355, guid: e845ce151d995264e80a8dfbe0f43522,
         type: 3}
     - target: {fileID: 6311594513585171110, guid: 05be270cdabffa742bd6f579ed45bdbe,
         type: 3}
