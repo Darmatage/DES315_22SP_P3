@@ -95,7 +95,8 @@ public class B03Bot_Weapon : MonoBehaviour
         {
 			SheildDefend.Invoke();
 			deactivateSheild = true;
-        }
+			movement.moveSpeed *= slowDown;
+		}
 
 		currentWeapon = weapon;
     }

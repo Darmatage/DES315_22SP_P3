@@ -9,9 +9,11 @@ public class A6_RailGun : MonoBehaviour {
     private float moveSpeedTemp;
     private float damageTemp;
     private AudioSource source;
+    private bool isFiring;
+    public GameObject gas;
 
-    public KeyCode chargeKey;
-    public KeyCode fireKey;
+    public string chargeKey;
+    public string fireKey;
 
     public float chargeThresh;
     public float chargeMax;
@@ -27,30 +29,36 @@ public class A6_RailGun : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         charge = 0;
-        chargeLevel = 1;
+        isFiring = false;
+        chargeLevel = 0;
         isCharging = false;
         moveSpeedTemp = GetComponentInParent<BotBasic_Move>().moveSpeed;
         GetComponent<CapsuleCollider>().enabled = false;
         GetComponent<MeshRenderer>().enabled = false;
         source = GetComponentInParent<AudioSource>();
+        chargeKey = GetComponentInParent<playerParent>().action2Input;
+        fireKey = GetComponentInParent<playerParent>().action1Input;
     }
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(chargeKey)) {
-            isCharging = true;
+        if (!isFiring) {
+            if (Input.GetButtonDown(chargeKey))
+            {
+                isCharging = true;
+                source.clip = chargeSound;
+                source.volume = 1.0f;
+                source.Play();
+                source.loop = true;
+            }
 
-            source.clip = chargeSound;
-            source.volume = 1.0f;
-            source.Play();
-            source.loop = true;
-        }
-
-        if (Input.GetKeyUp(chargeKey)) {
-            GetComponentInParent<BotBasic_Move>().moveSpeed = moveSpeedTemp;
-            isCharging = false;
-            source.Stop();
-            source.loop = false;
+            if (Input.GetButtonUp(chargeKey))
+            {
+                GetComponentInParent<BotBasic_Move>().moveSpeed = moveSpeedTemp;
+                isCharging = false;
+                source.Stop();
+                source.loop = false;
+            }
         }
 
         if (isCharging) {
@@ -59,15 +67,17 @@ public class A6_RailGun : MonoBehaviour {
             
             //source.pitch = Mathf.Lerp(0.0f, 1.25f, charge);
         }
-
-        if (charge >= chargeThresh * chargeLevel) {
-            chargeLevel = Mathf.Clamp(chargeLevel + 1, 0, chargeLevelMax);
+        if (charge >= chargeThresh && chargeLevel == 0)
+            chargeLevel++;
+        else if (charge >= chargeThresh * chargeLevel) {
+            chargeLevel = Mathf.Clamp(chargeLevel, 0, chargeLevelMax);
         }
 
-        if (Input.GetKeyDown(fireKey)) {
-            if (chargeLevel > 1) {
+        if (Input.GetButtonDown(fireKey)) {
+            if (chargeLevel >= 1) {
                 Fire(chargeLevel);
                 ResetCharge();
+
             }
         }
 
@@ -88,13 +98,15 @@ public class A6_RailGun : MonoBehaviour {
         source.loop = false;
         source.clip = fireSound;
         source.Play();
-        
+        gas.GetComponent<ParticleSystem>().Play();
+
         StartCoroutine(TurnOffRailgun());
+        StartCoroutine(Smoke());
     }
 
     private void ResetCharge() {
         charge = 0.0f;
-        chargeLevel = 1;
+        chargeLevel = 0;
         source.pitch = 1;
     }
 
@@ -103,5 +115,10 @@ public class A6_RailGun : MonoBehaviour {
         GetComponent<HazardDamage>().damage = damageTemp;
         GetComponent<CapsuleCollider>().enabled = false;
         GetComponent<MeshRenderer>().enabled = false;
+    }
+
+    IEnumerator Smoke() {
+        yield return new WaitForSeconds(2.0f);
+        gas.GetComponent<ParticleSystem>().Stop();
     }
 }

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class B17_LeapAbility : MonoBehaviour
 {
+
+    // leap feedback
+    public List<AudioClip> LeapAudioClips;
+    private AudioSource audioSource;
+
     public float Cooldown = 5.0f;
     public float ForwardForce = 10000.0f;
     public float UpwardForce = 3300.0f;
@@ -25,6 +30,8 @@ public class B17_LeapAbility : MonoBehaviour
         button2 = gameObject.transform.parent.parent.GetComponent<playerParent>().action2Input;
         button3 = gameObject.transform.parent.parent.GetComponent<playerParent>().action3Input;
         button4 = gameObject.transform.parent.parent.GetComponent<playerParent>().action4Input;
+
+        audioSource = transform.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -47,5 +54,8 @@ public class B17_LeapAbility : MonoBehaviour
     {
         Rigidbody rb = transform.parent.GetComponent<Rigidbody>();
         rb.AddRelativeForce(new Vector3(0.0f, UpwardForce, ForwardForce));
+
+        audioSource.clip = LeapAudioClips[UnityEngine.Random.Range(0, LeapAudioClips.Count)];
+        audioSource.Play();
     }
 }
