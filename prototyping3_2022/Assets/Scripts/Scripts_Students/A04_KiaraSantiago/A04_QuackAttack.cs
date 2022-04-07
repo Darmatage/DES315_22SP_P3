@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class A04_QuackAttack : MonoBehaviour
 {
-
+    private Animator anim;
     public string button;
+    
     public float cooldown = 5.0f;
 
     private bool isReadytoAttack = true;
@@ -16,6 +17,8 @@ public class A04_QuackAttack : MonoBehaviour
     void Start()
     {
         button = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
+
+        anim = gameObject.GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -39,6 +42,8 @@ public class A04_QuackAttack : MonoBehaviour
             cdTimer = cooldown;
             //play sound
 
+
+            anim.SetTrigger("Quack");
             //throw back enemy
             /*Transform theirTransform = enemy.GetComponent<Transform>();
 
