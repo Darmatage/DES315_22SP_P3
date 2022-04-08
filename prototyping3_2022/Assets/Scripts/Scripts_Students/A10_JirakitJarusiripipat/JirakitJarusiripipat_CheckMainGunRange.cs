@@ -9,16 +9,17 @@ public class JirakitJarusiripipat_CheckMainGunRange : MonoBehaviour
     {
         if(other != null)
         {
-            if(other.gameObject.transform.parent != null)
+            if(other.gameObject.transform.parent.transform.parent != null)
             {
-                if (other.gameObject.transform.parent.tag == "Player1")
+                if (other.gameObject.transform.parent.transform.parent.tag == "Player1")
                 {
                     inMainGunRange = true;
                     Debug.Log("Found Player 1");
                 }
-                else if (other.gameObject.transform.parent.tag == "Player2")
+                else if (other.gameObject.transform.parent.transform.parent.tag == "Player2")
                 {
                     inMainGunRange = true;
+                    Debug.Log("Found Player 2");
                 }
             }
             
@@ -29,13 +30,13 @@ public class JirakitJarusiripipat_CheckMainGunRange : MonoBehaviour
     {
         if (other != null)
         {
-            if (other.gameObject.transform.parent != null)
+            if (other.gameObject.transform.parent.transform.parent.tag != null)
             {
-                if (other.gameObject.transform.parent.tag == "Player1")
+                if (other.gameObject.transform.parent.transform.parent.tag == "Player1")
                 {
                     inMainGunRange = false;
                 }
-                else if (other.gameObject.transform.parent.tag == "Player2")
+                else if (other.gameObject.transform.parent.transform.parent.tag == "Player2")
                 {
                     inMainGunRange = false;
                 }

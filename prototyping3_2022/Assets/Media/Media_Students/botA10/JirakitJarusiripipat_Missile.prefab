@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4157478056571208895}
   - component: {fileID: 3818361728864473153}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: JirakitJarusiripipat_Missile
   m_TagString: Hazard
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ca4913335a3b745850f156a725a789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
+  damage: 4
   particlesPrefab: {fileID: 6920240838163102515}
   SpawnParticlesHere: {x: 0, y: 0, z: 0}
   isPlayer1Weapon: 0
