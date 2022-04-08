@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class A19_Weapon2 : MonoBehaviour
 {
+    public A19_SoundManager a19_SoundManager;
+
     public GameObject spinDamageCollider;
+    
     public string button2;
     public Vector3 spinRotation;
     public float spinSpeed;
@@ -41,6 +44,8 @@ public class A19_Weapon2 : MonoBehaviour
             StartCoroutine(SpinCorontine());
             a19_Weapon1.CooldownFeedbac2k();
             originalRotationValue = transform.rotation;
+            a19_SoundManager.PlaySpinEffect();
+
         }
         else if (Input.GetButtonDown(button2) && !hasSpin && onSpinCooldown)
         {

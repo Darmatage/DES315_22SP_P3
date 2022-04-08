@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class A19_Weapon1 : MonoBehaviour
 {
+    public A19_SoundManager a19_SoundManager;
     public GameObject dustPartilce;
     public GameObject damageCollider;
     public BotBasic_Move botBasic_Move;
@@ -73,8 +74,9 @@ public class A19_Weapon1 : MonoBehaviour
 
     public void ResetGroundSlam()
     {
-                Instantiate(dustPartilce, transform.position,  Quaternion.Euler(90, 0, 0) );
+        a19_SoundManager.PlayGroundSlamEffect();
 
+                Instantiate(dustPartilce, transform.position,  Quaternion.Euler(90, 0, 0) );
         isGroundSlam = false;
         damageCollider.SetActive(false);
 
