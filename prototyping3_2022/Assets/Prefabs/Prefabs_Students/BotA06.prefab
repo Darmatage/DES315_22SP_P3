@@ -7934,9 +7934,9 @@ MonoBehaviour:
   gas: {fileID: 2800977067600027814}
   chargeKey: r
   fireKey: e
-  chargeThresh: 2.5
+  chargeThresh: 5
   chargeMax: 10
-  chargeLevelMax: 4
+  chargeLevelMax: 2
   chargeMoveSpeed: 5
   chargeText: {fileID: 2254590442537508327}
   levelText: {fileID: 4492337393310227806}
