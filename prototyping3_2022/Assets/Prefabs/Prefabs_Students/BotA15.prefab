@@ -5205,6 +5205,7 @@ GameObject:
   - component: {fileID: 5780095072016173801}
   - component: {fileID: 1630196679763894567}
   - component: {fileID: 6032891983736470958}
+  - component: {fileID: 970261280718948976}
   m_Layer: 0
   m_Name: BotA15
   m_TagString: Untagged
@@ -5377,6 +5378,19 @@ MonoBehaviour:
   cooldownTime: 1
   button3: 
   button4: 
+--- !u!65 &970261280718948976
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355330930375697355}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.39, y: 1.25, z: 3.25}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1355330930662561729
 GameObject:
   m_ObjectHideFlags: 0
