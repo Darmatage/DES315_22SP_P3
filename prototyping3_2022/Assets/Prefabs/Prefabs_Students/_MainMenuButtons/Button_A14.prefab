@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myScene: Scene_BotA14
-  botPrefab: {fileID: 1355330930375697355, guid: e845ce151d995264e80a8dfbe0f43522,
+  botPrefab: {fileID: 1355330930375697355, guid: e329f4a53f387b046bd74981838a2dd4,
     type: 3}
   gameHandlerObj: {fileID: 0}
 --- !u!1 &6350672901285930397
