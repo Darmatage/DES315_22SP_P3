@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4157478056571208895}
   - component: {fileID: 3818361728864473153}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: JirakitJarusiripipat_Missile
   m_TagString: Hazard
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2d4450fe56b9a4fbf58fe43e64c2e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToDestroy: 2
+  timeToDestroy: 3
 --- !u!1 &4226139421490322046
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,6 +163,9 @@ MonoBehaviour:
   slpashWithoutDamage: {fileID: 4085200527003681851, guid: 265623d160c37b84684c2e0024b02f34,
     type: 3}
   parent: {fileID: 0}
+  missileIndication: {fileID: 4085200527003681851, guid: 2dd5ae3718bc19d45901064449f65a46,
+    type: 3}
+  target: {fileID: 0}
 --- !u!54 &1659587771078229605
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -191,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ca4913335a3b745850f156a725a789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
+  damage: 4
   particlesPrefab: {fileID: 6920240838163102515}
   SpawnParticlesHere: {x: 0, y: 0, z: 0}
   isPlayer1Weapon: 0

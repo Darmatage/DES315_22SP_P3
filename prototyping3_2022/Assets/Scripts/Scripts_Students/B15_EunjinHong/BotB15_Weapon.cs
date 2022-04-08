@@ -11,7 +11,6 @@ public class BotB15_Weapon : MonoBehaviour{
     public GameObject RightWeapon;
     public GameObject LeftWeapon;
 
-    public GameObject UnderWeapon;
 
 
     public GameObject BottomSmoke;
@@ -24,16 +23,26 @@ public class BotB15_Weapon : MonoBehaviour{
     public bool rightWeaponOut = false;
     public bool leftWeaponOut = false;
 
-    public bool underWeaponOut = false;
 
     private bool emergencyEject = true;
     private Rigidbody rb;
 
-	//grab axis from parent object
-	public string button1;
+    public GameObject Beyblade;
+    Quaternion origRotation;
+    int Spin = 0;
+    float spinTimer = 0;
+    float spinCD = 3,  spincooldown;
+    int spinCount = 5;
+
+
+    //grab axis from parent object
+    public string button1;
 	public string button2;
 	public string button3;
 	public string button4; // currently boost in player move script
+
+
+    public GameObject[] spincounters;
 
     void Start(){
         rb = GetComponent<Rigidbody>();
@@ -68,14 +77,44 @@ public class BotB15_Weapon : MonoBehaviour{
             leftWeaponOut = true;
 			StartCoroutine(WithdrawFrontWeapon());
         }
-        if ((Input.GetButtonDown(button2)) && (backWeaponOut == false))
+        if ((Input.GetButtonDown(button2)) && Spin == 0 && spinCount > 0)
         {
-            UnderWeapon.transform.localScale = new Vector3(3, 3, 3);
-            UnderWeapon.transform.Translate(0, thrustAmount, 0);
-            //SoundEffect.PlayOneShot(SoundEffect.clip);
-            underWeaponOut = true;
-            StartCoroutine(WithdrawUnderWeapon());
+            Spin = 1;
+            spinCount--;
+            spincooldown = spinCD;
+            //spincounters[spinCount].SetActive(false);
         }
+
+
+        if (spincooldown > 0)
+        {
+            spincooldown -= Time.deltaTime;
+        }
+        if (spinCount < 5 && spincooldown <= 0)
+        {
+            if (spinCount != 5)
+                spincooldown = spinCD;
+            else
+                spincooldown = 0;
+            spinCount++;
+            //spincounters[spinCount - 1].SetActive(true);
+        }
+        if (Spin == 1 && spinTimer <= 0)
+        {
+            spinTimer = 0.5f;
+            Spin = 2;
+        }
+        if (spinTimer > 0 && Spin == 2)
+        {
+            Beyblade.transform.Rotate(new Vector3(0,0,20));
+            spinTimer -= Time.deltaTime;
+        }
+        else if (Spin == 2 && spinTimer <= 0)
+        {
+            Beyblade.transform.localRotation = origRotation;
+            Spin = 0;
+        }
+
         if (Input.GetButtonDown(button3) && (emergencyEject == true))
         {
             rb.AddForce(rb.centerOfMass + new Vector3(/*Random.Range(0, 200)*/0, 200, 0/* Random.Range(0, 200)*/), ForceMode.Impulse);
@@ -98,15 +137,6 @@ public class BotB15_Weapon : MonoBehaviour{
 
         frontWeaponOut = false;
 	}
-
-    IEnumerator WithdrawUnderWeapon()
-    {
-        yield return new WaitForSeconds(0.6f);
-        UnderWeapon.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        UnderWeapon.transform.Translate(0, -thrustAmount, 0);
-        underWeaponOut = false;
-    }
-
     IEnumerator EmergencyCooldown()
     {
         BottomSmoke.SetActive(true);

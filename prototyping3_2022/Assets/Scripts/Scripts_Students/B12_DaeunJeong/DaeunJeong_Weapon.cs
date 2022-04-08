@@ -23,7 +23,7 @@ public class DaeunJeong_Weapon : MonoBehaviour
     public float boostSpeed = 0.0f;
     public GameObject fireVFX;
 
-    public float WithdrawWeaponTimer = 1.0f;
+    public float WithdrawWeaponTimer = 2.0f;
     public float BoostTimer = 1.0f;
 
     void Start()

@@ -10,6 +10,7 @@ public class A6_RailGun : MonoBehaviour {
     private float damageTemp;
     private AudioSource source;
     private bool isFiring;
+    public GameObject gas;
 
     public string chargeKey;
     public string fireKey;
@@ -29,7 +30,7 @@ public class A6_RailGun : MonoBehaviour {
     void Start() {
         charge = 0;
         isFiring = false;
-        chargeLevel = 1;
+        chargeLevel = 0;
         isCharging = false;
         moveSpeedTemp = GetComponentInParent<BotBasic_Move>().moveSpeed;
         GetComponent<CapsuleCollider>().enabled = false;
@@ -66,13 +67,14 @@ public class A6_RailGun : MonoBehaviour {
             
             //source.pitch = Mathf.Lerp(0.0f, 1.25f, charge);
         }
-
-        if (charge >= chargeThresh * chargeLevel) {
-            chargeLevel = Mathf.Clamp(chargeLevel + 1, 0, chargeLevelMax);
+        if (charge >= chargeThresh && chargeLevel == 0)
+            chargeLevel++;
+        else if (charge >= chargeThresh * chargeLevel) {
+            chargeLevel = Mathf.Clamp(chargeLevel, 0, chargeLevelMax);
         }
 
         if (Input.GetButtonDown(fireKey)) {
-            if (chargeLevel > 1) {
+            if (chargeLevel >= 1) {
                 Fire(chargeLevel);
                 ResetCharge();
 
@@ -96,13 +98,15 @@ public class A6_RailGun : MonoBehaviour {
         source.loop = false;
         source.clip = fireSound;
         source.Play();
-        
+        gas.GetComponent<ParticleSystem>().Play();
+
         StartCoroutine(TurnOffRailgun());
+        StartCoroutine(Smoke());
     }
 
     private void ResetCharge() {
         charge = 0.0f;
-        chargeLevel = 1;
+        chargeLevel = 0;
         source.pitch = 1;
     }
 
@@ -111,5 +115,10 @@ public class A6_RailGun : MonoBehaviour {
         GetComponent<HazardDamage>().damage = damageTemp;
         GetComponent<CapsuleCollider>().enabled = false;
         GetComponent<MeshRenderer>().enabled = false;
+    }
+
+    IEnumerator Smoke() {
+        yield return new WaitForSeconds(2.0f);
+        gas.GetComponent<ParticleSystem>().Stop();
     }
 }
