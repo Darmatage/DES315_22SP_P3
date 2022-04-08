@@ -28,6 +28,8 @@ public class QuackBash_CD : MonoBehaviour
     public AnimationCurve m_interp;
     public AudioSource m_chargeSound;
     public AudioSource m_LaunchSound;
+    public ParticleSystem m_chargingFX;
+    public ParticleSystem m_LaunchFX;
 
     private enum DuckState
     {
@@ -100,7 +102,13 @@ public class QuackBash_CD : MonoBehaviour
             m_movement.rotateSpeed = Mathf.Lerp(m_originalTurn, m_chargeTurn, eval);
             m_weapon.damage = Mathf.Lerp(m_minDamage, m_MaxDamage, eval);
             // damage is based on the charge
-            
+
+            if (m_chargingFX)
+            {
+                m_chargingFX.Play();
+            }
+
+
         }
         else
         {
@@ -122,6 +130,8 @@ public class QuackBash_CD : MonoBehaviour
                 m_rb.AddForce(transform.forward * (m_launchForce * eval), ForceMode.Impulse);
                 m_state = DuckState.Fire;
 
+                // fx
+
                 if (m_chargeSound)
                 {
                     m_chargeSound.Stop();
@@ -129,6 +139,16 @@ public class QuackBash_CD : MonoBehaviour
                 if (m_LaunchSound)
                 {
                     m_LaunchSound.Play();
+                }
+
+                if (m_chargingFX)
+                {
+                    m_chargingFX.Stop();
+                }
+
+                if (m_LaunchFX)
+                {
+                    m_LaunchFX.Play();
                 }
 
 
