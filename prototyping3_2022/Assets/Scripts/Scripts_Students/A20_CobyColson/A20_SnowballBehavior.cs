@@ -7,6 +7,7 @@ public class A20_SnowballBehavior : MonoBehaviour
     private Vector3 dir;
     public float speed;
     public float gravityFactor;
+    private float lifetime = 6.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,11 @@ public class A20_SnowballBehavior : MonoBehaviour
     {
         transform.position += dir * speed * Time.deltaTime;
         dir.y -= gravityFactor;
+        lifetime -= Time.deltaTime;
+        if (lifetime < 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void Initialize(Vector3 position, Vector3 direction)
