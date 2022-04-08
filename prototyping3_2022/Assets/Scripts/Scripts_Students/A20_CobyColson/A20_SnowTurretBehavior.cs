@@ -8,40 +8,60 @@ public class A20_SnowTurretBehavior : MonoBehaviour
     private float rotationSpeed;
     private float turretCooldown;
     private bool turretOn = false;
+    private Rigidbody rb;
+    public Transform snowballSpawn;
+    private float initialSpeed = 10.0f;
+    private bool spawning = false;
+
+    A20_Snowball snowman;
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
-        if (turretOn == false)
+        if (rb.velocity.sqrMagnitude > 0.1f)
         {
-            StartCoroutine(SpawnSnowball());
-            turretOn = true;
+            transform.localScale = transform.localScale * 1.0002f;
+        }
+        else if (!spawning)
+        {
+            StartCoroutine(SpawnSnowballs());
+            spawning = true;
         }
     }
 
-    public void Initialize(GameObject snowballPrefab_, float rotationSpeed_, float turretCooldown_, Vector3 position)
+    public void Initialize(GameObject snowballPrefab_, Vector3 position, Vector3 forward, A20_Snowball snowman_)
     {
         snowballPrefab = snowballPrefab_;
-        rotationSpeed = rotationSpeed_;
-        turretCooldown = turretCooldown_;
         transform.position = position;
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+        rb.velocity = forward * initialSpeed;
+        snowman = snowman_;
     }
 
-    private IEnumerator SpawnSnowball()
+    private IEnumerator SpawnSnowballs()
     {
-        while (true)
+        while (transform.localScale.x > 0)
         {
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x,
+             transform.eulerAngles.y + 22.5f,
+              transform.eulerAngles.z);
+            
             A20_SnowballBehavior snowball = Instantiate(snowballPrefab).GetComponent<A20_SnowballBehavior>();
-            snowball.Initialize(new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z),
-             transform.forward);
-            yield return new WaitForSeconds(turretCooldown);
-            Destroy(snowball.gameObject);
+            snowball.Initialize(snowballSpawn.position, transform.forward);
+
+            transform.localScale -= Vector3.one * 0.075f;
+
+            yield return new WaitForSeconds(0.15f);
         }
+        snowman.ResetBody();
+        Destroy(gameObject);
     }
 }

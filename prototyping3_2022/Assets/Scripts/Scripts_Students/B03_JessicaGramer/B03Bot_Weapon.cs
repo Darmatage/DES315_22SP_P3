@@ -98,6 +98,8 @@ public class B03Bot_Weapon : MonoBehaviour
 			movement.moveSpeed *= slowDown;
 		}
 
+		if (currentWeapon == Weapon.KNIVES && weapon == Weapon.NONE) KinvesWeapons.SetActive(false);
+
 		currentWeapon = weapon;
     }
 
