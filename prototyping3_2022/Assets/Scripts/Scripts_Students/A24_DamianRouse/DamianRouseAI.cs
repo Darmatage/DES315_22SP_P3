@@ -17,11 +17,14 @@ public class DamianRouseAI : MonoBehaviour
   public float predictedEnemyAngle_;
   public int futureSense_ = 5;
 
-  public bool aggro_ = false;
   public int moving_ = 0;
 
   public float timeUntilJump_ = 2;
   public float jumpTimer_ = 0;
+
+  public float shield_ = 0;
+
+  public State state_ = State.Passive;
 
   [Header("Obstacle Detection Data")]
   public float obstacleDetectRange_ = 4f;
@@ -57,6 +60,7 @@ public class DamianRouseAI : MonoBehaviour
   public float startTimer_ = 500f;
   public float timer_ = 0;
   
+  public enum State { Passive, Defensive, Neutral, Aggro};
 
   void Start()
   {
@@ -128,13 +132,22 @@ public class DamianRouseAI : MonoBehaviour
     }
     else
       NOTINARENA_ = true;
+
+    shield_ += BBD_.shieldPowerFront;
+    shield_ += BBD_.shieldPowerBack;
+    shield_ += BBD_.shieldPowerLeft;
+    shield_ += BBD_.shieldPowerRight;
+    shield_ += BBD_.shieldPowerTop;
+    shield_ += BBD_.shieldPowerBottom;
   }
 
   // Update is called once per frame
   void Update()
   {
+    //"Get" the arena timer
     timer_ += Time.deltaTime / 2f;
 
+    //Do nothing outside an arena
     if (NOTINARENA_)
       return;
 
@@ -143,6 +156,8 @@ public class DamianRouseAI : MonoBehaviour
     Move();
   }
 
+  //INTEL
+  //------------------------------------------------------
   void GetIntel()
   {
     //Get 2D x and z position vectors
@@ -176,8 +191,8 @@ public class DamianRouseAI : MonoBehaviour
       flankedTimer_ = 0;
 
     //Cannot be flanked before a certain time
-    if (timer_ < delayUntilFlankingIsPossible_)
-      flanked_ = false;
+    //if (timer_ < delayUntilFlankingIsPossible_)
+    //  flanked_ = false;
 
     //Predict where player will be
     predictedEnemyAngle_ = (angleBetweenFrontAndEnemy_ - pastAngleBetweenFrontAndEnemy_) * futureSense_ + angleBetweenFrontAndEnemy_;
@@ -194,6 +209,22 @@ public class DamianRouseAI : MonoBehaviour
     }
     else
       jumpTimer_ = 0;
+
+    //Getting shot from a distance
+    float currentShield = 0;
+    currentShield += BBD_.shieldPowerFront;
+    currentShield += BBD_.shieldPowerBack;
+    currentShield += BBD_.shieldPowerLeft;
+    currentShield += BBD_.shieldPowerRight;
+    currentShield += BBD_.shieldPowerTop;
+    currentShield += BBD_.shieldPowerBottom;
+
+    if(shield_ + 0.01 < currentShield || shield_ - 0.01 > currentShield)
+    {
+      shield_ = currentShield;
+      if (distanceBetweenFrontAndEnemy_ > 10f)
+        state_ = State.Aggro;
+    }
 
     //Make rays from 4 spots on AI
     Ray frontLeft = new Ray(transform.position - transform.right + transform.forward * 2, transform.forward);
@@ -249,13 +280,11 @@ public class DamianRouseAI : MonoBehaviour
     }
   }
 
+  //Decide on what to do based on intel
   public void Act()
   {
-    //make sure no mixed move orders
-    bool gaveMoveDir = false;
-
-    //Aggro flip
-    if(!aggro_)
+    //If armored, allow
+    if(DRM_.isArmored_)
     {
       if (timer_ / startTimer_  > 0.5f ||
            (botNumber_ == 1 && GameHandler.p1Health < 11) ||
@@ -263,32 +292,113 @@ public class DamianRouseAI : MonoBehaviour
          )
       {
         DRM_.UseMove(4);
-        aggro_ = true;
+        state_ = State.Aggro;
       }
     }
 
-    //What to be done if flanked
-    if(flanked_)
+    switch(state_)
     {
-      if(DRM_.isAttacking == false)
+      case State.Passive:
+        PassiveAct();
+        break;
+      case State.Defensive:
+        DefensiveAct();
+        break;
+      case State.Neutral:
+        NeutralAct();
+        break;
+      case State.Aggro:
+        AggroAct();
+        break;
+    }
+  }
+
+  void PassiveAct()
+  {
+    LookTowardsEnemy();
+    moving_ = -1;
+    MaintainDistance(DRM_.weaponScript_.moveOneRange_ + 4f, DRM_.weaponScript_.moveOneRange_ + 7f, 0);
+    if (timer_ > delayUntilFlankingIsPossible_)
+      state_ = State.Defensive;
+  }
+
+  void DefensiveAct()
+  {
+    LookTowardsEnemy();
+    MaintainDistance(DRM_.weaponScript_.moveOneRange_ + 1f, DRM_.weaponScript_.moveOneRange_ + 7f, 0);
+    HandleFlanking(1);
+
+    float absABFE = Mathf.Abs(angleBetweenFrontAndEnemy_);
+
+    //Only do if not attacking
+    if (!DRM_.isAttacking)
+    {
+      if (distanceBetweenFrontAndEnemy_ < DRM_.weaponScript_.moveOneRange_ + 3f && absABFE < 15f)
+        DRM_.UseMove(1);
+    }
+  }
+
+  void NeutralAct()
+  {
+    moving_ = 0;
+    LookTowardsEnemy();
+    HandleFlanking(1);
+
+    float absABFE = Mathf.Abs(angleBetweenFrontAndEnemy_);
+
+    //Only do if not attacking
+    if (!DRM_.isAttacking)
+    {
+      if (distanceBetweenFrontAndEnemy_ < DRM_.weaponScript_.moveOneRange_ + 2f && absABFE < 15f)
+        DRM_.UseMove(1);
+    }
+  }
+
+  void AggroAct()
+  {
+    LookTowardsEnemy();
+    MaintainDistance(DRM_.weaponScript_.moveOneRange_, DRM_.weaponScript_.moveOneRange_ + 3f, 0);
+    HandleFlanking(1);
+
+    float absABFE = Mathf.Abs(angleBetweenFrontAndEnemy_);
+
+    //Only do if not attacking
+    if (!DRM_.isAttacking)
+    {
+      if (distanceBetweenFrontAndEnemy_ < DRM_.weaponScript_.moveOneRange_ + 2f && absABFE < 15f)
+        DRM_.UseMove(1);
+    }
+  }
+
+  void HandleFlanking(int attacks = 0)
+  {
+    //What to be done if flanked
+    if (flanked_)
+    {
+      if (attacks != 0)
       {
-        if(Random.Range(0, 4) == 4)
-          DRM_.UseMove(2);
-        else
+        if (DRM_.isAttacking == false)
         {
-          if(angleBetweenFrontAndEnemy_ < 0)
-            DRM_.UseMove(3);
-          else
+          if (Random.Range(0, 5) == 4)
             DRM_.UseMove(2);
+          else
+          {
+            if (angleBetweenFrontAndEnemy_ < 0)
+              DRM_.UseMove(3);
+            else
+              DRM_.UseMove(2);
+          }
         }
       }
     }
-    else if(flankedTimer_ > 0.3f)
+    if (flankedTimer_ > 0.3f)
     {
       moving_ = -1;
-      gaveMoveDir = true;
     }
+  }
 
+  void LookTowardsEnemy()
+  {
     //Get Rot speed
     rotation_ = BBM_.rotateSpeed * Time.deltaTime;
     float angleToUse = angleBetweenFrontAndEnemy_;
@@ -311,25 +421,20 @@ public class DamianRouseAI : MonoBehaviour
     }
     else
       rotation_ = 0;
-
-
-    //Only do if not attacking
-    if(!DRM_.isAttacking)
-    {
-      if(distanceBetweenFrontAndEnemy_ < DRM_.weaponScript_.moveOneRange_ + 2f && absABFE < 15f)
-        DRM_.UseMove(1);
-    }
-
-    //if no move order, give order
-    if(!gaveMoveDir)
-    {
-      if (distanceBetweenFrontAndEnemy_ > DRM_.weaponScript_.moveOneRange_ + 3f)
-        moving_ = 1;
-      else if(distanceBetweenFrontAndEnemy_ < DRM_.weaponScript_.moveOneRange_)
-        moving_ = -1;
-    }
   }
 
+  void MaintainDistance(float min, float max, float variation)
+  {
+    if (distanceBetweenFrontAndEnemy_ > max)
+      moving_ = 1;
+    else if (distanceBetweenFrontAndEnemy_ < min + variation)
+      moving_ = -1;
+    //else
+    //  moving_ = 0;
+  }
+
+  //MOVEMENT After Acting
+  //-----------------------------
   public void Move()
   {
     move_ = BBM_.moveSpeed * Time.deltaTime * moving_;
