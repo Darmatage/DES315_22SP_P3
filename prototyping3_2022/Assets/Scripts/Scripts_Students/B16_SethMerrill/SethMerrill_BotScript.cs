@@ -31,16 +31,12 @@ public class SethMerrill_BotScript : MonoBehaviour
 			timeUntilReady = 0.0f;
 			if(CheckInputFire() && weapon != null)
 			{
+				arms.GetComponent<SethMerrillArmsScript>().Unhold();
 				weapon.GetComponent<SethMerrillCannonScript>().Fire();
 				GetComponent<Rigidbody>().AddForce(transform.forward * -5000.0f);
 				timeUntilReady = rechargeTime;
 			}
 		}
-		
-		if(CheckInputArms() && arms != null)
-		{
-			arms.GetComponent<SethMerrillArmsScript>().Grab();
-		}	
     }
 	
 	bool CheckInputFire()
@@ -51,5 +47,19 @@ public class SethMerrill_BotScript : MonoBehaviour
 	bool CheckInputArms()
 	{
 		return Input.GetButtonDown(b2);
+	}
+	
+	private void OnTriggerStay(Collider other)
+	{
+		if(CheckInputArms() && arms != null)
+		{
+			Debug.Log(other.gameObject.name);
+			arms.GetComponent<SethMerrillArmsScript>().Grab(other.gameObject);
+		}
+	}
+	
+	private void OnTriggerExit(Collider other)
+	{
+		arms.GetComponent<SethMerrillArmsScript>().Unhold();
 	}
 }
