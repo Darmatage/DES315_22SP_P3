@@ -73,7 +73,7 @@ public class BotBasic_Damage : MonoBehaviour{
 		}
 
 		if ((other.gameObject.tag == "Hazard")&&(notMyWeapon == true)){
-			attackDamage = other.gameObject.GetComponent<HazardDamage>().damage  ;
+			attackDamage = other.gameObject.GetComponent<HazardDamage>().damage;
 
 			Vector3 directionFore = (other.transform.position - transform.position).normalized;
 			Vector3 directionSides = (other.transform.position - compassSides.transform.position).normalized;
