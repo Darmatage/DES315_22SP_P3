@@ -61,6 +61,8 @@ public class DamianRouseManager : MonoBehaviour
     defaultTurn_ = BBM_.rotateSpeed;
 
     SetDefaultCamToBehind();
+    if(!isPlayer_)
+      BBM_.enabled = false;
   }
 
   void SetDefaultCamToBehind()
@@ -167,7 +169,7 @@ public class DamianRouseManager : MonoBehaviour
     armorParent_.transform.SetParent(null);
 
     //Affect weapon stats
-    weaponScript_.moveOneDamage_ = 2;
+    weaponScript_.moveOneDamage_ = 1;
     weaponScript_.moveOneSpeed_ /= 1.5f;
 
     //Get rid of all shield

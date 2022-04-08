@@ -13,6 +13,9 @@ public class A04_LaserEyeAttack : MonoBehaviour
     public string button;
 
     public float lengthOfAttack = 4f;
+    public float cooldown = 1.0f;
+    private bool readytoattack = true;
+    private float cdtimer;
 
     private Vector3 leftOGpos;
     private Vector3 rightOGpos;
@@ -31,8 +34,21 @@ public class A04_LaserEyeAttack : MonoBehaviour
         Vector3 recentLeft = leftOGpos + transform.position + transform.forward * 3.0f;
         Vector3 recentRight = rightOGpos + transform.position + transform.forward * 3.0f;
 
-        if ((Input.GetButtonDown(button)))
+
+        if(!readytoattack)
         {
+            cdtimer -= Time.deltaTime;
+
+            if(cdtimer <= 0)
+            {
+                readytoattack = true;
+            }
+        }
+
+        if (Input.GetButtonDown(button) && readytoattack)
+        {
+            readytoattack = false;
+            cdtimer = cooldown;
 
             curLeft = Instantiate(leftEyePrefab, recentLeft, Quaternion.identity);
             curRight = Instantiate(rightEyePrefab, recentRight, Quaternion.identity);
