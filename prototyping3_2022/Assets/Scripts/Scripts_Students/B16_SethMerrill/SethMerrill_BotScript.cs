@@ -53,7 +53,6 @@ public class SethMerrill_BotScript : MonoBehaviour
 	{
 		if(CheckInputArms() && arms != null)
 		{
-			Debug.Log(other.gameObject.name);
 			arms.GetComponent<SethMerrillArmsScript>().Grab(other.gameObject);
 		}
 	}
