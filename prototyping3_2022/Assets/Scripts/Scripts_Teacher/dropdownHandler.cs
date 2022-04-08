@@ -81,13 +81,13 @@ public class dropdownHandler : MonoBehaviour{
 		}else if (isNPC == true){
 			items1.Add("");
 			items1.Add("NPC_A00");
-			items1.Add("NPC_A01 Oussama Khalaf");
-			items1.Add("NPC_A02 Ryan Heath");
-			items1.Add("NPC_A03 Jiwon Jung");
-			items1.Add("NPC_A19 Zacary Brown");
-			items1.Add("NPC_B05 Carlos Garcia-Perez");
-			items1.Add("NPC_B13 Skyler Powers");
-			items1.Add("NPC_B16 Chase Graves");
+			items1.Add("NPC_A10 Jirakit Jarusiripipat");
+			items1.Add("NPC_A24 Damian Rouse");
+			//items1.Add("NPC_A03 Jiwon Jung");
+			//items1.Add("NPC_A19 Zacary Brown");
+			//items1.Add("NPC_B05 Carlos Garcia-Perez");
+			//items1.Add("NPC_B13 Skyler Powers");
+			//items1.Add("NPC_B16 Chase Graves");
 		}
 		
 		List<string> items2 = new List<string>();
@@ -146,13 +146,13 @@ public class dropdownHandler : MonoBehaviour{
 		}else if (isNPC == true){
 			items2.Add("");
 			items2.Add("NPC_A00");
-			items2.Add("NPC_B05 Carlos Garcia-Perez");
-			items2.Add("NPC_B13 Skyler Powers");
-			items2.Add("NPC_B16 Chase Graves");
-			items2.Add("NPC_A01 Oussama Khalaf");
-			items2.Add("NPC_A02 Ryan Heath");
-			items2.Add("NPC_A03 Jiwon Jung");
-			items2.Add("NPC_A19 Zacary Brown");
+			items2.Add("NPC_A10 Jirakit Jarusiripipat");
+			items2.Add("NPC_A24 Damian Rouse");
+			//items2.Add("NPC_B16 Chase Graves");
+			//items2.Add("NPC_A01 Oussama Khalaf");
+			//items2.Add("NPC_A02 Ryan Heath");
+			//items2.Add("NPC_A03 Jiwon Jung");
+			//items2.Add("NPC_A19 Zacary Brown");
 		}
 
 		//fill dropdown with items

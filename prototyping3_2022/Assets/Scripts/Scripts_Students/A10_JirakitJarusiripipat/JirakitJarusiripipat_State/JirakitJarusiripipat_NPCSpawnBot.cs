@@ -17,6 +17,7 @@ public class JirakitJarusiripipat_NPCSpawnBot : JirakitJarusiripipat_IState
 
     public void OnExit()
     {
+        //JirakitJarusiripipat_BotA10NPC.isMoving = true;
         Debug.Log("Out SpawnBotState");
     }
 

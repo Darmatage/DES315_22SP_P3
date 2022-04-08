@@ -18,6 +18,7 @@ public class JirakitJarusiripipat_NPCShootMainGun : JirakitJarusiripipat_IState
     public void OnExit()
     {
         Debug.Log("Out ShootMainGunState");
+        JirakitJarusiripipat_BotA10NPC.isMoving = true;
     }
 
     public void Tick()
