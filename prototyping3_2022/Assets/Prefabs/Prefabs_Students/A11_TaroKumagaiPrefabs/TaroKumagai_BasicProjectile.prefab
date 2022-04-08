@@ -14489,9 +14489,9 @@ GameObject:
   - component: {fileID: 1042945026587511118}
   - component: {fileID: 601366264177072562}
   - component: {fileID: 3040799453161350669}
-  - component: {fileID: 5085242730789195304}
   - component: {fileID: 5810568322465935681}
   - component: {fileID: -1745997348830260764}
+  - component: {fileID: -7014038078653964680}
   m_Layer: 0
   m_Name: TaroKumagai_BasicProjectile
   m_TagString: Hazard
@@ -14567,19 +14567,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5085242730789195304
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6779703677866785669}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5810568322465935681
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14617,6 +14604,19 @@ MonoBehaviour:
   isMonsterWeapon: 0
   parentRef: {fileID: 0}
   Explosion: {fileID: 0}
+--- !u!135 &-7014038078653964680
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6779703677866785669}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7615570426061416807
 GameObject:
   m_ObjectHideFlags: 0

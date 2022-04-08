@@ -7,21 +7,42 @@ public class BotB15_Weapon : MonoBehaviour{
 
     public GameObject FrontWeapon;
     public GameObject BackWeapon;
+
+    public GameObject RightWeapon;
+    public GameObject LeftWeapon;
+
+
+
     public GameObject BottomSmoke;
     //public AudioSource SoundEffect;
     //public AudioSource WoopSoundEffect;
-    private float thrustAmount = 2.0f;
+    private float thrustAmount = 3.0f;
 
     private bool frontWeaponOut = false;
 	private bool backWeaponOut = false;
+    public bool rightWeaponOut = false;
+    public bool leftWeaponOut = false;
+
+
     private bool emergencyEject = true;
     private Rigidbody rb;
 
-	//grab axis from parent object
-	public string button1;
+    public GameObject Beyblade;
+    Quaternion origRotation;
+    int Spin = 0;
+    float spinTimer = 0;
+    float spinCD = 3,  spincooldown;
+    int spinCount = 5;
+
+
+    //grab axis from parent object
+    public string button1;
 	public string button2;
 	public string button3;
 	public string button4; // currently boost in player move script
+
+
+    public GameObject[] spincounters;
 
     void Start(){
         rb = GetComponent<Rigidbody>();
@@ -37,23 +58,66 @@ public class BotB15_Weapon : MonoBehaviour{
 		//if (Input.GetKeyDown(KeyCode.T)){
 		if ((Input.GetButtonDown(button1))&&(frontWeaponOut==false))
         {
-            FrontWeapon.transform.localScale = new Vector3(1, 1, 1);
+            FrontWeapon.transform.localScale = new Vector3(3, 3, 3);
             FrontWeapon.transform.Translate(0, thrustAmount, 0);
+
+            BackWeapon.transform.localScale = new Vector3(3,3,3);
+            BackWeapon.transform.Translate(0, thrustAmount, 0);
+
+            RightWeapon.transform.localScale = new Vector3(3, 3, 3);
+            RightWeapon.transform.Translate(0, thrustAmount, 0);
+
+            LeftWeapon.transform.localScale = new Vector3(3, 3, 3);
+            LeftWeapon.transform.Translate(0, thrustAmount, 0);
+
             //SoundEffect.PlayOneShot(SoundEffect.clip);
             frontWeaponOut = true;
+            backWeaponOut = true;
+            rightWeaponOut = true;
+            leftWeaponOut = true;
 			StartCoroutine(WithdrawFrontWeapon());
         }
-        if ((Input.GetButtonDown(button2)) && (backWeaponOut == false))
+        if ((Input.GetButtonDown(button2)) && Spin == 0 && spinCount > 0)
         {
-            BackWeapon.transform.localScale = new Vector3(1, 1, 1);
-            BackWeapon.transform.Translate(0, thrustAmount, 0);
-            //SoundEffect.PlayOneShot(SoundEffect.clip);
-            backWeaponOut = true;
-            StartCoroutine(WithdrawBackWeapon());
+            Spin = 1;
+            spinCount--;
+            spincooldown = spinCD;
+            //spincounters[spinCount].SetActive(false);
         }
-        if(Input.GetButtonDown(button3) && (emergencyEject == true))
+
+
+        if (spincooldown > 0)
         {
-            rb.AddForce(rb.centerOfMass + new Vector3(Random.Range(0, 200), 100, Random.Range(0, 200)), ForceMode.Impulse);
+            spincooldown -= Time.deltaTime;
+        }
+        if (spinCount < 5 && spincooldown <= 0)
+        {
+            if (spinCount != 5)
+                spincooldown = spinCD;
+            else
+                spincooldown = 0;
+            spinCount++;
+            //spincounters[spinCount - 1].SetActive(true);
+        }
+        if (Spin == 1 && spinTimer <= 0)
+        {
+            spinTimer = 0.5f;
+            Spin = 2;
+        }
+        if (spinTimer > 0 && Spin == 2)
+        {
+            Beyblade.transform.Rotate(new Vector3(0,0,20));
+            spinTimer -= Time.deltaTime;
+        }
+        else if (Spin == 2 && spinTimer <= 0)
+        {
+            Beyblade.transform.localRotation = origRotation;
+            Spin = 0;
+        }
+
+        if (Input.GetButtonDown(button3) && (emergencyEject == true))
+        {
+            rb.AddForce(rb.centerOfMass + new Vector3(/*Random.Range(0, 200)*/0, 200, 0/* Random.Range(0, 200)*/), ForceMode.Impulse);
             //WoopSoundEffect.Play();
             StartCoroutine(EmergencyCooldown());
             emergencyEject = false;
@@ -64,17 +128,15 @@ public class BotB15_Weapon : MonoBehaviour{
 		yield return new WaitForSeconds(0.6f);
         FrontWeapon.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         FrontWeapon.transform.Translate(0, -thrustAmount, 0);
-        frontWeaponOut = false;
-	}
-
-    IEnumerator WithdrawBackWeapon()
-    {
-        yield return new WaitForSeconds(0.6f);
         BackWeapon.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         BackWeapon.transform.Translate(0, -thrustAmount, 0);
-        backWeaponOut = false;
-    }
+        RightWeapon.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        RightWeapon.transform.Translate(0, -thrustAmount, 0);
+        LeftWeapon.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        LeftWeapon.transform.Translate(0, -thrustAmount, 0);
 
+        frontWeaponOut = false;
+	}
     IEnumerator EmergencyCooldown()
     {
         BottomSmoke.SetActive(true);

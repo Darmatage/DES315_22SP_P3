@@ -12,83 +12,59 @@ public class A04_LaserEyeAttack : MonoBehaviour
 
     public string button;
 
-    private bool isWeaponOut = false;
-
     public float lengthOfAttack = 4f;
+    public float cooldown = 1.0f;
+    private bool readytoattack = true;
+    private float cdtimer;
 
     private Vector3 leftOGpos;
     private Vector3 rightOGpos;
 
-
-    private bool isDone = false;
     // Start is called before the first frame update
     void Start()
     {
         button = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
-        leftOGpos = leftEyePrefab.transform.localPosition;
-        rightOGpos = rightEyePrefab.transform.localPosition;
+        leftOGpos = leftEyePrefab.transform.position;
+        rightOGpos = rightEyePrefab.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if ((Input.GetButtonDown(button)) && !isWeaponOut)
+        Vector3 recentLeft = leftOGpos + transform.position + transform.forward * 3.0f;
+        Vector3 recentRight = rightOGpos + transform.position + transform.forward * 3.0f;
+
+
+        if(!readytoattack)
         {
+            cdtimer -= Time.deltaTime;
 
-            curLeft = Instantiate(leftEyePrefab, leftOGpos, Quaternion.identity);
-            curRight = Instantiate(rightEyePrefab, rightOGpos, Quaternion.identity);
+            if(cdtimer <= 0)
+            {
+                readytoattack = true;
+            }
+        }
 
-            Vector3 tarLeft = new Vector3(lengthOfAttack, - lengthOfAttack, 0);
-            Vector3 tarRight = new Vector3(lengthOfAttack, - lengthOfAttack, 0);
+        if (Input.GetButtonDown(button) && readytoattack)
+        {
+            readytoattack = false;
+            cdtimer = cooldown;
 
-            StartCoroutine(LerpPosition(tarLeft, tarRight, 1.5f));
+            curLeft = Instantiate(leftEyePrefab, recentLeft, Quaternion.identity);
+            curRight = Instantiate(rightEyePrefab, recentRight, Quaternion.identity);
 
-            isWeaponOut = true;
+
+            Rigidbody left = curLeft.GetComponent<Rigidbody>();
+            Rigidbody right = curRight.GetComponent<Rigidbody>();
+
+            Vector3 tarLeft = transform.forward * lengthOfAttack + transform.up * -lengthOfAttack;
+            Vector3 tarRight = transform.forward * lengthOfAttack + transform.up * -lengthOfAttack;
+
+            left.AddRelativeForce(tarLeft, ForceMode.VelocityChange);
+            right.AddRelativeForce(tarRight, ForceMode.VelocityChange);
+            
             
         }
 
-        if(isWeaponOut && isDone)
-        {
-            isDone = false;
-            StartCoroutine(WithdrawWeapon());
-        }
-    }
-
-
-    IEnumerator LerpPosition(Vector3 tarLeft, Vector3 tarRight, float dur)
-    {
-        float time = 0;
-
-        Vector3 leftStart = curLeft.transform.position;
-        Vector3 rightStart = curRight.transform.position;
-
-        while (time < dur)
-        {
-            curLeft.transform.position = Vector3.Lerp(leftStart, tarLeft, time / dur);
-            curRight.transform.position = Vector3.Lerp(rightStart, tarRight, time / dur);
-
-            time += Time.deltaTime;
-  
-            yield return null;
-        }
-
-        isDone = true;
-    }
-
-    IEnumerator WithdrawWeapon()
-    {
-        yield return new WaitForSeconds(0.6f);
-
-        if(curLeft)
-        {
-            Destroy(curLeft);
-        }
-
-        if(curRight)
-        {
-            Destroy(curRight);
-        }
-
-        isWeaponOut = false;
-    }
+    } 
 }

@@ -21,7 +21,7 @@ public class DamianRouseWeapon : MonoBehaviour
 
   [Header("Move 2 Settings")]
   public int moveTwoDamage_ = 6;
-  public float moveTwoTurnSpeed_ = 4f;
+  public float moveTwoTurnSpeedMult_ = 4f;
   public float moveTwoDashForce_ = 400f;
   public float moveTwoWait1_ = 4f;
   public float moveTwoWait2_ = 4f;
@@ -36,7 +36,7 @@ public class DamianRouseWeapon : MonoBehaviour
   public float moveThreeWait4_ = 4f;
   public float slashSpin_ = -4f;
 
-  //Misc
+  //Misc for lerping
   private Vector3 startPos_;
   private Quaternion startRot_;
   private Vector3 currentVec_;
@@ -54,8 +54,6 @@ public class DamianRouseWeapon : MonoBehaviour
   private float lerpDuration_;
   private Func<int> lerpFunction_ = () => { return 1; };
   private Func<int> Endfunc_ = () => { return 1; };
-
-  //public Animator stab_;
 
   // Start is called before the first frame update
   void Start()
@@ -144,7 +142,8 @@ public class DamianRouseWeapon : MonoBehaviour
 
   public int MoveTwoStep1E()
   {
-    owner_.GetComponent<BotBasic_Move>().rotateSpeed = moveTwoTurnSpeed_;
+    BotBasic_Move BBM = owner_.GetComponent<BotBasic_Move>();
+    BBM.rotateSpeed = owner_.GetComponent<DamianRouseManager>().defaultTurn_ * moveTwoTurnSpeedMult_;
     SetValues(moveTwoWait2_, MoveTwoStep2, MoveTwoStep2E);
     return 1;
   }
@@ -296,7 +295,7 @@ public class DamianRouseWeapon : MonoBehaviour
     if (hitsLeft_ < 1)
     {
       go.GetComponent<BoxCollider>().enabled = false;
-      hazard.damage = 0;
+      //hazard.damage = 0;
     }
   }
 

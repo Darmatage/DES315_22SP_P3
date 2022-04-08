@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6463855922134122588}
   - component: {fileID: 626777765700450922}
   - component: {fileID: 7289571740596908281}
+  - component: {fileID: 151063518478994208}
   m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
@@ -4873,6 +4874,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &151063518478994208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529369241628673821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a2d4450fe56b9a4fbf58fe43e64c2e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToDestroy: 0.75
 --- !u!1 &3768722107935373676
 GameObject:
   m_ObjectHideFlags: 0
@@ -4889,7 +4903,7 @@ GameObject:
   - component: {fileID: -3137855796218289427}
   - component: {fileID: 2036120254283430930}
   - component: {fileID: 8553369636196392619}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Blast Radius
   m_TagString: Hazard
   m_Icon: {fileID: 0}
@@ -5032,7 +5046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ca4913335a3b745850f156a725a789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 5
   particlesPrefab: {fileID: 1529369241628673821}
   SpawnParticlesHere: {x: 0, y: 0, z: 0}
   isPlayer1Weapon: 0
