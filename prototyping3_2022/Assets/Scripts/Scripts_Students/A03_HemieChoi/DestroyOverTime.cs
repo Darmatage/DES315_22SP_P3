@@ -23,6 +23,7 @@ public class DestroyOverTime : MonoBehaviour
         if (timer >= lifeTime)
         {
             --bulletData.duckOutCount;
+            bulletData.showDuck();
             Destroy(gameObject);
         }
     }

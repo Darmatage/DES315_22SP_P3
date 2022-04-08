@@ -5205,6 +5205,7 @@ GameObject:
   - component: {fileID: 5780095072016173801}
   - component: {fileID: 1630196679763894567}
   - component: {fileID: 6032891983736470958}
+  - component: {fileID: 970261280718948976}
   m_Layer: 0
   m_Name: BotA15
   m_TagString: Untagged
@@ -5341,7 +5342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  rotateSpeed: 150
+  rotateSpeed: 40
   jumpSpeed: 3
   boostSpeed: 10
   groundCheck: {fileID: 1355330930762081256}
@@ -5373,10 +5374,23 @@ MonoBehaviour:
   weaponLeftThrust: {fileID: 4245709177991594459}
   weaponRightThrust: {fileID: 8160687095547711129}
   thrustDistance: 2
-  thrustTime: 1
+  thrustTime: 1.5
   cooldownTime: 1
   button3: 
   button4: 
+--- !u!65 &970261280718948976
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355330930375697355}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.39, y: 1.25, z: 3.25}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1355330930662561729
 GameObject:
   m_ObjectHideFlags: 0
@@ -25217,6 +25231,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1355330930375697356}
     m_Modifications:
+    - target: {fileID: 1781594437933363392, guid: 93b81acf4f16b804a84ed43795fb3015,
+        type: 3}
+      propertyPath: m_Animation
+      value: 
+      objectReference: {fileID: 7400000, guid: 94b7c2a454a5ff24f99c2091df77ad6e, type: 2}
+    - target: {fileID: 1781594437933363392, guid: 93b81acf4f16b804a84ed43795fb3015,
+        type: 3}
+      propertyPath: m_AnimatePhysics
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781594437933363392, guid: 93b81acf4f16b804a84ed43795fb3015,
+        type: 3}
+      propertyPath: m_PlayAutomatically
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781594437933363392, guid: 93b81acf4f16b804a84ed43795fb3015,
+        type: 3}
+      propertyPath: m_Animations.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781594437933363392, guid: 93b81acf4f16b804a84ed43795fb3015,
+        type: 3}
+      propertyPath: m_Animations.Array.data[0]
+      value: 
+      objectReference: {fileID: 7400000, guid: 94b7c2a454a5ff24f99c2091df77ad6e, type: 2}
     - target: {fileID: 3959444698982829496, guid: 93b81acf4f16b804a84ed43795fb3015,
         type: 3}
       propertyPath: m_RootOrder
@@ -25308,6 +25347,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1355330930375697356}
     m_Modifications:
+    - target: {fileID: 1781594437933363392, guid: 93b81acf4f16b804a84ed43795fb3015,
+        type: 3}
+      propertyPath: m_Animation
+      value: 
+      objectReference: {fileID: 7400000, guid: 7e27e2cb03d4f194eb95af737fed573a, type: 2}
+    - target: {fileID: 1781594437933363392, guid: 93b81acf4f16b804a84ed43795fb3015,
+        type: 3}
+      propertyPath: m_AnimatePhysics
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781594437933363392, guid: 93b81acf4f16b804a84ed43795fb3015,
+        type: 3}
+      propertyPath: m_PlayAutomatically
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781594437933363392, guid: 93b81acf4f16b804a84ed43795fb3015,
+        type: 3}
+      propertyPath: m_Animations.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781594437933363392, guid: 93b81acf4f16b804a84ed43795fb3015,
+        type: 3}
+      propertyPath: m_Animations.Array.data[0]
+      value: 
+      objectReference: {fileID: 7400000, guid: 7e27e2cb03d4f194eb95af737fed573a, type: 2}
     - target: {fileID: 3852334965317018344, guid: 93b81acf4f16b804a84ed43795fb3015,
         type: 3}
       propertyPath: m_Enabled

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
 public class B09_Pincher_Ability : MonoBehaviour
@@ -10,6 +11,9 @@ public class B09_Pincher_Ability : MonoBehaviour
     public GameObject pincher_left;
     public GameObject pincher_right;
     public GameObject saw;
+    public GameObject canvas;
+
+    private GameObject player2Canvas;
 
     [SerializeField] private Animator sawBlade;
     private GameObject grabbedObject;
@@ -18,6 +22,11 @@ public class B09_Pincher_Ability : MonoBehaviour
     private float targetZ = 0.0f;
     private float elapsedTime;
     private Transform grabbedObjecParentTransform;
+    private int breakCount;
+    private int maxBreakCount;
+
+    private float cooldown;
+    private float maxCooldown;
 
 
     //grab axis from parent object
@@ -36,6 +45,8 @@ public class B09_Pincher_Ability : MonoBehaviour
 
         targetZ = Mathf.Abs(1.50f - sawBaseZ);
 
+        maxCooldown = 3.0f;
+        maxBreakCount = 5;
     }
 
     // Update is called once per frame
@@ -47,9 +58,53 @@ public class B09_Pincher_Ability : MonoBehaviour
         if (left == null || right == null)
             return;
 
+        if (breakCount >= maxBreakCount && cooldown > 0.0f)
+        {
+            ResetGrabbedObject();
+            //gameObject.GetComponent<Rigidbody>().AddForce(-1 * Vector3.forward * 10.0f);
+
+            left.open();
+            right.open();
+
+            cooldown -= Time.deltaTime;
+
+            return;
+        }
+        else
+        {
+            if (cooldown <= 0.0f && breakCount >= maxBreakCount)
+            {
+                breakCount = 0;
+            }
+        }
+
+
         if (left.grabbedObject == null && right.grabbedObject == null)
         {
             ResetGrabbedObject();
+        }
+
+        if (grabbedObject)
+        {
+            if (player2Canvas == null)
+            {
+                player2Canvas = Instantiate(canvas);
+                player2Canvas.SetActive(true);
+                player2Canvas.transform.SetParent(grabbedObject.transform);
+            }
+
+            player2Canvas.transform.localPosition = new Vector3(0.0f,2.4f,0.0f);
+            player2Canvas.transform.rotation = Quaternion.identity;
+
+            if (Input.GetKeyDown(KeyCode.B) == true)
+            {
+                ++breakCount;
+
+                if (breakCount >= maxBreakCount)
+                {
+                    cooldown = maxCooldown;
+                }
+            }
         }
 
         //Grab Mechanic
@@ -72,7 +127,6 @@ public class B09_Pincher_Ability : MonoBehaviour
                     Debug.Log("Copied changed transform");
                     grabbedObject = left.grabbedObject;
                     grabbedObjecParentTransform = grabbedObject.transform.parent;
-
                     elapsedTime = 0;
                     sawBaseZ = saw.transform.localPosition.z;
                 }
@@ -85,6 +139,7 @@ public class B09_Pincher_Ability : MonoBehaviour
                     saw.transform.localPosition = new Vector3(0, saw.transform.localPosition.y, newPositionZ);
                 }
 
+                grabbedObject.GetComponent<BotBasic_Move>().isGrabbed = true;
                 grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
                 grabbedObject.transform.SetParent(transform);
 
@@ -99,13 +154,15 @@ public class B09_Pincher_Ability : MonoBehaviour
     {
         if (grabbedObject)
         {
-            Debug.Log("Set parent transform");
+            grabbedObject.GetComponent<BotBasic_Move>().isGrabbed = false;
             grabbedObject.transform.SetParent(grabbedObjecParentTransform);
             grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
             grabbedObjecParentTransform = null;
             grabbedObject = null;
 
             saw.transform.localPosition = new Vector3(0, saw.transform.localPosition.y, sawBaseZ);
+
+            Destroy(player2Canvas);
         }
 
         sawBlade.SetBool("Spinning", false);
