@@ -67,6 +67,10 @@ public class SpinningWeapon : MonoBehaviour
 	    }*/
 
 		currentDamage = bladeRigidbody.angularVelocity.magnitude / 2.5f;
+		if(currentDamage < 1.0f)
+        {
+			currentDamage = 0.0f;
+        }
 		damageScript.damage = Mathf.Round(currentDamage);
 
 

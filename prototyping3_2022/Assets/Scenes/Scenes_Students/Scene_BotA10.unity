@@ -2344,6 +2344,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BotA10
       objectReference: {fileID: 0}
+    - target: {fileID: 1355330930375697355, guid: ba9be4f07009e4c45985a00c928a1bf5,
+        type: 3}
+      propertyPath: m_TagString
+      value: BotA10_Check
+      objectReference: {fileID: 0}
     - target: {fileID: 1355330930375697356, guid: ba9be4f07009e4c45985a00c928a1bf5,
         type: 3}
       propertyPath: m_RootOrder
@@ -2399,6 +2404,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7262971493492308989, guid: ba9be4f07009e4c45985a00c928a1bf5,
+        type: 3}
+      propertyPath: bulletCooldown
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba9be4f07009e4c45985a00c928a1bf5, type: 3}
 --- !u!1001 &1763605167
@@ -2408,40 +2418,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 869471276}
     m_Modifications:
-    - target: {fileID: 1351519160931485986, guid: 7bcf33272d634884785987ed9804bfa5,
-        type: 3}
-      propertyPath: m_Height
-      value: 2.16
-      objectReference: {fileID: 0}
-    - target: {fileID: 1351519160931485986, guid: 7bcf33272d634884785987ed9804bfa5,
-        type: 3}
-      propertyPath: m_Radius
-      value: 2.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 1351519160931485986, guid: 7bcf33272d634884785987ed9804bfa5,
+    - target: {fileID: 394364476055049821, guid: 7bcf33272d634884785987ed9804bfa5,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1351519160931485986, guid: 7bcf33272d634884785987ed9804bfa5,
-        type: 3}
-      propertyPath: m_BaseOffset
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1351519160931485986, guid: 7bcf33272d634884785987ed9804bfa5,
-        type: 3}
-      propertyPath: m_AutoBraking
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1351519160931485986, guid: 7bcf33272d634884785987ed9804bfa5,
-        type: 3}
-      propertyPath: m_Acceleration
-      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1355330930375697355, guid: 7bcf33272d634884785987ed9804bfa5,
         type: 3}
       propertyPath: m_Name
       value: BotA10_NPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 1355330930375697355, guid: 7bcf33272d634884785987ed9804bfa5,
+        type: 3}
+      propertyPath: m_TagString
+      value: BotA10_Check
       objectReference: {fileID: 0}
     - target: {fileID: 1355330930375697356, guid: 7bcf33272d634884785987ed9804bfa5,
         type: 3}
@@ -2497,6 +2487,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942126389197850686, guid: 7bcf33272d634884785987ed9804bfa5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bcf33272d634884785987ed9804bfa5, type: 3}

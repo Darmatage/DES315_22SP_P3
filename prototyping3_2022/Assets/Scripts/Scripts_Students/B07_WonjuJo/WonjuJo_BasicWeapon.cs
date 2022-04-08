@@ -8,6 +8,7 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 	public GameObject weaponThrust;
 	public GameObject Projectile;
 	public GameObject ProjectileLauncher;
+	public GameObject Barrel;
 
 	private float thrustAmount = 3.5f;
 
@@ -23,25 +24,40 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 	private float Button1CooldownRate = 2f;
 	
 	private float Button2Cooldown = 0f;
-	private float Button2CooldownRate = 4f;
+	private float Button2CooldownRate = 3f;
 
 	Vector3 LauncherPosition;
-	
-	//Vector3 ObjectScale;
-	//Vector3 ObjectDecreasedScale;
 
-	//float time = 0;
-	//float speed = 3.0f;
+	public Color StartColor;
+	public Color EndColor;
 
-	//bool CanAttack = false;
+	private Renderer LauncherRenderer;
+
+	AudioSource AS;
+	public AudioClip FirstWeaponClip;
+	public AudioClip BeepSound;
+
+	bool CannotAttack = false;
+
+	float StartTime;
+
+	private bool ProjectileCheck;
+	private float ProjectileTimer = 0f;
+	private float ProjectileLife = 3f;
 
 	void Start()
 	{
 		button1 = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
         button2 = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
 
-		//ObjectScale = ProjectileLauncher.transform.localScale;
-		//ObjectDecreasedScale = new Vector3(0.00499304f, 0.005272481f, 0.004954814f);
+		LauncherRenderer = Barrel.GetComponent<Renderer>();
+
+		if (!LauncherRenderer)
+			Debug.Log("There is no LauncherRenderer");
+
+		LauncherRenderer.material.color = StartColor;
+
+		AS = GetComponent<AudioSource>();
 	}
 
     void Update()
@@ -51,21 +67,51 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 		if ((Input.GetButtonDown(button1)) && (weaponOut == false) && Time.time > Button1Cooldown)
 		{
 			Button1Cooldown = Time.time + Button1CooldownRate;
-			
+
+			AS.PlayOneShot(FirstWeaponClip);
+
 			weaponThrust.transform.Translate(0, 0, thrustAmount);
 			weaponOut = true;
 			StartCoroutine(WithdrawWeapon());
-		
+			
 		}
 
-		if ((Input.GetButtonDown(button2)) && Time.time > Button2Cooldown)
+		if (Input.GetButtonDown(button2) && Time.time > Button2Cooldown)
 		{
+			StartTime = Time.time;
+
+			LauncherRenderer.material.color = StartColor;
 
 			Button2Cooldown = Time.time + Button2CooldownRate;
 
 			Instantiate(Projectile, LauncherPosition, transform.rotation);
-			//StartCoroutine(RepeatLerp(ObjectDecreasedScale, ObjectScale, Button2Cooldown));
+			
+			ProjectileCheck = true;
+
+			CannotAttack = true;
+        }
+
+        if (CannotAttack)
+		{
+			float t = (Time.time - StartTime) / Button2CooldownRate;
+			LauncherRenderer.material.color = Color.Lerp(EndColor, StartColor, t);
 		}
+
+		if(ProjectileCheck)
+        {
+			ProjectileTimer += Time.deltaTime;
+			if (ProjectileTimer > 1f && ProjectileTimer <= ProjectileLife)
+			{
+				ProjectileTimer -= Time.deltaTime;
+				if (Input.GetButtonDown(button2))
+				{
+					AS.PlayOneShot(BeepSound);
+					ProjectileTimer = 0;
+				}
+			}
+		}
+
+
 	}
 
 	IEnumerator WithdrawWeapon()
@@ -75,16 +121,9 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 		weaponOut = false;
 	}
 
-	//public IEnumerator RepeatLerp(Vector3 original, Vector3 changed, float t)
- //   {
-	//	float i = 0.0f;
-	//	float rate = (1.0f / time) * speed;
-	//	while(i<1.0f)
- //       {
-	//		i += Time.deltaTime * rate;
-	//		ProjectileLauncher.transform.localScale = Vector3.Lerp(original, changed, i);
-	//		yield return null;
-	//	}
- //   }
+	IEnumerator WaitForSeconds(float time)
+    {
+		yield return new WaitForSeconds(time);
 
+	}
 }

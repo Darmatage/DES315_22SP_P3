@@ -9,6 +9,9 @@ public class JirakitJarusiripipat_BotA10NPC : MonoBehaviour
     private JirakitJarusiripipat_Weapon _weapon;
     private bool isPlayer1;
     private JirakitJarusiripipat_CheckMainGunRange _mainGun;
+    private Rigidbody _rigidbody;
+    private float dist = 0.0f;
+    public static bool isMoving;
     //private Jirakit
     void At(JirakitJarusiripipat_IState to, JirakitJarusiripipat_IState from, Func<bool> condition) => _stateMachine.AddTransition(to, from, condition);
 
@@ -18,7 +21,7 @@ public class JirakitJarusiripipat_BotA10NPC : MonoBehaviour
     {
         var navMeshAgent = GetComponent<NavMeshAgent>();
         _stateMachine = new JirakitJarusipipat_StateMachine();
-        _mainGun = GetComponent<JirakitJarusiripipat_CheckMainGunRange>();
+        _mainGun = GetComponentInChildren<JirakitJarusiripipat_CheckMainGunRange>();
         _weapon = GetComponent<JirakitJarusiripipat_Weapon>();
         if (transform.parent.tag == "Player1")
         {
@@ -29,19 +32,21 @@ public class JirakitJarusiripipat_BotA10NPC : MonoBehaviour
             isPlayer1 = false;
         }
 
-        var moveToward = new JirakitJarusiripipat_NPCMove(this, navMeshAgent, _mainGun, _weapon);
+        var moveToward = new JirakitJarusiripipat_NPCMove(this, navMeshAgent, _mainGun, _weapon, transform);
         var shootMissile = new JirakitJarusiripipat_NPCShootMissile(_weapon);
         var shootMainGun = new JirakitJarusiripipat_NPCShootMainGun(_weapon);
         var spawnBot = new JirakitJarusiripipat_NPCSpawnBot(_weapon);
         var idle = new JirakitJarusiripipat_NPCIdle();
+        //var flee = new JirakitJarusiripipat_NPCIdle();
 
 
-        
-        //At(moveToward, idle, NotInRange());
-        //At(idle, moveToward, InRange());
+
+        //At(moveToward, idle,StopMove());
+        //At(idle, moveToward, isMoving);
         _stateMachine.AddAnyTransition(shootMissile, () => _weapon.missileReady);
         _stateMachine.AddAnyTransition(shootMainGun, () => _weapon.currentBulletCooldown <= 0.0f);
         _stateMachine.AddAnyTransition(spawnBot, () => _weapon.currentBotCooldown <= 0.0f);
+        _stateMachine.AddAnyTransition(moveToward, () => isMoving);
         _stateMachine.SetState(idle);
         At(shootMissile, idle, MissileIsNotReady());
         At(shootMainGun, idle, MainGunIsNotReady());
@@ -54,18 +59,23 @@ public class JirakitJarusiripipat_BotA10NPC : MonoBehaviour
     Func<bool> MissileIsNotReady() => () => !_weapon.missileReady;
     Func<bool> MainGunIsNotReady() => () => _weapon.currentBulletCooldown > 0.0f;
     Func<bool> BotIsNotReady() => () => _weapon.currentBotCooldown <= 0.0f;
-    Func<bool> NotInRange() => () => !_mainGun.inMainGunRange;
+    Func<bool> Move() => () => isMoving;
+    //Func<bool> NotInRange() => () => !_mainGun.inMainGunRange;
     //Func<bool> InRange() => () => _mainGun.inMainGunRange;
+    //Func<bool> Move() => () => dist < 3;
+    //Func<bool> StopMove() => () isMoving = true;
     // Update is called once per frame
     private void Update()
     {
         //transform.LookAt(_weapon.target.transform);
         _stateMachine.Tick();
-        //Vector3 lookVector = _weapon.target.transform.position - transform.position;
-        //lookVector.y = transform.position.y;
-        //Quaternion rot = Quaternion.LookRotation(lookVector);
-        //transform.rotation = Quaternion.Slerp(transform.rotation, rot, 1);
-        transform.LookAt(_weapon.target.GetComponentInChildren<BotBasic_Damage>().gameObject.transform);
+        Vector3 lookVector = _weapon.target.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position - transform.position;
+        lookVector.y = transform.position.z;
+        Quaternion rot = Quaternion.LookRotation(lookVector);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rot, 9 * Time.deltaTime);
+        dist = Vector3.Distance(_weapon.target.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position, transform.position);
+       
+        //transform.LookAt(_weapon.target.GetComponentInChildren<BotBasic_Damage>().gameObject.transform);
     }
     //public float Speed = 1f;
 

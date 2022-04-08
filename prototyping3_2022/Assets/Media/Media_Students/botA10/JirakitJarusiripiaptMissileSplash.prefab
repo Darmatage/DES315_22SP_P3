@@ -4901,7 +4901,7 @@ GameObject:
   - component: {fileID: 5163699635161064248}
   - component: {fileID: 8374250108326888688}
   - component: {fileID: 1170851861754250980}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: JirakitJarusiripiaptMissileSplash
   m_TagString: Hazard
   m_Icon: {fileID: 0}
@@ -4999,7 +4999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ca4913335a3b745850f156a725a789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 3
   particlesPrefab: {fileID: 419902863338429077}
   SpawnParticlesHere: {x: 0, y: 0, z: 0}
   isPlayer1Weapon: 0
