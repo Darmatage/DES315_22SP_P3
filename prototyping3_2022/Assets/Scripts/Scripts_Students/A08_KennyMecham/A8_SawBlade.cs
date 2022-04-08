@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class A8_SawBlade : MonoBehaviour
 {
-  public KeyCode activation_key;
+  private string activation_key;
   public GameObject pivot_object;
   public Vector3 pivot_axis;
   public float active_time;
   public float cooldown_time;
   public float rotation_amount;
+  public GameObject bot;
 
   private float active_timer_;
   private float cooldown_timer_;
@@ -18,6 +19,7 @@ public class A8_SawBlade : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
+    activation_key = bot.GetComponentInParent<playerParent>().action1Input;
     starting_local_pos_ = transform.localPosition;
     starting_local_rot_ = transform.localRotation;
   }
@@ -32,7 +34,7 @@ public class A8_SawBlade : MonoBehaviour
 
   void CheckForActivation()
   {
-    if (Input.GetKeyDown(activation_key) && cooldown_timer_ == 0)
+    if (Input.GetButtonDown(activation_key) && cooldown_timer_ == 0)
     {
       active_timer_ = active_time;
       cooldown_timer_ = cooldown_time + active_time;
