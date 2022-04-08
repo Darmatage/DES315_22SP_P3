@@ -8,8 +8,9 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 	public GameObject weaponThrust;
 	public GameObject Projectile;
 	public GameObject ProjectileLauncher;
+	public GameObject Barrel;
 
-	private float thrustAmount = 3f;
+	private float thrustAmount = 3.5f;
 
 	private bool weaponOut = false;
 
@@ -27,43 +28,74 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 
 	Vector3 LauncherPosition;
 
+	public Color StartColor;
+	public Color EndColor;
+
+	private Renderer LauncherRenderer;
+
+	AudioSource AS;
+	public AudioClip FirstWeaponClip;
+
+	bool CannotAttack = false;
+
+	float StartTime;
 
 	void Start()
 	{
 		button1 = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
-		button2 = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
+        button2 = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
 
-		
+		LauncherRenderer = Barrel.GetComponent<Renderer>();
+
+		if (!LauncherRenderer)
+			Debug.Log("There is no LauncherRenderer");
+
+		LauncherRenderer.material.color = StartColor;
+
+		AS = GetComponent<AudioSource>();
 	}
 
-	void Update()
+    void Update()
 	{
 		LauncherPosition = ProjectileLauncher.transform.position;
 
-		//if (Input.GetKeyDown(KeyCode.T)){
 		if ((Input.GetButtonDown(button1)) && (weaponOut == false) && Time.time > Button1Cooldown)
 		{
 			Button1Cooldown = Time.time + Button1CooldownRate;
-			
-			weaponThrust.transform.Translate(0, thrustAmount, 0);
+
+			AS.PlayOneShot(FirstWeaponClip);
+
+			weaponThrust.transform.Translate(0, 0, thrustAmount);
 			weaponOut = true;
 			StartCoroutine(WithdrawWeapon());
-		
+			
 		}
 
-		if ((Input.GetButtonDown(button2)) && Time.time > Button2Cooldown)
+		if (Input.GetButtonDown(button2) && Time.time > Button2Cooldown)
 		{
+			StartTime = Time.time;
+
+			LauncherRenderer.material.color = StartColor;
+
 			Button2Cooldown = Time.time + Button2CooldownRate;
 
 			Instantiate(Projectile, LauncherPosition, transform.rotation);
+			
+			CannotAttack = true;
+
+		}
+
+		if (CannotAttack)
+		{
+			float t = (Time.time - StartTime) / Button2CooldownRate;
+			LauncherRenderer.material.color = Color.Lerp(EndColor, StartColor, t);		
 		}
 	}
 
 	IEnumerator WithdrawWeapon()
 	{
 		yield return new WaitForSeconds(0.6f);
-		weaponThrust.transform.Translate(0, -thrustAmount, 0);
+		weaponThrust.transform.Translate(0, 0, -thrustAmount);
 		weaponOut = false;
 	}
-
 }

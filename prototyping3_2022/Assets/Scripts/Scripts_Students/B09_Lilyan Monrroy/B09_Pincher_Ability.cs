@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
@@ -8,7 +9,14 @@ public class B09_Pincher_Ability : MonoBehaviour
 {
     public GameObject pincher_left;
     public GameObject pincher_right;
+    public GameObject saw;
+
+    [SerializeField] private Animator sawBlade;
     private GameObject grabbedObject;
+    private float thrustAmount = 1.85f;
+    private float sawBaseZ = 0.0f;
+    private float targetZ = 0.0f;
+    private float elapsedTime;
     private Transform grabbedObjecParentTransform;
 
 
@@ -26,6 +34,8 @@ public class B09_Pincher_Ability : MonoBehaviour
         button3 = gameObject.transform.parent.GetComponent<playerParent>().action3Input;
         button4 = gameObject.transform.parent.GetComponent<playerParent>().action4Input;
 
+        targetZ = Mathf.Abs(1.50f - sawBaseZ);
+
     }
 
     // Update is called once per frame
@@ -39,29 +49,13 @@ public class B09_Pincher_Ability : MonoBehaviour
 
         if (left.grabbedObject == null && right.grabbedObject == null)
         {
-            if (grabbedObject)
-            {
-                Debug.Log("Set parent transform");
-
-                grabbedObject.transform.SetParent(grabbedObjecParentTransform);
-                grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
-                grabbedObjecParentTransform = null;
-                grabbedObject = null;
-            }
+            ResetGrabbedObject();
         }
 
         //Grab Mechanic
         if (Input.GetButton(button1))
         {
-            if (grabbedObject)
-            {
-                Debug.Log("Set parent transform");
-
-                grabbedObject.transform.SetParent(grabbedObjecParentTransform);
-                grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
-                grabbedObjecParentTransform = null;
-                grabbedObject = null;
-            }
+            ResetGrabbedObject();
 
             left.open();
             right.open();
@@ -69,13 +63,26 @@ public class B09_Pincher_Ability : MonoBehaviour
         }
         else
         {
-            if (left.grabbedObject && right.grabbedObject)
+            if ((left.grabbedObject != null && left.state == B09_Pincher_Object.PincherState.Close) && (right.grabbedObject != null && right.state == B09_Pincher_Object.PincherState.Close))
             {
+                sawBlade.SetBool("Spinning", true);
+
                 if (grabbedObject == null)
                 {
                     Debug.Log("Copied changed transform");
                     grabbedObject = left.grabbedObject;
                     grabbedObjecParentTransform = grabbedObject.transform.parent;
+
+                    elapsedTime = 0;
+                    sawBaseZ = saw.transform.localPosition.z;
+                }
+                else
+                {
+
+                    elapsedTime += Time.deltaTime;
+                    float newPositionZ = sawBaseZ + Mathf.Clamp(Mathf.Sin(elapsedTime * 2.0f) * targetZ,0, targetZ);
+
+                    saw.transform.localPosition = new Vector3(0, saw.transform.localPosition.y, newPositionZ);
                 }
 
                 grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
@@ -86,5 +93,22 @@ public class B09_Pincher_Ability : MonoBehaviour
             left.close();
             right.close();
         }
+    }
+
+    private void ResetGrabbedObject()
+    {
+        if (grabbedObject)
+        {
+            Debug.Log("Set parent transform");
+            grabbedObject.transform.SetParent(grabbedObjecParentTransform);
+            grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
+            grabbedObjecParentTransform = null;
+            grabbedObject = null;
+
+            saw.transform.localPosition = new Vector3(0, saw.transform.localPosition.y, sawBaseZ);
+        }
+
+        sawBlade.SetBool("Spinning", false);
+
     }
 }

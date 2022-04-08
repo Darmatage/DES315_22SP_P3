@@ -19,18 +19,8 @@ public class JirakitJarusiripipat_TankBullet : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log("Hit");
-
-        //if (collision.gameObject.transform.parent.tag == "Player1")
-        //{
-        //    //collision.gameObject.GetComponent<BotBasic_Damage>();
-        //}
-        //else if (collision.gameObject.transform.parent.tag == "Player2")
-        //{
-
-        //}
-        //bulletEffect.Stop();
-        //Destroy(bulletEffect.gameObject);
+        bulletEffect.gameObject.SetActive(true);
+        bulletEffect.Play();
         Destroy(gameObject);
 
     }

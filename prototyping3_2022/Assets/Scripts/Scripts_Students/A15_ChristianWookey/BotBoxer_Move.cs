@@ -33,6 +33,8 @@ public class BotBoxer_Move : MonoBehaviour
 	public string pJump;
 	public string button4; // right bumper or [y] or [/] keys, to test on boost
 
+	private GameObject target;
+
 	void Start()
 	{
 		if (gameObject.GetComponent<Rigidbody>() != null)
@@ -50,17 +52,27 @@ public class BotBoxer_Move : MonoBehaviour
 		// pHorizontal = "p1Horizontal";
 		// pJump = "p1Jump";
 		// button4 = "p1Fire4";
+
+		if (transform.parent.gameObject.CompareTag("Player1"))
+			target = GameObject.FindGameObjectWithTag("Player2").transform.GetChild(0).gameObject;
+		else
+			target = GameObject.FindGameObjectWithTag("Player1").transform.GetChild(0).gameObject;
 	}
 
 	void Update()
 	{
 		float botMove = Input.GetAxisRaw(pVertical) * moveSpeed * Time.deltaTime;
 		float botStrafe = Input.GetAxisRaw(pHorizontal) * moveSpeed * Time.deltaTime;
+		float botRotate = 0f;
 
-		Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		target.y = transform.parent.position.y;
-		transform.parent.rotation.SetLookRotation(target - transform.parent.position);
-		float botRotate = Input.GetAxisRaw(pHorizontal) * rotateSpeed * Time.deltaTime;
+		if (target)
+		{
+			Vector3 targetPosition = target.transform.position;
+			targetPosition.y = transform.position.y;
+			Quaternion targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
+			transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * rotateSpeed);
+			//transform.rotation.SetLookRotation(targetPosition - transform.position);
+		}
 
 		if (isGrabbed == false)
 		{

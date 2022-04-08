@@ -80,6 +80,18 @@ public class KaiKawashima_PartsManager : MonoBehaviour
     {
         IsCollecting = true;
         CollectingTimer = 1.0f;
+        DamageStuff.shieldPowerLeft = 3;
+        DamageStuff.shieldPowerRight = 3;
+        DamageStuff.shieldPowerTop = 3;
+        DamageStuff.shieldPowerBottom = 3;
+        DamageStuff.shieldPowerFront = 5;
+        DamageStuff.shieldPowerBack = 3;
+        PartShield.top = 3;
+        PartShield.bottom = 3;
+        PartShield.front = 5;
+        PartShield.back = 3;
+        PartShield.left = 3;
+        PartShield.right = 3;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -95,37 +107,37 @@ public class KaiKawashima_PartsManager : MonoBehaviour
 
                     if (i == (int)Side.TOP)
                     { 
-                        ++DamageStuff.shieldPowerTop;
-                        ++PartShield.top;
+                        //++DamageStuff.shieldPowerTop;
+                        //++PartShield.top;
                         DamageStuff.dmgParticlesTop.SetActive(false);
                     }
                     if (i == (int)Side.BOTTOM) 
                     {
-                        ++DamageStuff.shieldPowerBottom;
-                        ++PartShield.bottom;
+                        //++DamageStuff.shieldPowerBottom;
+                        //++PartShield.bottom;
                     }
                     if (i == (int)Side.LEFT)
                     {
-                        ++DamageStuff.shieldPowerLeft;
-                        ++PartShield.left;
+                        //++DamageStuff.shieldPowerLeft;
+                        //++PartShield.left;
                         DamageStuff.dmgParticlesLeft.SetActive(false);
                     }
                     if (i == (int)Side.RIGHT)
                     {
-                        ++DamageStuff.shieldPowerRight;
-                        ++PartShield.right;
+                        //++DamageStuff.shieldPowerRight;
+                        //++PartShield.right;
                         DamageStuff.dmgParticlesRight.SetActive(false);
                     }
                     if (i == (int)Side.FRONT)
                     {
-                        ++DamageStuff.shieldPowerFront;
-                        ++PartShield.front;
+                        //++DamageStuff.shieldPowerFront;
+                        //++PartShield.front;
                         DamageStuff.dmgParticlesFront.SetActive(false);
                     }
                     if (i == (int)Side.BACK)
                     {
-                        ++DamageStuff.shieldPowerBack;
-                        ++PartShield.back;
+                        //++DamageStuff.shieldPowerBack;
+                        //++PartShield.back;
                         DamageStuff.dmgParticlesBack.SetActive(false);
                     }
 

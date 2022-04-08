@@ -10,7 +10,7 @@ public class TaroKumagai_WeaponDamage : HazardDamage
 
 	void OnCollisionEnter(Collision other)
     {
-        if (isAPlayer(other.gameObject))
+        if (isAPlayer(other.gameObject) || other.gameObject.tag.Equals("Hazard"))
             Physics.IgnoreCollision(GetComponent<Collider>(), other.collider, true);
 
 
