@@ -24,7 +24,7 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 	private float Button1CooldownRate = 2f;
 	
 	private float Button2Cooldown = 0f;
-	private float Button2CooldownRate = 4f;
+	private float Button2CooldownRate = 3f;
 
 	Vector3 LauncherPosition;
 
@@ -35,10 +35,15 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 
 	AudioSource AS;
 	public AudioClip FirstWeaponClip;
+	public AudioClip BeepSound;
 
 	bool CannotAttack = false;
 
 	float StartTime;
+
+	private bool ProjectileCheck;
+	private float ProjectileTimer = 0f;
+	private float ProjectileLife = 3f;
 
 	void Start()
 	{
@@ -81,15 +86,32 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 
 			Instantiate(Projectile, LauncherPosition, transform.rotation);
 			
+			ProjectileCheck = true;
+
 			CannotAttack = true;
+        }
 
-		}
-
-		if (CannotAttack)
+        if (CannotAttack)
 		{
 			float t = (Time.time - StartTime) / Button2CooldownRate;
-			LauncherRenderer.material.color = Color.Lerp(EndColor, StartColor, t);		
+			LauncherRenderer.material.color = Color.Lerp(EndColor, StartColor, t);
 		}
+
+		if(ProjectileCheck)
+        {
+			ProjectileTimer += Time.deltaTime;
+			if (ProjectileTimer > 1f && ProjectileTimer <= ProjectileLife)
+			{
+				ProjectileTimer -= Time.deltaTime;
+				if (Input.GetButtonDown(button2))
+				{
+					AS.PlayOneShot(BeepSound);
+					ProjectileTimer = 0;
+				}
+			}
+		}
+
+
 	}
 
 	IEnumerator WithdrawWeapon()
@@ -97,5 +119,11 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 		yield return new WaitForSeconds(0.6f);
 		weaponThrust.transform.Translate(0, 0, -thrustAmount);
 		weaponOut = false;
+	}
+
+	IEnumerator WaitForSeconds(float time)
+    {
+		yield return new WaitForSeconds(time);
+
 	}
 }
