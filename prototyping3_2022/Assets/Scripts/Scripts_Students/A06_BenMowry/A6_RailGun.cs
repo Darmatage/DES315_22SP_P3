@@ -69,8 +69,8 @@ public class A6_RailGun : MonoBehaviour {
         }
         if (charge >= chargeThresh && chargeLevel == 0)
             chargeLevel++;
-        else if (charge >= chargeThresh * chargeLevel) {
-            chargeLevel = Mathf.Clamp(chargeLevel, 0, chargeLevelMax);
+        else if (charge >= chargeThresh * (chargeLevel + 1) && chargeLevel < chargeLevelMax) {
+            chargeLevel++;
         }
 
         if (Input.GetButtonDown(fireKey)) {
