@@ -371,6 +371,7 @@ MonoBehaviour:
   pincher_left: {fileID: 5466640150610039993}
   pincher_right: {fileID: 4262541680855959507}
   saw: {fileID: 6574805103170921883}
+  canvas: {fileID: 5462156456986187725, guid: 9261ee472d3e57149873e601cdf461f1, type: 3}
   sawBlade: {fileID: 5251238609204365411}
 --- !u!1 &1355330930662561729
 GameObject:

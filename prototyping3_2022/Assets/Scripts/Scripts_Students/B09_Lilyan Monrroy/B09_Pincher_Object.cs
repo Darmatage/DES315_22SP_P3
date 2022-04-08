@@ -42,7 +42,6 @@ public class B09_Pincher_Object : MonoBehaviour
             if (player2.GetComponent<BotBasic_Move>())
             {
                 grabbedObject = player2;
-                player2.GetComponent<BotBasic_Move>().isGrabbed = true;
             }
         }
     }
@@ -55,7 +54,6 @@ public class B09_Pincher_Object : MonoBehaviour
         {
             if (player2.GetComponent<BotBasic_Move>())
             {
-                player2.GetComponent<BotBasic_Move>().isGrabbed = false;
                 grabbedObject = null;
             }
         }
