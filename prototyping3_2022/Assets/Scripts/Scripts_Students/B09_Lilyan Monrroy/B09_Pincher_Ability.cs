@@ -60,13 +60,21 @@ public class B09_Pincher_Ability : MonoBehaviour
 
         if (breakCount >= maxBreakCount && cooldown > 0.0f)
         {
+            if (grabbedObject)
+            {
+                gameObject.GetComponent<Rigidbody>().AddForce(-1 * transform.forward * 4000);
+            }
+            
             ResetGrabbedObject();
-            //gameObject.GetComponent<Rigidbody>().AddForce(-1 * Vector3.forward * 10.0f);
-
+            
             left.open();
             right.open();
 
+
+
             cooldown -= Time.deltaTime;
+
+
 
             return;
         }
