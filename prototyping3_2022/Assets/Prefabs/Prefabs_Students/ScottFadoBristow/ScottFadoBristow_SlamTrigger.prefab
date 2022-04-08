@@ -4816,9 +4816,9 @@ GameObject:
   m_Component:
   - component: {fileID: 655614123873145170}
   - component: {fileID: 5535236913018945579}
-  - component: {fileID: 8424003054804511481}
   - component: {fileID: -3232034093442675723}
   - component: {fileID: 3292784388559327445}
+  - component: {fileID: 405123272782293670}
   m_Layer: 0
   m_Name: ScottFadoBristow_SlamTrigger
   m_TagString: Hazard
@@ -4854,25 +4854,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 1, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8424003054804511481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4947766490009947104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7ca4913335a3b745850f156a725a789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 5
-  particlesPrefab: {fileID: 7916852506792683719, guid: a6746c9ee60a1a44d813bcdbac5cb0ce,
-    type: 3}
-  SpawnParticlesHere: {x: 0, y: 0, z: 0}
-  isPlayer1Weapon: 0
-  isPlayer2Weapon: 0
-  isMonsterWeapon: 0
 --- !u!114 &-3232034093442675723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4899,3 +4880,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Timeout: 0.25
+--- !u!114 &405123272782293670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4947766490009947104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b9d590edea778499d098d6de59e16f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  particlesPrefab: {fileID: 7916852506792683719, guid: a6746c9ee60a1a44d813bcdbac5cb0ce,
+    type: 3}
+  SpawnParticlesHere: {x: 0, y: 0, z: 0}
+  isPlayer1Weapon: 0
+  isPlayer2Weapon: 0
+  isMonsterWeapon: 0
