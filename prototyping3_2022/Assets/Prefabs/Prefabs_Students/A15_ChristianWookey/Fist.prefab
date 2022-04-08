@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 3852334965317018344}
   - component: {fileID: 8158095318183831657}
   - component: {fileID: 3065277648044232767}
-  - component: {fileID: 1781594437933363392}
   - component: {fileID: 1946150445604539767}
   m_Layer: 0
   m_Name: Fist
@@ -173,23 +172,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!111 &1781594437933363392
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7394300990700535667}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 94b7c2a454a5ff24f99c2091df77ad6e, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 94b7c2a454a5ff24f99c2091df77ad6e, type: 2}
-  - {fileID: 7400000, guid: 7e27e2cb03d4f194eb95af737fed573a, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 1
-  m_CullingType: 0
 --- !u!95 &1946150445604539767
 Animator:
   serializedVersion: 3
