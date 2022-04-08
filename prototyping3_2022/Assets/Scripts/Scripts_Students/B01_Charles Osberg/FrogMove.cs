@@ -9,6 +9,9 @@ public class FrogMove : MonoBehaviour
 	public float jumpSpeed = 7f;
 	private float flipSpeed = 150f;
 
+	private float jumpAccumulation = 0.0f;
+	private float jumpAccumulationRate = 1.0f;
+	
 	private Rigidbody rb;
 	public Transform groundCheck;
 	public Transform turtleCheck;
@@ -61,11 +64,6 @@ public class FrogMove : MonoBehaviour
 	    isTurtled = Physics.CheckSphere(turtleCheck.position, 0.4f, groundLayer);
 	    if (Input.GetButtonDown(pJump))
 	    {
-		    if (isGrounded)
-		    {
-			    rb.AddForce(rb.centerOfMass + new Vector3(0f, jumpSpeed * 10, 0f), ForceMode.Impulse);
-		    }
-
 		    //flip cooldown logic
 		    // if ((isTurtled == true) && (canFlip == false)){
 		    // canFlipGate = false;	
@@ -88,6 +86,33 @@ public class FrogMove : MonoBehaviour
 			    transform.eulerAngles = betterEulerAngles;
 			    GetComponent<Rigidbody>().velocity = Vector3.zero;
 			    GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+		    }
+	    }
+	    
+	    if (Input.GetButtonUp(pJump))
+	    {
+		    if (isGrounded)
+		    {
+			    var jumpForce = transform.up * jumpSpeed * 10.0f * jumpAccumulation;
+			    var baseRotation = transform.rotation.eulerAngles;
+			    baseRotation.z = 0;
+			    baseRotation.x = -45;
+			    jumpForce = Quaternion.Euler(baseRotation) * jumpForce;
+			    jumpForce = Vector3.Reflect(jumpForce, transform.forward);
+			    rb.AddForce(rb.centerOfMass + jumpForce, ForceMode.Impulse);
+		    }
+		    jumpAccumulation = 0.0f;
+	    }
+	    else if(Input.GetButton(pJump))
+	    {
+		    if (isGrounded)
+		    {
+			    jumpAccumulation = Mathf.Clamp01(jumpAccumulation + Time.deltaTime * jumpAccumulationRate);
+		    }
+		    else
+		    {
+			    jumpAccumulation = 0.0f;
+			    rb.AddForce((transform.up * -1 + rb.centerOfMass) * 10.0f, ForceMode.Acceleration);
 		    }
 	    }
     }
