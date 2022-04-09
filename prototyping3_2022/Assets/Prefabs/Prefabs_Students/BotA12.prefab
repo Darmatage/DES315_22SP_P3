@@ -165,6 +165,7 @@ GameObject:
   - component: {fileID: 5780095072016173801}
   - component: {fileID: 4164011113351167296}
   - component: {fileID: 5466436695155228953}
+  - component: {fileID: 9207683110349372744}
   m_Layer: 0
   m_Name: BotA12
   m_TagString: Untagged
@@ -394,6 +395,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &9207683110349372744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355330930375697355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e97583df7499f44e9baea0e54699928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Cooldown: 1
+  HomingSpeed: 20
+  buttonID: 
+  RocketPrefab: {fileID: 9064584162721204779, guid: 1ea6b466bab701346a3910d1e4238156,
+    type: 3}
 --- !u!1 &1355330930662561729
 GameObject:
   m_ObjectHideFlags: 0
