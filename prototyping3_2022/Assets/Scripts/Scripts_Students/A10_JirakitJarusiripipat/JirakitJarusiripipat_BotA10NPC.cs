@@ -41,12 +41,13 @@ public class JirakitJarusiripipat_BotA10NPC : MonoBehaviour
 
 
 
-        //At(moveToward, idle,StopMove());
-        //At(idle, moveToward, isMoving);
+        At(moveToward, idle, StopMove());
+        At(idle, moveToward, Move());
+        At(shootMainGun, moveToward, Move());
         _stateMachine.AddAnyTransition(shootMissile, () => _weapon.missileReady);
         _stateMachine.AddAnyTransition(shootMainGun, () => _weapon.currentBulletCooldown <= 0.0f);
         _stateMachine.AddAnyTransition(spawnBot, () => _weapon.currentBotCooldown <= 0.0f);
-        _stateMachine.AddAnyTransition(moveToward, () => isMoving);
+        //_stateMachine.AddAnyTransition(moveToward, () => isMoving);
         _stateMachine.SetState(idle);
         At(shootMissile, idle, MissileIsNotReady());
         At(shootMainGun, idle, MainGunIsNotReady());
@@ -60,6 +61,7 @@ public class JirakitJarusiripipat_BotA10NPC : MonoBehaviour
     Func<bool> MainGunIsNotReady() => () => _weapon.currentBulletCooldown > 0.0f;
     Func<bool> BotIsNotReady() => () => _weapon.currentBotCooldown <= 0.0f;
     Func<bool> Move() => () => isMoving;
+    Func<bool> StopMove() => () => !isMoving;
     //Func<bool> NotInRange() => () => !_mainGun.inMainGunRange;
     //Func<bool> InRange() => () => _mainGun.inMainGunRange;
     //Func<bool> Move() => () => dist < 3;
@@ -74,7 +76,7 @@ public class JirakitJarusiripipat_BotA10NPC : MonoBehaviour
         Quaternion rot = Quaternion.LookRotation(lookVector);
         transform.rotation = Quaternion.Slerp(transform.rotation, rot, 9 * Time.deltaTime);
         dist = Vector3.Distance(_weapon.target.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position, transform.position);
-       
+        Debug.Log("IsMoving " + isMoving);
         //transform.LookAt(_weapon.target.GetComponentInChildren<BotBasic_Damage>().gameObject.transform);
     }
     //public float Speed = 1f;
