@@ -2418,20 +2418,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 869471276}
     m_Modifications:
-    - target: {fileID: 394364476055049821, guid: 7bcf33272d634884785987ed9804bfa5,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1355330930375697355, guid: 7bcf33272d634884785987ed9804bfa5,
         type: 3}
       propertyPath: m_Name
       value: BotA10_NPC
-      objectReference: {fileID: 0}
-    - target: {fileID: 1355330930375697355, guid: 7bcf33272d634884785987ed9804bfa5,
-        type: 3}
-      propertyPath: m_TagString
-      value: BotA10_Check
       objectReference: {fileID: 0}
     - target: {fileID: 1355330930375697356, guid: 7bcf33272d634884785987ed9804bfa5,
         type: 3}
@@ -2487,11 +2477,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8942126389197850686, guid: 7bcf33272d634884785987ed9804bfa5,
-        type: 3}
-      propertyPath: m_Layer
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bcf33272d634884785987ed9804bfa5, type: 3}

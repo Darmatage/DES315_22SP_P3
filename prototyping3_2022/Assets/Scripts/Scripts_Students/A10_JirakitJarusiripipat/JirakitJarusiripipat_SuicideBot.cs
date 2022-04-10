@@ -17,7 +17,11 @@ public class JirakitJarusiripipat_SuicideBot : MonoBehaviour
     [HideInInspector]
     public GameObject parent;
     [SerializeField]
-
+    private AudioSource movingSound;
+    [SerializeField]
+    private AudioSource blastSound;
+    [SerializeField]
+    private AudioSource countdownSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,8 +30,9 @@ public class JirakitJarusiripipat_SuicideBot : MonoBehaviour
     }
     private void OnDestroy()
     {
-        soundKeeper.StopBotMoving();
-        soundKeeper.StopCountdownSound();
+        movingSound.Stop();
+        countdownSound.Stop();
+        blastSound.Play();
     }
     // Update is called once per frame
     void Update()
@@ -37,12 +42,12 @@ public class JirakitJarusiripipat_SuicideBot : MonoBehaviour
             Vector3 pos = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
             rb.MovePosition(pos);
             transform.LookAt(target);
-            soundKeeper.BotMoving();
+            //movingSound.Play();
         }
         else if(stop && !oneTime)
         {
-            soundKeeper.StopBotMoving();
-            soundKeeper.PlayCountdownSound();
+            movingSound.Stop();
+            countdownSound.Play();
 
             oneTime = true;
             StartCoroutine(Boom());
@@ -53,7 +58,7 @@ public class JirakitJarusiripipat_SuicideBot : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         Instantiate(BlastExplosion, transform.position, Quaternion.identity);
         soundKeeper.PlayBotExplosion();
-        //Debug.Log("Boommmmmmmmmmmmmmmm!");
+        //blastSound.Play();
         Destroy(gameObject);
     }
     private void OnCollisionEnter(Collision collision)
