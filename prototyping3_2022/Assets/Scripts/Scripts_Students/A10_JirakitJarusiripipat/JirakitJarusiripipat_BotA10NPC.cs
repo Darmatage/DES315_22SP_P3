@@ -72,11 +72,11 @@ public class JirakitJarusiripipat_BotA10NPC : MonoBehaviour
         //transform.LookAt(_weapon.target.transform);
         _stateMachine.Tick();
         Vector3 lookVector = _weapon.target.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position - transform.position;
-        lookVector.y = transform.position.z;
+        lookVector.y = transform.position.y;
         Quaternion rot = Quaternion.LookRotation(lookVector);
         transform.rotation = Quaternion.Slerp(transform.rotation, rot, 9 * Time.deltaTime);
         dist = Vector3.Distance(_weapon.target.GetComponentInChildren<BotBasic_Damage>().gameObject.transform.position, transform.position);
-        Debug.Log("IsMoving " + isMoving);
+       Debug.Log("IsMoving " + isMoving);
         //transform.LookAt(_weapon.target.GetComponentInChildren<BotBasic_Damage>().gameObject.transform);
     }
     //public float Speed = 1f;
