@@ -141,7 +141,7 @@ public class HarpoonGun : MonoBehaviour
     private bool isHook;
     private bool isLaunched;
     private bool isAttacked;
-    private bool isRecharge = false;
+    public bool isRecharge = false;
 
     private Animator anim;
 
