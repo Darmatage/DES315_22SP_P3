@@ -13,6 +13,7 @@ public class B09_Pincher_Ability : MonoBehaviour
     public GameObject saw;
     public GameObject canvas;
 
+
     private GameObject player2Canvas;
 
     [SerializeField] private Animator sawBlade;
@@ -130,6 +131,7 @@ public class B09_Pincher_Ability : MonoBehaviour
             {
                 sawBlade.SetBool("Spinning", true);
 
+
                 if (grabbedObject == null)
                 {
                     Debug.Log("Copied changed transform");
@@ -143,6 +145,8 @@ public class B09_Pincher_Ability : MonoBehaviour
 
                     elapsedTime += Time.deltaTime;
                     float newPositionZ = sawBaseZ + Mathf.Clamp(Mathf.Sin(elapsedTime * 2.0f) * targetZ,0, targetZ);
+
+                    Debug.Log(newPositionZ);
 
                     saw.transform.localPosition = new Vector3(0, saw.transform.localPosition.y, newPositionZ);
                 }
