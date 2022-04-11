@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Boxer_HazardDamage : HazardDamage{
-	private GameHandler gameHandler;
-
+	
 	public GameObject particleLocation;
 
 	public Material[] materials;

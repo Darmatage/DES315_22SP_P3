@@ -4351,7 +4351,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -35, y: 485}
+  m_AnchoredPosition: {x: -35, y: 905}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &799394304
@@ -12494,7 +12494,7 @@ PrefabInstance:
         type: 3}
       propertyPath: botPrefabs.Array.data[39]
       value: 
-      objectReference: {fileID: 1355330930375697355, guid: e845ce151d995264e80a8dfbe0f43522,
+      objectReference: {fileID: 1355330930375697355, guid: 4cadd2fff056b2b4f950a2e9cf8d0e78,
         type: 3}
     - target: {fileID: 6311594513585171110, guid: 05be270cdabffa742bd6f579ed45bdbe,
         type: 3}

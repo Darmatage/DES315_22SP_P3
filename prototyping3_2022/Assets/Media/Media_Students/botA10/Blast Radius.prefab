@@ -4903,6 +4903,7 @@ GameObject:
   - component: {fileID: -3137855796218289427}
   - component: {fileID: 2036120254283430930}
   - component: {fileID: 8553369636196392619}
+  - component: {fileID: 8459134885643972548}
   m_Layer: 20
   m_Name: Blast Radius
   m_TagString: Hazard
@@ -5052,3 +5053,15 @@ MonoBehaviour:
   isPlayer1Weapon: 0
   isPlayer2Weapon: 0
   isMonsterWeapon: 0
+--- !u!114 &8459134885643972548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3768722107935373676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b6055b1e464f154e8310d90d3c0cb0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

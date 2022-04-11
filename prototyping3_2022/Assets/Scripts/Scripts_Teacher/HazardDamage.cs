@@ -13,7 +13,7 @@ public class HazardDamage : MonoBehaviour{
 	public bool isPlayer2Weapon = false;
 	public bool isMonsterWeapon = false;
 
-    void Start(){
+    public void Start(){
 		if (GameObject.FindWithTag("GameHandler") != null){
 			gameHandler = GameObject.FindWithTag("GameHandler").GetComponent<GameHandler>();
 		}

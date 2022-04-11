@@ -32,7 +32,7 @@ public class dropdownHandler : MonoBehaviour{
 			
 			items1.Add("BotA01 Taher Kagzi");
 			items1.Add("BotA02 Mac Roshak");
-			items1.Add("BotA03 Hermie Choi");
+			items1.Add("BotA03 Hemie Choi");
 			items1.Add("BotA04 Kiara Santiago");
 			items1.Add("BotA05 Jakob Shumway");
 			items1.Add("BotA06 Ben Mowry");
@@ -43,7 +43,7 @@ public class dropdownHandler : MonoBehaviour{
 			items1.Add("BotA11 Taro Kumagai");
 			items1.Add("BotA12 Scott Fado-Bristow");
 			items1.Add("BotA13 Kai Kawashima");
-			items1.Add("BotA14 Fredy Martin");
+			items1.Add("BotA14 Freddy Martin");
 			items1.Add("BotA15 Christian Wookey");
 			items1.Add("BotA16 Ben Thompson");
 			items1.Add("BotA17 Kelson Wysocki");
@@ -121,7 +121,7 @@ public class dropdownHandler : MonoBehaviour{
 			
 			items2.Add("BotA01 Taher Kagzi");
 			items2.Add("BotA02 Mac Roshak");
-			items2.Add("BotA03 Hermie Choi");
+			items2.Add("BotA03 Hemie Choi");
 			items2.Add("BotA04 Kiara Santiago");
 			items2.Add("BotA05 Jakob Shumway");
 			items2.Add("BotA06 Ben Mowry");
@@ -132,7 +132,7 @@ public class dropdownHandler : MonoBehaviour{
 			items2.Add("BotA11 Taro Kumagai");
 			items2.Add("BotA12 Scott Fado-Bristow");
 			items2.Add("BotA13 Kai Kawashima");
-			items2.Add("BotA14 Fredy Martin");
+			items2.Add("BotA14 Freddy Martin");
 			items2.Add("BotA15 Christian Wookey");
 			items2.Add("BotA16 Ben Thompson");
 			items2.Add("BotA17 Kelson Wysocki");
