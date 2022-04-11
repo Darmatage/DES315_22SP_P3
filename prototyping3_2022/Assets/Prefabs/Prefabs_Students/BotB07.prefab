@@ -385,6 +385,7 @@ MonoBehaviour:
   StartColor: {r: 0.6784314, g: 0.25490198, b: 0.25490198, a: 0}
   EndColor: {r: 0.6415094, g: 0.5598077, b: 0.5598077, a: 0}
   FirstWeaponClip: {fileID: 8300000, guid: 08e6ee8595fcc4948ac154fbf4dbb28a, type: 3}
+  BeepSound: {fileID: 8300000, guid: f1fd376651413bc46a62690da1be5e7a, type: 3}
 --- !u!82 &2209159633898936874
 AudioSource:
   m_ObjectHideFlags: 0
