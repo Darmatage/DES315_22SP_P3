@@ -12,13 +12,13 @@ public class B09_Pincher_Ability : MonoBehaviour
     public GameObject pincher_right;
     public GameObject saw;
     public GameObject canvas;
+    public GameObject coolDownEffect;
 
 
     private GameObject player2Canvas;
 
     [SerializeField] private Animator sawBlade;
     private GameObject grabbedObject;
-    private float thrustAmount = 1.85f;
     private float sawBaseZ = 0.0f;
     private float targetZ = 0.0f;
     private float elapsedTime;
@@ -29,6 +29,7 @@ public class B09_Pincher_Ability : MonoBehaviour
     private float cooldown;
     private float maxCooldown;
 
+    [SerializeField] private Transform coolDownTransform;
 
     //grab axis from parent object
     private string button1;
@@ -112,6 +113,9 @@ public class B09_Pincher_Ability : MonoBehaviour
                 if (breakCount >= maxBreakCount)
                 {
                     cooldown = maxCooldown;
+                    GameObject swirlEffect = Instantiate(coolDownEffect, coolDownTransform);
+                    swirlEffect.transform.localScale = new Vector3(0.5f,0.5f,0.5f);
+                    Destroy(swirlEffect,maxCooldown);
                 }
             }
         }
@@ -131,7 +135,6 @@ public class B09_Pincher_Ability : MonoBehaviour
             {
                 sawBlade.SetBool("Spinning", true);
 
-
                 if (grabbedObject == null)
                 {
                     Debug.Log("Copied changed transform");
@@ -144,7 +147,8 @@ public class B09_Pincher_Ability : MonoBehaviour
                 {
 
                     elapsedTime += Time.deltaTime;
-                    float newPositionZ = sawBaseZ + Mathf.Clamp(Mathf.Sin(elapsedTime * 2.0f) * targetZ,0, targetZ);
+
+                    float newPositionZ = sawBaseZ + Mathf.Abs(Mathf.Sin(elapsedTime * 2.0f) * targetZ);
 
                     Debug.Log(newPositionZ);
 
