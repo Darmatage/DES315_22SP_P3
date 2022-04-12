@@ -7,14 +7,19 @@ public class Bot22_RocketBoost : MonoBehaviour
     public GameObject leftBoost;
     public GameObject rightBoost;
 	public GameObject body;
+	public GameObject cooldownMeter;
+	public GameObject spike;
 	public float boostSpeed = 1000f;
-	public float cooldown = 2.0f;
+	public float cooldownTime = 2.0f;
+	AudioSource Audio;
+	public AudioClip chargeSound;
+	private float nextFireTime = 0.0f;
 	private float thrustAmount = 1f;
 	
 	private bool boosting = false;
-	private bool onCooldown = false;
 
 	private Rigidbody rb;
+	private Renderer cooldownColor;
 
 	//grab axis from parent object
 	[HideInInspector]
@@ -37,33 +42,48 @@ public class Bot22_RocketBoost : MonoBehaviour
 		if (body.GetComponent<Rigidbody>() != null)
 		{
 			rb = body.GetComponent<Rigidbody>();
-		}   
+		}
+
+		cooldownColor = cooldownMeter.GetComponent<Renderer>();
+
+		Audio = GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
     void Update()
-    {
-		if(onCooldown)
-			StartCoroutine(Cooldown());
-		else
+    {		
+		if(Time.time > nextFireTime)
 		{
-			if ((Input.GetButtonDown(button1))&&(boosting==false))
+			cooldownColor.material.SetColor("_Color", Color.green);
+
+			if ((Input.GetButton(button1)) && !boosting)
 			{
+				Audio.PlayOneShot(chargeSound);
+				boosting = true;
+
 				leftBoost.transform.Translate(0,thrustAmount, 0);
 				rightBoost.transform.Translate(0,thrustAmount, 0);
-				boosting = true;
 			
 				rb.AddForce(transform.forward * boostSpeed, ForceMode.Impulse);
+				StartCoroutine(TurnOffBoost()); 
 
+				nextFireTime = Time.time + cooldownTime;
 
-				StartCoroutine(TurnOffBoost());
+			}
 
-				onCooldown = true;
-			}  	
+		}
+		else
+		{
+			cooldownColor.material.SetColor("_Color", Color.red);
 		}
 
+		if(!boosting)
+			spike.GetComponent<HazardDamage>().damage = 1.0f;
+		else
+			spike.GetComponent<HazardDamage>().damage = 3.0f;
 
-
+		//Debug.Log(spike.GetComponent<HazardDamage>().damage);	
         
     }
     
@@ -75,9 +95,4 @@ public class Bot22_RocketBoost : MonoBehaviour
 		boosting = false;
 	}
 
-	IEnumerator Cooldown()
-    {
-		yield return new WaitForSeconds(cooldown);
-		onCooldown = false;
-	}
 }
