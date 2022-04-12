@@ -13,29 +13,47 @@ public class MineAttack : MonoBehaviour
     private float countdown_timer = 0;
     private bool explosion_alive = false;
     private float explosion_lifetime = 0.1f;
-    private GameObject explosion_object;
+    private GameObject explosion_object = null;
+    private Collider explosion_collider = null;
+    private bool already_disabled = false;
+    private float despawn_collider = 0.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        countdown_timer = fuse_time;
     }
 
     // Update is called once per frame
     void Update()
     {
-        countdown_timer -= Time.deltaTime;
+        countdown_timer += Time.deltaTime;
 
-        if (countdown_timer <= 0.0f)
-            Explode();
+        //if (countdown_timer < fuse_time)
+        //Explode();
 
         if (explosion_alive)
         {
+
+            despawn_collider += Time.deltaTime;
+            if (already_disabled == false && despawn_collider > 0.2f)
+            {
+                explosion_collider.enabled = false;
+                already_disabled = true;
+            }
+
             explosion_lifetime -= Time.deltaTime;
 
             if (explosion_lifetime <= 0.0f)
                 Destroy(this.gameObject);
+
+            
         }
+
+
+
+        if (countdown_timer >= fuse_time)
+            Explode();
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,6 +61,7 @@ public class MineAttack : MonoBehaviour
         if (explosion_alive == false)
         {
             GameObject explosion_object = Instantiate(explosion_prefab, this.transform.position, Quaternion.identity);
+            explosion_collider = explosion_object.GetComponent<Collider>();
             explosion_object.transform.parent = this.transform;
 
             GameObject mine_light = this.transform.GetChild(0).gameObject;
@@ -60,6 +79,7 @@ public class MineAttack : MonoBehaviour
         if (explosion_alive == false)
         {
             GameObject explosion_object = Instantiate(explosion_prefab, this.transform.position, Quaternion.identity);
+            explosion_collider = explosion_object.GetComponent<Collider>();
             explosion_object.transform.parent = this.transform;
 
             GameObject mine_light = this.transform.GetChild(0).gameObject;
