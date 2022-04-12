@@ -251,7 +251,8 @@ public class GameHandler : MonoBehaviour{
 				gameTime = 0;
 				gameTimeEnd = gameTime;
 				if (isCoop == false){
-					winner = "Time's up! \nNo winner. \nP1 Health = " + p1Health + " \nP2 Health = " + p2Health;
+					winner = "Time's up! \nNo winner."; 
+					//\nP1 Health = " + p1Health + " \nP2 Health = " + p2Health;
 					StartCoroutine(EndGame());
 				}
 			}
