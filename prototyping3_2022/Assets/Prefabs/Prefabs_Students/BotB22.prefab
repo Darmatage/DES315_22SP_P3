@@ -377,7 +377,7 @@ MonoBehaviour:
   cooldownMeter: {fileID: 1355330930662561729}
   spike: {fileID: 2387512001222870137}
   boostSpeed: 2000
-  cooldownTime: 3
+  cooldownTime: 2
   chargeSound: {fileID: 8300000, guid: 6cd7faa31976f7e4aa4edf0a4072ad94, type: 3}
   button1: 
   button2: 
