@@ -7,7 +7,7 @@ public class BotBasic_Move : MonoBehaviour
 	public float moveSpeed = 10;
 	public float rotateSpeed = 100;
 	public float jumpSpeed = 7f;
-	private float flipSpeed = 150f;
+	protected float flipSpeed = 150f;
 	public float boostSpeed = 10f;
 
 	protected Rigidbody rb; // allows a child class to use this variable
