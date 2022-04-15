@@ -12,7 +12,9 @@ public class B09_Pincher_Ability : MonoBehaviour
     public GameObject pincher_left;
     public GameObject pincher_right;
     public GameObject saw;
-    public GameObject canvas;
+    public GameObject player2Input; //Breakout key ->
+    public GameObject player1Input; //Breakout key D
+
     public GameObject coolDownEffect;
 
     private GameObject player2Canvas;
@@ -26,6 +28,7 @@ public class B09_Pincher_Ability : MonoBehaviour
     private Transform grabbedObjecParentTransform;
     private int breakCount;
     private int maxBreakCount;
+    private KeyCode breakOutKey;
 
     [SerializeField] private AudioClip[] clinkAudioClips;
     private AudioSource pincherAudioSource;
@@ -70,6 +73,15 @@ public class B09_Pincher_Ability : MonoBehaviour
         parent = pincher_left.transform.parent.gameObject;
         pincherAudioSource = parent.GetComponent<AudioSource>();
         sawAudioSource = saw.GetComponent<AudioSource>();
+
+        if (gameObject.transform.parent.GetComponent<playerParent>().isPlayer1)
+        {
+            breakOutKey = KeyCode.RightArrow;
+        }
+        else
+        {
+            breakOutKey = KeyCode.D;
+        }
     }
 
     // Update is called once per frame
@@ -119,15 +131,24 @@ public class B09_Pincher_Ability : MonoBehaviour
         {
             if (player2Canvas == null)
             {
-                player2Canvas = Instantiate(canvas);
+                //Determine which breakout key to use.
+                if (breakOutKey == KeyCode.RightArrow)
+                {
+                    player2Canvas = Instantiate(player2Input);
+                }
+                else
+                {
+                    player2Canvas = Instantiate(player1Input);
+                }
+
                 player2Canvas.SetActive(true);
                 player2Canvas.transform.SetParent(grabbedObject.transform);
             }
 
-            player2Canvas.transform.localPosition = new Vector3(0.0f,2.4f,0.0f);
+            player2Canvas.transform.localPosition = new Vector3(0.0f,2.0f,0.0f);
             player2Canvas.transform.rotation = Quaternion.identity;
 
-            if (Input.GetKeyDown(KeyCode.B) == true && cooldownUntilNextPress < Time.time)
+            if (Input.GetKeyDown(breakOutKey) && cooldownUntilNextPress < Time.time)
             {
                 cooldownUntilNextPress = Time.time + CooldownTime;
 
