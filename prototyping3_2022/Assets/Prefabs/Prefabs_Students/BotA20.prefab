@@ -298,6 +298,7 @@ MonoBehaviour:
     type: 3}
   snowmanTopRef: {fileID: 8712236322446321930}
   snowmanMiddleRef: {fileID: 467848057327918956}
+  snowmanBottomRef: {fileID: 7078533940412928264}
   snowballSpawnPointLeft: {fileID: 5934279157357301466}
   snowballSpawnPointRight: {fileID: 8300506141548144836}
   turretRotationSpeed: 30
@@ -1152,6 +1153,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 104a45520ae896d49a7cafe54a03c659, type: 3}
+--- !u!1 &7078533940412928264 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1626252713699065768, guid: 104a45520ae896d49a7cafe54a03c659,
+    type: 3}
+  m_PrefabInstance: {fileID: 8407548872009182880}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5953823329514109077 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2742032334705972789, guid: 104a45520ae896d49a7cafe54a03c659,
