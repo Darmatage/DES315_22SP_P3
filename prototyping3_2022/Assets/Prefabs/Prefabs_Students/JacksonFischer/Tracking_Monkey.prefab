@@ -1735,7 +1735,7 @@ MonoBehaviour:
   fuse_time: 5
   explosion_prefab: {fileID: 6703356809530827566, guid: 7f439c6b276879f47859a6f4f97646dd,
     type: 3}
-  turn_speed: 1
+  turn_speed: 101
   move_speed: 10
 --- !u!23 &9002378828449599929
 MeshRenderer:
