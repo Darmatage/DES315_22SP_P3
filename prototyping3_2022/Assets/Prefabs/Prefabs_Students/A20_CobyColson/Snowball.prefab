@@ -111,10 +111,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  particlesPrefab: {fileID: 7916852506792683719, guid: a6746c9ee60a1a44d813bcdbac5cb0ce,
+  particlesPrefab: {fileID: 7916852506792683719, guid: a43de24e4fea03541816e6ad775a2c84,
     type: 3}
   SpawnParticlesHere: {x: 0, y: 0, z: 0}
-  isPlayer1Weapon: 1
+  isPlayer1Weapon: 0
   isPlayer2Weapon: 0
   isMonsterWeapon: 0
 --- !u!114 &2982168364103149166
