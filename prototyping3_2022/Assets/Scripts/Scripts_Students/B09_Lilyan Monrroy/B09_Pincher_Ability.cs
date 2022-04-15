@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
+using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
 public class B09_Pincher_Ability : MonoBehaviour
@@ -19,12 +20,24 @@ public class B09_Pincher_Ability : MonoBehaviour
 
     [SerializeField] private Animator sawBlade;
     private GameObject grabbedObject;
+    private GameObject parent;
     private float sawBaseZ = 0.0f;
     private float targetZ = 0.0f;
     private float elapsedTime;
     private Transform grabbedObjecParentTransform;
     private int breakCount;
     private int maxBreakCount;
+
+    [SerializeField] private AudioClip[] clinkAudioClips;
+    private AudioSource pincherAudioSource;
+    public bool playPincherSFX;
+
+    [SerializeField] private AudioClip[] pushAudioClips;
+    private AudioSource pushAudioSource;
+
+    [SerializeField] private AudioClip sawAudioClip;
+    private AudioSource sawAudioSource;
+    public bool sawPincherSFX;
 
     private float cooldown;
     private float maxCooldown;
@@ -49,6 +62,10 @@ public class B09_Pincher_Ability : MonoBehaviour
 
         maxCooldown = 3.0f;
         maxBreakCount = 5;
+
+        parent = pincher_left.transform.parent.gameObject;
+        pincherAudioSource = parent.GetComponent<AudioSource>();
+        sawAudioSource = saw.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -116,6 +133,13 @@ public class B09_Pincher_Ability : MonoBehaviour
                     GameObject swirlEffect = Instantiate(coolDownEffect, coolDownTransform);
                     swirlEffect.transform.localScale = new Vector3(0.5f,0.5f,0.5f);
                     Destroy(swirlEffect,maxCooldown);
+
+                    pushAudioSource = parent.AddComponent<AudioSource>(); ;
+                    pushAudioSource.clip = pushAudioClips[Random.Range(0, 3)];
+                    pushAudioSource.pitch = Random.Range(1.10f, 1.50f);
+                    pushAudioSource.volume = Random.Range(0.65f, 1.00f);
+                    pushAudioSource.Play();
+                    Destroy(pushAudioSource,maxCooldown);
                 }
             }
         }
@@ -135,6 +159,15 @@ public class B09_Pincher_Ability : MonoBehaviour
             {
                 sawBlade.SetBool("Spinning", true);
 
+                if (sawAudioSource.isPlaying == false)
+                {
+                    sawAudioSource.clip = sawAudioClip;
+                    sawAudioSource.pitch = pincherAudioSource.pitch = Random.Range(0.95f, 1.05f);
+                    sawAudioSource.volume = Random.Range(0.35f, .45f);
+                    sawAudioSource.loop = true;
+                    sawAudioSource.Play();
+                }
+
                 if (grabbedObject == null)
                 {
                     Debug.Log("Copied changed transform");
@@ -142,6 +175,7 @@ public class B09_Pincher_Ability : MonoBehaviour
                     grabbedObjecParentTransform = grabbedObject.transform.parent;
                     elapsedTime = 0;
                     sawBaseZ = saw.transform.localPosition.z;
+                    playPincherSFX = true;
                 }
                 else
                 {
@@ -158,11 +192,19 @@ public class B09_Pincher_Ability : MonoBehaviour
                 grabbedObject.GetComponent<BotBasic_Move>().isGrabbed = true;
                 grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
                 grabbedObject.transform.SetParent(transform);
-
             }
+
 
             left.close();
             right.close();
+        }
+
+        if (playPincherSFX)
+        {
+            pincherAudioSource.clip = clinkAudioClips[Random.Range(0, 3)];
+            pincherAudioSource.Play();
+            pincherAudioSource.pitch = Random.Range(1.10f, 1.50f);
+            playPincherSFX = false;
         }
     }
 
@@ -182,6 +224,6 @@ public class B09_Pincher_Ability : MonoBehaviour
         }
 
         sawBlade.SetBool("Spinning", false);
-
+        sawAudioSource.Stop();
     }
 }
