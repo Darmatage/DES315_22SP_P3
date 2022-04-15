@@ -79,9 +79,10 @@ GameObject:
   - component: {fileID: 364999052203561223}
   - component: {fileID: 5780095072016173801}
   - component: {fileID: 3597172623914523088}
+  - component: {fileID: 7113696862884291364}
   m_Layer: 0
   m_Name: BotA20
-  m_TagString: Untagged
+  m_TagString: A20
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -195,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab929fe774a0084c8ae87aafe02faf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
+  moveSpeed: 7
   rotateSpeed: 120
   jumpSpeed: 7
   boostSpeed: 10
@@ -298,11 +299,112 @@ MonoBehaviour:
     type: 3}
   snowmanTopRef: {fileID: 8712236322446321930}
   snowmanMiddleRef: {fileID: 467848057327918956}
+  snowmanBottomRef: {fileID: 7078533940412928264}
   snowballSpawnPointLeft: {fileID: 5934279157357301466}
   snowballSpawnPointRight: {fileID: 8300506141548144836}
   turretRotationSpeed: 30
   turretShootCooldown: 0.75
   action1Cooldown: 0.5
+  snowballThrowSfx: {fileID: 8300000, guid: 38fd8a201495879458457f31a2a7cddd, type: 3}
+  snowballRollSfx: {fileID: 8300000, guid: 0be8dd2c604f14c46b8b914e91b782be, type: 3}
+  snowmanGrowSfx: {fileID: 8300000, guid: cfbe8fbe243325e4eaf115c4205032b0, type: 3}
+--- !u!82 &7113696862884291364
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355330930375697355}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: ab5732fb3a74006408f07ff6a825dad7,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1355330930762081239
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,7 +586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6967344283441677862}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 1, z: 1.5}
+  m_LocalPosition: {x: 1, y: 1, z: 2}
   m_LocalScale: {x: 0.66515, y: 0.66515, z: 0.66515}
   m_Children: []
   m_Father: {fileID: 1355330930375697356}
@@ -514,7 +616,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8949046689206179917}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 1, z: 1.5}
+  m_LocalPosition: {x: -1, y: 1, z: 2}
   m_LocalScale: {x: 0.66515, y: 0.66515, z: 0.66515}
   m_Children: []
   m_Father: {fileID: 1355330930375697356}
@@ -938,6 +1040,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: SnowmanMiddle
       objectReference: {fileID: 0}
+    - target: {fileID: 7782482166454482023, guid: b43162ab291475b4fa60f65ee4b9f971,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.6403306e-11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7782482166454482023, guid: b43162ab291475b4fa60f65ee4b9f971,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.706897
+      objectReference: {fileID: 0}
+    - target: {fileID: 7782482166454482023, guid: b43162ab291475b4fa60f65ee4b9f971,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.017223688
+      objectReference: {fileID: 0}
+    - target: {fileID: 7782482166454482023, guid: b43162ab291475b4fa60f65ee4b9f971,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.017223688
+      objectReference: {fileID: 0}
+    - target: {fileID: 7782482166454482023, guid: b43162ab291475b4fa60f65ee4b9f971,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.706897
+      objectReference: {fileID: 0}
+    - target: {fileID: 7782482166454482023, guid: b43162ab291475b4fa60f65ee4b9f971,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -2.791
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b43162ab291475b4fa60f65ee4b9f971, type: 3}
 --- !u!1 &467848057327918956 stripped
@@ -1152,6 +1284,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 104a45520ae896d49a7cafe54a03c659, type: 3}
+--- !u!1 &7078533940412928264 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1626252713699065768, guid: 104a45520ae896d49a7cafe54a03c659,
+    type: 3}
+  m_PrefabInstance: {fileID: 8407548872009182880}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5953823329514109077 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2742032334705972789, guid: 104a45520ae896d49a7cafe54a03c659,

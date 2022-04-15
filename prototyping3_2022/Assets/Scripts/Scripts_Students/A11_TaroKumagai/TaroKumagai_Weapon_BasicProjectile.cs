@@ -8,6 +8,8 @@ public class TaroKumagai_Weapon_BasicProjectile : MonoBehaviour
 	public GameObject projectile;
 	public GameObject explosion;
 	public GameObject magnetizationParticle;
+	public GameObject magnetizationIsActivatedParticle;
+    public TaroKumagai_MagnetizerBehavior magnetizer;
 
     public int MaxProjectiles = 2;
     public float ProjectileLifetime = 3f;
@@ -35,7 +37,7 @@ public class TaroKumagai_Weapon_BasicProjectile : MonoBehaviour
 
     void Start()
     {
-		
+        magnetizationIsActivatedParticle.SetActive(false);
     }
 
     void Update()
@@ -79,13 +81,22 @@ public class TaroKumagai_Weapon_BasicProjectile : MonoBehaviour
                 projectile.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
 
+        if (activeProjectiles.Count > 1)
+        {
+            magnetizer.isActive = true;
+        }
+        else
+            magnetizer.isActive = false;
+
+
         if (Input.GetButton(ButtonMagnetize) && activeProjectiles.Count > 1)
         {
             magentizing = true;
+            magnetizationIsActivatedParticle.SetActive(true);
 
             Vector3 midpoint = new Vector3();
 
-            foreach(var projectile in activeProjectiles)
+            foreach (var projectile in activeProjectiles)
             {
                 midpoint.x += projectile.transform.position.x;
                 midpoint.y += projectile.transform.position.y;
@@ -120,10 +131,13 @@ public class TaroKumagai_Weapon_BasicProjectile : MonoBehaviour
                 // Resetting the cooldown for magnetization particle effect
                 magnetTimer = MagnetParticleCooldown;
             }
-            
+
         }
         else
+        {
             magentizing = false;
+            magnetizationIsActivatedParticle.SetActive(false);
+        }
     }
 
     public void CreateExplosion(Vector3 position)
