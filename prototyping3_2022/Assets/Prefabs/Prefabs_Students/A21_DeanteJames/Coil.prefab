@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 2469091879728272463}
   - component: {fileID: 3831232055486430446}
   - component: {fileID: 5398162149650110945}
-  - component: {fileID: 3942002992854771746}
   - component: {fileID: -4672770583893074291}
   - component: {fileID: 3214835558188081273}
   - component: {fileID: 788120507411549357}
+  - component: {fileID: 1031317750389535648}
   m_Layer: 0
   m_Name: Coil
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3612965155469325767}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 388.09433, y: -41.889137, z: 1205.9308}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.015, y: 0.015, z: 0.015}
   m_Children:
   - {fileID: 6072068312425198662}
   - {fileID: 204782410364065032}
@@ -45,7 +45,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3612965155469325767}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -7809238460305434446, guid: 434f76f181c8bfd40b1df1562344e16c, type: 3}
 --- !u!23 &5398162149650110945
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -88,19 +88,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &3942002992854771746
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3612965155469325767}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &-4672770583893074291
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -151,6 +138,20 @@ MonoBehaviour:
   isPlayer1Weapon: 0
   isPlayer2Weapon: 0
   isMonsterWeapon: 0
+--- !u!136 &1031317750389535648
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3612965155469325767}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 40
+  m_Height: 150
+  m_Direction: 1
+  m_Center: {x: 0, y: 70, z: 0}
 --- !u!1 &6958145259407612681
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,8 +161,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 204782410364065032}
-  - component: {fileID: 6344500100193172531}
   - component: {fileID: 3038952641467796628}
+  - component: {fileID: 2754962678934489410}
   m_Layer: 0
   m_Name: AttachRadius
   m_TagString: Untagged
@@ -183,20 +184,6 @@ Transform:
   m_Father: {fileID: 2469091879728272463}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &6344500100193172531
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6958145259407612681}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 8
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3038952641467796628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,6 +196,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22fac84953eb4b0419a1bec55a316061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &2754962678934489410
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6958145259407612681}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 625
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7438563136562107724
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,7 +235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7438563136562107724}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.75, y: 0, z: -0.19}
+  m_LocalPosition: {x: -402, y: 0, z: 95}
   m_LocalScale: {x: 12, y: 8, z: 12}
   m_Children: []
   m_Father: {fileID: 2469091879728272463}
