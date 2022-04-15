@@ -28,6 +28,8 @@ public class GrantWu_Weapon_Fists : MonoBehaviour
 	private float otherrotatespeed;
 	private float otherjumpspeed;
 	private AudioSource audiosource;
+	public GameObject r_particles;
+	public GameObject l_particles;
 
 	void Start()
 	{
@@ -38,6 +40,9 @@ public class GrantWu_Weapon_Fists : MonoBehaviour
 
 		myrb = gameObject.GetComponent<Rigidbody>();
 		audiosource = gameObject.GetComponent<AudioSource>();
+		r_particles.SetActive(false);
+		l_particles.SetActive(false);
+
 
 		// Grab other game object based on player tag
 		if (gameObject.transform.parent.CompareTag("Player1"))
@@ -83,11 +88,13 @@ public class GrantWu_Weapon_Fists : MonoBehaviour
 		{
 			leftFist.transform.Translate(0, 0, -thrustAmount);
 			leftOut = false;
+			l_particles.SetActive(false);
 		}
 		else
         {
 			rightFist.transform.Translate(0, 0, -thrustAmount);
 			rightOut = false;
+			r_particles.SetActive(false);
 		}
 		myrb.constraints = RigidbodyConstraints.None;
 	}
@@ -108,6 +115,10 @@ public class GrantWu_Weapon_Fists : MonoBehaviour
 					other_movement.rotateSpeed = 0f;
 					other_movement.jumpSpeed = 0f;
 					audiosource.Play();
+					if (leftOut)
+						l_particles.SetActive(true);
+					if (rightOut)
+						r_particles.SetActive(true);
 				}
 				StartCoroutine(ReleaseStun(other_rb, other_movement));
 			}
