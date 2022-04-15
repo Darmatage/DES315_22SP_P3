@@ -94,21 +94,25 @@ public class GrantWu_Weapon_Fists : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-		if (other.gameObject.transform.parent.CompareTag("Player1") || other.gameObject.transform.parent.CompareTag("Player2"))
+		if (other.gameObject.transform.parent)
         {
-			BotBasic_Move other_movement = other.gameObject.GetComponent<BotBasic_Move>();
-			Rigidbody other_rb = other.gameObject.GetComponent<Rigidbody>();
+			if (other.gameObject.transform.parent.CompareTag("Player1") || other.gameObject.transform.parent.CompareTag("Player2"))
+			{
+				BotBasic_Move other_movement = other.gameObject.GetComponent<BotBasic_Move>();
+				Rigidbody other_rb = other.gameObject.GetComponent<Rigidbody>();
 
-			if (rightOut || leftOut)
-            {
-				other_rb.constraints = RigidbodyConstraints.FreezeAll;
-				other_movement.moveSpeed = 0f;
-				other_movement.rotateSpeed = 0f;
-				other_movement.jumpSpeed = 0f;
-				audiosource.Play();
+				if (rightOut || leftOut)
+				{
+					other_rb.constraints = RigidbodyConstraints.FreezeAll;
+					other_movement.moveSpeed = 0f;
+					other_movement.rotateSpeed = 0f;
+					other_movement.jumpSpeed = 0f;
+					audiosource.Play();
+				}
+				StartCoroutine(ReleaseStun(other_rb, other_movement));
 			}
-			StartCoroutine(ReleaseStun(other_rb, other_movement));
 		}
+		
 	}
 
 	IEnumerator ReleaseStun(Rigidbody other_rb, BotBasic_Move other_movement)
