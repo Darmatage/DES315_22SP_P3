@@ -6,7 +6,7 @@ public class WonjuJo_Projectile : MonoBehaviour
 {
     private float ProjectileLife = 3f;
     private float ProjectileTimer = 0f;
-    float Speed = 10f;
+    float Speed = 15f;
     // Start is called before the first frame update
 
     Rigidbody rigidBody;
