@@ -382,6 +382,8 @@ MonoBehaviour:
   boostSFX: {fileID: 8300000, guid: 28992f392f6a17f47b2c566284d74685, type: 3}
   boostSpeed: 50
   fireVFX: {fileID: 6493137072813091176}
+  WithdrawWeaponTimer: 2
+  BoostTimer: 1
 --- !u!82 &5696157707756869417
 AudioSource:
   m_ObjectHideFlags: 0
@@ -767,8 +769,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 700, y: 500, z: 300}
-  m_Center: {x: 0, y: 0, z: 334.76782}
+  m_Size: {x: 610.9545, y: 400.64258, z: 134.97276}
+  m_Center: {x: 1.6030073, y: 0.26988983, z: 339.5256}
 --- !u!114 &8595704471964100664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -781,7 +783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ca4913335a3b745850f156a725a789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 3
   particlesPrefab: {fileID: 7916852506792683719, guid: a6746c9ee60a1a44d813bcdbac5cb0ce,
     type: 3}
   SpawnParticlesHere: {x: 0, y: 0, z: 0}

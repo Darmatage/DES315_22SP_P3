@@ -163,10 +163,9 @@ GameObject:
   - component: {fileID: 1355330930375697359}
   - component: {fileID: 364999052203561223}
   - component: {fileID: 5780095072016173801}
-  - component: {fileID: 42120117449186968}
-  - component: {fileID: 9093166021570309862}
   - component: {fileID: 4164011113351167296}
   - component: {fileID: 5466436695155228953}
+  - component: {fileID: 9207683110349372744}
   m_Layer: 0
   m_Name: BotA12
   m_TagString: Untagged
@@ -360,32 +359,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doesFallDamage: 0
   playerFallDamage: 4
---- !u!65 &42120117449186968
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355330930375697355}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.81, y: 0.74, z: 1.44}
-  m_Center: {x: 1.79, y: -0.015, z: 1.38}
---- !u!65 &9093166021570309862
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355330930375697355}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.81, y: 0.74, z: 1.44}
-  m_Center: {x: 1.79, y: -0.015, z: -1.38}
 --- !u!114 &4164011113351167296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,6 +395,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &9207683110349372744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355330930375697355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e97583df7499f44e9baea0e54699928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Cooldown: 1
+  HomingSpeed: 20
+  buttonID: 
+  RocketPrefab: {fileID: 9064584162721204779, guid: 1ea6b466bab701346a3910d1e4238156,
+    type: 3}
 --- !u!1 &1355330930662561729
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,9 +565,11 @@ GameObject:
   - component: {fileID: 6606117622234039783}
   - component: {fileID: 5378322682544768568}
   - component: {fileID: 4809041925535746539}
+  - component: {fileID: 4869464228257332078}
+  - component: {fileID: 1884818374428840194}
   m_Layer: 0
   m_Name: leftClaw
-  m_TagString: Untagged
+  m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -646,6 +638,39 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4869464228257332078
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5242597439484971111}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.9999999, z: 1.0000001}
+  m_Center: {x: 0.00000011920929, y: 0, z: 0.000000059604645}
+--- !u!114 &1884818374428840194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5242597439484971111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b9d590edea778499d098d6de59e16f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+  particlesPrefab: {fileID: 7916852506792683719, guid: a6746c9ee60a1a44d813bcdbac5cb0ce,
+    type: 3}
+  SpawnParticlesHere: {x: 0, y: 0, z: 0}
+  isPlayer1Weapon: 0
+  isPlayer2Weapon: 0
+  isMonsterWeapon: 0
+  DamageOn: 0
 --- !u!1 &5787207669449309017
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,9 +682,11 @@ GameObject:
   - component: {fileID: 4862949012956489109}
   - component: {fileID: 7803697031734396985}
   - component: {fileID: 7045024848398041702}
+  - component: {fileID: 1689076590799666415}
+  - component: {fileID: 5911150500414504764}
   m_Layer: 0
   m_Name: rightClaw
-  m_TagString: Untagged
+  m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -672,8 +699,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5787207669449309017}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.85, y: -0.015, z: -0.336}
-  m_LocalScale: {x: 0.5, y: 0.7, z: 0.4}
+  m_LocalPosition: {x: 0.85, y: -0.015, z: -0.281}
+  m_LocalScale: {x: 0.5, y: 0.7, z: 0.5496}
   m_Children: []
   m_Father: {fileID: 1355330929262153268}
   m_RootOrder: 1
@@ -728,6 +755,39 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1689076590799666415
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5787207669449309017}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.9999999, z: 1.0000001}
+  m_Center: {x: 0.00000011920929, y: 0, z: -0.000000059604645}
+--- !u!114 &5911150500414504764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5787207669449309017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b9d590edea778499d098d6de59e16f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 3
+  particlesPrefab: {fileID: 7916852506792683719, guid: a6746c9ee60a1a44d813bcdbac5cb0ce,
+    type: 3}
+  SpawnParticlesHere: {x: 0, y: 0, z: 0}
+  isPlayer1Weapon: 0
+  isPlayer2Weapon: 0
+  isMonsterWeapon: 0
+  DamageOn: 0
 --- !u!1 &8160687095547711129
 GameObject:
   m_ObjectHideFlags: 0

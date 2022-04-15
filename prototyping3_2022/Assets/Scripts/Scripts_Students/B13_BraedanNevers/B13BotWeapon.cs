@@ -13,6 +13,7 @@ public class B13BotWeapon : MonoBehaviour
 	private Animator anime;
 	private bool CanAttackBomb = true;
 	private bool CanAttackArm = true;
+	public GameObject roboArm;
 
 	//grab axis from parent object
 	public string button1;
@@ -26,6 +27,7 @@ public class B13BotWeapon : MonoBehaviour
 		button2 = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
 		button3 = gameObject.transform.parent.GetComponent<playerParent>().action3Input;
 		button4 = gameObject.transform.parent.GetComponent<playerParent>().action4Input;
+		roboArm.tag = "Untagged";	
 
 		anime = GetComponentInChildren<Animator>();
 	}
@@ -40,6 +42,7 @@ public class B13BotWeapon : MonoBehaviour
 		}
 		if ((Input.GetButtonDown(button2)) && (CanAttackArm == true))
 		{
+			roboArm.tag = "Hazard";
 			anime.SetTrigger("Smack");
 			CanAttackArm = false;
 			StartCoroutine(WaitForArmSmack());
@@ -55,6 +58,7 @@ public class B13BotWeapon : MonoBehaviour
 	IEnumerator WaitForArmSmack()
 	{
 		yield return new WaitForSeconds(AttackTwoCooldown);
+		roboArm.tag = "Untagged";
 		CanAttackArm = true;
 	}
 }

@@ -30,7 +30,7 @@ public class HyungseobKim_Cannon : MonoBehaviour
         var bots = FindObjectsOfType<BotBasic_Damage>();
         foreach(BotBasic_Damage bot in bots)
         {
-            if (bot.gameObject != transform.parent)
+            if (bot.gameObject != transform.parent.gameObject)
             {
                 enemy = bot;
                 break;

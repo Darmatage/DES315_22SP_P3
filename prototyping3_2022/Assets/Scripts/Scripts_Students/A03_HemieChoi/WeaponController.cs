@@ -102,13 +102,25 @@ public class WeaponController : MonoBehaviour
 		
 		if ((Input.GetButton(button2)))
         {
-            Orca.rotation = Quaternion.Euler(Orca.rotation.eulerAngles + new Vector3(0, rotateSpeed, 0));
+            //Orca.rotation = Quaternion.Euler(Orca.rotation.eulerAngles + new Vector3(0, rotateSpeed, 0));
+            //Orca.transform.Rotate(0, rotateSpeed * Time.deltaTime, 0);
+            if (transform.localScale.magnitude < 1.5)
+                transform.localScale += transform.localScale * 0.25f * Time.deltaTime;
         }
 		
 		if ((Input.GetButton(button3)))
         {
-            Orca.rotation = Quaternion.Euler(Orca.rotation.eulerAngles + new Vector3(0, rotateSpeed * -1, 0));
+            //Orca.rotation = Quaternion.Euler(Orca.rotation.eulerAngles + new Vector3(0, rotateSpeed * -1, 0));
+            //Orca.transform.Rotate(0, -rotateSpeed * Time.deltaTime, 0);
+            if (transform.localScale.magnitude > 1.0)
+                transform.localScale -= transform.localScale * 0.25f * Time.deltaTime;
         }
+    
+        //if (Orca.rotation.y < -90.0f)
+            //Orca.rotation = Quaternion.Euler(Orca.rotation.eulerAngles.x, -90.0f, Orca.rotation.eulerAngles.z);
+        //if (Orca.rotation.y > 90.0f)
+            //Orca.rotation = Quaternion.Euler(Orca.rotation.eulerAngles.x, 90.0f, Orca.rotation.eulerAngles.z);
+
     }
 
     public void showDuck()

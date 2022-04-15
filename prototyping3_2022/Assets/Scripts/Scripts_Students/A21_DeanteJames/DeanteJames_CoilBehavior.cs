@@ -58,7 +58,7 @@ public class DeanteJames_CoilBehavior : MonoBehaviour
 
 
             Vector3 avgPos = (gameObject.transform.position + coilHolder[newCoilAttached].transform.position)/2.0f;
-
+            avgPos += new Vector3(0.0f, 0.6f, 0.0f);
             // Then we have a z = z case
             // we ned to rotate on the z axis
             Vector3 dist = coilHolder[newCoilAttached].transform.position - gameObject.transform.position;

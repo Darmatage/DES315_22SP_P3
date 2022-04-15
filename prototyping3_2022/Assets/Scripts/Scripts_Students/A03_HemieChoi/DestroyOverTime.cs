@@ -20,6 +20,11 @@ public class DestroyOverTime : MonoBehaviour
     {
         timer += Time.deltaTime;
 
+        if (transform.localScale.x < 0.15f)
+        {
+            transform.localScale = transform.localScale + new Vector3(0.15f * Time.deltaTime, 0.15f * Time.deltaTime, 0.15f * Time.deltaTime);
+        }
+
         if (timer >= lifeTime)
         {
             --bulletData.duckOutCount;

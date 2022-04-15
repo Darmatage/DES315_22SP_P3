@@ -8,6 +8,8 @@ public class Taher_Spikes_Script : MonoBehaviour
 
 	public GameObject[] spikeHolders;
 	private float thrustAmount = -0.6f;
+	private float timer = 0.0f;
+	public float Spike_cd = 5.0f;
 	
 	private bool weaponOut = false;
 
@@ -26,7 +28,9 @@ public class Taher_Spikes_Script : MonoBehaviour
 
     void Update(){
 		//if (Input.GetKeyDown(KeyCode.T)){
-		if ((Input.GetButtonDown(button1))&&(weaponOut==false)){
+		timer += Time.deltaTime;
+
+		if ((Input.GetButtonDown(button1))&&(weaponOut==false) && timer > Spike_cd){
 
 			foreach (var spike in spikeHolders)
 			{

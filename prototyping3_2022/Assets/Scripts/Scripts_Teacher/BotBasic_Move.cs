@@ -7,10 +7,10 @@ public class BotBasic_Move : MonoBehaviour
 	public float moveSpeed = 10;
 	public float rotateSpeed = 100;
 	public float jumpSpeed = 7f;
-	private float flipSpeed = 150f;
+	protected float flipSpeed = 150f;
 	public float boostSpeed = 10f;
 
-	private Rigidbody rb;
+	protected Rigidbody rb; // allows a child class to use this variable
 	public Transform groundCheck;
 	public Transform turtleCheck;
 	public LayerMask groundLayer;
@@ -33,7 +33,7 @@ public class BotBasic_Move : MonoBehaviour
 	public string pJump;
 	public string button4; // right bumper or [y] or [/] keys, to test on boost
 	
-    void Start(){
+    public void Start(){
 		if (gameObject.GetComponent<Rigidbody>() != null){
 			rb = gameObject.GetComponent<Rigidbody>();
 		}
@@ -50,7 +50,7 @@ public class BotBasic_Move : MonoBehaviour
 		// button4 = "p1Fire4";
     }
 
-    void Update(){
+    public void Update(){
 		float botMove = Input.GetAxisRaw(pVertical) * moveSpeed * Time.deltaTime;
 		float botRotate = Input.GetAxisRaw(pHorizontal) * rotateSpeed * Time.deltaTime;
 		
