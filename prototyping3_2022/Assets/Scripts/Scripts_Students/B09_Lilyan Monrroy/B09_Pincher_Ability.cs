@@ -15,7 +15,6 @@ public class B09_Pincher_Ability : MonoBehaviour
     public GameObject canvas;
     public GameObject coolDownEffect;
 
-
     private GameObject player2Canvas;
 
     [SerializeField] private Animator sawBlade;
@@ -37,10 +36,14 @@ public class B09_Pincher_Ability : MonoBehaviour
 
     [SerializeField] private AudioClip sawAudioClip;
     private AudioSource sawAudioSource;
-    public bool sawPincherSFX;
 
+    //Not able to use claw cool down
     private float cooldown;
     private float maxCooldown;
+
+    //Button B press cool down.
+    private float CooldownTime;
+    private float cooldownUntilNextPress;
 
     [SerializeField] private Transform coolDownTransform;
 
@@ -62,6 +65,7 @@ public class B09_Pincher_Ability : MonoBehaviour
 
         maxCooldown = 3.0f;
         maxBreakCount = 5;
+        CooldownTime = 0.5f;
 
         parent = pincher_left.transform.parent.gameObject;
         pincherAudioSource = parent.GetComponent<AudioSource>();
@@ -123,8 +127,10 @@ public class B09_Pincher_Ability : MonoBehaviour
             player2Canvas.transform.localPosition = new Vector3(0.0f,2.4f,0.0f);
             player2Canvas.transform.rotation = Quaternion.identity;
 
-            if (Input.GetKeyDown(KeyCode.B) == true)
+            if (Input.GetKeyDown(KeyCode.B) == true && cooldownUntilNextPress < Time.time)
             {
+                cooldownUntilNextPress = Time.time + CooldownTime;
+
                 ++breakCount;
 
                 if (breakCount >= maxBreakCount)
