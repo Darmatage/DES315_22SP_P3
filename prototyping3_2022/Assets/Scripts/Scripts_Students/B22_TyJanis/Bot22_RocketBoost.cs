@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bot22_RocketBoost : MonoBehaviour
@@ -11,15 +10,15 @@ public class Bot22_RocketBoost : MonoBehaviour
 	public GameObject spike;
 	public float boostSpeed = 1000f;
 	public float cooldownTime = 2.0f;
-	AudioSource Audio;
+	private AudioSource _audio;
 	public AudioClip chargeSound;
-	private float nextFireTime = 0.0f;
-	private float thrustAmount = 1f;
+	private float _nextFireTime;
+	private readonly float _thrustAmount = 1f;
 	
-	private bool boosting = false;
+	private bool _boosting;
 
-	private Rigidbody rb;
-	private Renderer cooldownColor;
+	private Rigidbody _rb;
+	private Renderer _cooldownColor;
 
 	//grab axis from parent object
 	[HideInInspector]
@@ -31,68 +30,67 @@ public class Bot22_RocketBoost : MonoBehaviour
 	[HideInInspector]
 	public string button4; // currently boost in player move script
 
-    // Start is called before the first frame update
+	private static readonly int Color1 = Shader.PropertyToID("_Color");
+
+	// Start is called before the first frame update
     void Start()
     {
-     	button1 = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
-		button2 = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
-		button3 = gameObject.transform.parent.GetComponent<playerParent>().action3Input;
-		button4 = gameObject.transform.parent.GetComponent<playerParent>().action4Input;
+	    var parent = gameObject.transform.parent;
+	    button1 = parent.GetComponent<playerParent>().action1Input;
+		button2 = parent.GetComponent<playerParent>().action2Input;
+		button3 = parent.GetComponent<playerParent>().action3Input;
+		button4 = parent.GetComponent<playerParent>().action4Input;
 
 		if (body.GetComponent<Rigidbody>() != null)
 		{
-			rb = body.GetComponent<Rigidbody>();
+			_rb = body.GetComponent<Rigidbody>();
 		}
 
-		cooldownColor = cooldownMeter.GetComponent<Renderer>();
+		_cooldownColor = cooldownMeter.GetComponent<Renderer>();
 
-		Audio = GetComponent<AudioSource>();
+		_audio = GetComponent<AudioSource>();
 
     }
 
     // Update is called once per frame
     void Update()
-    {		
-		if(Time.time > nextFireTime)
+    {
+	    if(Time.time > _nextFireTime)
 		{
-			cooldownColor.material.SetColor("_Color", Color.green);
+			_cooldownColor.material.SetColor(Color1, Color.green);
 
-			if ((Input.GetButton(button1)) && !boosting)
+			if ((Input.GetButton(button1)) && !_boosting)
 			{
-				Audio.PlayOneShot(chargeSound);
-				boosting = true;
+				_audio.PlayOneShot(chargeSound);
+				_boosting = true;
 
-				leftBoost.transform.Translate(0,thrustAmount, 0);
-				rightBoost.transform.Translate(0,thrustAmount, 0);
+				leftBoost.transform.Translate(0,_thrustAmount, 0);
+				rightBoost.transform.Translate(0,_thrustAmount, 0);
 			
-				rb.AddForce(transform.forward * boostSpeed, ForceMode.Impulse);
+				_rb.AddForce(transform.forward * boostSpeed, ForceMode.Impulse);
 				StartCoroutine(TurnOffBoost()); 
 
-				nextFireTime = Time.time + cooldownTime;
+				_nextFireTime = Time.time + cooldownTime;
 
 			}
 
 		}
 		else
 		{
-			cooldownColor.material.SetColor("_Color", Color.red);
+			_cooldownColor.material.SetColor(Color1, Color.red);
 		}
 
-		if(!boosting)
-			spike.GetComponent<HazardDamage>().damage = 1.0f;
-		else
-			spike.GetComponent<HazardDamage>().damage = 3.0f;
+	    spike.GetComponent<HazardDamage>().damage = !_boosting ? 1.0f : 3.0f;
 
-		//Debug.Log(spike.GetComponent<HazardDamage>().damage);	
-        
+	    //Debug.Log(spike.GetComponent<HazardDamage>().damage);	
     }
     
     IEnumerator TurnOffBoost()
     {
 		yield return new WaitForSeconds(0.6f);
-		leftBoost.transform.Translate(0,-thrustAmount, 0);
-        rightBoost.transform.Translate(0,-thrustAmount, 0);
-		boosting = false;
+		leftBoost.transform.Translate(0,-_thrustAmount, 0);
+        rightBoost.transform.Translate(0,-_thrustAmount, 0);
+		_boosting = false;
 	}
 
 }
