@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1901343502919995284}
   - component: {fileID: 5408665914410090533}
   m_Layer: 0
-  m_Name: GrantWu_PS_Fists
+  m_Name: GrantWu_PS_Fists 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9100271970948007194}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2194.1702, y: 733.04803, z: 1069.3691}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.7, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -47,9 +47,9 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 0
+  looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -168,7 +168,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 150
+      scalar: 40
       minScalar: 5
       maxCurve:
         serializedVersion: 2
