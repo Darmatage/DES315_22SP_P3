@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
-  rotateSpeed: 120
+  rotateSpeed: 160
   jumpSpeed: 7
   boostSpeed: 10
   groundCheck: {fileID: 1355330930762081256}
@@ -231,12 +231,12 @@ MonoBehaviour:
   sidelimit: 0.72
   knockBackSpeed: 10
   forceSideLimit_p75: 1
-  shieldPowerFront: 5
-  shieldPowerBack: 5
-  shieldPowerLeft: 5
-  shieldPowerRight: 5
-  shieldPowerTop: 5
-  shieldPowerBottom: 5
+  shieldPowerFront: 6
+  shieldPowerBack: 6
+  shieldPowerLeft: 6
+  shieldPowerRight: 6
+  shieldPowerTop: 6
+  shieldPowerBottom: 6
   shieldFrontObj: {fileID: 1098726327034351829}
   shieldBackObj: {fileID: 2186211737314387781}
   shieldLeftObj: {fileID: 2735579452779107192}
@@ -586,7 +586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6967344283441677862}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 1, z: 2}
+  m_LocalPosition: {x: 1.2, y: 1, z: 0.75}
   m_LocalScale: {x: 0.66515, y: 0.66515, z: 0.66515}
   m_Children: []
   m_Father: {fileID: 1355330930375697356}
@@ -616,7 +616,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8949046689206179917}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 1, z: 2}
+  m_LocalPosition: {x: -1.2, y: 1, z: 0.75}
   m_LocalScale: {x: 0.66515, y: 0.66515, z: 0.66515}
   m_Children: []
   m_Father: {fileID: 1355330930375697356}

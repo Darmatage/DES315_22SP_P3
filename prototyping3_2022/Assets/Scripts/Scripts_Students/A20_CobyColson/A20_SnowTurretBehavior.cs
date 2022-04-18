@@ -60,7 +60,7 @@ public class A20_SnowTurretBehavior : MonoBehaviour
 
             transform.localScale -= Vector3.one * 0.075f;
 
-            yield return new WaitForSeconds(0.175f);
+            yield return new WaitForSeconds(0.2f);
         }
         snowman.ResetBody();
         Destroy(gameObject);

@@ -13,7 +13,6 @@ public class A20_Snowball : MonoBehaviour
     public GameObject snowmanTopRef;
     public GameObject snowmanMiddleRef;
     public GameObject snowmanBottomRef;
-    
     public Transform snowballSpawnPointLeft;
     public Transform snowballSpawnPointRight;
     private BotBasic_Move movement;
@@ -27,7 +26,6 @@ public class A20_Snowball : MonoBehaviour
         Complete
     }
     SnowmanState snowmanState = SnowmanState.Complete;
-
     public float action1Cooldown;
     private float action1CooldownTimer = 0.0f;
     private float snowmanTopMiddleHeightDelta;
@@ -36,6 +34,11 @@ public class A20_Snowball : MonoBehaviour
     public AudioClip snowballThrowSfx;
     public AudioClip snowballRollSfx;
     public AudioClip snowmanGrowSfx;
+    private bool playThrowAnimation = false;
+    private float timePlayedThrowAnimation = 0;
+    private float throwAnimationLerpFactor = 0;
+    private Quaternion initialRotation;
+    private Quaternion targetRotation;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +51,16 @@ public class A20_Snowball : MonoBehaviour
         snowmanMiddleRef.transform.position.y;
 
         audioSrc = GetComponent<AudioSource>();
+
+        string playerNumber = gameObject.transform.root.tag;
+        if (playerNumber == "Player1")
+        {
+            snowballPrefab.GetComponent<HazardDamage>().isPlayer1Weapon = true;
+        }
+        else if (playerNumber == "Player2")
+        {
+            snowballPrefab.GetComponent<HazardDamage>().isPlayer2Weapon = true;
+        }
     }
 
     // Update is called once per frame
@@ -82,6 +95,24 @@ public class A20_Snowball : MonoBehaviour
         {
             ThrowSnowball();
         }
+
+        if (playThrowAnimation)
+        {
+            throwAnimationLerpFactor = Mathf.PingPong(timePlayedThrowAnimation * 8.0f, 1.0f);
+            snowmanMiddleRef.transform.rotation = Quaternion.Lerp(initialRotation, targetRotation, throwAnimationLerpFactor);
+            timePlayedThrowAnimation += Time.deltaTime;
+            if (timePlayedThrowAnimation > 0.2f)
+            {
+                playThrowAnimation = false;
+                timePlayedThrowAnimation = 0;
+                //snowmanMiddleRef.transform.rotation = snowmanTopRef.transform.rotation;
+            }
+        }
+        else if (snowmanMiddleRef.transform.rotation != snowmanTopRef.transform.rotation)
+        {
+            snowmanMiddleRef.transform.rotation = Quaternion.Lerp(snowmanMiddleRef.transform.rotation,
+             snowmanTopRef.transform.rotation, Time.time);
+        }
     }
     
     public void ResetBody()
@@ -100,13 +131,24 @@ public class A20_Snowball : MonoBehaviour
     private void ThrowSnowball()
     {
         A20_SnowballBehavior snowball = Instantiate(snowballPrefab).GetComponent<A20_SnowballBehavior>();
-            Vector3 spawnPoint = (snowballSpawnLeft ? snowballSpawnPointLeft.position : snowballSpawnPointRight.position);
-            Vector3 spawnDirection = transform.forward + 0.1f * (snowballSpawnLeft ? transform.right : -transform.right);
-            snowball.Initialize(spawnPoint, spawnDirection);
-            snowballSpawnLeft = !snowballSpawnLeft;
-            action1CooldownTimer = action1Cooldown;
+        Vector3 spawnPoint = (snowballSpawnLeft ? snowballSpawnPointLeft.position : snowballSpawnPointRight.position);
+        Vector3 spawnDirection = transform.forward + 0.1f * (snowballSpawnLeft ? transform.right : -transform.right);
+        snowball.Initialize(spawnPoint, spawnDirection);
+        playThrowAnimation = true;
+        initialRotation = transform.rotation;
+        GameObject targetObj = new GameObject();
+        float deltaY = (snowballSpawnLeft ? 45 : -45);
+        targetObj.transform.eulerAngles = new Vector3(
+            transform.eulerAngles.x,
+            transform.eulerAngles.y + deltaY,
+            transform.eulerAngles.z);
+        targetRotation = targetObj.transform.rotation;
+        Destroy(targetObj);
 
-            PlaySnowballSfx(0.75f);
+        snowballSpawnLeft = !snowballSpawnLeft;
+        action1CooldownTimer = action1Cooldown;
+        
+        PlaySnowballSfx(0.75f);
     }
 
     private void RollSnowball()
