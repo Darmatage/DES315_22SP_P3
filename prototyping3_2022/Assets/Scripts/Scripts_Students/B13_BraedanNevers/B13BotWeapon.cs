@@ -28,7 +28,7 @@ public class B13BotWeapon : MonoBehaviour
 		button3 = gameObject.transform.parent.GetComponent<playerParent>().action3Input;
 		button4 = gameObject.transform.parent.GetComponent<playerParent>().action4Input;
 		roboArm.tag = "Untagged";	
-
+		roboArm.GetComponent<BoxCollider>().enabled = false;
 		anime = GetComponentInChildren<Animator>();
 	}
 
@@ -45,6 +45,7 @@ public class B13BotWeapon : MonoBehaviour
 			roboArm.tag = "Hazard";
 			anime.SetTrigger("Smack");
 			CanAttackArm = false;
+			roboArm.GetComponent<BoxCollider>().enabled = true;
 			StartCoroutine(WaitForArmSmack());
 		}
 	}
@@ -59,6 +60,7 @@ public class B13BotWeapon : MonoBehaviour
 	{
 		yield return new WaitForSeconds(AttackTwoCooldown);
 		roboArm.tag = "Untagged";
+		roboArm.GetComponent<BoxCollider>().enabled = false;
 		CanAttackArm = true;
 	}
 }
