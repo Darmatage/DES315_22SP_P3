@@ -59,9 +59,12 @@ public class WonjuJo_BasicWeapon : MonoBehaviour
 
 		AS = GetComponent<AudioSource>();
 
+		FrontBarrel.SetActive(false);
+		BackBarrel.SetActive(true);
+
 	}
 
-    void Update()
+	void Update()
 	{
 		FrontLauncherPosition = FrontProjectileLauncher.transform.position;
 		BackLauncherPosition = BackProjectileLauncher.transform.position;

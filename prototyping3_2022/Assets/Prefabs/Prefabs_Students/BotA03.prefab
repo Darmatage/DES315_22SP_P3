@@ -389,8 +389,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 12
-  rotateSpeed: 60
-  jumpSpeed: 10
+  rotateSpeed: 50
+  jumpSpeed: 9
   boostSpeed: 10
   groundCheck: {fileID: 1355330930762081256}
   turtleCheck: {fileID: 1355330929556144337}
@@ -423,8 +423,8 @@ MonoBehaviour:
   sidelimit: 0.75
   knockBackSpeed: 10
   forceSideLimit_p75: 1
-  shieldPowerFront: 5
-  shieldPowerBack: 5
+  shieldPowerFront: 7
+  shieldPowerBack: 3
   shieldPowerLeft: 5
   shieldPowerRight: 5
   shieldPowerTop: 5
