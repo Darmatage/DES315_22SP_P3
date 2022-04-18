@@ -17,6 +17,7 @@ public class HyungseobKim_Cannon : MonoBehaviour
     [HideInInspector]
     public string button4;
 
+    [HideInInspector]
     public BotBasic_Damage enemy;
 
     // Start is called before the first frame update
@@ -30,7 +31,7 @@ public class HyungseobKim_Cannon : MonoBehaviour
         var bots = FindObjectsOfType<BotBasic_Damage>();
         foreach(BotBasic_Damage bot in bots)
         {
-            if (bot.gameObject != transform.parent)
+            if (bot.gameObject != transform.parent.gameObject)
             {
                 enemy = bot;
                 break;

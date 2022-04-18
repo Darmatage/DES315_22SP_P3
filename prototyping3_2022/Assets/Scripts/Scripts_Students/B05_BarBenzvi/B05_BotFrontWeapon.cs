@@ -5,6 +5,8 @@ using UnityEngine;
 public class B05_BotFrontWeapon : MonoBehaviour
 {
     public GameObject WeaponParent = null;
+    public GameObject RightWing = null;
+    public GameObject LeftWing = null;
     public float DashSpeed = 10.0f;
     public float Cooldown = 3.5f;
     public float WeaponActiveTime = 0.5f;

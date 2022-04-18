@@ -903,7 +903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab929fe774a0084c8ae87aafe02faf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 7
+  moveSpeed: 9
   rotateSpeed: 90
   jumpSpeed: 0
   boostSpeed: 10
@@ -1002,8 +1002,9 @@ MonoBehaviour:
   button4: 
   tankBullet: {fileID: 3460551608766651555, guid: 794b5d854f104044f8f3edf8c74bcb61,
     type: 3}
-  bulletCooldown: 2
+  bulletCooldown: 1
   bulletSpeed: 1200
+  currentBulletCooldown: 0
   mainGun: {fileID: 7746154491066223068}
   normalMainGun: {fileID: 2100000, guid: 26673b4cfc99aa14c8f1e823d37f36e3, type: 2}
   cooldownMainGun: {fileID: 2100000, guid: 020616931318bbe41a543ea399756f49, type: 2}
@@ -1019,9 +1020,12 @@ MonoBehaviour:
   cooldownMissile: {fileID: 2100000, guid: 020616931318bbe41a543ea399756f49, type: 2}
   missileBarrel: {fileID: 7390829372249760876}
   missileCooldown: 6
+  missileReady: 1
+  target: {fileID: 0}
   missileIndication: {fileID: 4085200527003681851, guid: 2dd5ae3718bc19d45901064449f65a46,
     type: 3}
   botCooldown: 7
+  currentBotCooldown: 0
   suicideBot: {fileID: 645873793712370039, guid: 33ab68b1867e6eb4eb7f40a9d9cdfcf3,
     type: 3}
   botSpawn: {fileID: 1229773324}

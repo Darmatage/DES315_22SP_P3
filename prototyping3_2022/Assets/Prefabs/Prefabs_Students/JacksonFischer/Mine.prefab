@@ -222,8 +222,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9acead3e9d0ea0d44847952b9a94d068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuse_time: 120
+  fuse_time: 5
   aoe_damage: 5
   direct_damage: 10
   explosion_prefab: {fileID: 6703356809530827566, guid: 7f439c6b276879f47859a6f4f97646dd,
     type: 3}
+  player_number: 0

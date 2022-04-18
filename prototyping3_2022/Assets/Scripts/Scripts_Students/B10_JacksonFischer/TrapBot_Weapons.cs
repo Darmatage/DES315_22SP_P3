@@ -5,6 +5,7 @@ using UnityEngine;
 public class TrapBot_Weapons : MonoBehaviour
 {
 	public GameObject mine_prefab;
+	public GameObject tracking_prefab;
 
 	//grab axis from parent object
 	public string button1;
@@ -49,6 +50,46 @@ public class TrapBot_Weapons : MonoBehaviour
 			mine.transform.parent = null;
 
 		}
+
+		if (Input.GetButtonDown(button2))
+        {
+			GameObject tracking = Instantiate(tracking_prefab);
+
+			/*GameObject[] targets = new GameObject[1];
+
+			if (this.transform.parent.tag == "Player1")
+				targets = GameObject.FindGameObjectsWithTag("Player2");
+			
+
+			else if(this.transform.parent.tag == "Player2")
+				targets = GameObject.FindGameObjectsWithTag("Player1");
+			
+			int player_index = 0;
+
+			for(int i = 0; i < targets.Length; i++)
+            {
+				if (targets[i] != null)
+                {
+					player_index = i;
+					break;
+				}
+            }
+
+			GameObject other_player = targets[player_index].transform.GetChild(0).gameObject;
+
+			TrackingAttack attack = (TrackingAttack)tracking.GetComponent("TrackingAttack");
+			attack.target = other_player;*/
+
+
+
+			tracking.transform.SetParent(this.transform);
+			Vector3 new_tracking_local_position = tracking.transform.localPosition;
+			new_tracking_local_position.x = 1.0f;
+			new_tracking_local_position.z = 5.0f;
+			tracking.transform.localPosition = new_tracking_local_position;
+
+			//tracking.transform.parent = null;
+        }
 	}
 
 	

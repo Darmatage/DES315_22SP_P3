@@ -27,6 +27,10 @@ public class SpinningWeapon : MonoBehaviour
 
 	public float currentDamage = 0.0f;
 
+	private AudioSource spinSound;
+
+	private float soundtimer = 0.0f;
+
 	void Start()
 	{
 		button1 = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
@@ -41,8 +45,9 @@ public class SpinningWeapon : MonoBehaviour
 		weaponDecel = maxspeed / 2.0f;
 
 		bladeRigidbody.maxAngularVelocity = maxspeed;
+		spinSound = GetComponent<AudioSource>();
 		//bladeTransform = spinnerBlade.GetComponent<Transform>();
-	
+
 	}
 
 	void FixedUpdate()
@@ -67,6 +72,22 @@ public class SpinningWeapon : MonoBehaviour
 	    }*/
 
 		currentDamage = bladeRigidbody.angularVelocity.magnitude / 2.5f;
+
+		float rotationPeriod = 1.0f / (bladeRigidbody.angularVelocity.magnitude * (0.1592f *1.5f));
+		if (currentDamage < 1.0f)
+        {
+			currentDamage = 0.0f;
+        }
+        else
+        {
+			soundtimer += Time.fixedDeltaTime;
+			if(soundtimer >= rotationPeriod)
+            {
+				soundtimer = 0.0f;
+				spinSound.time = 0.2f;
+				spinSound.Play();
+            }
+        }
 		damageScript.damage = Mathf.Round(currentDamage);
 
 

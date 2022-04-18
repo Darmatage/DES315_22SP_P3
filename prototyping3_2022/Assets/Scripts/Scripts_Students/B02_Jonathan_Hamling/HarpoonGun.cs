@@ -109,6 +109,7 @@
 //    }
 //}
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -125,7 +126,10 @@ public class HarpoonGun : MonoBehaviour
     [SerializeField]
     private float launchSpeed = 3f;
 
-    GameObject newHarpoon;
+    [SerializeField]
+    private Material chain;
+
+    GameObject newHarpoon = null;
 
     float distance;
     [SerializeField]
@@ -137,11 +141,13 @@ public class HarpoonGun : MonoBehaviour
     private bool isHook;
     private bool isLaunched;
     private bool isAttacked;
+    public bool isRecharge = false;
 
     private Animator anim;
 
     Rigidbody rb;
     private Vector3 startPos;
+    private Vector3 staticHook_offset;
 
     //grab axis from parent object
     private string button1;
@@ -166,39 +172,53 @@ public class HarpoonGun : MonoBehaviour
     {
         startPos = transform.position;
 
-
-        if (isLaunched)
-        {
-            newHarpoon.GetComponent<LineRenderer>().SetPosition(0, startPos);
-            newHarpoon.GetComponent<LineRenderer>().SetPosition(1, newHarpoon.transform.position);
-            isHook = newHarpoon.GetComponent<ColliderHarpoon>().isHooked;
-            enemy = newHarpoon.GetComponent<ColliderHarpoon>().enemy;
-            if (newHarpoon.GetComponent<ColliderHarpoon>().falseHook) ;
-            newHarpoon.GetComponent<ColliderHarpoon>().player = this.gameObject;
-        }
-
-        if (Input.GetButtonDown(button1) && !isLaunched)
+        if (Input.GetButtonDown(button1) && !isLaunched && !isRecharge)
         {
             Debug.Log("Object Fired");
             StartHook();
         }
-        if (Input.GetButtonDown(button2))
-        {
-            isAttacked = !isAttacked;
-            Debug.Log("ATTACKING");
-            anim.SetBool("Attack", isAttacked);
-            Debug.Log(anim.GetBool("Attack"));
-        }
 
         ReturnHook();
+        BringEnemyBack();
 
+        if (isLaunched)
+        {
+            if (newHarpoon.GetComponent<ColliderHarpoon>().falseHook)
+            {
+                StartCoroutine(Recharge());
+
+                newHarpoon.transform.position = new Vector3(0, -999, 0);
+                newHarpoon.GetComponent<ColliderHarpoon>().falseHook = false;
+                newHarpoon.GetComponent<LineRenderer>().enabled = false;
+
+                isHook = false;
+                newHarpoon.GetComponent<ColliderHarpoon>().isHooked = false;
+            }
+
+            newHarpoon.GetComponent<LineRenderer>().SetPosition(0, startPos);
+            newHarpoon.GetComponent<LineRenderer>().SetPosition(1, newHarpoon.transform.position);
+            newHarpoon.GetComponent<LineRenderer>().material = chain;
+
+            isHook = newHarpoon.GetComponent<ColliderHarpoon>().isHooked;
+            enemy = newHarpoon.GetComponent<ColliderHarpoon>().enemy;
+            newHarpoon.GetComponent<ColliderHarpoon>().player = this.gameObject;
+        }
+
+        Debug.Log(isRecharge);
     }
 
     private void StartHook()
     {
+        if (newHarpoon)
+        {
+            Destroy(newHarpoon.gameObject, .1f);
+            newHarpoon = null;
+        }
+
         isLaunched = true;
         newHarpoon = Instantiate(harpoon, harpoon.transform.position, harpoon.transform.rotation);
         newHarpoon.AddComponent<LineRenderer>();
+        
         newHarpoon.SetActive(true);
         
         rb = newHarpoon.GetComponent<Rigidbody>();  
@@ -212,8 +232,14 @@ public class HarpoonGun : MonoBehaviour
         {
             distance = Vector3.Distance(newHarpoon.transform.position, startPos);
 
-            if (distance > maxDistance || isHook)
+            if (isHook)
             {
+                isLaunched = false;
+            }
+            else if (distance > maxDistance)
+            {
+                newHarpoon.GetComponent<LineRenderer>().enabled = false;
+
                 isLaunched = false;
             }
         }
@@ -222,11 +248,50 @@ public class HarpoonGun : MonoBehaviour
     private void BringEnemyBack()
     {
         if (isHook)
-        {
-            Vector3 final = new Vector3(startPos.x, enemy.transform.position.y, startPos.z);
-            enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, final, maxDistance);
-            isHook = false;
+        { 
+            StartCoroutine(hookStage());
         }
+    }
+
+    private void sineWave()
+    {
+
+    }
+
+    private IEnumerator hookStage()
+    {
+        Vector3 hookpos = enemy.transform.position;
+
+        newHarpoon.GetComponent<LineRenderer>().SetPosition(0, startPos);
+        newHarpoon.GetComponent<LineRenderer>().SetPosition(1, hookpos);
+
+        newHarpoon.transform.position = new Vector3(0, -999, 0);
+
+        Vector3 final = new Vector3(startPos.x, startPos.y + 2f, startPos.z + 3.5f);
+        enemy.transform.position = Vector3.Lerp(enemy.transform.position, final, .008f);
+
+        isAttacked = !isAttacked;
+        Debug.Log("ATTACKING");
+        anim.SetBool("Attack", true);
+
+        yield return new WaitForSeconds(6.0f);
+
+        newHarpoon.GetComponent<LineRenderer>().enabled = false;
+
+        anim.SetBool("Attack", false);
+
+        isHook = false;
+        newHarpoon.GetComponent<ColliderHarpoon>().isHooked = false;
+
+        StartCoroutine(Recharge());
+    }
+
+    private IEnumerator Recharge()
+    {
+        isRecharge = true;
+        yield return new WaitForSeconds(5.0f);
+
+        isRecharge = false;
     }
 
 }

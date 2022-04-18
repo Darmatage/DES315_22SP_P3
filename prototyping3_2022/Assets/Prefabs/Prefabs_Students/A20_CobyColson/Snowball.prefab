@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 5510685655128181883}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 2.706, z: 1.494}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  particlesPrefab: {fileID: 7916852506792683719, guid: a6746c9ee60a1a44d813bcdbac5cb0ce,
+  particlesPrefab: {fileID: 7916852506792683719, guid: a43de24e4fea03541816e6ad775a2c84,
     type: 3}
   SpawnParticlesHere: {x: 0, y: 0, z: 0}
   isPlayer1Weapon: 0
@@ -130,4 +130,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 26
-  gravityFactor: 0.0004
+  gravityFactor: 0.0002

@@ -67,7 +67,6 @@ public class BotBoxer_Move : MonoBehaviour
 
 		if (target)
 		{
-			Debug.Log(target);
 			Vector3 targetPosition = target.transform.position;
 			targetPosition.y = transform.position.y;
 			Quaternion targetRotation = Quaternion.LookRotation(targetPosition - transform.position);

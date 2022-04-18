@@ -10,6 +10,7 @@ public class DamianRouseWeapon : MonoBehaviour
   public GameObject up_;
   public GameObject right_;
   public GameObject spearTip_;
+  public GameObject spearHandle_;
   private GameObject owner_;
   public GameObject dashHitBox_;
   public GameObject swipeHitBox_;
@@ -21,7 +22,7 @@ public class DamianRouseWeapon : MonoBehaviour
 
   [Header("Move 2 Settings")]
   public int moveTwoDamage_ = 6;
-  public float moveTwoTurnSpeed_ = 4f;
+  public float moveTwoTurnSpeedMult_ = 4f;
   public float moveTwoDashForce_ = 400f;
   public float moveTwoWait1_ = 4f;
   public float moveTwoWait2_ = 4f;
@@ -36,7 +37,7 @@ public class DamianRouseWeapon : MonoBehaviour
   public float moveThreeWait4_ = 4f;
   public float slashSpin_ = -4f;
 
-  //Misc
+  //Misc for lerping
   private Vector3 startPos_;
   private Quaternion startRot_;
   private Vector3 currentVec_;
@@ -48,6 +49,12 @@ public class DamianRouseWeapon : MonoBehaviour
   [Header("Debug")]
   public int hitsLeft_ = 0;
 
+  [Header("Effects")]
+  public Material canHitMat_;
+  public Material beforeChargeMat_;
+  private Material defaultHandleMat_;
+  public GameObject chargeEffect_;
+
   //Lerp Stuff
   private bool lerping_ = false;
   private float lerpTimer_;
@@ -55,28 +62,20 @@ public class DamianRouseWeapon : MonoBehaviour
   private Func<int> lerpFunction_ = () => { return 1; };
   private Func<int> Endfunc_ = () => { return 1; };
 
-  //public Animator stab_;
-
   // Start is called before the first frame update
   void Start()
   {
     startPos_ = transform.localPosition;
     startRot_ = transform.localRotation;
+
+    defaultHandleMat_ = spearHandle_.GetComponent<MeshRenderer>().material;
   }
 
   // Update is called once per frame
   void Update()
   {
     Use();
-    /*
-     float botMove = Input.GetAxisRaw(pVertical) * moveSpeed * Time.deltaTime;
-		float botRotate = Input.GetAxisRaw(pHorizontal) * rotateSpeed * Time.deltaTime;
-		
-		if (isGrabbed == false){
-			transform.Translate(0,0, botMove);
-			transform.Rotate(0, botRotate, 0);
-		}
-     */
+    
   }
 
   //Called By Manager
@@ -132,6 +131,7 @@ public class DamianRouseWeapon : MonoBehaviour
 
   public void MoveTwo()
   {
+    spearHandle_.GetComponent<MeshRenderer>().material = beforeChargeMat_;
     targetVec_ = -(right_.transform.localPosition - spearTip_.transform.localPosition) * 1f + startPos_;
     SetValues(moveTwoWait1_, MoveTwoStep1, MoveTwoStep1E);
   }
@@ -144,7 +144,8 @@ public class DamianRouseWeapon : MonoBehaviour
 
   public int MoveTwoStep1E()
   {
-    owner_.GetComponent<BotBasic_Move>().rotateSpeed = moveTwoTurnSpeed_;
+    BotBasic_Move BBM = owner_.GetComponent<BotBasic_Move>();
+    BBM.rotateSpeed = owner_.GetComponent<DamianRouseManager>().defaultTurn_ * moveTwoTurnSpeedMult_;
     SetValues(moveTwoWait2_, MoveTwoStep2, MoveTwoStep2E);
     return 1;
   }
@@ -157,7 +158,9 @@ public class DamianRouseWeapon : MonoBehaviour
 
   public int MoveTwoStep2E()
   {
+    chargeEffect_.active = true;
     
+
     SetHitDamage(dashHitBox_, moveTwoDamage_);
     AddHits(dashHitBox_, 1);
 
@@ -177,6 +180,7 @@ public class DamianRouseWeapon : MonoBehaviour
 
   public int MoveTwoStep3E()
   {
+    chargeEffect_.active = false;
     SetValues(moveTwoWait4_, MoveTwoStep4, MoveEnd);
     return 1;
   }
@@ -285,6 +289,10 @@ public class DamianRouseWeapon : MonoBehaviour
 
   public void AddHits(GameObject go, int hits)
   {
+    if (hitsLeft_ == 0)
+    {
+      spearHandle_.GetComponent<MeshRenderer>().material = canHitMat_;
+    }
     hitsLeft_ += hits;
     go.GetComponent<BoxCollider>().enabled = true;
   }
@@ -297,6 +305,7 @@ public class DamianRouseWeapon : MonoBehaviour
     {
       go.GetComponent<BoxCollider>().enabled = false;
       //hazard.damage = 0;
+      spearHandle_.GetComponent<MeshRenderer>().material = defaultHandleMat_;
     }
   }
 
@@ -306,6 +315,7 @@ public class DamianRouseWeapon : MonoBehaviour
     spearTip_.GetComponent<BoxCollider>().enabled = false;
     dashHitBox_.GetComponent<BoxCollider>().enabled = false;
     swipeHitBox_.GetComponent<BoxCollider>().enabled = false;
+    spearHandle_.GetComponent<MeshRenderer>().material = defaultHandleMat_;
   }
 
 
