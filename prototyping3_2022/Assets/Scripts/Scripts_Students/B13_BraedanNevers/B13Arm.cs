@@ -7,7 +7,7 @@ public class B13Arm : MonoBehaviour
     public GameObject bombToSpawn;
     public GameObject bombToHold;
     public GameObject bombInBox;
-
+    public GameObject player; 
     public void Start()
     {
         bombToHold.SetActive(false);
@@ -21,7 +21,8 @@ public class B13Arm : MonoBehaviour
 
     public void DropBomb()
     {
-        Instantiate(bombToSpawn, bombToHold.transform.position, bombToHold.transform.rotation);
+        GameObject activeBomb = Instantiate(bombToSpawn, bombToHold.transform.position, bombToHold.transform.rotation);
+        activeBomb.GetComponent<Rigidbody>().AddForce(player.transform.forward * 500);
         bombToHold.SetActive(false);
     }
 }

@@ -4876,6 +4876,8 @@ GameObject:
   - component: {fileID: 601366264177072562}
   - component: {fileID: 3040799453161350669}
   - component: {fileID: 5810568322465935681}
+  - component: {fileID: 9006595379170201900}
+  - component: {fileID: 4961691433109117015}
   m_Layer: 0
   m_Name: TaroKumagai_MagnetizationParticleEffect
   m_TagString: Hazard
@@ -4964,3 +4966,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &9006595379170201900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6779703677866785669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 248d183c03727874e9711e605bddd9b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LifeTime: 0
+--- !u!114 &4961691433109117015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6779703677866785669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 248d183c03727874e9711e605bddd9b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LifeTime: 3

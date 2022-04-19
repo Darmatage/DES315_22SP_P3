@@ -404,8 +404,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mine_prefab: {fileID: 6222910822826562529, guid: 9a0a2a3e515fa8a44884c9a4ce21c16f,
     type: 3}
+  tracking_prefab: {fileID: 7119367232920230458, guid: bd80c25a7b178ac43b18c24404edbb07,
+    type: 3}
   button1: e
-  button2: 
+  button2: r
   button3: 
   button4: 
 --- !u!1 &1355330930662561729

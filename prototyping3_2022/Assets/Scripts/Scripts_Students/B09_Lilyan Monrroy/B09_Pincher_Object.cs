@@ -29,6 +29,14 @@ public class B09_Pincher_Object : MonoBehaviour
     {
         if (transform.localPosition == originalPincherPos)
         {
+            if (state != PincherState.Idle)
+            {
+                if (parent.GetComponent<B09_Pincher_Ability>().playPincherSFX == false)
+                {
+                    parent.GetComponent<B09_Pincher_Ability>().playPincherSFX = true;
+                }
+            }
+
             state = PincherState.Idle;
         }
     }

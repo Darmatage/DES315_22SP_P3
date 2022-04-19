@@ -14,6 +14,7 @@ public class Bot_Weapon_B21 : MonoBehaviour{
     private float thrustAmount = 3f;
     public AudioSource attackSound;
     public AudioSource hitSound;
+    public GameObject hitParticle;
 
     private bool weaponOut = false;
 
@@ -29,6 +30,7 @@ public class Bot_Weapon_B21 : MonoBehaviour{
         button3 = gameObject.transform.parent.GetComponent<playerParent>().action3Input;
         button4 = gameObject.transform.parent.GetComponent<playerParent>().action4Input;
         weaponThrust.gameObject.GetComponent<MeshRenderer>().enabled = true;
+        hitParticle.SetActive(false);
 
     }
 
@@ -47,7 +49,8 @@ public class Bot_Weapon_B21 : MonoBehaviour{
         yield return new WaitForSeconds(0.1f);
         weaponThrust.transform.Translate(-thrustAmount,0, 0);
         weaponOut = false;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.5f);
+        hitParticle.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -55,6 +58,7 @@ public class Bot_Weapon_B21 : MonoBehaviour{
         if (weaponOut)
         {
             hitSound.Play();
+            hitParticle.SetActive(true);
         }
     }
 }
