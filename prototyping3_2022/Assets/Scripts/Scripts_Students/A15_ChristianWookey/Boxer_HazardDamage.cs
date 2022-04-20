@@ -8,6 +8,10 @@ public class Boxer_HazardDamage : HazardDamage{
 
 	public Material[] materials;
 
+	public AudioSource audio;
+
+	public AudioClip[] clips;
+
 	private float delay = 0f;
 
     public void Update()
@@ -16,13 +20,20 @@ public class Boxer_HazardDamage : HazardDamage{
 	}
 
     void OnCollisionEnter(Collision other) {
-		if (delay <= 0f)
+		if (other.gameObject != gameObject)
 		{
-			GameObject damageParticles = Instantiate(particlesPrefab, particleLocation.transform.position, other.transform.rotation);
-			damageParticles.GetComponent<ParticleSystemRenderer>().material = materials[Random.Range(0, materials.Length)];
-			damageParticles.GetComponent<ParticleSystem>().Emit(1);
-			delay = 0.1f;
-			Destroy(damageParticles, 1f);
+			if (delay <= 0f)
+			{
+				GameObject damageParticles = Instantiate(particlesPrefab, particleLocation.transform.position, other.transform.rotation);
+				damageParticles.GetComponent<ParticleSystemRenderer>().material = materials[Random.Range(0, materials.Length)];
+				damageParticles.GetComponent<ParticleSystem>().Emit(1);
+				audio.clip = clips[Random.Range(0, clips.Length)];
+				audio.Play();
+
+				delay = 0.2f;
+				Destroy(damageParticles, 1f);
+
+			}
 		}
 	}
 
