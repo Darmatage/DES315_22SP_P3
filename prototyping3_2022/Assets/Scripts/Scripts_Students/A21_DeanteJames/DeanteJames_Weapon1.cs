@@ -62,7 +62,7 @@ public class DeanteJames_Weapon1 : MonoBehaviour
 
     void Throw()
     {
-        Vector3 offset = new Vector3(0.0f, 1.25f, 0.5f);
+        Vector3 offset = new Vector3(0.0f, 0.5f, 0.5f);
         Throwable = GameObject.Instantiate(coilToThrow, gameObject.transform.position + offset, Quaternion.identity);
 
         // Add the coil to the main coil set to keep track of all the spawned coils

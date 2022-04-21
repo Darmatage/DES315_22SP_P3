@@ -1986,6 +1986,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4194753073932114437, guid: 7d90e140ad0fce04b9658626f274ef89,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194753073932114437, guid: 7d90e140ad0fce04b9658626f274ef89,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194753073932114437, guid: 7d90e140ad0fce04b9658626f274ef89,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -180
+      objectReference: {fileID: 0}
     - target: {fileID: 6722143439938741298, guid: 7d90e140ad0fce04b9658626f274ef89,
         type: 3}
       propertyPath: BeepSound
