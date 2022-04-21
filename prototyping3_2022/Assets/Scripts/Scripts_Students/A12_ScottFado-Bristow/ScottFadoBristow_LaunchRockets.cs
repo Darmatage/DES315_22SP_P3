@@ -26,6 +26,11 @@ public class ScottFadoBristow_LaunchRockets : MonoBehaviour
 
     public GameObject RocketPrefab;
 
+
+    public AudioClip LaunchNoise;
+
+    private AudioSource audioSource;
+
     private float timerA_ = 0;
     private float timerB_ = 0;
     // Start is called before the first frame update
@@ -66,6 +71,8 @@ public class ScottFadoBristow_LaunchRockets : MonoBehaviour
 
         SAMesh = SiloA.GetComponentInChildren<Renderer>();
         SBMesh = SiloB.GetComponentInChildren<Renderer>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -118,6 +125,12 @@ public class ScottFadoBristow_LaunchRockets : MonoBehaviour
             ScottFadoBristow_DelayedHoming rScript = r.GetComponent<ScottFadoBristow_DelayedHoming>();
 
             rScript.Launch(opponent);
+        }
+
+        if (audioSource)
+        {
+            audioSource.pitch = Random.Range(0.9f, 1.1f);
+            audioSource.PlayOneShot(LaunchNoise);
         }
 
     }

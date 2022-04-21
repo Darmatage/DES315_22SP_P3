@@ -18,12 +18,18 @@ public class ScottFadoBristow_SlamWeapon : MonoBehaviour
 
     private Animator aniPlayer;
 
+    public AudioClip SlamNoise;
+
+    private AudioSource audioSource;
+
 
     // Start is called before the first frame update
     void Start()
     {
         button1 = gameObject.transform.parent.GetComponent<playerParent>().action1Input;
         aniPlayer = gameObject.GetComponent<Animator>();
+
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -55,6 +61,8 @@ public class ScottFadoBristow_SlamWeapon : MonoBehaviour
 
     void SpawnHitbox()
     {
+        if (audioSource)
+            audioSource.PlayOneShot(SlamNoise);
 
         GameObject s = Instantiate(slamTrigger, transform);
 
