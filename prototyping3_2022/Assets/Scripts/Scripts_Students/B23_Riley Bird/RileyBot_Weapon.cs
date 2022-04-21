@@ -14,7 +14,6 @@ public class RileyBot_Weapon : MonoBehaviour{
 	
 	private bool weaponOut = false;
 	private bool pushed = false;
-	private bool pulled = false;
 	private bool spun = false;
 
 	//grab axis from parent object
@@ -23,7 +22,13 @@ public class RileyBot_Weapon : MonoBehaviour{
 	public string button3;
 	public string button4; // currently boost in player move script
 
-    void Start(){
+	public AudioSource source;
+	public AudioClip hit;
+	public AudioClip jump;
+	public AudioClip push;
+
+
+	void Start(){
 		if(weaponSide)
         {
 			thrustAmount = -1.5f;
@@ -51,6 +56,10 @@ public class RileyBot_Weapon : MonoBehaviour{
 		{
 			weaponThrust.transform.Translate(0,thrustAmount, 0);
 			weaponOut = true;
+			if(!weaponSide)
+				source.PlayOneShot(hit);
+			
+			
 			StartCoroutine(WithdrawWeapon());
 		}
 		if((Input.GetButtonDown(button2))&&(pushed==false) && !weaponSide)
@@ -60,16 +69,20 @@ public class RileyBot_Weapon : MonoBehaviour{
 			vec.Normalize();
 			vec.y = 0;
 			otherPlayerBody.AddForce((vec * 10), ForceMode.VelocityChange);
+			if (!weaponSide)
+				source.PlayOneShot(push);
 			StartCoroutine(PushAway());
         }
-		if ((Input.GetButtonDown(button3)) && (pulled == false) && !weaponSide)
+		if ((Input.GetButtonDown(button3)) && (pushed == false) && !weaponSide)
 		{
-			pulled = true;
+			pushed = true;
 			Vector3 vec = transform.position - otherPlayerTransform.position;
 			vec.Normalize();
 			vec.y = 0;
 			otherPlayerBody.AddForce((vec * 10), ForceMode.VelocityChange);
-			StartCoroutine(PullIn());
+			if (!weaponSide)
+				source.PlayOneShot(jump);
+			StartCoroutine(PushAway());
 		}
 		if ((Input.GetButtonDown(button4)) && (spun == false) && !weaponSide)
 		{
@@ -87,14 +100,8 @@ public class RileyBot_Weapon : MonoBehaviour{
 
 	IEnumerator PushAway()
     {
-		yield return new WaitForSeconds(2f);
+		yield return new WaitForSeconds(5f);
 		pushed = false;
-    }
-
-	IEnumerator PullIn()
-    {
-		yield return new WaitForSeconds(2f);
-		pulled = false;
     }
 
 	IEnumerator Spin()
