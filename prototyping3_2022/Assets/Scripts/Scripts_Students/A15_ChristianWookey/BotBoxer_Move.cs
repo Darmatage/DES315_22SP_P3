@@ -63,7 +63,7 @@ public class BotBoxer_Move : MonoBehaviour
 	{
 		float botMove = Input.GetAxisRaw(pVertical) * moveSpeed * Time.deltaTime;
 		float botStrafe = Input.GetAxisRaw(pHorizontal) * moveSpeed * Time.deltaTime;
-		float botRotate = 0f;
+		//float botRotate = 0f;
 
 		if (target)
 		{

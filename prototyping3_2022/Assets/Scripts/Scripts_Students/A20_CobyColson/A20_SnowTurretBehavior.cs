@@ -56,10 +56,11 @@ public class A20_SnowTurretBehavior : MonoBehaviour
             
             A20_SnowballBehavior snowball = Instantiate(snowballPrefab).GetComponent<A20_SnowballBehavior>();
             snowball.Initialize(snowballSpawn.position, transform.forward);
+            snowman.PlaySnowballSfx(0.4f);
 
             transform.localScale -= Vector3.one * 0.075f;
 
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.2f);
         }
         snowman.ResetBody();
         Destroy(gameObject);

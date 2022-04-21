@@ -171,6 +171,7 @@ public class DamianRouseManager : MonoBehaviour
     //Affect weapon stats
     weaponScript_.moveOneDamage_ = 1;
     weaponScript_.moveOneSpeed_ /= 1.5f;
+    weaponScript_.moveTwoDamage_ = 3;
 
     //Get rid of all shield
     BBD_.shieldPowerFront = 0;

@@ -7,6 +7,7 @@ public class DamianRouseHitBox : MonoBehaviour
   public GameObject weapon_;
   private DamianRouseWeapon weaponScript_;
   private HazardDamage hazardScript_;
+  public GameObject hitEffect_ = null;
 
   // Start is called before the first frame update
   void Start()
@@ -23,7 +24,12 @@ public class DamianRouseHitBox : MonoBehaviour
 
   void OnTriggerEnter(Collider other)
   {
-    if(other.gameObject.GetComponent< BotBasic_Damage>()!= null)
+    if (other.gameObject.GetComponent<BotBasic_Damage>() != null)
+    {
       weaponScript_.Hit(gameObject, hazardScript_);
+
+      if (hitEffect_ != null)
+        Instantiate(hitEffect_, transform.position, Quaternion.Euler(0, 0, 0));
+    }
   }
 }
