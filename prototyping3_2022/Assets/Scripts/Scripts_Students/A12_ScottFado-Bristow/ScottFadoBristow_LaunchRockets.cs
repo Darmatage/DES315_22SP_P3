@@ -10,13 +10,24 @@ public class ScottFadoBristow_LaunchRockets : MonoBehaviour
 
     public Vector3 StartingOffset = new Vector3(0, 2, 0);
 
+    public GameObject SiloA;
+    private bool aFired = false;
+    public GameObject SiloB;
+    private bool bFired = false;
+
+    public Material SiloEmptyMat;
+    public Material SiloReadyMat;
+
+    private Renderer SAMesh, SBMesh;
+
     public string buttonID;
 
     private GameObject opponent;
 
     public GameObject RocketPrefab;
 
-    private float timer_ = 0;
+    private float timerA_ = 0;
+    private float timerB_ = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,25 +63,55 @@ public class ScottFadoBristow_LaunchRockets : MonoBehaviour
                 opponent = opFR.gameObject;
 
         }
+
+        SAMesh = SiloA.GetComponentInChildren<Renderer>();
+        SBMesh = SiloB.GetComponentInChildren<Renderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer_ -= Time.deltaTime;
+        timerA_ -= Time.deltaTime;
+        timerB_ -= Time.deltaTime;
 
         //ATTACK
-        if (Input.GetButtonDown(buttonID) && timer_ <= 0)
+        if (Input.GetButtonDown(buttonID) )
         {
-            timer_ = Cooldown;
-            LaunchRockets();
+            if (timerA_ <= 0)
+            {
+                timerA_ = Cooldown;
+                LaunchRockets(true);
+            }
+            else if(timerB_ <= 0)
+            {
+                timerB_ = Cooldown;
+                LaunchRockets(false);
+            }
         }
+
+
+        if(timerA_ <= 0)
+            SAMesh.material = SiloReadyMat;
+        if (timerB_ <= 0)
+            SBMesh.material = SiloReadyMat;
+
     }
 
 
-    void LaunchRockets()
+    void LaunchRockets(bool A = true)
     {
-        Vector3 spawnPosition = gameObject.transform.position + StartingOffset;
+        Vector3 spawnPosition;
+        if (A)
+        {
+            spawnPosition = SiloA.transform.position + StartingOffset;
+            SAMesh.material = SiloEmptyMat;
+        }
+        else
+        {
+            spawnPosition = SiloB.transform.position + StartingOffset;
+            SBMesh.material = SiloEmptyMat;
+        }
+
         GameObject r = Instantiate(RocketPrefab, spawnPosition, Quaternion.identity);
         if(r)
         {

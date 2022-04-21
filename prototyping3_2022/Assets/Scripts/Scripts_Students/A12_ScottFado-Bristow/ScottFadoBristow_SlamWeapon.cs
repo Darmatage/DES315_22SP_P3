@@ -8,7 +8,7 @@ public class ScottFadoBristow_SlamWeapon : MonoBehaviour
 
     public float AttackCooldown = 2.0f;
 
-    public float HitboxOffset = 2.0f;
+    public Vector3 HitboxOffset;
 
     bool canAttack = true;
 
@@ -47,6 +47,7 @@ public class ScottFadoBristow_SlamWeapon : MonoBehaviour
             if (timer <= 0)
             {
                 canAttack = true;
+
             }
         }
     }
@@ -58,8 +59,9 @@ public class ScottFadoBristow_SlamWeapon : MonoBehaviour
         GameObject s = Instantiate(slamTrigger, transform);
 
         Vector3 nt = s.transform.localPosition;
-        nt.x += HitboxOffset;
+        nt += HitboxOffset;
         s.transform.localPosition = nt;
+
     }
 
     
