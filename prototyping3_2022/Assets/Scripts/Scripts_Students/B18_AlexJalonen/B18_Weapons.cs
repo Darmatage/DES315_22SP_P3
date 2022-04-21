@@ -57,6 +57,7 @@ public class B18_Weapons : MonoBehaviour
 	}
 
 	private bool didOverheat = false;
+	private float damageCounter = 0;
 
 	void Update()
 	{
@@ -102,7 +103,14 @@ public class B18_Weapons : MonoBehaviour
 					var bulletDamage = bulletObj.AddComponent<HazardDamage>();
 					if(bulletDamage != null)
 					{
-						bulletDamage.damage = DPS/ fireRate;
+						damageCounter += DPS / fireRate;
+						bulletDamage.damage = 0;
+						while(damageCounter >= 1)
+                        {
+							damageCounter--;
+							bulletDamage.damage++;
+
+						}
 
 						if (gameObject.transform.parent.GetComponent<playerParent>().isPlayer1)
 							bulletDamage.isPlayer1Weapon = true;
