@@ -9,9 +9,11 @@ public class SethMerrill_BotScript : MonoBehaviour
 	private string b1, b2, b3, b4;
 	private float timeUntilReady;
 	public float rechargeTime;
+	public AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
+		audio = GetComponent<AudioSource>();
 		b1 = transform.parent.GetComponent<playerParent>().action1Input;
 		b2 = transform.parent.GetComponent<playerParent>().action2Input;
 		b3 = transform.parent.GetComponent<playerParent>().action3Input;
@@ -29,9 +31,12 @@ public class SethMerrill_BotScript : MonoBehaviour
 		else
 		{
 			timeUntilReady = 0.0f;
+			weapon.GetComponent<ParticleSystem>().Play();
 			if(CheckInputFire() && weapon != null)
 			{
+				audio.Play();
 				arms.GetComponent<SethMerrillArmsScript>().Unhold();
+				weapon.GetComponent<ParticleSystem>().Stop();
 				weapon.GetComponent<SethMerrillCannonScript>().Fire();
 				GetComponent<Rigidbody>().AddForce(transform.forward * -5000.0f);
 				timeUntilReady = rechargeTime;
