@@ -13,12 +13,16 @@ public class ScottFadoBristow_DelayedHoming : MonoBehaviour
     GameObject target;
 
     private Rigidbody physics;
+    private ParticleSystem ps;
+    private bool playing = false;
     // Start is called before the first frame update
     void Start()
     {
         timer_ = Delay;
 
         physics = gameObject.GetComponent<Rigidbody>();
+
+        ps = gameObject.GetComponentInChildren<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -27,6 +31,12 @@ public class ScottFadoBristow_DelayedHoming : MonoBehaviour
         timer_ -= Time.deltaTime;
         if(timer_ <= 0)
         {
+            if (!playing)
+            {
+                playing = true;
+                ps.Play();
+            }
+
             Vector3 TargetPos = new Vector3(0 , 0, 0);
             if (target)
                 TargetPos = target.transform.position;
@@ -35,7 +45,16 @@ public class ScottFadoBristow_DelayedHoming : MonoBehaviour
 
             Vector3 ndiff = diff.normalized;
 
+            Vector3 nd = Vector3.RotateTowards(transform.up, diff, 1.6f, 0);
+
+            transform.rotation = Quaternion.LookRotation(nd);
+
             physics.velocity = ndiff * HomingSpeed;
+        }
+        else
+        {
+            //SPIN IN AIR WILDLY;
+            transform.rotation = transform.rotation * Quaternion.Euler(100.0f * Time.deltaTime, 0.0f, 0.0f);
         }
     }
 
