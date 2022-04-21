@@ -6,13 +6,36 @@ public class TaroKumagai_WeaponExplosionHitBox : HazardDamage
 {
     public TaroKumagai_Weapon_BasicProjectile parentRef;
     public float explosionLifeTime = 1f;
+    public List<Collider> alreadyHit = new List<Collider>();
+
 	void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("ground"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("ground") || other.gameObject.tag.Equals("Hazard"))
             Physics.IgnoreCollision(GetComponent<Collider>(), other.collider, true);
+
+        foreach (Collider collider in alreadyHit)
+        {
+            if (collider == other.collider)
+                Physics.IgnoreCollision(GetComponent<Collider>(), other.collider);
+
+            return;
+        }
+
+        alreadyHit.Add(other.collider);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        foreach (Collider collider in alreadyHit)
+        {
+            if (collider == other)
+                Physics.IgnoreCollision(GetComponent<Collider>(), other);
 
+            return;
+        }
+
+        alreadyHit.Add(other);
+    }
     private void Start()
     {
         StartCoroutine(destroySelf(explosionLifeTime));

@@ -79,6 +79,7 @@ public class GameHandler : MonoBehaviour{
 	public GameObject gameTimerText;
 	private float gameTimer = 0f;
 	public bool isGameTime = false;
+	public static int gameTimeEnd = -10;
 
 	//Fall Does Damage
 	public bool fallDoesdamage = false;
@@ -207,6 +208,7 @@ public class GameHandler : MonoBehaviour{
 				if (p2PlayerChoiceName != ""){
 					winner = "Player2: " + p2PlayerChoiceName;
 				} else {winner = "Player2: " + p2PrefabNameLast;}
+				gameTimeEnd = gameTime;
 				StartCoroutine(EndGame());
 			} else if ((isCoop == true)&&(sendP1death == true)){
 				coopPlayer1Dead=true;
@@ -221,6 +223,7 @@ public class GameHandler : MonoBehaviour{
 				if (p1PlayerChoiceName != ""){
 					winner = "Player1: " + p1PlayerChoiceName;
 				} else {winner = "Player1: " + p1PrefabNameLast;}
+				gameTimeEnd = gameTime;
 				StartCoroutine(EndGame());
 			} else if ((isCoop == true)&&(sendP2death == true)){
 				coopPlayer2Dead=true;
@@ -246,8 +249,10 @@ public class GameHandler : MonoBehaviour{
 			gameTimer += 0.01f;
 			if (gameTime <= 0){
 				gameTime = 0;
+				gameTimeEnd = gameTime;
 				if (isCoop == false){
-					winner = "Time's up! \nNo winner. \nP1 Health = " + p1Health + " \nP2 Health = " + p2Health;
+					winner = "Time's up! \nNo winner."; 
+					//\nP1 Health = " + p1Health + " \nP2 Health = " + p2Health;
 					StartCoroutine(EndGame());
 				}
 			}
@@ -337,7 +342,13 @@ public class GameHandler : MonoBehaviour{
 		GTtemp.text = "" + gameTime;
 		
 		Text winTemp = winnerText.GetComponent<Text>();
-		if (isCoop == false){winTemp.text = "WINNER: \n" + winner;}
+		//if (isCoop == false){winTemp.text = "WINNER: \n" + winner;}
+		if (isCoop == false){
+			winTemp.text = "WINNER: \n" + winner + 
+					"\n P1 health = " + p1Health + 
+					"\n P2 health = " + p2Health +
+					"\n" + gameTimeEnd + " seconds left";
+			}
 		else if (isCoop == true){winTemp.text = "" + winner;}		
 	}
 	

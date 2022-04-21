@@ -10,7 +10,7 @@ public class TaroKumagai_WeaponDamage : HazardDamage
 
 	void OnCollisionEnter(Collision other)
     {
-        if (isAPlayer(other.gameObject))
+        if (isAPlayer(other.gameObject) || other.gameObject.tag.Equals("Hazard"))
             Physics.IgnoreCollision(GetComponent<Collider>(), other.collider, true);
 
 
@@ -23,6 +23,11 @@ public class TaroKumagai_WeaponDamage : HazardDamage
         //    
         //}
 
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
         if (isReactiveProjectile(other.gameObject))
         {
             // Get the midpoint of the collision
@@ -37,7 +42,6 @@ public class TaroKumagai_WeaponDamage : HazardDamage
             Destroy(gameObject);
         }
     }
-
     private void OnDestroy()
     {
         parentRef.activeProjectiles.Remove(gameObject);

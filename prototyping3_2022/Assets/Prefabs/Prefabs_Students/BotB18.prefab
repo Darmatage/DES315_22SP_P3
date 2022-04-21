@@ -986,7 +986,8 @@ MonoBehaviour:
   bulletLifetime: 1
   fireRate: 12
   spreadFactor: 5
-  DPS: 5
+  DPS: 13
+  holdMin: 0.5
   windupTime: 1
   overheatTime: 3
   barPrefab: {fileID: 1126585746793281164, guid: e1e5ab7cb61708f4aa04847b52dd00de,
