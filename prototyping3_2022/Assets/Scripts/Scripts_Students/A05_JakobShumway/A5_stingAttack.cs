@@ -51,10 +51,14 @@ public class A5_stingAttack : MonoBehaviour
         if (Input.GetButtonDown(atkKey))
             tailAni.Play("botA5_scorpionSting");
 
-        if (Input.GetButtonDown(grabKey) && !isGrabbing && !isClawing)
-        {
-            leftClawAni.Play("botA5_clawGrabLeft");
-            rightClawAni.Play("botA5_clawGrab");
-        }
+        //if (Input.GetButtonDown(grabKey) && !isGrabbing && !isClawing)
+        //{
+        //    leftClawAni.Play("botA5_clawGrabLeft");
+        //    rightClawAni.Play("botA5_clawGrab");
+        //}
+
+        // if deal dmg
+
+        // if take dmg
     }
 }
