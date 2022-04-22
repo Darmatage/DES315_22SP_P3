@@ -13,6 +13,7 @@ public class B08_Weapons : MonoBehaviour
 	private AudioSource HitSound;
 
 	public GameObject Pivot;
+	public GameObject Eye;
 
 	private float StartingAngle;
 
@@ -47,11 +48,15 @@ public class B08_Weapons : MonoBehaviour
 
 		}
 
+		Eye.transform.Rotate(0, Time.deltaTime * 30, 0);
+
 		if ((SwingInProgress == true))
         {
 			
-			Pivot.transform.Rotate(0, Time.deltaTime*2160, 0);
-			currentY += Time.deltaTime * 2160;
+			Pivot.transform.Rotate(0, Time.deltaTime*1800, 0);
+			currentY += Time.deltaTime * 1800;
+			Eye.transform.Rotate(0, Time.deltaTime * 900, 0);
+
 
 			if (!soundPLayed)
             {
