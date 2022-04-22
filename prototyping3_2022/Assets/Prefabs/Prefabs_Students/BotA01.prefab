@@ -549,7 +549,13 @@ MonoBehaviour:
   - {fileID: 4288579694181537972}
   - {fileID: 6123773110261817357}
   - {fileID: 6123773109067658019}
+  spikeMats:
+  - {fileID: 2156826666109640713}
+  - {fileID: 3054266303602538223}
   Spike_cd: 5
+  readyMat: {fileID: -4973734387028869240, guid: be66e7c5538f2b947bf9fc47dcf8a6cd,
+    type: 3}
+  notReadyMat: {fileID: 2100000, guid: fc72bc8853738a94eb7880f591c61507, type: 2}
   button1: 
   button2: 
   button3: 
@@ -1787,7 +1793,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3566775493881337330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0.71, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4828995442878702751}
@@ -1815,8 +1821,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 4}
-  m_Center: {x: 0, y: -0.7, z: 0}
+  m_Size: {x: 0.19, y: 0.9071655, z: 4}
+  m_Center: {x: 0.0029242337, y: -0.7464173, z: -0.04589176}
 --- !u!114 &6950046886565080692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1829,7 +1835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ca4913335a3b745850f156a725a789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
+  damage: 20
   particlesPrefab: {fileID: 7246120000014656734, guid: 740a2aebec573654ab0fea34ed35ef72,
     type: 3}
   SpawnParticlesHere: {x: 0, y: 0, z: 0}
@@ -1862,7 +1868,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3708602590547045340}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0.71, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5319233209896699090}
@@ -1890,8 +1896,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 4}
-  m_Center: {x: 0, y: -0.7, z: 0}
+  m_Size: {x: 0.19, y: 0.9071655, z: 4}
+  m_Center: {x: 0.002924234, y: -0.7464173, z: -0.04589176}
 --- !u!114 &5417675555428528954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1904,7 +1910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ca4913335a3b745850f156a725a789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
+  damage: 20
   particlesPrefab: {fileID: 7246120000014656734, guid: 740a2aebec573654ab0fea34ed35ef72,
     type: 3}
   SpawnParticlesHere: {x: 0, y: 0, z: 0}
