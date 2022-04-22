@@ -10,6 +10,8 @@ public class B08_Weapons : MonoBehaviour
 	public string button3;
 	public string button4; // currently boost in player move script
 
+	private AudioSource HitSound;
+
 	public GameObject Pivot;
 
 	private float StartingAngle;
@@ -17,7 +19,9 @@ public class B08_Weapons : MonoBehaviour
 	private bool SwingReady;
 	private bool SwingInProgress;
 	private float currentY = 0.0f;
-	private float buildUp = 0.1f;
+	private bool soundPLayed = true;
+
+	public ParticleSystem particleSystem;
 
 
 	void Start()
@@ -30,7 +34,7 @@ public class B08_Weapons : MonoBehaviour
 		SwingReady = true;
 		SwingInProgress = false;
 		
-		
+		HitSound = GetComponent<AudioSource>();
 
 	}
     void Update()
@@ -40,6 +44,7 @@ public class B08_Weapons : MonoBehaviour
 			SwingInProgress = true;
 			SwingReady = false;
 			StartCoroutine(WithdrawWeapon());
+
 		}
 
 		if ((SwingInProgress == true))
@@ -47,10 +52,18 @@ public class B08_Weapons : MonoBehaviour
 			
 			Pivot.transform.Rotate(0, Time.deltaTime*2160, 0);
 			currentY += Time.deltaTime * 2160;
+
+			if (!soundPLayed)
+            {
+				soundPLayed = true;
+				HitSound.Play();
+            }
+
 			if (currentY >= 360)
             {
 				currentY = 0.0f;
 				SwingInProgress=false;
+				soundPLayed = false;
             }
 
 		}
@@ -58,7 +71,8 @@ public class B08_Weapons : MonoBehaviour
 
 	IEnumerator WithdrawWeapon()
 	{
-		yield return new WaitForSeconds(3.0f);
+		yield return new WaitForSeconds(4.0f);
 		SwingReady = true;
+		particleSystem.Play();
 	}
 }
