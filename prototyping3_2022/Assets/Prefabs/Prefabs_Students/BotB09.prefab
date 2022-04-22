@@ -330,7 +330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 15
   rotateSpeed: 180
-  jumpSpeed: 3
+  jumpSpeed: 1
   boostSpeed: 12
   groundCheck: {fileID: 1355330930762081256}
   turtleCheck: {fileID: 1355330929556144337}
@@ -424,7 +424,6 @@ MonoBehaviour:
   pincher_left: {fileID: 5466640150610039993}
   pincher_right: {fileID: 4262541680855959507}
   saw: {fileID: 6574805103170921883}
-  canvas: {fileID: 5462156456986187725, guid: 9261ee472d3e57149873e601cdf461f1, type: 3}
   player2Input: {fileID: 5872314216244398788, guid: f26a21379123a9840a4856080fa652ee,
     type: 3}
   player1Input: {fileID: 2006077066916469387, guid: d6ab4aa653fb641428f669fb890cd3b5,

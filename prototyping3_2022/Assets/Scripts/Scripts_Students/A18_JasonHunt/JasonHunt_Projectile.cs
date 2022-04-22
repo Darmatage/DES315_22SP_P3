@@ -40,6 +40,7 @@ public class JasonHunt_Projectile : MonoBehaviour
 
         if (collision.gameObject.transform.root.tag == "Player1" || collision.gameObject.transform.root.tag == "Player2")
         {
+            Home.GetComponent<JasonHunt_SFX>().PlayHitEnemy();
             Destroy(this.gameObject);
         }
     }

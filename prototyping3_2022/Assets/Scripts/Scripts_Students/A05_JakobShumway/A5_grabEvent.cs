@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class A5_grabEvent : MonoBehaviour
 {
+    public AudioSource stabSfx;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,5 +38,11 @@ public class A5_grabEvent : MonoBehaviour
     {
         GetComponentInParent<A5_stingAttack>().isClawing = false;
         GetComponentInChildren<HazardDamage>().damage = 0;
+    }
+
+    public void playStabSfx()
+    {
+        stabSfx.pitch = Random.Range(.5f, 1.5f);
+        stabSfx.Play();
     }
 }

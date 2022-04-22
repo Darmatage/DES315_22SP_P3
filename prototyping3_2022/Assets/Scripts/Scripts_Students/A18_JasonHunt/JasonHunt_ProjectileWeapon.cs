@@ -33,6 +33,7 @@ public class JasonHunt_ProjectileWeapon : MonoBehaviour
 		//if (Input.GetKeyDown(KeyCode.T)){
 		if ((Input.GetButtonDown(button1)) && (weaponReloaded == true))
 		{
+			GetComponent<JasonHunt_SFX>().PlayShoot();
 			//push display back into body
 			projectileDisplay.transform.Translate(0, 0, -1);
 
@@ -52,6 +53,7 @@ public class JasonHunt_ProjectileWeapon : MonoBehaviour
 
 		if ((Input.GetButtonDown(button2)))
 		{
+			GetComponent<JasonHunt_SFX>().PlayReturn();
 			GameObject[] projectiles = GameObject.FindGameObjectsWithTag("Hazard");
 			foreach (GameObject proj in projectiles)
             {
