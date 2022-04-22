@@ -42,6 +42,7 @@ public class SethMerrillArmsScript : MonoBehaviour
 	private void Hold()
 	{
 		if(enemy == null) return;
+		if(enemy.GetComponent<BotBasic_Move>() == null) return;
 		enemy.GetComponent<BotBasic_Move>().isGrabbed = true;
 		Reparent(enemy, emptySlot);
 		isHolding = true;
@@ -50,6 +51,7 @@ public class SethMerrillArmsScript : MonoBehaviour
 	public void Unhold()
 	{
 		if(enemy == null) return;
+		if(enemy.GetComponent<BotBasic_Move>() == null) return;
 		enemy.GetComponent<BotBasic_Move>().isGrabbed = false;
 		Reparent(enemy, enemyTransformParent);
 		isHolding = false;
