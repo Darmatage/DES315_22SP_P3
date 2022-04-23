@@ -112,6 +112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player1: 0
+  musicManager: {fileID: 0}
+  zap: {fileID: 8300000, guid: b966d71cdc705ed45b22d2900a5af4a6, type: 3}
 --- !u!114 &8351233757635806176
 MonoBehaviour:
   m_ObjectHideFlags: 0
