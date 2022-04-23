@@ -10,6 +10,9 @@ public class MainAttack_KelsonWysocki : MonoBehaviour
     public string button;
     public float offset;
     public float cooldown;
+    public AudioSource attackSound;
+
+    public Light[] lights;
 
     public float resetSpeedTime;
     private float resetSpeedCounter = 0f;
@@ -36,6 +39,7 @@ public class MainAttack_KelsonWysocki : MonoBehaviour
         {
             startTime = Time.time;
             pSystem.Play();
+            attackSound.Play();
         }
 
         if (Input.GetButton(button))
@@ -59,11 +63,20 @@ public class MainAttack_KelsonWysocki : MonoBehaviour
             float change = Time.time - startTime;
             move.moveSpeed = Mathf.Lerp(20f, 0f, change / 0.25f);
             move.rotateSpeed = Mathf.Lerp(250f, 150f, change / 0.25f);
+
+            for (int i = 0; i < lights.Length; ++i)
+            {
+                Color color = lights[i].color;
+                color.g = Mathf.Lerp(1f, 0f, change / 0.25f);
+                color.r = Mathf.Lerp(0f, 1f, change / 0.25f);
+                lights[i].color = color;
+            }
         }
 
         if (Input.GetButtonUp(button))
         {
             pSystem.Stop();
+            attackSound.Stop();
         }
 
         if (!resetSpeed && resetSpeedCounter >= resetSpeedTime)
@@ -77,6 +90,14 @@ public class MainAttack_KelsonWysocki : MonoBehaviour
             float change = Time.time - startTime;
             move.moveSpeed = Mathf.Lerp(1f, 20f, change / 0.25f);
             move.rotateSpeed = Mathf.Lerp(150f, 250f, change / 0.25f);
+
+            for (int i = 0; i < lights.Length; ++i)
+            {
+                Color color = lights[i].color;
+                color.g = Mathf.Lerp(0f, 1f, change / 0.25f);
+                color.r = Mathf.Lerp(1f, 0f, change / 0.25f);
+                lights[i].color = color;
+            }
         }
     }
 
