@@ -37,6 +37,8 @@ TagManager:
   - B10
   - BotA10_Check
   - A20
+  - P1_Tracker
+  - P2_Tracker
   layers:
   - Default
   - TransparentFX
