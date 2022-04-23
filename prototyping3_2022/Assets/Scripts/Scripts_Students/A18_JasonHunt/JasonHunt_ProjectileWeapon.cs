@@ -33,6 +33,7 @@ public class JasonHunt_ProjectileWeapon : MonoBehaviour
 		//if (Input.GetKeyDown(KeyCode.T)){
 		if ((Input.GetButtonDown(button1)) && (weaponReloaded == true))
 		{
+			GetComponent<JasonHunt_SFX>().PlayShoot();
 			//push display back into body
 			projectileDisplay.transform.Translate(0, 0, -1);
 
@@ -44,15 +45,32 @@ public class JasonHunt_ProjectileWeapon : MonoBehaviour
 			direction.Normalize();
 
 			newProjectile.GetComponent<JasonHunt_Projectile>().direction = direction;
+			newProjectile.GetComponent<JasonHunt_Projectile>().Home = this.gameObject;
 
 			weaponReloaded = false;
 			StartCoroutine(RespawnWeapon());
+		}
+
+		if ((Input.GetButtonDown(button2)))
+		{
+			GetComponent<JasonHunt_SFX>().PlayReturn();
+			GameObject[] projectiles = GameObject.FindGameObjectsWithTag("Hazard");
+			foreach (GameObject proj in projectiles)
+            {
+				if (proj.name.Contains("JasonHunt_Projectile"))
+                {
+					if (proj.GetComponent<JasonHunt_Projectile>().stuck == true)
+                    {
+						proj.GetComponent<JasonHunt_Projectile>().returning = true;
+                    }
+                }
+            }
 		}
 	}
 
 	IEnumerator RespawnWeapon()
 	{
-		yield return new WaitForSeconds(3.0f);
+		yield return new WaitForSeconds(2.0f);
 		projectileDisplay.transform.Translate(0, 0, 1);
 		weaponReloaded = true;
 	}

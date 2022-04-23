@@ -14,6 +14,8 @@ public class WeaponController : MonoBehaviour
     public GameObject display5;
     public Transform shotPoint;
 	public Transform Orca;
+    public AudioSource shootSound;
+    public ParticleSystem starPart;
     private HazardDamage dmgScrt;
     private bool isDuckAvail = true;
     public int duckOutCount = 0;
@@ -22,7 +24,10 @@ public class WeaponController : MonoBehaviour
     public string button2;
     public string button3;
     public string button4;
-    
+
+    private float holdDtB2 = 0.0f;
+    private float holdDtB3 = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -93,6 +98,7 @@ public class WeaponController : MonoBehaviour
 
         if ((Input.GetButtonDown(button1)) && isDuckAvail)
         {
+            shootSound.Play();
             GameObject ball2Throw = Instantiate(throwBall, shotPoint.position, shotPoint.rotation);
             ball2Throw.GetComponent<Rigidbody>().velocity = shotPoint.transform.forward * shootPower;
             //showCount[duckOutCount].SetActive(false);
@@ -105,7 +111,11 @@ public class WeaponController : MonoBehaviour
             //Orca.rotation = Quaternion.Euler(Orca.rotation.eulerAngles + new Vector3(0, rotateSpeed, 0));
             //Orca.transform.Rotate(0, rotateSpeed * Time.deltaTime, 0);
             if (transform.localScale.magnitude < 1.5)
-                transform.localScale += transform.localScale * 0.25f * Time.deltaTime;
+            {
+                createStar();
+                transform.localScale += transform.localScale * 0.35f * Time.deltaTime;
+                shootPower = 5;
+            }
         }
 		
 		if ((Input.GetButton(button3)))
@@ -113,18 +123,33 @@ public class WeaponController : MonoBehaviour
             //Orca.rotation = Quaternion.Euler(Orca.rotation.eulerAngles + new Vector3(0, rotateSpeed * -1, 0));
             //Orca.transform.Rotate(0, -rotateSpeed * Time.deltaTime, 0);
             if (transform.localScale.magnitude > 1.0)
-                transform.localScale -= transform.localScale * 0.25f * Time.deltaTime;
+            {
+                createStar();
+                transform.localScale -= transform.localScale * 0.35f * Time.deltaTime;
+            }
+
+            holdDtB3 += Time.deltaTime;
+            if (holdDtB3 > 0.5f && shootPower > 1)
+            {
+                --shootPower;
+                holdDtB3 = 0.0f;
+            }
         }
-    
+
         //if (Orca.rotation.y < -90.0f)
-            //Orca.rotation = Quaternion.Euler(Orca.rotation.eulerAngles.x, -90.0f, Orca.rotation.eulerAngles.z);
+        //Orca.rotation = Quaternion.Euler(Orca.rotation.eulerAngles.x, -90.0f, Orca.rotation.eulerAngles.z);
         //if (Orca.rotation.y > 90.0f)
-            //Orca.rotation = Quaternion.Euler(Orca.rotation.eulerAngles.x, 90.0f, Orca.rotation.eulerAngles.z);
+        //Orca.rotation = Quaternion.Euler(Orca.rotation.eulerAngles.x, 90.0f, Orca.rotation.eulerAngles.z);
 
     }
 
     public void showDuck()
     {
         //showCount[duckOutCount].SetActive(true);
+    }
+
+    void createStar()
+    {
+        starPart.Play();
     }
 }

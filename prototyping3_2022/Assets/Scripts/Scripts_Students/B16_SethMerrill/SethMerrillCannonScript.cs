@@ -25,7 +25,8 @@ public class SethMerrillCannonScript : MonoBehaviour
 	
 	void SpawnRound()
 	{
-		GameObject roundInstance = Instantiate(round, transform.position + transform.up, transform.rotation);
+		GameObject roundInstance = Instantiate(round, transform.position, transform.rotation);
 		roundInstance.GetComponent<Rigidbody>().AddForce(transform.up * speed * 10.0f);
+		roundInstance.GetComponent<SethMerrillRoundScript>().parent = gameObject;
 	}
 }

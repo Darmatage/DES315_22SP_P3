@@ -6,10 +6,11 @@ public class A8_KnifeBlade : MonoBehaviour
 {
   public GameObject start_point;
   public GameObject end_point;
+  public GameObject bot;
 
   public float active_time;
   public float cooldown_time;
-  public KeyCode activation_key;
+  private string activation_key;
 
   private float active_timer_ = 0;
   private float cooldown_timer_ = 0;
@@ -17,6 +18,7 @@ public class A8_KnifeBlade : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
+    activation_key = bot.GetComponentInParent<playerParent>().action2Input;
     local_start_pos_ = transform.localPosition;
     ChildrenSetActive(false);
   }
@@ -24,7 +26,7 @@ public class A8_KnifeBlade : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if(cooldown_timer_ == 0 && Input.GetKeyDown(activation_key))
+    if(cooldown_timer_ == 0 && Input.GetButtonDown(activation_key))
     {
       cooldown_timer_ = active_time + cooldown_time;
       active_timer_ = active_time;
@@ -67,7 +69,6 @@ public class A8_KnifeBlade : MonoBehaviour
       cooldown_timer_ = 0;
     }
   }
-
 
   void ChildrenSetActive(bool active)
   {

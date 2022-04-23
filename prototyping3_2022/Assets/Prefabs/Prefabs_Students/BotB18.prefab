@@ -944,7 +944,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   rotateSpeed: 100
-  jumpSpeed: 7
+  jumpSpeed: 2
   boostSpeed: 10
   groundCheck: {fileID: 1355330930762081256}
   turtleCheck: {fileID: 1355330929556144337}
@@ -986,7 +986,8 @@ MonoBehaviour:
   bulletLifetime: 1
   fireRate: 12
   spreadFactor: 5
-  DPS: 5
+  DPS: 13
+  holdMin: 0.5
   windupTime: 1
   overheatTime: 3
   barPrefab: {fileID: 1126585746793281164, guid: e1e5ab7cb61708f4aa04847b52dd00de,
@@ -1012,12 +1013,12 @@ MonoBehaviour:
   sidelimit: 0.75
   knockBackSpeed: 10
   forceSideLimit_p75: 1
-  shieldPowerFront: 5
-  shieldPowerBack: 5
-  shieldPowerLeft: 5
-  shieldPowerRight: 5
-  shieldPowerTop: 5
-  shieldPowerBottom: 5
+  shieldPowerFront: 2
+  shieldPowerBack: 1
+  shieldPowerLeft: 7
+  shieldPowerRight: 7
+  shieldPowerTop: 1
+  shieldPowerBottom: 1
   shieldFrontObj: {fileID: 1098726327034351829}
   shieldBackObj: {fileID: 2186211737314387781}
   shieldLeftObj: {fileID: 2735579452779107192}

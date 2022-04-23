@@ -5,6 +5,9 @@ using UnityEngine;
 public class A5_stingAniEvent : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    public AudioSource stingAtkSfx;
+
     void Start()
     {
         
@@ -26,5 +29,10 @@ public class A5_stingAniEvent : MonoBehaviour
         Rigidbody launchMe = GetComponentInParent<Rigidbody>();
         launchMe.AddForce(new Vector3(0, 20, 0), ForceMode.Impulse);
         launchMe.AddRelativeTorque(new Vector3(64, 0, 0), ForceMode.Impulse);
+    }
+
+    public void playStingSfx()
+    {
+        stingAtkSfx.Play();
     }
 }

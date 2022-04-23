@@ -10,12 +10,12 @@ public class B13BombTimer : MonoBehaviour
 
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
+
         explodeTimer -= Time.deltaTime;
         if(explodeTimer <= 0)
         {
@@ -24,4 +24,11 @@ public class B13BombTimer : MonoBehaviour
         }
         
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Instantiate(Explosion, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
+
 }

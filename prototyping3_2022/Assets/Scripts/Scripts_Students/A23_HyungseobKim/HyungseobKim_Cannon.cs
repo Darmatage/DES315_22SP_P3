@@ -17,6 +17,7 @@ public class HyungseobKim_Cannon : MonoBehaviour
     [HideInInspector]
     public string button4;
 
+    [HideInInspector]
     public BotBasic_Damage enemy;
 
     // Start is called before the first frame update
