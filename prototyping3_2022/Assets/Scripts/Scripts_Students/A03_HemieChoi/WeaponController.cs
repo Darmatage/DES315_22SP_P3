@@ -14,6 +14,8 @@ public class WeaponController : MonoBehaviour
     public GameObject display5;
     public Transform shotPoint;
 	public Transform Orca;
+    public AudioSource shootSound;
+    public ParticleSystem starPart;
     private HazardDamage dmgScrt;
     private bool isDuckAvail = true;
     public int duckOutCount = 0;
@@ -96,6 +98,7 @@ public class WeaponController : MonoBehaviour
 
         if ((Input.GetButtonDown(button1)) && isDuckAvail)
         {
+            shootSound.Play();
             GameObject ball2Throw = Instantiate(throwBall, shotPoint.position, shotPoint.rotation);
             ball2Throw.GetComponent<Rigidbody>().velocity = shotPoint.transform.forward * shootPower;
             //showCount[duckOutCount].SetActive(false);
@@ -109,6 +112,7 @@ public class WeaponController : MonoBehaviour
             //Orca.transform.Rotate(0, rotateSpeed * Time.deltaTime, 0);
             if (transform.localScale.magnitude < 1.5)
             {
+                createStar();
                 transform.localScale += transform.localScale * 0.35f * Time.deltaTime;
                 shootPower = 5;
             }
@@ -119,7 +123,10 @@ public class WeaponController : MonoBehaviour
             //Orca.rotation = Quaternion.Euler(Orca.rotation.eulerAngles + new Vector3(0, rotateSpeed * -1, 0));
             //Orca.transform.Rotate(0, -rotateSpeed * Time.deltaTime, 0);
             if (transform.localScale.magnitude > 1.0)
+            {
+                createStar();
                 transform.localScale -= transform.localScale * 0.35f * Time.deltaTime;
+            }
 
             holdDtB3 += Time.deltaTime;
             if (holdDtB3 > 0.5f && shootPower > 1)
@@ -139,5 +146,10 @@ public class WeaponController : MonoBehaviour
     public void showDuck()
     {
         //showCount[duckOutCount].SetActive(true);
+    }
+
+    void createStar()
+    {
+        starPart.Play();
     }
 }

@@ -13,9 +13,19 @@ public class JulianBlackstone_TankModeScript : MonoBehaviour
     [SerializeField]
     private GameObject leg4 = null;    
     [SerializeField]
-    private GameObject mace = null;
+    private GameObject mace = null; 
+    [SerializeField]
+    private GameObject cannon = null;
+    [SerializeField]
+    private GameObject projectileSpawnPt = null;
     [SerializeField]
     private BoxCollider colBox = null;
+    [SerializeField]
+    private GameObject projectileReference = null;
+
+
+    [SerializeField]
+    private BoxCollider floorColBox = null;
 
     //grab axis from parent object
     public string button1;
@@ -35,6 +45,7 @@ public class JulianBlackstone_TankModeScript : MonoBehaviour
 
     private float tankTimer = 0.0f;
     private float cooldownTimer = 0.0f;
+    private float cooldownTimer2 = 0.0f;
     private float defaultTankTime = 3.0f;
     private float defaultCDTimer = 6.0f;
 
@@ -63,30 +74,52 @@ public class JulianBlackstone_TankModeScript : MonoBehaviour
     {
         if (cooldownTimer > 0)
         {
-            tankTimer -= Time.deltaTime;
+            cooldownTimer -= Time.deltaTime;
         }
+
+        if (cooldownTimer2 > 0)
+        {
+            cooldownTimer2 -= Time.deltaTime;
+        }
+
         if (tankTimer > 0)
         {
             tankTimer -= Time.deltaTime;
         }
 
+        if ((Input.GetButtonUp(button2) && cannon.activeInHierarchy == true) && cooldownTimer2 <= 0)
+        {
+            cooldownTimer2 = 0.5f;
+            // create a new barrel object from prefab and get its rigidbody
+            GameObject newProjectile = Instantiate(projectileReference, projectileSpawnPt.transform.position, Quaternion.identity);
+            Rigidbody projBody = newProjectile.GetComponent<Rigidbody>();
 
+            GameObject parent = this.gameObject.transform.parent.gameObject;
 
-        if (Input.GetButtonUp(button1))
+            newProjectile.GetComponent<HazardDamage>().isPlayer1Weapon = parent.CompareTag("Player1");
+            newProjectile.GetComponent<HazardDamage>().isPlayer2Weapon = parent.CompareTag("Player2");
+            
+
+            projBody.AddForce(projectileSpawnPt.transform.forward * 2500);
+        }
+
+        if (tankTimer <= 0 && leg1.activeInHierarchy == false)
         {
             Vector3 newPos = transform.position;
             newPos.y += 2;
             transform.position = newPos;
         }
 
-        if (Input.GetButtonDown(button1))
+        if (Input.GetButtonDown(button1) && cooldownTimer <= 0)
         {
+            cooldownTimer = 3.5f;
+            tankTimer = 2.5f;
             Vector3 newPos = transform.position;
             newPos.y -= 2;
             transform.position = newPos;
         }
 
-        if (Input.GetButton(button1))
+        if (tankTimer > 0)
         {
             BotBasic_Move myMove = GetComponent<BotBasic_Move>();
 
@@ -95,7 +128,9 @@ public class JulianBlackstone_TankModeScript : MonoBehaviour
             leg3.SetActive(false);
             leg4.SetActive(false);
             mace.SetActive(true);
+            cannon.SetActive(false);
             colBox.enabled = false;
+            floorColBox.enabled = false;
 
             myMove.moveSpeed = 2;
             myMove.rotateSpeed = 250;
@@ -111,6 +146,9 @@ public class JulianBlackstone_TankModeScript : MonoBehaviour
             leg3.SetActive(true);
             leg4.SetActive(true);
             mace.SetActive(false);
+            cannon.SetActive(true);
+            floorColBox.enabled = true;
+
 
             myMove.moveSpeed = 15;
             myMove.rotateSpeed = 120;

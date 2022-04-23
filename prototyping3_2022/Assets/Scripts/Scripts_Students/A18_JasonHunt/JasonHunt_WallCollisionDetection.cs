@@ -20,6 +20,7 @@ public class JasonHunt_WallCollisionDetection : MonoBehaviour
     {
         if (collision.gameObject.name.Contains("CubeWall"))
         {
+            gameObject.GetComponentInParent<JasonHunt_Projectile>().Home.GetComponent<JasonHunt_SFX>().PlayHitWall();
             gameObject.GetComponentInParent<JasonHunt_Projectile>().StopProjectile();
         }
     }
