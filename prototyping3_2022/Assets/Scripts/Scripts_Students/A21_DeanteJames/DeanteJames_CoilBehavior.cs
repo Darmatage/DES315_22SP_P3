@@ -52,6 +52,9 @@ public class DeanteJames_CoilBehavior : MonoBehaviour
 
             // only connect the coils if they are both tocuhing the ground
 
+            if (coilHolder[newCoilAttached] == null)
+                return;
+
             if (coilHolder[newCoilAttached].GetComponent<DeanteJames_CoilBehavior>().planted == false
                 || planted == false)
                 return;

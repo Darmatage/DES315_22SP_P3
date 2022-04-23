@@ -34,7 +34,7 @@ public class DeanteJames_Weapon1 : MonoBehaviour
         }
         else
         {
-            coilToThrow.GetComponent<DeanteJames_ArcBehavior>().player1 = false;
+            coilToThrow.GetComponent<DeanteJames_CoilBehavior>().player1 = false;
             arc.GetComponent<DeanteJames_ArcBehavior>().player1 = false;
         }
     }
