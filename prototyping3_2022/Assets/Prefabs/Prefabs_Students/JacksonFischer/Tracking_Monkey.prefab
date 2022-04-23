@@ -1732,11 +1732,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack_body: {fileID: 2173311474482932949}
   attack_collider: {fileID: 4180957905297664439}
-  fuse_time: 5
-  explosion_prefab: {fileID: 6703356809530827566, guid: 7f439c6b276879f47859a6f4f97646dd,
+  fuse_time: 7
+  explosion_prefab: {fileID: 6703356809530827566, guid: 0ad1ddfe36904e944acdfe216a3dd218,
     type: 3}
   turn_speed: 101
-  move_speed: 10
+  move_speed: 2
 --- !u!23 &9002378828449599929
 MeshRenderer:
   m_ObjectHideFlags: 0

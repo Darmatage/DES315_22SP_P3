@@ -12,7 +12,7 @@ public class TrackingAttack : MonoBehaviour
     public GameObject explosion_prefab;
 
     public float turn_speed = 1.0f;
-    public float move_speed = 10.0f;
+    public float move_speed = 5.0f;
 
     private Transform local_transform;
     private GameObject parent;
@@ -94,7 +94,52 @@ public class TrackingAttack : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (player_tag == "Player1")
+        {
+            if (collision.gameObject.CompareTag("Player2"))
+            {
+                if (explosion_alive == false)
+                {
+                    GameObject explosion_object = Instantiate(explosion_prefab, this.transform.position, Quaternion.identity);
+                    // explosion_collider = explosion_object.GetComponent<Collider>();
+                    explosion_object.transform.parent = this.transform;
+
+                    GameObject mine_light = this.transform.GetChild(0).gameObject;
+                    Renderer mine_light_renderer = (Renderer)mine_light.GetComponent(typeof(Renderer));
+                    mine_light_renderer.enabled = false;
+
+                    Renderer mine_renderer = (Renderer)this.GetComponent(typeof(Renderer));
+                    mine_renderer.enabled = false;
+                    explosion_alive = true;
+                }
+            }
+        }
+
+        else if (player_tag == "Player2")
+        {
+            if (collision.gameObject.CompareTag("Player1"))
+            {
+                if (explosion_alive == false)
+                {
+                    GameObject explosion_object = Instantiate(explosion_prefab, this.transform.position, Quaternion.identity);
+                    // explosion_collider = explosion_object.GetComponent<Collider>();
+                    explosion_object.transform.parent = this.transform;
+
+                    GameObject mine_light = this.transform.GetChild(0).gameObject;
+                    Renderer mine_light_renderer = (Renderer)mine_light.GetComponent(typeof(Renderer));
+                    mine_light_renderer.enabled = false;
+
+                    Renderer mine_renderer = (Renderer)this.GetComponent(typeof(Renderer));
+                    mine_renderer.enabled = false;
+                    explosion_alive = true;
+                }
+            }
+        }
+    }
+
+    /*private void OnTriggerEnter(Collider other)
     {
         if (player_tag == "Player1")
         {
@@ -137,7 +182,7 @@ public class TrackingAttack : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 
     /*private void OnCollisionEnter(Collision collision)
     {
