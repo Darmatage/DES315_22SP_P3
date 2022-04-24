@@ -9986,6 +9986,65 @@ Transform:
   m_Father: {fileID: 6978040854554231784}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5263499393002469356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5283551482066958300}
+  - component: {fileID: 7044421626038221564}
+  - component: {fileID: 8819065900098697998}
+  m_Layer: 0
+  m_Name: ForceRadius
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5283551482066958300
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5263499393002469356}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2338503068542322150}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7044421626038221564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5263499393002469356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07326d5f6c8930041a6d9866d710c3b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  working: 0
+  timer: 0.3
+--- !u!135 &8819065900098697998
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5263499393002469356}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.047942877
+  m_Center: {x: 0.0002521914, y: 0, z: 0}
 --- !u!1 &5527228934075747923
 GameObject:
   m_ObjectHideFlags: 0
@@ -20010,8 +20069,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab929fe774a0084c8ae87aafe02faf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  rotateSpeed: 100
+  moveSpeed: 15
+  rotateSpeed: 180
   jumpSpeed: 7
   boostSpeed: 10
   groundCheck: {fileID: 6978040854100739020}
@@ -20129,6 +20188,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 20af1428b34f0644b8e746ebfadfc206, type: 3}
   - {fileID: 8300000, guid: 4c30338a03a256c4ea58fa2c9e8b68b0, type: 3}
   particleSystem: {fileID: 0}
+  forceRadius: {fileID: 7044421626038221564}
 --- !u!198 &6340660384888185477
 ParticleSystem:
   m_ObjectHideFlags: 0
