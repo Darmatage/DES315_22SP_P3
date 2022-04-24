@@ -12,6 +12,7 @@ public class RandomAttack : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     [SerializeField] List<AudioClip> clips;
     [SerializeField] ParticleSystem particleSystem;
+    [SerializeField] ForceRadius forceRadius;
     ScreenShake shake;
 
     [SerializeField]enum Clips
@@ -50,6 +51,8 @@ public class RandomAttack : MonoBehaviour
         {
             particleSystem.Play();
             shake.TriggerShake(0.3f);
+            forceRadius.working= true;
+            forceRadius.timer = 0.3f;
             attackTimer = 1;
             return;
         }
@@ -58,6 +61,10 @@ public class RandomAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+     //  if (forceRadius.working == true)
+     //  {
+     //      forceRadius.enabled = false;
+     //  }    
         if (timeLeft <= Time.deltaTime)
         {
             // transition complete
