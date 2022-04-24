@@ -31,6 +31,15 @@ public class BenThompson_FirebreathBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //if (other.gameObject.name == "SampleWeapon")
+        //{
+        //    this.GetComponent<HazardDamage>().damage = 0;
+        //}
+        //else
+        //{
+        //    this.GetComponent<HazardDamage>().damage = 5;
+        //}
+
         if (hitCount > 0)
         {
             this.GetComponent<HazardDamage>().damage = 0;

@@ -44,6 +44,9 @@ public class BenThompson_MineBehavior : MonoBehaviour
         if (collided == true)
             return;
 
+        if (other.transform.parent == null)
+            return;
+
         if (other.transform.parent.tag != "Player1" && other.transform.parent.tag != "Player2")
             return;
 

@@ -34,6 +34,11 @@ TagManager:
   - A03bot
   - Player1_Mine
   - Player2_Mine
+  - B10
+  - BotA10_Check
+  - A20
+  - P1_Tracker
+  - P2_Tracker
   layers:
   - Default
   - TransparentFX
@@ -46,7 +51,7 @@ TagManager:
   - ground
   - A09_Projectiles
   - A09_Bot
-  - 
+  - A03_Ball
   - 
   - 
   - B05_Top
@@ -55,7 +60,7 @@ TagManager:
   - A06_Ethereal
   - B05_Bot2
   - B05_Blade2
-  - 
+  - A10_Check
   - 
   - 
   - 

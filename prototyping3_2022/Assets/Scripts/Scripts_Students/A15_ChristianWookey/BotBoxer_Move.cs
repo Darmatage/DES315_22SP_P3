@@ -63,11 +63,10 @@ public class BotBoxer_Move : MonoBehaviour
 	{
 		float botMove = Input.GetAxisRaw(pVertical) * moveSpeed * Time.deltaTime;
 		float botStrafe = Input.GetAxisRaw(pHorizontal) * moveSpeed * Time.deltaTime;
-		float botRotate = 0f;
+		//float botRotate = 0f;
 
 		if (target)
 		{
-			Debug.Log(target);
 			Vector3 targetPosition = target.transform.position;
 			targetPosition.y = transform.position.y;
 			Quaternion targetRotation = Quaternion.LookRotation(targetPosition - transform.position);

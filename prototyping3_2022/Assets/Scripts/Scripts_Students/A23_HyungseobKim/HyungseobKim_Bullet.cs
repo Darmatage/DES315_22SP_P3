@@ -43,8 +43,10 @@ public class HyungseobKim_Bullet : MonoBehaviour
         if (moving)
         {
             direction.y -= g * Time.deltaTime;
-
             transform.position += direction * speed * Time.deltaTime;
+
+            // While it is moving, ignore other inputs.
+            return;
         }
         else
         {

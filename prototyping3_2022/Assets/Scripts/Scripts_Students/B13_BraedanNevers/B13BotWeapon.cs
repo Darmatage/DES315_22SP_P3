@@ -5,11 +5,15 @@ using UnityEngine;
 public class B13BotWeapon : MonoBehaviour
 {
 	//NOTE: This script goes on the main playerBot Game Object, and the weapon goes in the public GO slot
+	public float AttackOneCooldown = 5.0f;
+	public float AttackTwoCooldown = 1.0f;
 
-	public GameObject weaponThrust;
-	private float thrustAmount = 3f;
+	public GameObject boxBomb;
 
-	private bool weaponOut = false;
+	private Animator anime;
+	private bool CanAttackBomb = true;
+	private bool CanAttackArm = true;
+	public GameObject roboArm;
 
 	//grab axis from parent object
 	public string button1;
@@ -23,24 +27,40 @@ public class B13BotWeapon : MonoBehaviour
 		button2 = gameObject.transform.parent.GetComponent<playerParent>().action2Input;
 		button3 = gameObject.transform.parent.GetComponent<playerParent>().action3Input;
 		button4 = gameObject.transform.parent.GetComponent<playerParent>().action4Input;
+		roboArm.tag = "Untagged";	
+		roboArm.GetComponent<BoxCollider>().enabled = false;
+		anime = GetComponentInChildren<Animator>();
 	}
 
 	void Update()
 	{
-		//if (Input.GetKeyDown(KeyCode.T)){
-		if ((Input.GetButtonDown(button1)) && (weaponOut == false))
+		if ((Input.GetButtonDown(button1)) && (CanAttackBomb == true))
 		{
-			weaponThrust.transform.Translate(0, thrustAmount, 0);
-			weaponOut = true;
-			StartCoroutine(WithdrawWeapon());
+			anime.SetTrigger("Attack");
+			CanAttackBomb = false;
+			StartCoroutine(WaitForPlaceBomb());
+		}
+		if ((Input.GetButtonDown(button2)) && (CanAttackArm == true))
+		{
+			roboArm.tag = "Hazard";
+			anime.SetTrigger("Smack");
+			CanAttackArm = false;
+			roboArm.GetComponent<BoxCollider>().enabled = true;
+			StartCoroutine(WaitForArmSmack());
 		}
 	}
 
-	IEnumerator WithdrawWeapon()
+	IEnumerator WaitForPlaceBomb()
 	{
-		yield return new WaitForSeconds(0.6f);
-		weaponThrust.transform.Translate(0, -thrustAmount, 0);
-		weaponOut = false;
+		yield return new WaitForSeconds(AttackOneCooldown);
+		boxBomb.SetActive(true);
+		CanAttackBomb = true;
 	}
-
+	IEnumerator WaitForArmSmack()
+	{
+		yield return new WaitForSeconds(AttackTwoCooldown);
+		roboArm.tag = "Untagged";
+		roboArm.GetComponent<BoxCollider>().enabled = false;
+		CanAttackArm = true;
+	}
 }

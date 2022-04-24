@@ -15038,6 +15038,7 @@ MonoBehaviour:
   isMonsterWeapon: 0
   parentRef: {fileID: 0}
   explosionLifeTime: 0.7
+  alreadyHit: []
 --- !u!23 &8178399956578387984
 MeshRenderer:
   m_ObjectHideFlags: 0

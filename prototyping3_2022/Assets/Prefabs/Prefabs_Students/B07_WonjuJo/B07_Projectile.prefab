@@ -210,7 +210,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acd14999a663b27409e2e813bf8c50ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button1: 
+  button2: 
   CannonSound: {fileID: 8300000, guid: 13b33b5ef58b27248b7b80e568a66e98, type: 3}
+  BeepSound: {fileID: 8300000, guid: f1fd376651413bc46a62690da1be5e7a, type: 3}
   PS: {fileID: 0}
 --- !u!82 &-2512868650712567752
 AudioSource:

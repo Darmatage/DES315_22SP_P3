@@ -36,15 +36,14 @@ public class BotBoxer_Weapon : MonoBehaviour
 		//if (Input.GetKeyDown(KeyCode.T)){
 		if ((Input.GetButtonDown(button1)) && (leftWeaponOut == false))
 		{
-			weaponLeftThrust.GetComponent<SphereCollider>().enabled = true;
-			weaponLeftThrust.transform.Translate(0, 0, thrustDistance);
+			weaponLeftThrust.GetComponent<Animator>().SetTrigger("PunchL");
+			//weaponLeftThrust.transform.Translate(0, 0, thrustDistance);
 			leftWeaponOut = true;
 			StartCoroutine(WithdrawLeftWeapon());
 		}
 		if ((Input.GetButtonDown(button2)) && (rightWeaponOut == false))
 		{
-			weaponRightThrust.GetComponent<SphereCollider>().enabled = true;
-			weaponRightThrust.transform.Translate(0, 0, thrustDistance);
+			weaponRightThrust.GetComponent<Animator>().SetTrigger("PunchR");
 			rightWeaponOut = true;
 			StartCoroutine(WithdrawRightWeapon());
 		}
@@ -53,16 +52,12 @@ public class BotBoxer_Weapon : MonoBehaviour
 	IEnumerator WithdrawLeftWeapon()
 	{
 		yield return new WaitForSeconds(thrustTime);
-		weaponLeftThrust.transform.Translate(0, 0, -thrustDistance);
-		weaponLeftThrust.GetComponent<SphereCollider>().enabled = false;
 		StartCoroutine(CooldownLeftWeapon());
 	}
 
 	IEnumerator WithdrawRightWeapon()
 	{
 		yield return new WaitForSeconds(thrustTime);
-		weaponRightThrust.transform.Translate(0, 0, -thrustDistance);
-		weaponRightThrust.GetComponent<SphereCollider>().enabled = false;
 		StartCoroutine(CooldownRightWeapon());
 	}
 

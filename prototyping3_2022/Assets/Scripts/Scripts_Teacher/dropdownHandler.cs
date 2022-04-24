@@ -32,7 +32,7 @@ public class dropdownHandler : MonoBehaviour{
 			
 			items1.Add("BotA01 Taher Kagzi");
 			items1.Add("BotA02 Mac Roshak");
-			items1.Add("BotA03 Hermie Choi");
+			items1.Add("BotA03 Hemie Choi");
 			items1.Add("BotA04 Kiara Santiago");
 			items1.Add("BotA05 Jakob Shumway");
 			items1.Add("BotA06 Ben Mowry");
@@ -43,7 +43,7 @@ public class dropdownHandler : MonoBehaviour{
 			items1.Add("BotA11 Taro Kumagai");
 			items1.Add("BotA12 Scott Fado-Bristow");
 			items1.Add("BotA13 Kai Kawashima");
-			items1.Add("BotA14 Fredy Martin");
+			items1.Add("BotA14 Freddy Martin");
 			items1.Add("BotA15 Christian Wookey");
 			items1.Add("BotA16 Ben Thompson");
 			items1.Add("BotA17 Kelson Wysocki");
@@ -81,13 +81,13 @@ public class dropdownHandler : MonoBehaviour{
 		}else if (isNPC == true){
 			items1.Add("");
 			items1.Add("NPC_A00");
-			items1.Add("NPC_A01 Oussama Khalaf");
-			items1.Add("NPC_A02 Ryan Heath");
-			items1.Add("NPC_A03 Jiwon Jung");
-			items1.Add("NPC_A19 Zacary Brown");
-			items1.Add("NPC_B05 Carlos Garcia-Perez");
-			items1.Add("NPC_B13 Skyler Powers");
-			items1.Add("NPC_B16 Chase Graves");
+			items1.Add("NPC_A10 Jirakit Jarusiripipat");
+			items1.Add("NPC_A24 Damian Rouse");
+			//items1.Add("NPC_A03 Jiwon Jung");
+			//items1.Add("NPC_A19 Zacary Brown");
+			//items1.Add("NPC_B05 Carlos Garcia-Perez");
+			//items1.Add("NPC_B13 Skyler Powers");
+			//items1.Add("NPC_B16 Chase Graves");
 		}
 		
 		List<string> items2 = new List<string>();
@@ -121,7 +121,7 @@ public class dropdownHandler : MonoBehaviour{
 			
 			items2.Add("BotA01 Taher Kagzi");
 			items2.Add("BotA02 Mac Roshak");
-			items2.Add("BotA03 Hermie Choi");
+			items2.Add("BotA03 Hemie Choi");
 			items2.Add("BotA04 Kiara Santiago");
 			items2.Add("BotA05 Jakob Shumway");
 			items2.Add("BotA06 Ben Mowry");
@@ -132,7 +132,7 @@ public class dropdownHandler : MonoBehaviour{
 			items2.Add("BotA11 Taro Kumagai");
 			items2.Add("BotA12 Scott Fado-Bristow");
 			items2.Add("BotA13 Kai Kawashima");
-			items2.Add("BotA14 Fredy Martin");
+			items2.Add("BotA14 Freddy Martin");
 			items2.Add("BotA15 Christian Wookey");
 			items2.Add("BotA16 Ben Thompson");
 			items2.Add("BotA17 Kelson Wysocki");
@@ -146,13 +146,13 @@ public class dropdownHandler : MonoBehaviour{
 		}else if (isNPC == true){
 			items2.Add("");
 			items2.Add("NPC_A00");
-			items2.Add("NPC_B05 Carlos Garcia-Perez");
-			items2.Add("NPC_B13 Skyler Powers");
-			items2.Add("NPC_B16 Chase Graves");
-			items2.Add("NPC_A01 Oussama Khalaf");
-			items2.Add("NPC_A02 Ryan Heath");
-			items2.Add("NPC_A03 Jiwon Jung");
-			items2.Add("NPC_A19 Zacary Brown");
+			items2.Add("NPC_A10 Jirakit Jarusiripipat");
+			items2.Add("NPC_A24 Damian Rouse");
+			//items2.Add("NPC_B16 Chase Graves");
+			//items2.Add("NPC_A01 Oussama Khalaf");
+			//items2.Add("NPC_A02 Ryan Heath");
+			//items2.Add("NPC_A03 Jiwon Jung");
+			//items2.Add("NPC_A19 Zacary Brown");
 		}
 
 		//fill dropdown with items
